@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+  <title>Test</title>
+  <script type="text/javascript" 
+          src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+  </script>
+
+  <script type="text/javascript"
+          src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDYj1IOAdgDbXnWadcslxvxbR_NjWn1X9g&sensor=false">
+  </script>
+
+</head>
+<body>
+  
+<div id="map_canvas"></div>
+
+<script type="text/javascript">
+  /*
+	$.ajax({
+		url: src + qry,
+		dataType: 'jsonp'
+	}).done(function (json) {
+
+  });
+  */
+
+
+var server = {
+    host: 'http://streamstatsags.cr.usgs.gov',
+    path: '/ss_ws_92/Service.asmx/getStreamstats?x=42.37915225958498&y=-72.47167921066244&inCRS=EPSG:6.6:4326&StateNameAbbr=MA&getBasinChars=C&getFlowStats=C&getGeometry=KML&downloadFeature=False&clientID=UT%20Demo'
+};
+
+/*
+var server = {
+    host: 'http://gist.cs.umass.edu:3000',
+    path: '/stream.kml'
+};
+*/
+
+
+var myLatLng = new google.maps.LatLng(42.37915225958498, -72.47167921066244);
+var options  = {
+  zoom     : 4,
+  center   : myLatLng,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+
+var map = new google.maps.Map(document.getElementById("map_canvas"), options);
+
+/*
+var geoRssLayer = new google.maps.KmlLayer(server.host + server.path);
+console.log('Setting geoRssLayer');
+geoRssLayer.setMap(map);
+
+*/
+/*
+  var geocoder = new GClientGeocoder();
+  geocoder.setCache = null;
+
+  // Google Maps caches KML files -- use a random query string:
+  var url_end  = "&nocache=" + (new Date()).valueOf();
+
+  // Server root will be the streamstats web server:
+  var svr_root = '/ss_ws_92/Service.asmx/getStreamstats?x=-111.1563&y=39.4725&inCRS=EPSG:6.6:4326&StateNameAbbr=UT&getBasinChars=C&getFlowStats=C&getGeometry=KML&downloadFeature=False&clientID=UT%20Demo' + url_end;
+
+  var map = new GMap2($('map')[0]);
+  
+  // Add controls:
+  map.addControl(new GLargeMapControl());
+  map.addControl(new GMapTypeControl());
+
+  // Add the overlay:
+  geoxml = new GGeoXml(svr_root);
+  map.addOverlay(geoxml);
+
+  // Default zoom level:
+  var z1 = 14;
+  map.setCenter(new GLatLng(-111.1563, 39.4725));
+*/
+</script>
+
+</body>
+</html>

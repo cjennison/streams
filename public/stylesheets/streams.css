@@ -1,0 +1,25 @@
+div#view {
+  width: 1000px;
+  height: 610px;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid black;
+}
+
+div#inst {
+  width: 280px;
+  height: 600px;
+  margin-left: 5px;
+  margin-top: 5px;
+  border: 1px solid black;
+  float: left;
+}
+
+div#map {
+  width: 480px;
+  height: 600px;
+  margin-left: 5px;
+  margin-top: 5px;
+  border: 0px solid black;
+  float: left;
+}

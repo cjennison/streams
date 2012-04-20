@@ -14,11 +14,11 @@
       function initialize() {
         var server = {
           host: 'http://streamstatsags.cr.usgs.gov',
-          path: '/ss_ws_92/Service.asmx/getStreamstats?x=42.37915225958498&y=-72.47167921066244&inCRS=EPSG:6.6:4326&StateNameAbbr=MA&getBasinChars=C&getFlowStats=C&getGeometry=KML&downloadFeature=False&clientID=UT%20Demo'
+          path: '/ss_ws_92/Service.asmx/getStreamstats?x=-72.43307&y=42.39019&inCRS=EPSG:6.6:4326&StateNameAbbr=MA&getBasinChars=C&getFlowStats=C&getGeometry=KML&downloadFeature=False&clientID=UT%20Demo'
         };
 
         var myOptions = {
-          center: new google.maps.LatLng(42,-72),
+          center: new google.maps.LatLng(42.39019, -72.43307),
           zoom: 5,
           mapTypeId: google.maps.MapTypeId.TERRAIN
 //          center: new google.maps.LatLng(-34.397, 150.644),
@@ -31,7 +31,7 @@
         var map = new google.maps.Map(document.getElementById("map_canvas"),
             myOptions);
 
-      var geoRssLayer = new google.maps.KmlLayer(server.host + server.path);
+      var geoRssLayer = new google.maps.KmlLayer('http://localhost:3000/kml/streamsMA.kml');
       console.log('Setting geoRssLayer');
       geoRssLayer.setMap(map);
 

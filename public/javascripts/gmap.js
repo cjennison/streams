@@ -9,7 +9,9 @@ var GMap = (function init() {
 
     latlng: function (lat, lng) {
       return new LatLng(lat, lng);
-    }
+    },
+    
+    maptype: google.maps.MapTypeId
   };
 
 })();

@@ -1,25 +1,32 @@
-div#view {
-  width: 1000px;
-  height: 610px;
-  margin-right: auto;
-  margin-left: auto;
-  border: 1px solid black;
+body {
+  z-index : -500;
+  position: absolute;
+  top     : 0;
+  left    : 0;
+  height  : 100%;
+  width   : 100%;
+  margin  : 0px;
 }
 
 div#inst {
-  width: 280px;
+  width : 250px;
   height: 600px;
-  margin-left: 5px;
-  margin-top: 5px;
+  margin-left: -10px;
+  margin-top: -40px;
+  padding: 5px;
   border: 1px solid black;
-  float: left;
+  background-color: white;
+  box-shadow: 5px 5px 5px #888888;
+  z-index: 300;
 }
 
 div#map {
-  width: 480px;
-  height: 600px;
-  margin-left: 5px;
-  margin-top: 5px;
-  border: 0px solid black;
-  float: left;
+  display : block;
+  position: absolute;
+  top     : 0;
+  left    : 0;
+  height  : 100%;
+  width   : 100%;
+  z-index : -10;
+  border  : 1px solid black;
 }

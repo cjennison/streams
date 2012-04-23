@@ -4,6 +4,11 @@ var http = require('http');
 http://streamstatsags.cr.usgs.gov/ss_ws_92/Service.asmx/getStreamstats?x=-111.1563&y=39.4725&inCRS=EPSG:6.6:4326&StateNameAbbr=UT&getBasinChars=C&getFlowStats=C&getGeometry=KML&downloadFeature=False&clientID=UT%20Demo
 */
 
+exports.main = function (req, res) {
+  res.render('main.ejs',
+             { 'title' : 'Streams' });
+};
+
 exports.stream = function (req, res) {
     var options = {
         host: 'streamstatsags.cr.usgs.gov',

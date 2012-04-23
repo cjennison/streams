@@ -2,7 +2,15 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/streams.css" />
+
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/javascripts/gmap.js"></script>
+    <script src="/javascripts/streams.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/javascripts/main.js"></script>
   </head>
   <body>
     <%- body %>

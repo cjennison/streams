@@ -1,7 +1,8 @@
 var GMap = (function init() {
   // Shorthand to access google maps:
-	var Map      = google.maps.Map;
-  var LatLng   = google.maps.LatLng;
+	var Map        = google.maps.Map;
+  var LatLng     = google.maps.LatLng;
+  var InfoWindow = google.maps.InfoWindow;
 
   // Some useful objects:
   var geocoder = new google.maps.Geocoder();
@@ -22,6 +23,13 @@ var GMap = (function init() {
         map     : gmap,
         title   : title
       });
+    },
+
+    info: function (map, marker, content) {
+      var infoWindow = new InfoWindow();
+      infoWindow.setContent(content);
+      infoWindow.open(map, marker);
+      return infoWindow;
     },
 
     state: function (latlng, cb) {

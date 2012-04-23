@@ -39,18 +39,25 @@ $(function() {
   // Construct the map:
   var map = GMap.map(mapcanvas, options);
 
+  // Global info window to be used to display loading status:
+  var loadingInfo;
+   
   // Click event on the map. This adds a marker on the clicked
   // location. It will also send an Ajax call to the server to
   // initiate the downloading of the KML file.
   GMap.event.addListener(map, 'click', function (event) {
     // Create a new marker and add it to the map:
-    GMap.marker(event.latLng, map, '');
+    var marker = GMap.marker(event.latLng, map, '');
 
     // Set the latitude/longitude:
     var lat = $('span#lat');
     var lng = $('span#lng');
     lat.html(event.latLng.lat());
     lng.html(event.latLng.lng());
+    
+    loadingInfo = GMap.info(map, marker,
+                            '<b>Retrieving from stream stats @ ' +
+                            lat.html() + ', ' + lng.html() + '</b>');
 
     GMap.state(event.latLng, function (name) {
       socket.emit('marker', { 'state' : name,
@@ -62,8 +69,12 @@ $(function() {
   socket.on('kmldone', function (data) {
     var loc = 'http://' + document.location.host + '/' + data.kmlpath;
     console.log('layering ' + loc);
-      var geoRssLayer = new google.maps.KmlLayer(loc, { preserveViewport :  true });
+    var geoRssLayer = new google.maps.KmlLayer(loc, { preserveViewport :  true });
     console.log('Setting geoRssLayer');
+
+    // Close the info window:
+    loadingInfo.close();
+
     geoRssLayer.setMap(map);
     // Set center
     var latlng = GMap.latlng(data.lat, data.lng);

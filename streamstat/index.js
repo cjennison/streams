@@ -10,7 +10,8 @@ var fs   = require('fs');
 //   - callback to notify client.
 
 // The default directory for downloading KML files:
-var KMLDIR = 'public/kml';
+var PUBDIR = 'public';
+var KMLDIR = 'kml';
 
 exports.make = function (options) {
   // Validate input arguments:
@@ -66,7 +67,7 @@ exports.make = function (options) {
           // Create unique filename:
           var time    = (new Date()).getTime();
           var kmlpath = KMLDIR + '/' + time + '.kml';
-		      fs.writeFile(kmlpath, kmldata, function (err) {
+		      fs.writeFile(PUBDIR + '/' + kmlpath, kmldata, function (err) {
 			      if (err) throw err;
 			      console.log(kmlpath + ' downloaded.');
 

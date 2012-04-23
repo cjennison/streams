@@ -15,7 +15,9 @@ exports.listen = function (app) {
       var url = streamstat.make(data);
       url.fetch(function (kmlpath) {
         console.log('kml file downloaded. notifying client.');
-        socket.emit('kmldone', { kmlpath : kmlpath });
+        socket.emit('kmldone', { kmlpath : kmlpath, 
+                                 lat     : data.lat,
+                                 lng     : data.lng });
       });
     });
 

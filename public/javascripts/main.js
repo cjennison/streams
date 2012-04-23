@@ -60,9 +60,14 @@ $(function() {
   });
 
   socket.on('kmldone', function (data) {
-    console.log(data);
-    var geoRssLayer = new google.maps.KmlLayer(data.kmlpath);
+    var loc = 'http://' + document.location.host + '/' + data.kmlpath;
+    console.log('layering ' + loc);
+      var geoRssLayer = new google.maps.KmlLayer(loc, { preserveViewport :  true });
     console.log('Setting geoRssLayer');
     geoRssLayer.setMap(map);
+    // Set center
+    var latlng = GMap.latlng(data.lat, data.lng);
+    map.setZoom(14);
+    map.setCenter(latlng);
   });
 });

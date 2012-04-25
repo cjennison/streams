@@ -1,6 +1,21 @@
-var express = require('express')
-  , routes = require('./routes')
-  , notify = require('./notify');
+var express = require('express'),
+    routes = require('./routes'),
+    notify = require('./notify');
+
+// Possibly add DB support in future?
+/*
+var db = require("mysql-native").createTCPClient('instance12373.db.xeround.com', 8392); // localhost:3306 by default
+db.auto_prepare = true;
+function dump_rows(cmd)
+{
+   cmd.addListener('row', function(r) { console.dir(r); } );
+}
+
+db.auth("test", "tdr", "YdojBird");
+dump_rows(db.query("select 1+1,2,3,'4',length('hello')"));
+dump_rows(db.execute("select 1+1,2,3,'4',length(?)", ["hello"]));
+db.close();
+*/
 
 var app = module.exports = express.createServer();
 
@@ -24,7 +39,7 @@ app.configure('production', function(){
 // Routes
 app.get('/', routes.main);
 
-app.listen(9999);
+app.listen(process.env.C9_PORT || 9999);
 console.log("Express server listening on port %d in %s mode", 
             app.address().port, app.settings.env);
 

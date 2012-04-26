@@ -13,6 +13,31 @@ var fs   = require('fs');
 var PUBDIR = 'public';
 var KMLDIR = 'kml';
 
+function getDrainId (kmldata) {
+  var re    = /DrainID = (\d+)/g;
+  var match = re.exec(kmldata);
+  return match[1];
+}
+
+function getRScriptImage (lat, lng, drainId, cb) {
+  var opt = {
+    host : 'streams.ecs.umass.edu',
+    path : '/gmap_script.php?y=' + lat + '&x=' + lng + '&da=' + drainId
+  };
+  http.get(opt, function (res) {
+    var img = '';
+    res.on('data', function (chunk) {
+      img += chunk.toString();
+    });
+    
+    res.on('end', function () {
+      var re = /<img src='(.*)' \/>/g;
+      var match = re.exec(img);
+      cb('<img width="250px" src="http://streams.ecs.umass.edu/' + match[1] + '" />');
+    });
+  });
+}
+
 exports.make = function (options) {
   // Validate input arguments:
 	if (! (options.lat && options.lng && options.state)) {
@@ -71,11 +96,21 @@ exports.make = function (options) {
 			      if (err) throw err;
 			      console.log(kmlpath + ' downloaded.');
 
-            // Invoke callback with the path to the kml file:
-            cb(kmlpath);
-		      })
+            // Call RScript:
+            getRScriptImage(y, x, getDrainId(kmldata),
+              function (img) {
+                var props = {
+                  drainId: img
+                };
+                // Invoke callback with the path to the kml file:
+                cb(kmlpath, props);
+              });
+              
+		      });
 	      });
-      });
+      }).on('error', function(e) {
+                console.log('Got error: ' + e.message);
+            });
 
     }
   };

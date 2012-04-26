@@ -71,14 +71,25 @@ $(function() {
     console.log('layering ' + loc);
     var geoRssLayer = new google.maps.KmlLayer(loc, { preserveViewport :  true });
     console.log('Setting geoRssLayer');
-
+    
     // Close the info window:
     loadingInfo.close();
-
     geoRssLayer.setMap(map);
+    
+    console.log('Drain ID = ' + data.props.drainId);
+    
+    /*
+    var rscript = 'http://streams.ecs.umass.edu/gmap_script.php';
+    var cmd = rscript + '?y=' + data.lat + '&x=' + data.lng 
+                          + '&da=' + data.props.drainId;
+    */
+    
+    $('div#rscript').empty();
+    $('div#rscript').append(data.props.drainId);
+
     // Set center
-    var latlng = GMap.latlng(data.lat, data.lng);
-    map.setZoom(14);
-    map.setCenter(latlng);
+    //var latlng = GMap.latlng(data.lat, data.lng);
+    //map.setZoom(14);
+    //map.setCenter(latlng);
   });
 });

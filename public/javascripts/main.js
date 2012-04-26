@@ -83,9 +83,15 @@ $(function() {
     var cmd = rscript + '?y=' + data.lat + '&x=' + data.lng 
                           + '&da=' + data.props.drainId;
     */
-    
-    $('div#rscript').empty();
-    $('div#rscript').append(data.props.drainId);
+
+    // RScript support:
+    var rscript = $('div#rscript');
+    rscript.empty();
+    rscript.hide();
+    rscript.append(data.props.drainId);
+    setTimeout(function () {
+      rscript.fadeIn('slow', function () {});
+    }, 1000);
 
     // Set center
     //var latlng = GMap.latlng(data.lat, data.lng);

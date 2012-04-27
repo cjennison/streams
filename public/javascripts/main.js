@@ -43,10 +43,12 @@ $(function() {
   var loadingInfo;
    
   var gadges = new google.maps.KmlLayer('http://livestreams.herokuapp.com/GagesUsed.kmz',
-                                       { preserveViewport :  true });
+                                        { preserveViewport :  true,
+                                          clickable : false });
   gadges.setMap(map);
   var ct_watershed = new google.maps.KmlLayer('http://livestreams.herokuapp.com/ct_watershed.kmz',
-                                              { preserveViewport :  true });
+                                              { preserveViewport :  true,
+                                                clickable : false });
   ct_watershed.setMap(map);
 
   // Click event on the map. This adds a marker on the clicked

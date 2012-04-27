@@ -44,7 +44,8 @@ $(function() {
    
   var gadges = new google.maps.KmlLayer('http://livestreams.herokuapp.com/GagesUsed.kmz');
   gadges.setMap(map);
-  // google.maps.KmlLayer('/ct_watershed.kmz');
+  var ct_watershed = new google.maps.KmlLayer('http://livestreams.herokuapp.com/ct_watershed.kmz');
+  ct_watershed.setMap(map);
 
   // Click event on the map. This adds a marker on the clicked
   // location. It will also send an Ajax call to the server to

@@ -42,7 +42,7 @@ $(function() {
   // Global info window to be used to display loading status:
   var loadingInfo;
    
-  //google.maps.KmlLayer('http://livestream.herokuapp.com/GagesUsed.kmz');
+  google.maps.KmlLayer('http://livestream.herokuapp.com/GagesUsed.kmz');
   // google.maps.KmlLayer('/ct_watershed.kmz');
 
   // Click event on the map. This adds a marker on the clicked

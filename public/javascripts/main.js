@@ -42,6 +42,9 @@ $(function() {
   // Global info window to be used to display loading status:
   var loadingInfo;
    
+  google.maps.KmlLayer('/GagesUsed.kmz');
+  google.maps.KmlLayer('/ct_watershed.kmz');
+
   // Click event on the map. This adds a marker on the clicked
   // location. It will also send an Ajax call to the server to
   // initiate the downloading of the KML file.

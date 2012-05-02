@@ -38,7 +38,7 @@ div#logos {
   width: 100px;
 }
 
-img {
+div#logos > img {
   display: block;
   width: 100px;
 }

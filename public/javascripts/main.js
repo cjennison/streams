@@ -111,4 +111,53 @@ $(function() {
     //map.setZoom(14);
     //map.setCenter(latlng);
   });
+
+
+  ///// Prompt Stuff /////
+
+  var inst = $('div#prompt');
+
+  function step1 () {
+    var handler = GMap.event.addListener(map, 'click', function (event) {
+      var lat = $('span#lat');
+      var lng = $('span#lng');
+      lat.html(event.latLng.lat());
+      lng.html(event.latLng.lng());
+
+      // Create a new marker and add it to the map:
+      var marker = GMap.marker(event.latLng, map, '');
+    
+      loadingInfo = GMap.info(map, marker,
+                              '<b>Retrieving from stream stats @ ' +
+                              lat.html() + ', ' + lng.html() + '</b>');
+
+      GMap.state(event.latLng, function (name) {
+        socket.emit('marker', { 'state' : name,
+                                'lat'   : event.latLng.lat(),
+                                'lng'   : event.latLng.lng() });
+      });
+
+      GMap.event.removeListener(handler);
+      step2(marker);
+    });
+    inst.html('<p>Choose a point to delineate the basin.</p>');
+  }
+
+  function step2 () {
+    inst.append('<p>Is this the basin you wanted? ' +
+                '<a id="step2yes" href="">Yes</a>/' +
+                '<a id="step2no"  href="">No</a></p>');
+  }
+
+  //step1();
+
+// 1. Choose a point for delineating a basin
+//   2. Is this the basin you wanted (Yes/No) - where no would bring the
+//   user back to selecting a new point, if yes then go to next step
+// I think step 2.5 will be a menu/check boxes that allows the user to
+//   select which models will be run, right now we only have one model
+// 3. A button to run the algorithm we have setup on our server now
+// 4. Last step would be choice of data export and whether the user
+//   wanted to do this for a new basin
+
 });

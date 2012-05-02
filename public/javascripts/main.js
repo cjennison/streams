@@ -41,7 +41,7 @@ $(function() {
 
   // Global info window to be used to display loading status:
   var loadingInfo;
-   
+
   var gadges = new google.maps.KmlLayer('http://livestreams.herokuapp.com/GagesUsed.kmz',
                                         { preserveViewport :  true,
                                           clickable : false });
@@ -101,6 +101,10 @@ $(function() {
     setTimeout(function () {
       rscript.fadeIn('slow', function () {});
     }, 1000);
+
+    // Move marker to basin coordinates:
+    // TODO: need to add tables to map IDs to markers to keep track of
+    // the markers between callbacks.
 
     // Set center
     //var latlng = GMap.latlng(data.lat, data.lng);

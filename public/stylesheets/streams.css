@@ -42,3 +42,8 @@ img {
   display: block;
   width: 100px;
 }
+
+span#beta {
+  font-family: Arial;
+  font-size: 30px;
+}

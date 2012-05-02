@@ -35,15 +35,21 @@ div#logos {
   margin-left: 10px;
   margin-top: 10px;
   z-index: 300;
-  width: 100px;
+  width: 200px;
 }
 
 div#logos > img {
   display: block;
-  width: 100px;
+  width: 60px;
+}
+
+div#logos > p {
+  font-size: 10px;
+  color: blue;
 }
 
 span#beta {
   font-family: Arial;
   font-size: 30px;
+  color: red;
 }

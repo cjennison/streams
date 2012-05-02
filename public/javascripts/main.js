@@ -8,7 +8,7 @@ $(function() {
   // TODO: where should the initial map display?
   var options = {
     center : GMap.latlng(42.39019, -72.43307),
-    zoom : 14,
+    zoom : 17,
     mapTypeId : google.maps.MapTypeId.TERRAIN,
 
 

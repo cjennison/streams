@@ -44,7 +44,7 @@ $(function() {
 
   var gadges = new google.maps.KmlLayer('http://livestreams.herokuapp.com/GagesUsed.kmz',
                                         { preserveViewport :  true,
-                                          clickable : false });
+                                          clickable : true });
   gadges.setMap(map);
   var ct_watershed = new google.maps.KmlLayer('http://livestreams.herokuapp.com/ct_watershed.kmz',
                                               { preserveViewport :  true,
@@ -54,7 +54,8 @@ $(function() {
   // Click event on the map. This adds a marker on the clicked
   // location. It will also send an Ajax call to the server to
   // initiate the downloading of the KML file.
-  GMap.event.addListener(map, 'click', function (event) {
+  
+  GMap.event.addListener(map, 'rightclick', function (event) {
     // Create a new marker and add it to the map:
     var marker = GMap.marker(event.latLng, map, '');
 
@@ -73,6 +74,7 @@ $(function() {
                               'lat'   : event.latLng.lat(),
                               'lng'   : event.latLng.lng() });
     });
+
   });
 
   socket.on('kmldone', function (data) {

@@ -11,7 +11,6 @@ $(function() {
     zoom : 17,
     mapTypeId : google.maps.MapTypeId.TERRAIN,
 
-
     mapTypeControl: true,
     mapTypeControlOptions: {
       style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -84,16 +83,13 @@ $(function() {
     console.log('Setting geoRssLayer');
     
     // Close the info window:
-    loadingInfo.close();
+
+    // Comment this out until further notice...
+    //    loadingInfo.close();
+
     geoRssLayer.setMap(map);
     
     console.log('Drain ID = ' + data.props.drainId);
-    
-    /*
-    var rscript = 'http://streams.ecs.umass.edu/gmap_script.php';
-    var cmd = rscript + '?y=' + data.lat + '&x=' + data.lng 
-                          + '&da=' + data.props.drainId;
-    */
 
     // RScript support:
     var rscript = $('div#rscript');

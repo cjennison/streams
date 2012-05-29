@@ -81,6 +81,12 @@ exports.make = function (options) {
       var req = http.get(options, function (res) {
         console.log('Got response: ' + res.statusCode);
 
+        // Check response code
+        if (res.statusCode != 200) {
+          cb(true, 'Streamstats service unavailable.');
+          return;
+        }
+        
         // Save the data that is returned from the request:
 	      var kmldata = '';
 	      res.on('data', function(chunk) {
@@ -103,7 +109,7 @@ exports.make = function (options) {
                   drainId: img
                 };
                 // Invoke callback with the path to the kml file:
-                cb(kmlpath, props);
+                cb(false, kmlpath, props);
               });
               
 		      });

@@ -20,12 +20,22 @@ exports.listen = function (app) {
     socket.on('marker', function (data) {
       console.log('received marker message: ' + data);
       var url = streamstat.make(data);
-      url.fetch(function (kmlpath, props) {          
-        console.log('kml file downloaded. notifying client.');
-        socket.emit('kmldone', { kmlpath : kmlpath,
-                                 props   : props,
-                                 lat     : data.lat,
-                                 lng     : data.lng });
+      url.fetch(function (error, kmlpath, props) {
+        if (error) {
+          // If there is an error, the message will be the
+          // second argument in the arguments array:
+          console.log('Error: ' + arguments[1]);
+          socket.emit('kmlerror', { error: true,
+                                    msg  : arguments[1] });
+        }
+        else {
+          console.log('kml file downloaded. notifying client.');
+          socket.emit('kmldone', { error   : false,
+                                   kmlpath : kmlpath,
+                                   props   : props,
+                                   lat     : data.lat,
+                                   lng     : data.lng });
+        }
       });
     });
 

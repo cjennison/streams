@@ -3,6 +3,7 @@ var GMap = (function init() {
 	var Map        = google.maps.Map;
   var LatLng     = google.maps.LatLng;
   var InfoWindow = google.maps.InfoWindow;
+  var KmlLayer   = google.maps.KmlLayer;
 
   // Some useful objects:
   var geocoder = new google.maps.Geocoder();
@@ -25,11 +26,48 @@ var GMap = (function init() {
       });
     },
 
+    marker2: function (latlng, title) {
+      return new google.maps.Marker({
+        position: latlng,
+        title   : title
+      });
+    },
+
     info: function (map, marker, content) {
       var infoWindow = new InfoWindow();
       infoWindow.setContent(content);
       infoWindow.open(map, marker);
       return infoWindow;
+    },
+
+    // Created this version of info in order to support new basin
+    // object. This should be merged into the above info function
+    // when this work is complete.
+    info2: function () {
+      var options = {
+        disableAutoPan: false
+        ,maxWidth: 20
+        ,pixelOffset: new google.maps.Size(-140, 0)
+        ,zIndex: null
+        ,boxStyle: {
+          background: "url('http://www.garylittle.ca/map/artwork/tipbox.gif') no-repeat"
+          ,opacity: 0.60
+          ,width: "180px"
+        }
+        ,closeBoxMargin: "10px 2px 2px 2px"
+        ,infoBoxClearance: new google.maps.Size(1, 1)
+        ,isHidden: false
+        ,pane: "floatPane"
+        ,enableEventPropagation: false
+      };
+      //return new InfoWindow();
+      return new InfoBox(options);
+    },
+
+    kml: function (map, location) {
+      return new KmlLayer(location,
+                          { preserveViewport: true,
+                            map: map });
     },
 
     state: function (latlng, cb) {

@@ -2,7 +2,7 @@
 var Basin = (function init () {
   // This is used to disable event handlers when a basin lookup is in progress.
   var disableHandlers = false;
-  
+
   // Return an object representing the Basin module:
   return {
     
@@ -11,6 +11,12 @@ var Basin = (function init () {
       // Return if a basin lookup is in progress:
       if (disableHandlers)
         return;
+
+      // Reference to some useful DOM nodes to speed
+      // things up a bit rather than search DOM each time.
+      var prompt  = $('div#prompt');
+      var ldrmsg  = $('div#loader > #msg');
+      var rscript = $('div#rscript');
 
       // Disable handlers:
       disableHandlers = true;
@@ -29,6 +35,12 @@ var Basin = (function init () {
         socket: socket,
         info: info
       };
+
+      function resetPrompt () {
+        disableHandlers = false;
+        prompt.empty();
+        rscript.empty();
+      }
       
       // This function sends a message to the server to initiate a
       // KML download from streamstats.
@@ -67,6 +79,9 @@ var Basin = (function init () {
         basin.kml = kml;
         // Save the drainage model URL in the basin object:
         basin.drainage_url = data.props.drainId;
+        // Remove marker:
+        marker.setMap(null);
+        // Verify basin:
         verify_basin();
       }
 
@@ -94,17 +109,16 @@ var Basin = (function init () {
                    '<p><a id="p1-yes" href="">Yes</a> or ' +
                    '<a id="p1-no" href="">No</a></p>');
 
-        $('div#prompt').append(p1);
+        $('div#prompt').html(p1);
         
         $(p1).find('#p1-yes').click(function (event) {
-          console.log('p1-yes handler invoked.');
           event.preventDefault();
           select_model();
         });
 
         $(p1).find('#p1-no').click(function (event) {
           event.preventDefault();
-          // call reset on basin...
+          resetPrompt();
         });
 
       }
@@ -114,16 +128,22 @@ var Basin = (function init () {
                    '<form>' +
                    '<input type="radio" name="model" id="p2-drainage">Drainage</input><br/>' +
                    '<input type="radio" name="model" id="p2-other">Other Model</input><br/>' +
-                   '</form>');
-        $('div#prompt').append(p2);
+                   '</form>' +
+                   '<p>Or choose a <a href="" id="p2-newbasin">new basin</a>.</p>');
+        $('div#prompt').html(p2);
 
         $(p2).find('#p2-drainage').click(function (event) {
           var url = basin.drainage_url;
-          var rscript = $('div#rscript');
+          console.log('Drainage URL: ' + url);
           rscript.empty();
           rscript.hide();
-          rscript.append(data.props.drainId);
+          rscript.append(url);
           rscript.fadeIn('slow', function () {})
+        });
+
+        $(p2).find('#p2-newbasin').click(function (event) {
+          event.preventDefault();
+          resetPrompt();
         });
         
         // Allow the map to be clicked again:

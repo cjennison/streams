@@ -21,6 +21,10 @@ body {
   color: red;
 }
 
+div#rscript {
+  margin-top: 10px;
+}
+
 div#inst {
   width : 250px;
   height: 600px;

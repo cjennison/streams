@@ -44,7 +44,7 @@ var Basin = (function init () {
 
       // Select the next basin id:
       var basin_id = nextId();
-      while (!(basin_id in basinTable)) {
+      while (basin_id in basinTable) {
         basin_id = nextId();
       }
 

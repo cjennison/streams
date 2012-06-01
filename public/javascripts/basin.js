@@ -1,8 +1,23 @@
-
+/* The Basin module represents all those things that one might
+ * want to do with a basin. 
+ */
 var Basin = (function init () {
-  // This is used to disable event handlers when a basin lookup is in progress.
+  // This is used to disable event handlers when
+  // a basin lookup is in progress. We want to disable
+  // the selection of another basin when a lookup is
+  // in progress.
   var disableHandlers = false;
 
+  var basinTable = {};
+
+  function nextId () {
+    return Math.floor(Math.random());
+  }
+
+  function addBasin (basin) {
+    basinTable[basin.getId()] = basin;
+  }
+  
   // Return an object representing the Basin module:
   return {
     
@@ -27,15 +42,28 @@ var Basin = (function init () {
       var info     = GMap.info2();         // Create the InfoWindow.
       var position = marker.getPosition(); // Get the marker position.
 
+      // Select the next basin id:
+      var basin_id = nextId();
+      while (!(basin_id in basinTable)) {
+        basin_id = nextId();
+      }
+
+      console.log('created basin object ' + basin_id);
+      
       // The initial basin object:
       var basin = {
-        jquery: $,
-        map: map,
-        marker: marker,
-        socket: socket,
-        info: info
+        getId  : function () { return basin_id; },
+        jquery : $,
+        map    : map,
+        marker : marker,
+        socket : socket,
+        info   : info
       };
 
+      // Add the basin to the basin table:
+      addBasin(basin);
+
+      // This resets the prompt view to select another basin:
       function resetPrompt () {
         disableHandlers = false;
         prompt.empty();
@@ -51,7 +79,9 @@ var Basin = (function init () {
                                   lng   : position.lng() });
         });
       }
-      
+
+      // This function displays the initial loading messages
+      // when a point on the map is clicked to select a basin.
       function retrieve_info () {
         var loader = $('div#loader > #msg');        
         var lat    = position.lat().toPrecision(4);
@@ -66,6 +96,8 @@ var Basin = (function init () {
         info.open(map, marker);
       }
 
+      // This function is invoked when the KML data has been
+      // loaded from the streamstats web service.
       function receive_kml (data) {
         var ldr  = $('div#loader > #msg');
         ldr.fadeOut('slow', function () { });
@@ -85,6 +117,9 @@ var Basin = (function init () {
         verify_basin();
       }
 
+      // This function is invoked when there is an error loading the
+      // KML file from the streamstats website. It is called typically
+      // when the streamstats service is unavailable.
       function kml_error (data) {
         var ldr  = $('div#loader > #msg');
         ldr.fadeOut('slow', function () { });
@@ -95,15 +130,9 @@ var Basin = (function init () {
         disableHandlers = false;
       }
 
-      // 1. Choose a point for delineating a basin
-      //   2. Is this the basin you wanted (Yes/No) - where no would bring the
-      //   user back to selecting a new point, if yes then go to next step
-      // I think step 2.5 will be a menu/check boxes that allows the user to
-      //   select which models will be run, right now we only have one model
-      // 3. A button to run the algorithm we have setup on our server now
-      // 4. Last step would be choice of data export and whether the user
-      //   wanted to do this for a new basin
-      
+      // This function prompts the user when the basin is overlayed onto
+      // the google map. It asks the user if this is the basin they
+      // are interested in.
       function verify_basin () {
         var p1 = $('<p>Is this the basin you wanted?</p>' +
                    '<p><a id="p1-yes" href="">Yes</a> or ' +
@@ -119,10 +148,12 @@ var Basin = (function init () {
         $(p1).find('#p1-no').click(function (event) {
           event.preventDefault();
           resetPrompt();
+          // TODO: do I remove the basin from the display?
         });
-
       }
 
+      // This function prompts the user to select model to run and
+      // displays the results in the prompt view.
       function select_model () {
         var p2 = $('<p>Please choose a model to run:</p>' +
                    '<form>' +
@@ -157,7 +188,8 @@ var Basin = (function init () {
       retrieve_info();
       request_kml();
       
-      // Return the basic object:
+      // Return the basic object. Not sure this is useful, but perhaps it
+      // will be in the future.
       return basin;
     }
     

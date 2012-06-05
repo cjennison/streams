@@ -46,6 +46,11 @@ $(function() {
                                                 clickable : false });
   ct_watershed.setMap(map);
 
+  var fortRiver = new google.maps.KmlLayer('http://livestreams.herokuapp.com/Fort_River.kml',
+                                           { preserveViewport : true,
+                                             clickable : false });
+  fortRiver.setMap(map);
+
   GMap.event.addListener(map, 'rightclick', function (event) {
     var m = GMap.marker2(event.latLng, '');
     var b = Basin.basin($, GMap, map, m, socket);

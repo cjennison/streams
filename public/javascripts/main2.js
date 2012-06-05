@@ -48,8 +48,11 @@ $(function() {
 
   var fortRiver = new google.maps.KmlLayer('http://livestreams.herokuapp.com/Fort_River.kml',
                                            { preserveViewport : true,
-                                             clickable : false });
+                                             clickable : true });
   fortRiver.setMap(map);
+  google.maps.event.addListener(fortRiver, 'click', function (event) {
+    console.debug(event);
+  });
 
   GMap.event.addListener(map, 'rightclick', function (event) {
     var m = GMap.marker2(event.latLng, '');

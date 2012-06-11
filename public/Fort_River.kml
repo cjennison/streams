@@ -661,6 +661,9 @@
       </Placemark>
       <Placemark>
         <name>Buffam Brook</name>
+        <description>
+          This is a description of Buffam Brook!
+        </description>
         <styleUrl>#style0</styleUrl>
         <Style id="inline">
           <IconStyle>

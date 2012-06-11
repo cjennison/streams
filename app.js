@@ -1,6 +1,7 @@
 var express = require('express'),
-    routes = require('./routes'),
-    notify = require('./notify');
+    routes  = require('./routes'),
+    notify  = require('./notify'),
+    reach   = require('./lib/reach');
 
 // Possibly add DB support in future?
 /*
@@ -29,18 +30,18 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
-  app.use(express.errorHandler()); 
+  app.use(express.errorHandler());
 });
 
 // Routes
 app.get('/', routes.main);
 
 app.listen(process.env.PORT || process.env.C9_PORT || 9999);
-console.log("Express server listening on port %d in %s mode", 
+console.log("Express server listening on port %d in %s mode",
             app.address().port, app.settings.env);
 
 notify.listen(app);

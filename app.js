@@ -1,6 +1,6 @@
 var express = require('express'),
     routes  = require('./routes'),
-    notify  = require('./notify'),
+    notify  = require('./lib/notify'),
     reach   = require('./lib/reach');
 
 // Possibly add DB support in future?

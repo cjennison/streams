@@ -9,6 +9,13 @@ exports.main = function (req, res) {
              { 'title' : 'Streams' });
 };
 
+// A new interface to the streams application
+exports.v2 = function (req, res) {
+  res.render('version2.ejs',
+             { 'title' : 'Streams',
+               'layout': 'layout2.ejs' });
+};
+
 exports.stream = function (req, res) {
     var options = {
         host: 'streamstatsags.cr.usgs.gov',

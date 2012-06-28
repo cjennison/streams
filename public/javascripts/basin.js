@@ -8,10 +8,15 @@ var Basin = (function init () {
   // in progress.
   var disableHandlers = false;
 
-  var basinTable = {};
+  // Keeps track of basins.
+  // NOTE: Do we need this? Do we ever need to consult this table?
+  var basinTable  = {};
+
+  // The next basin id:
+  var nextBasinId = 0;
 
   function nextId () {
-    return Math.floor(Math.random());
+    return nextBasinId+=1;
   }
 
   function addBasin (basin) {
@@ -44,9 +49,6 @@ var Basin = (function init () {
 
       // Select the next basin id:
       var basin_id = nextId();
-      while (basin_id in basinTable) {
-        basin_id = nextId();
-      }
 
       console.log('created basin object ' + basin_id);
       

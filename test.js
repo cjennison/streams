@@ -2,6 +2,7 @@ var http = require('http');
 var step = require('step');
 var fs   = require('fs');
 
+// Options.
 var options = {
 	host: 'streamstatsags.cr.usgs.gov',
 	path: '/ss_ws_92/Service.asmx/getStreamstats?x=-72.43307&y=42.39019&inCRS=EPSG:6.6:4326&StateNameAbbr=MA&getBasinChars=C&getFlowStats=C&getGeometry=KML&downloadFeature=False&clientID=UT%20Demo'

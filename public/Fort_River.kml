@@ -38,25 +38,25 @@
     </Schema>
     <Style id="style0">
       <BalloonStyle>
-        <text><![CDATA[<table border="0">
-        <tr><td><b>ComID</b></td><td>$[Fort_River/ComID]</td></tr>
-        <tr><td><b>Permanent_</b></td><td>$[Fort_River/Permanent_]</td></tr>
-        <tr><td><b>FDate</b></td><td>$[Fort_River/FDate]</td></tr>
-        <tr><td><b>Resolution</b></td><td>$[Fort_River/Resolution]</td></tr>
-        <tr><td><b>GNIS_ID</b></td><td>$[Fort_River/GNIS_ID]</td></tr>
-        <tr><td><b>GNIS_Name</b></td><td>$[Fort_River/GNIS_Name]</td></tr>
-        <tr><td><b>LengthKM</b></td><td>$[Fort_River/LengthKM]</td></tr>
-        <tr><td><b>ReachCode</b></td><td>$[Fort_River/ReachCode]</td></tr>
-        <tr><td><b>FlowDir</b></td><td>$[Fort_River/FlowDir]</td></tr>
-        <tr><td><b>WBAreaComI</b></td><td>$[Fort_River/WBAreaComI]</td></tr>
-        <tr><td><b>WBArea_Per</b></td><td>$[Fort_River/WBArea_Per]</td></tr>
-        <tr><td><b>FType</b></td><td>$[Fort_River/FType]</td></tr>
-        <tr><td><b>FCode</b></td><td>$[Fort_River/FCode]</td></tr>
-        <tr><td><b>Shape_Leng</b></td><td>$[Fort_River/Shape_Leng]</td></tr>
-        <tr><td><b>Enabled</b></td><td>$[Fort_River/Enabled]</td></tr>
-        <tr><td><b>Culvert</b></td><td>$[Fort_River/Culvert]</td></tr>
+        <text><table border="0">
+          <tr><td><b>ComID</b></td><td>$[Fort_River/ComID]</td></tr>
+          <tr><td><b>Permanent_</b></td><td>$[Fort_River/Permanent_]</td></tr>
+          <tr><td><b>FDate</b></td><td>$[Fort_River/FDate]</td></tr>
+          <tr><td><b>Resolution</b></td><td>$[Fort_River/Resolution]</td></tr>
+          <tr><td><b>GNIS_ID</b></td><td>$[Fort_River/GNIS_ID]</td></tr>
+          <tr><td><b>GNIS_Name</b></td><td>$[Fort_River/GNIS_Name]</td></tr>
+          <tr><td><b>LengthKM</b></td><td>$[Fort_River/LengthKM]</td></tr>
+          <tr><td><b>ReachCode</b></td><td>$[Fort_River/ReachCode]</td></tr>
+          <tr><td><b>FlowDir</b></td><td>$[Fort_River/FlowDir]</td></tr>
+          <tr><td><b>WBAreaComI</b></td><td>$[Fort_River/WBAreaComI]</td></tr>
+          <tr><td><b>WBArea_Per</b></td><td>$[Fort_River/WBArea_Per]</td></tr>
+          <tr><td><b>FType</b></td><td>$[Fort_River/FType]</td></tr>
+          <tr><td><b>FCode</b></td><td>$[Fort_River/FCode]</td></tr>
+          <tr><td><b>Shape_Leng</b></td><td>$[Fort_River/Shape_Leng]</td></tr>
+          <tr><td><b>Enabled</b></td><td>$[Fort_River/Enabled]</td></tr>
+          <tr><td><b>Culvert</b></td><td>$[Fort_River/Culvert]</td></tr>
         </table>
-        ]]></text>
+        </text>
       </BalloonStyle>
       <PolyStyle>
         <color>ffff0000</color>

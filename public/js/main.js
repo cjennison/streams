@@ -1,4 +1,9 @@
 $(function() {
+  ////// UI Initialization //////
+  $("#accordion").accordion({ header : "h3",
+                              fillSpace : true,
+                              autoHeight: false });
+
   // Run web sockets:
   var socket = io.connect();
 

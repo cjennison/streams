@@ -1,4 +1,7 @@
 $(function() {
+  ////// UI Initialization //////
+  $("#accordion").accordion({ header: "h3" });
+  
   // Run web sockets:
   var socket    = io.connect();
   var mapcanvas = $('div#map')[0];

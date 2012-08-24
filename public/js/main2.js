@@ -1,6 +1,10 @@
 $(function() {
   ////// UI Initialization //////
-  $("#accordion").accordion({ header: "h3" });
+  $("#accordion").accordion({ header : "h3",
+                              fillSpace : true });
+  $('#inst').resizable();
+  $('#inst').draggable();
+  
   
   // Run web sockets:
   var socket    = io.connect();

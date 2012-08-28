@@ -39,6 +39,21 @@ div#inst {
   font-size: 11px;
 }
 
+#app-control {
+  position: absolute;
+  width   : 250px;
+  height  : 600px;
+  top: 50px;
+  left: 50px;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: white;
+  box-shadow: 5px 5px 5px #888888;
+  z-index: 300;
+  font-family: Arial;
+  font-size: 11px;  
+}
+
 div#loader {
   height: 20px;
 }

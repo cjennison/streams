@@ -1,45 +1,46 @@
 /* The AppControl module
  */
-var AppControl;
-
-$(function () {
-  // The AppControl object:
-  var exp = { name : 'AppControl' };
+Streams.app_control = {
+  name : 'AppControl',
+  apps : { },
   
-  // First construct the main AppControl UI element:
-  exp.elm = $('<div id="app-control">');
-  
-  // Create the accordion:
-  var accordion = $('<div>');
-  
-  // Accordion options:
-  var accordionOpts = {
-    header    : 'h3',
-    fillSpace : true
-  };
+  init : function () {
+    this.elm = $('<div id="app-control">');
+  },
 
-  // Apply some jQuery UI properties:
-  accordion.accordion(accordionOpts);
+  render : function () {
+    // Create the accordion:
+    var accordion = $('<div>');
+    
+    // Add the registered apps:
+    console.log('Loading Apps:');
+    for (var name in this.apps) {
+      var app = this.apps[name];
+      
+      console.log('    ' + app.name);
+      // Initialize the app:
+      app.init();
+      // Add to the app control view:
+      var header  = $('<h3><a href="#">' + app.name + '</a></h3>');
+      accordion.append(header);
+      accordion.append(app.view);
+    }
+    
+    // Append the accordion:
+    this.elm.append(accordion);
+    
+    // Append to the body element:
+    $('body').append(this.elm);
+    // Make the element resiable and draggable:
+    Streams.app_control.elm.draggable();
 
-  // Attach to UI:
-  exp.elm.append(accordion);
+    // Accordion options:
+    var accordionOpts = {
+      header    : 'h3',
+      fillSpace : true
+    };
 
-  // Append to the body element:
-  $('body').append(exp.elm);
-  
-  // Make the element resiable and draggable:
-  exp.elm.draggable();
-
-  exp.addApp = function (app) {
-    accordion.append(app);
-    // Reconstruct the accordion:
-    accordion.accordion('destroy');
-    accordion.accordion(accordionOpts)
-  };
-
-  // A test to dynamically add an element to the accordion:
-  exp.addApp($('<h3><a href="#">Hello</a></h3><div><p>This is a test</p></div>'));
-  exp.addApp($('<h3><a href="#">Hello 2</a></h3><div><p>This is a test</p></div>'));  
-  
-  AppControl = exp;
-});
+    // Apply some jQuery UI properties:
+    accordion.accordion(accordionOpts);    
+  }
+};

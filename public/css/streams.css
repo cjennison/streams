@@ -41,7 +41,7 @@ div#inst {
 
 #app-control {
   position: absolute;
-  width   : 250px;
+  width   : 350px;
   height  : 600px;
   top: 50px;
   left: 50px;
@@ -82,7 +82,7 @@ div#map {
 
 div#logos {
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 600px;
   z-index: 300;
   width: 200px;
 }

@@ -1,7 +1,8 @@
 var express = require('express'),
     routes  = require('./routes'),
     notify  = require('./lib/notify'),
-    reach   = require('./lib/reach');
+    reach   = require('./lib/reach'),
+    models  = require('./lib/models');
 
 // Possibly add DB support in future?
 /*
@@ -38,8 +39,10 @@ app.configure('production', function(){
 });
 
 // Routes
-app.get('/',   routes.main);
-app.get('/v2', routes.v2);
+app.get('/', routes.main);
+app.get('/weather-model-exec', models.weather_model_exec);
+
+// app.get('/v2', routes.v2);
 
 app.listen(process.env.PORT || process.env.C9_PORT || 9999);
 console.log("Express server listening on port %d in %s mode",

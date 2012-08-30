@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-setwd("/whatever/")
+setwd("whatever/")
 library(MASS)
 library(zoo)
 

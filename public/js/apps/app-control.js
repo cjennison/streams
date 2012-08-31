@@ -5,7 +5,7 @@ Streams.app_control = {
   apps : { },
   
   init : function () {
-    this.elm = $('<div id="app-control">');
+    this.view = $('<div id="app-control">');
   },
 
   render : function () {
@@ -27,12 +27,12 @@ Streams.app_control = {
     }
     
     // Append the accordion:
-    this.elm.append(accordion);
+    this.view.append(accordion);
     
     // Append to the body element:
-    $('body').append(this.elm);
+    $('body').append(this.view);
     // Make the element resiable and draggable:
-    Streams.app_control.elm.draggable();
+    Streams.app_control.view.draggable();
 
     // Accordion options:
     var accordionOpts = {

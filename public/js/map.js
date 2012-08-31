@@ -4,7 +4,7 @@ Streams.map = {
   name : 'Map',
   
   init : function () {
-    Streams.map.view = $('div#map')[0];
+    Streams.map.view = $('div#map');
   },
 
   render : function () {
@@ -39,7 +39,7 @@ Streams.map = {
     };
 
     // Construct the map:
-    var map = GMap.map(Streams.map.view, options);
+    var map = GMap.map(Streams.map.view[0], options);
 
     // Make the map available:
     this._map = map;

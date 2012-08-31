@@ -102,3 +102,8 @@ span#beta {
   font-size: 30px;
   color: red;
 }
+
+/* weather app */
+#weather-models-app #loader #message img {
+  margin-right: 5px;
+}

@@ -6,6 +6,8 @@ var Streams = {};
 Streams.socket = io.connect();
 
 $(function () {
+  Streams.view = $('body');
+  
   Streams.map.init();
   Streams.app_control.init();
 

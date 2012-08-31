@@ -41,6 +41,7 @@ app.configure('production', function(){
 // Routes
 app.get('/', routes.main);
 app.get('/weather-model-exec', models.weather_model_exec);
+app.get('/weather-model-exec/status', models.weather_model_status);
 
 // app.get('/v2', routes.v2);
 

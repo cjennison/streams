@@ -1,4 +1,7 @@
 <div id="weather-models-app">
+  <div id="loader">
+    <div id="message"></div>
+  </div>
   <p>
     Please select values below for <strong>mean percent change in
     precipitation</strong>, <strong>mean percent change in
@@ -6,13 +9,16 @@
     temperature</strong>.
   </p>
   <p>
-    <p>Precipitation 1 [<span id="precip01-value"></span>%]</p>
+    <p>Mean Perc. Change in Precipitation [<span id="precip01-value"></span>%]</p>
     <div id="precip01"></div>
     
-    <p>Precipitation 2 [<span id="precip02-value"></span>%]</p>
+    <p>Mean Perc. Change in Precipitation Variance [<span id="precip02-value"></span>%]</p>
     <div id="precip02"></div>
 
-    <p>Mean Temp Change [<span id="mean-temp-value"></span>]</p>
+    <p>Mean Temperature Change [<span id="mean-temp-value"></span>]</p>
     <div id="mean-temp"></div>
+  </p>
+  <p>
+    <a id="run" href="#">Run Model</a>
   </p>
 </div>

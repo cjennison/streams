@@ -15,7 +15,7 @@ Streams.app_control.apps.weather_models = {
     var precipSlider1     = view.find('#precip01');
     var precipSlider1Val  = view.find('#precip01-value');
     var precipSlider2     = view.find('#precip02');
-    var precipSlider2Val  = view.find('#precip02-value');    
+    var precipSlider2Val  = view.find('#precip02-value');
     var meanTempChange    = view.find('#mean-temp');
     var meanTempChangeVal = view.find('#mean-temp-value');
     var runButton         = view.find('#run');
@@ -29,8 +29,8 @@ Streams.app_control.apps.weather_models = {
     meanTempChangeVal.text(0);
 
     precipSlider1.slider(
-      { max     : 100,
-        min     : 0,
+      { max     : 50,
+        min     : -50,
         range   : 'min',
         value   : 1,
         animate : 'fast',
@@ -41,11 +41,11 @@ Streams.app_control.apps.weather_models = {
     );
     
     precipSlider2.slider(
-      { max     : 100,
-        min     : 0,
+      { max     : 50,
+        min     : -50,
         range   : 'min',
         value   : 1,
-        animate : 'fast',        
+        animate : 'fast',
         slide   : function (event, ui) {
           precipSlider2Val.text(ui.value);
         }
@@ -53,20 +53,24 @@ Streams.app_control.apps.weather_models = {
     );
 
     meanTempChange.slider(
-      { max     : 6,
-        min     : -1,
+      { max     : 7,
+        min     : 0,
         range   : 'min',
         value   : 0,
-        animate : 'fast',        
+        animate : 'fast',
         slide   : function (event, ui) {
           meanTempChangeVal.text(ui.value);
-        }        
+        }
       }
     );
 
     // Save the context of this object:
     var that = this;
 
+    // This function checks the status of the Rscript model. It
+    // communicates with the server using Ajax to determine if
+    // there is any output to be displayed in the UI or if the
+    // image files are available for display.
     function statusCheck () {
       console.log('statusCheck called');
       $.get('/weather-model-exec/status', function (data) {
@@ -88,7 +92,7 @@ Streams.app_control.apps.weather_models = {
         if (entry.type === 'info') {
           msg.html('<img src="images/ajax-loader.gif"/>');
           msg.append(entry.message);
-          setTimeout(statusCheck, 1000);          
+          setTimeout(statusCheck, 1000);
         }
 
         if (entry.type === 'image') {

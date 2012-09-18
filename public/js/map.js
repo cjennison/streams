@@ -46,19 +46,19 @@ Streams.map = {
 
     //// TESTING ////
     
-    var gadges = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/GagesUsed.kmz',
-                                          { preserveViewport :  true,
-                                            clickable : true });
-    gadges.setMap(map);
+    //var gadges = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/GagesUsed.kmz',
+    //                                      { preserveViewport :  true,
+    //                                        clickable : true });
+    //gadges.setMap(map);
     var ct_watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/ct_watershed.kmz',
                                                 { preserveViewport :  true,
                                                   clickable : false });
     ct_watershed.setMap(map);
 
-    var fortRiver = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/Fort_River.kml',
-                                             { preserveViewport : true,
-                                               clickable : true });
-    fortRiver.setMap(map);
+    //var fortRiver = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/Fort_River.kml',
+    //                                         { preserveViewport : true,
+    //                                           clickable : true });
+    //fortRiver.setMap(map);
     
 
     var westbrook = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/westbook.kmz',

@@ -12,10 +12,21 @@ Streams.app_control = {
     // Create the accordion:
     var accordion = $('<div>');
     
+    // Create an array of the apps:
+    var apps = [];
+    for (var name in this.apps) {
+      apps.push(this.apps[name]);
+    }
+
+    // Sort the apps by order property:
+    apps.sort(function (x, y) {
+      return x.order > y.order;
+    });
+
     // Add the registered apps:
     console.log('Loading Apps:');
-    for (var name in this.apps) {
-      var app = this.apps[name];
+    for (var i = 0; i < apps.length; i++) {
+      var app = apps[i];
       
       console.log('    ' + app.name);
       // Initialize the app:

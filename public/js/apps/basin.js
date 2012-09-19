@@ -2,7 +2,7 @@
  */
 Streams.app_control.apps.basin = {
   name : 'Basin',
-  
+  order: 1,
   init : function () {
     //// Initialize View ////
     var basin_view    = $('<div id="basin-app">');

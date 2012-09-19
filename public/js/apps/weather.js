@@ -57,6 +57,7 @@ Streams.app_control.apps.weather_models = {
         min     : 0,
         range   : 'min',
         value   : 0,
+        step: 0.25,
         animate : 'fast',
         slide   : function (event, ui) {
           meanTempChangeVal.text(ui.value);

@@ -1,6 +1,6 @@
 Streams.app_control.apps.fish_models = {
   name : 'Fish Models',
-  order: 3,
+  order: 5,
   init : function () {
     //// Initialize View ////
     var view = $('<div id="fish-models-app">');

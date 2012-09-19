@@ -11,7 +11,7 @@ Streams.map = {
     // Options for the default map to display.
     var options = {
       center : GMap.latlng(42.39019, -72.43307),
-      zoom : 17,
+      zoom : 16,
       mapTypeId : google.maps.MapTypeId.TERRAIN,
 
       mapTypeControl: true,
@@ -61,14 +61,24 @@ Streams.map = {
     fortRiver.setMap(map);
     
 
-    var westbrook = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/westbook.kmz',
+    // var westbrook = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/westbook.kmz',
+    //                                          { preserveViewport : false,
+    //                                            clickable : false });
+    // westbrook.setMap(map);
+
+    var sites = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/Sites.kml',
                                              { preserveViewport : false,
                                                clickable : false });
-    westbrook.setMap(map);
+    sites.setMap(map);
 
-    google.maps.event.addListener(westbrook, 'click', function (event) {
-      console.debug(event);
-    });
+    var Watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/Watershed.kml',
+                                             { preserveViewport : false,
+                                               clickable : false });
+    Watershed.setMap(map);
+
+    // google.maps.event.addListener(westbrook, 'click', function (event) {
+    //   console.debug(event);
+    // });
     //// TESTING ////
   },
 

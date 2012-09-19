@@ -3,9 +3,24 @@ Streams.app_control.apps.environmental_models = {
   order: 3,
   init : function () {
     //// Initialize View ////
-    var view = $('<div id="environmental-models-app">');
-    view.html('environmental models app.');
-  
+    var template = Handlebars.templates.fish-model;
+    var view=$(template(context));
+    
+    var nullslider1 = view.find('.nullslider1');
+    var nullbutton = view.find('.nullbutton');
+    
+    nullbutton.button({disabled:true});
+    nullslider1.slider({
+      value:0,
+      min:-50,
+      max:50,
+      disabled:true
+    });
+    
     this.view = view;
+
+// var view = $('<div id="environmental-models-app">');
+  //  view.html('environmental models app.');
+  
   }
 };

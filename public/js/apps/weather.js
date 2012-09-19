@@ -1,7 +1,7 @@
 /** The Weather App.
  */
 Streams.app_control.apps.weather_models = {
-  name : 'Weather Models',
+  name : 'Weather and Climate Models',
   order: 2,
   init : function () {
     //// Grab the app view ////

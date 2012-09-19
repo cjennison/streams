@@ -165,7 +165,7 @@ Streams.app_control.apps.basin = {
           $('<p>Please choose a model to run:</p>' +
             '<form>' +
             '<input type="radio" name="model" id="p2-drainage">Drainage</input><br/>' +
-            '<input type="radio" name="model" id="p2-other">Other Model</input><br/>' +
+            '<input type="radio" name="model" disabled="disabled" id="p2-other">Other Model</input><br/>' +
             '</form>' +
             '<p>Or choose a <a href="" id="p2-newbasin">new basin</a>.</p>');
         $('div#prompt').html(p2);

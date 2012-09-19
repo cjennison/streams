@@ -2,20 +2,20 @@
   <div id="loader">
     <div id="message"></div>
   </div>
-  <p>
-    Please select values below for <strong>mean percent change in
-    precipitation</strong>, <strong>mean percent change in
-    precipitation variance</strong>, and <strong>mean change in
-    temperature</strong>.
+  <select name="weathertype" class="ui-state-default"><option>Stochastic Weather Generation</option>
+    <option disabled="disabled">Downscaled Climate Scenario</option></select>
+  <p><strong>Specify Amount Change</strong>
+    <br>Please select values below for changes driving stochastically generated weather.
   </p>
   <p>
-    <p>Mean Perc. Change in Precipitation [<span id="precip01-value"></span>%]</p>
+    
+    <p>Mean Annual Precipitation (% change, 80-year mean) [<span id="precip01-value"></span>%]</p>
     <div id="precip01"></div>
     
-    <p>Mean Perc. Change in Precipitation Variance [<span id="precip02-value"></span>%]</p>
+    <p>Precipitation Annual Variance (% change, 80-year mean) [<span id="precip02-value"></span>%]</p>
     <div id="precip02"></div>
 
-    <p>Mean Temperature Change [<span id="mean-temp-value"></span>]</p>
+    <p>Mean Annual Temperature (&deg;C change, 80-year mean) [<span id="mean-temp-value"></span>]</p>
     <div id="mean-temp"></div>
   </p>
   <p>

@@ -7,14 +7,15 @@ Streams.app_control.apps.fish_models = {
     var template = Handlebars.templates['fish-models'];
     var view=$(template(context));
     
-    var nullslider1 = view.find('.nullslider1');
+    var nullslider2 = view.find('.nullslider2');
     var nullbutton = view.find('.nullbutton');
     
     nullbutton.button({disabled:true});
-    nullslider1.slider({
-      value:0,
-      min:-50,
-      max:50,
+    nullslider2.slider({
+      value:1,
+      min:0,
+      max:1,
+      step:0.1,
       disabled:true
     });
     

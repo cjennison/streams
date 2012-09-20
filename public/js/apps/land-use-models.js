@@ -3,7 +3,9 @@ Streams.app_control.apps.land_use_models = {
   order: 4,
   init : function () {
     //// Initialize View ////
-    var template = Handlebars.templates.fish-model;
+    // Nothing in context yet!
+    var context = { };
+    var template = Handlebars.templates['land-use-models'];
     var view=$(template(context));
     
     var nullslider1 = view.find('.nullslider1');

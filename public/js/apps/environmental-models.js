@@ -3,7 +3,9 @@ Streams.app_control.apps.environmental_models = {
   order: 3,
   init : function () {
     //// Initialize View ////
-    var template = Handlebars.templates.fish-model;
+    // Nothing in context yet!
+    var context = { };
+    var template = Handlebars.templates['environmental-models'];
     var view=$(template(context));
     
     var nullslider1 = view.find('.nullslider1');

@@ -2,8 +2,9 @@ Streams.app_control.apps.fish_models = {
   name : 'Fish Population Models',
   order: 5,
   init : function () {
-    
-    var template = Handlebars.templates.fish-model;
+    // Nothing in context yet!
+    var context = { };
+    var template = Handlebars.templates['fish-models'];
     var view=$(template(context));
     
     var nullslider1 = view.find('.nullslider1');

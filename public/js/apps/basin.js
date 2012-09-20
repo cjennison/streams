@@ -1,7 +1,7 @@
 /* The Basin Application
  */
 Streams.app_control.apps.basin = {
-  name : 'Basin',
+  name : 'Basin Selection',
   order: 1,
   init : function () {
     //// Initialize View ////

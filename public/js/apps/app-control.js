@@ -52,6 +52,6 @@ Streams.app_control = {
     };
 
     // Apply some jQuery UI properties:
-    accordion.accordion(accordionOpts);    
+    accordion.accordion(accordionOpts);
   }
 };

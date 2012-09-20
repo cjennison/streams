@@ -55,14 +55,17 @@ var weatherModel = models.weatherModel(streamsConfig);
 // Routes
 app.get('/', routes.main);
 // Weather Model Routes:
-app.get('/weather-model-exec',
-  function (req, res) {
-    weatherModel.exec(req, res);
-  });
-app.get('/weather-model-exec/status',
-  function (req, res) {
-    weatherModel.status(req, res);
-  });
+// app.get('/weather-model-exec',
+//   function (req, res) {
+//     weatherModel.exec(req, res);
+//   });
+// app.get('/weather-model-exec/status',
+//   function (req, res) {
+//     weatherModel.status(req, res);
+//   });
+
+app.get('/weather-model-exec', models.weather_model_exec);
+app.get('/weather-model-exec/status', models.weather_model_status);
 
 // app.get('/v2', routes.v2);
 

@@ -14,8 +14,8 @@
     box.append(title);
     box.append(image);
 
-    image.width('400px');
-    image.height('350px');
+    image.width('150px');
+    image.height('100px');
     
     Streams.map.view.append(box);
     console.log(Streams.ui.view);

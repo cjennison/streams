@@ -1,8 +1,9 @@
-var express = require('express'),
-    routes  = require('./routes'),
-    notify  = require('./lib/notify'),
-    reach   = require('./lib/reach'),
-    models  = require('./lib/models');
+var express     = require('express'),
+    routes      = require('./routes'),
+    user_routes = require('routes/users');
+    notify      = require('./lib/notify'),
+    reach       = require('./lib/reach'),
+    models      = require('./lib/models');
 
 // Load the application configuration file:
 var streamsConfig = require('./streams.json');
@@ -67,7 +68,8 @@ app.get('/', routes.main);
 app.get('/weather-model-exec', models.weather_model_exec);
 app.get('/weather-model-exec/status', models.weather_model_status);
 
-// app.get('/v2', routes.v2);
+// Routes for users:
+app.get('/users/:username/runs', user_routes.getRuns);
 
 app.listen(process.env.PORT || process.env.C9_PORT || streamsConfig.port);
 console.log("Express server listening on port %d in %s mode",

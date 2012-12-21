@@ -19,6 +19,7 @@
 #Activate Necessary Libraries
 library(MASS)
 basedir <- paste0(getwd(), "/..") 
+print('running weather')
 setwd(paste0(basedir,"/rscripts"))
 
 source("param_startup.R")

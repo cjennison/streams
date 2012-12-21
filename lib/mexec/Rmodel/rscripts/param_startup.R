@@ -6,7 +6,7 @@ source("param_functions.R")
 
 
 #args consists of single json object which contains userid and runid
-ids<-fromJSON( commandArgs(trailingOnly = TRUE) )
+ids<-fromJSON(commandArgs(trailingOnly = TRUE) )
 #these ids are used to find correct directory for the run, which contains param.json, which has all remaining parameters
 
 setwd(paste0(basedir,"/runs/",ids$userid,"/",ids$runid))

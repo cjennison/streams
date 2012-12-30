@@ -12,15 +12,18 @@ exports.exec = function(req, res) {
 	// - get a new run directory for each run
 	var runs = settings.runs;
 	for(var aRun in runs) {
-		var path = 'xxxusers/' + user + '/' + aRun.scriptName + '/';
-		aRun.runId;
+		var path = 'xxxusers/' + user + '/' + aRun.scriptName + '/'+aRun.runId;
 		mkdir_p(path);
 		// - create settings file
 		fs.writeFile(path+'/'+aRun.scriptName+'.setting', aRun, function(err) {
 			if(err) {
 				console.log("cannot save setting for the model: " + aRun.scriptName);
-				//TODO: remove the path with nodejs
-
+				//TODO: remove the path with nodejs-done
+				mexec.rimraf(path,function(err){
+					if(err){
+						console.log("cannot remove path: "+path);
+					}
+				});
 				runReady = false;
 				throw err;
 				break;
@@ -30,6 +33,6 @@ exports.exec = function(req, res) {
 	}
 	// - call mexec.runModels
 	if(runReady) {
-		mexec.runModels();
+		mexec.runModels(runs,0,"xxxpath of the modelsxxx");
 	}
 };

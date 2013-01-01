@@ -1,7 +1,0 @@
-{
-	"name": "mexec",
-  "version": "0.0.1",
-  "author": "Kun Tu <tukun1980@gmail.com>",
-  "description": "a library for executing model scripts.",
-  "main": "./batchrun.js"
-}

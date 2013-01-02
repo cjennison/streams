@@ -9,10 +9,15 @@ exports.exec = function(req, res) {
 	var runReady = true;
 	// TODO:
 	// - get the user
+	user = req.body.user;
+	//build up an array of runs from the setting
+	var runs = mexec.buildRuns(setting);
 	// - get a new run directory for each run
-	var runs = settings.runs;
+	
 	for(var aRun in runs) {
-		var path = 'xxxusers/' + user + '/' + aRun.scriptName + '/'+aRun.runId;
+		//generate a runId with uuid
+		aRun.runId = 
+		var path = _dirname + '../lib/mexec' + user + '/' + aRun.scriptName + '/'+aRun.runId;
 		mkdir_p(path);
 		// - create settings file
 		fs.writeFile(path+'/'+aRun.scriptName+'.setting', aRun, function(err) {
@@ -25,7 +30,7 @@ exports.exec = function(req, res) {
 					}
 				});
 				runReady = false;
-				throw err;
+				//throw err;
 				break;
 			}
 			console.log("setting for " + aRun.scriptName + " is saved");

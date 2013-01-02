@@ -1,26 +1,33 @@
-var users = require('lib/users');
-var mexec = require('lib/mexec');
+
+var users = require('../lib/users');
+var mexec = require('../lib/mexec');
 var fs = require('fs');
 
 // Routes for the mexec library.
 exports.exec = function(req, res) {
 	var settings = req.body;
-	var user = req.session.user; // TODO: assign user (login?)
+	//var user = req.session.user; // TODO: assign user (login?)
+	var user = req.body.user;
 	var runReady = true;
 	// TODO:
 	// - get the user
-	user = req.body.user;
+	
 	//build up an array of runs from the setting
-	var runs = mexec.buildRuns(setting);
+	var runs = mexec.buildRuns(settings);
+	
 	// - get a new run directory for each run
 	
-	for(var aRun in runs) {
+	for( var idx =0; idx<runs.length;idx++ ) {
+		var aRun = runs[idx];
 		//generate a runId with uuid
-		aRun.runId = 
-		var path = _dirname + '../lib/mexec' + user + '/' + aRun.scriptName + '/'+aRun.runId;
-		mkdir_p(path);
+		if(aRun.runId===''){
+			aRun.runId = 1234;
+		}
+		var path = __dirname + '/../lib/mexec' + user + '/' + aRun.scriptName + '/'+aRun.runId;
+		mexec.mkdir_p(path);
 		// - create settings file
 		fs.writeFile(path+'/'+aRun.scriptName+'.setting', aRun, function(err) {
+			console.log(err);
 			if(err) {
 				console.log("cannot save setting for the model: " + aRun.scriptName);
 				//TODO: remove the path with nodejs-done
@@ -29,9 +36,8 @@ exports.exec = function(req, res) {
 						console.log("cannot remove path: "+path);
 					}
 				});
-				runReady = false;
-				//throw err;
-				break;
+				throw err;
+				//return;
 			}
 			console.log("setting for " + aRun.scriptName + " is saved");
 		});

@@ -1,0 +1,7 @@
+{
+  "name": "mexec",
+  "version": "0.0.1",
+  "author": "Tim Richards <tim.d.richards@gmail.com>",
+  "description": "a library for representing users.",
+  "main": "./batchrun.js"
+}

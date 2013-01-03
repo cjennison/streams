@@ -1,5 +1,5 @@
 // Routes for the users library.
-var users = require('lib/users');
+var users = require('../lib/users');
 
 exports.getRuns = function (req, res) {
   var username = req.params.username;

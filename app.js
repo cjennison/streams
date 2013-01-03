@@ -1,7 +1,8 @@
-var express      = require('express'),
+var http         = require('http'),
+    express      = require('express'),
     routes       = require('./routes'),
-    user_routes  = require('routes/users'),
-    mexec_routes = require('routes/mexec'),
+    user_routes  = require('./routes/users'),
+    mexec_routes = require('./routes/mexec'),
     notify       = require('./lib/notify'),
     reach        = require('./lib/reach'),
     models       = require('./lib/models');
@@ -28,7 +29,7 @@ dump_rows(db.execute("select 1+1,2,3,'4',length(?)", ["hello"]));
 db.close();
 */
 
-var app = module.exports = express.createServer();
+var app = module.exports = express();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -76,8 +77,11 @@ app.get('/users/:username/runs', user_routes.getRuns);
 // Routes for mexec:
 app.get('/mexec', mexec_routes.exec);
 
-app.listen(process.env.PORT || process.env.C9_PORT || streamsConfig.port);
-console.log("Express server listening on port %d in %s mode",
-            app.address().port, app.settings.env);
+// Create the HTTP server:
+var server = http.createServer(app);
 
-notify.listen(app);
+server.listen(streamsConfig.port);
+console.log("Express server listening on port %d in %s mode",
+            streamsConfig.port, app.settings.env);
+
+notify.listen(server);

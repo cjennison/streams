@@ -1,5 +1,5 @@
-var users = require('lib/users');
-var mexec = require('lib/mexec');
+var users = require('../lib/users');
+var mexec = require('../lib/mexec');
 var fs = require('fs');
 
 // Routes for the mexec library.
@@ -16,7 +16,7 @@ exports.exec = function(req, res) {
 	
 	for(var aRun in runs) {
 		//generate a runId with uuid
-		aRun.runId = 
+		//aRun.runId = 
 		var path = _dirname + '../lib/mexec' + user + '/' + aRun.scriptName + '/'+aRun.runId;
 		mkdir_p(path);
 		// - create settings file
@@ -31,7 +31,7 @@ exports.exec = function(req, res) {
 				});
 				runReady = false;
 				//throw err;
-				break;
+				//break;
 			}
 			console.log("setting for " + aRun.scriptName + " is saved");
 		});

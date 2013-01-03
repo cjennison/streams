@@ -1,4 +1,3 @@
-
 var users = require('../lib/users');
 var mexec = require('../lib/mexec');
 var fs = require('fs');
@@ -25,6 +24,7 @@ exports.exec = function(req, res) {
 		}
 		var path = __dirname + '/../lib/mexec' + user + '/' + aRun.scriptName + '/'+aRun.runId;
 		mexec.mkdir_p(path);
+
 		// - create settings file
 		fs.writeFile(path+'/'+aRun.scriptName+'.setting', aRun, function(err) {
 			console.log(err);

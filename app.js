@@ -14,21 +14,6 @@ var streamsConfig = require('./streams.json');
 console.log('Streams Configuration:');
 console.log(streamsConfig);
 
-// Possibly add DB support in future?
-/*
-var db = require("mysql-native").createTCPClient('instance12373.db.xeround.com', 8392); // localhost:3306 by default
-db.auto_prepare = true;
-function dump_rows(cmd)
-{
-   cmd.addListener('row', function(r) { console.dir(r); } );
-}
-
-db.auth("test", "tdr", "YdojBird");
-dump_rows(db.query("select 1+1,2,3,'4',length('hello')"));
-dump_rows(db.execute("select 1+1,2,3,'4',length(?)", ["hello"]));
-db.close();
-*/
-
 var app = module.exports = express();
 
 app.configure(function(){

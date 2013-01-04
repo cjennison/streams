@@ -98,6 +98,19 @@ div#logos > p {
   color: blue;
 }
 
+div#user {
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+}
+
+div#user > p {
+  font-size: large;
+  color: white;
+  background-color: blue;
+  border: 1px solid blue;
+}
+
 span#beta {
   font-family: Arial;
   font-size: 30px;

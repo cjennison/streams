@@ -6,6 +6,7 @@ body {
   height  : 100%;
   width   : 100%;
   margin  : 0;
+  overflow:hidden;
 }
 
 .infowindow {
@@ -44,7 +45,7 @@ div#inst {
   width   : 400px;
   height  : 600px;
   top: 50px;
-  left: 50px;
+  right: 100px;
   padding: 10px;
   border: 1px solid black;
   background-color: white;
@@ -81,10 +82,16 @@ div#map {
   border  : 1px solid black;
 }
 
+div#map .gmnoprint{
+	position:absolute;
+}
+
 div#logos {
-  margin-left: 10px;
-  margin-top: 600px;
-  z-index: 300;
+  position:absolute;
+  bottom:100px;
+  left:10px;
+  
+  z-index: 0;
   width: 200px;
 }
 
@@ -120,4 +127,31 @@ span#beta {
 /* weather app */
 #weather-models-app #loader #message img {
   margin-right: 5px;
+}
+
+.basinSelection-control{
+	
+	-o-transition: all 1s ease-out;
+	-ms-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	-webkit-transition: all 1s ease-out;
+	
+	position:absolute;
+	top:40px;
+	left:40px;
+	width:350px;
+	height:300px;
+}
+
+
+.basinSelection-control .select-basin{
+	height:300px;
+}
+
+.basinApplication{
+	-o-transition: all 1s ease-out;
+	-ms-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	-webkit-transition: all 1s ease-out;
+	height:100%;
 }

@@ -96,6 +96,7 @@ var Basin = (function init () {
 
         info.setContent('<div class="infowindow">Retrieving data...</div>');
         info.open(map, marker);
+        console.log("is this happening twice?");
       }
 
       // This function is invoked when the KML data has been

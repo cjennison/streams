@@ -5,6 +5,7 @@ Streams.app_control.apps.basin = {
   order: 1,
   init : function () {
     //// Initialize View ////
+    var basin_container = $('.basinContainer-control');
     var basin_view    = $('<div id="basin-app">');
     var loader        = $('<div id="loader">');
     var message       = $('<div id="msg">');
@@ -12,9 +13,7 @@ Streams.app_control.apps.basin = {
     var prompt        = $('<div id="prompt">');
     var rscript       = $('<div id="rscript">');
 
-    prompt_header.html('Please select a basin. Right-click ' +
-                       'on the map to retrieve and ' +
-		                   'display basin data.');
+    prompt_header.html('Right click the map to select a point to delineate a basin.');
   
     basin_view
       .append(loader.append(message))
@@ -23,6 +22,10 @@ Streams.app_control.apps.basin = {
       .append(rscript);
 
     this.view = basin_view;
+    prompt.empty();
+        rscript.empty();
+        
+        $(basin_view).addClass("basinApplication");
 
     //// Initialize Functionality ////
 
@@ -43,13 +46,16 @@ Streams.app_control.apps.basin = {
       // Return if a basin lookup is in progress:
       if (disableHandlers)
         return;
-
+	  
+	  
+	  console.log($(basin_container));
       // Disable handlers:
       disableHandlers = true;
-
+      
       // Create and display the marker:
       var marker = Streams.map.makeMarker(event.latLng, '');
       Streams.map.addMarker(marker);
+      console.log(event.latLng);
 
       // Create the info window:
       var info   = Streams.map.makeInfoWindow();
@@ -61,7 +67,7 @@ Streams.app_control.apps.basin = {
         info   : info
       };
       basinTable[basin.id] = basin;
-
+	  //retrieve_info();
       //// STATE MACHINE ////
       
       // This resets the prompt view to select another basin:
@@ -69,7 +75,10 @@ Streams.app_control.apps.basin = {
         disableHandlers = false;
         prompt.empty();
         rscript.empty();
+        
+        prompt_header.fadeIn();
       }
+      
 
       // This function sends a message to the server to initiate a
       // KML download from streamstats.
@@ -88,6 +97,8 @@ Streams.app_control.apps.basin = {
                    };                   
                    socket.emit('marker', message);
                  });
+                 
+        
       }
 
       // This function displays the initial loading messages
@@ -96,12 +107,19 @@ Streams.app_control.apps.basin = {
         var position = marker.getPosition();
         var lat      = position.lat().toPrecision(4);
         var lng      = position.lng().toPrecision(4);
-
+		
+		message.fadeIn('slow', function () { });
+		
+		$(message).empty();
+		
         message.append('Retrieving (~1min) @ ' + lat + ', ' + lng);
         message.append('<img src="images/ajax-loader.gif"/>');
+        console.log("Looking for Position");
 
         info.setContent('<div class="infowindow">Retrieving data...</div>');
         Streams.map.openInfoWindow(info, marker);
+        
+        prompt_header.fadeOut();
       }
 
       // This function is invoked when the KML data has been
@@ -128,6 +146,7 @@ Streams.app_control.apps.basin = {
       // KML file from the streamstats website. It is called typically
       // when the streamstats service is unavailable.
       function kml_error (data) {
+      	
         message.fadeOut('slow', function () { });
         Streams.map.closeInfoWindow(info);
         Streams.map.deleteMarker(marker);
@@ -140,22 +159,24 @@ Streams.app_control.apps.basin = {
       // the google map. It asks the user if this is the basin they
       // are interested in.
       function verify_basin () {
-        var p1 = $('<p>Is this the basin you wanted?</p>' +
-                   '<p><a id="p1-yes" href="">Yes</a> or ' +
-                   '<a id="p1-no" href="">No</a></p>');
+        var p1 = $('<p>Use this point?</p>' +
+                   '<center><p><button id="p1-yes" href="">Use This Point</button>' + '<br>' +
+                   '<p><button id="p1-no" href="">Pick a New Point</button>' 
+                   );
 
         prompt.html(p1);
-        
         $(p1).find('#p1-yes').click(function (event) {
           event.preventDefault();
           select_model();
         });
-
+        
+		
         $(p1).find('#p1-no').click(function (event) {
           event.preventDefault();
           resetPrompt();
           // TODO: do I remove the basin from the display?
         });
+        
       }
 
       // This function prompts the user to select model to run and

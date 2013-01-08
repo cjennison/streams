@@ -1,6 +1,6 @@
 $(function() {
   ////// UI Initialization //////
-  $("#accordion").accordion({ header : "h3",
+  $("#accordion").accordion({ header : "h2",
                               fillSpace : true });
   $('#inst').resizable();
   $('#inst').draggable();

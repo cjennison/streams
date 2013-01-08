@@ -5,7 +5,7 @@ Streams.app_control.apps.basin = {
   order: 1,
   init : function () {
     //// Initialize View ////
-    var basin_container = $('.basinContainer-control');
+    
     var basin_view    = $('<div id="basin-app">');
     var loader        = $('<div id="loader">');
     var message       = $('<div id="msg">');
@@ -20,13 +20,13 @@ Streams.app_control.apps.basin = {
       .append(prompt_header)
       .append(prompt)
       .append(rscript);
-
     this.view = basin_view;
     prompt.empty();
         rscript.empty();
         
-        $(basin_view).addClass("basinApplication");
-
+    $(basin_view).addClass("basinApplication");
+   
+	
     //// Initialize Functionality ////
 
     // This is used to disable event handlers when
@@ -46,9 +46,9 @@ Streams.app_control.apps.basin = {
       // Return if a basin lookup is in progress:
       if (disableHandlers)
         return;
-	  
-	  
-	  console.log($(basin_container));
+      
+     
+      
       // Disable handlers:
       disableHandlers = true;
       
@@ -67,7 +67,7 @@ Streams.app_control.apps.basin = {
         info   : info
       };
       basinTable[basin.id] = basin;
-	  //retrieve_info();
+      
       //// STATE MACHINE ////
       
       // This resets the prompt view to select another basin:
@@ -159,6 +159,7 @@ Streams.app_control.apps.basin = {
       // the google map. It asks the user if this is the basin they
       // are interested in.
       function verify_basin () {
+      	 Streams.app_control.addClass(".basinSelection-control", "select-basin");
         var p1 = $('<p>Use this point?</p>' +
                    '<center><p><button id="p1-yes" href="">Use This Point</button>' + '<br>' +
                    '<p><button id="p1-no" href="">Pick a New Point</button>' 

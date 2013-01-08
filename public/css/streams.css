@@ -140,12 +140,12 @@ span#beta {
 	top:40px;
 	left:40px;
 	width:350px;
-	height:300px;
+	height:100px;
 }
 
 
-.basinSelection-control .select-basin{
-	height:300px;
+.basinSelection-control.select-basin{
+	height:200px;
 }
 
 .basinApplication{

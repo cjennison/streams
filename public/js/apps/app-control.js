@@ -14,7 +14,6 @@ Streams.app_control = {
   	//Create Container
   	var basin = $('<div>');
   	$(basin).addClass('basinSelection-control');
-  	
   	//Create According
   	var basinAccordion = $('<div>');
   	$(basin).append(basinAccordion);
@@ -41,7 +40,10 @@ Streams.app_control = {
   	basinAccordion.accordion(accordionOpts);
   	//basinAccordion.draggable();
   	
-  	
+  },
+  
+  addClass: function(div, className){
+  	$(div).addClass(className);
   },
 
   render : function () {

@@ -1,9 +1,14 @@
 var http = require('http');
 
 exports.main = function (req, res) {
-  res.render('main.ejs',
-             { 'title' : 'Streams',
-               'user'  : req.session.username });
+  if (req.session.username === undefined) {
+    res.redirect('/login');
+  }
+  else {
+    res.render('main.ejs',
+               { 'title' : 'Streams',
+                 'user'  : req.session.username });
+  }
 };
 
 exports.front = function (req, res) {

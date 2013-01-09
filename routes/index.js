@@ -1,13 +1,14 @@
-var http = require('http');
+var http  = require('http');
+var users = require('../lib/users');
 
 exports.main = function (req, res) {
-  if (req.session.username === undefined) {
+  if (req.session.user === undefined) {
     res.redirect('/login');
   }
   else {
     res.render('main.ejs',
                { 'title' : 'Streams',
-                 'user'  : req.session.username });
+                 'user'  : req.session.user.name });
   }
 };
 
@@ -22,17 +23,21 @@ exports.login = function (req, res) {
 };
 
 exports.login_user = function (req, res) {
+  var user = undefined;
+
   // Check to see if the username was sent as part
   // of the request body:
   if (req.body.username) {
-    // If yes, then save in the user's session:
-    req.session.username = req.body.username;
-    // Then we redirect to the stream app:
-    res.redirect('/streams');
+    user = users.lookup(req.body.username);
+  }
+
+  if (!user) {
+    res.redirect('/login');
   }
   else {
-    // Otherwise, we redirect back to login:
-    res.redirect('/login');
+    req.session.user     = user;
+    req.session.username = user.name;
+    res.redirect('/streams');
   }
 };
 

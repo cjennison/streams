@@ -6,7 +6,7 @@ body {
   height  : 100%;
   width   : 100%;
   margin  : 0;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .infowindow {
@@ -127,6 +127,12 @@ span#beta {
 /* weather app */
 #weather-models-app #loader #message img {
   margin-right: 5px;
+  width:200px;
+}
+
+
+#fish-models-app{
+	position:static;
 }
 
 .basinSelection-control{
@@ -143,15 +149,42 @@ span#beta {
 	height:100px;
 }
 
+.steps-control{
+	width:1000px;
+	height:0px;
+	position:absolute;
+	top:50px;
+	right:-400px;
+	z-index:2000;
+}
 
 .basinSelection-control.select-basin{
-	height:200px;
+	height:400px;
+}
+
+.basinSelection-control.drainage-model{
+	height:600px;
+}
+
+.basinSelection-control.get-basin{
+	height:100px;
+}
+
+h3 img{
+	opacity:0;
+}
+table{
+	width: 90%;
 }
 
 .basinApplication{
-	-o-transition: all 1s ease-out;
-	-ms-transition: all 1s ease-out;
-	-moz-transition: all 1s ease-out;
-	-webkit-transition: all 1s ease-out;
+	-o-transition: all .5s ease-out;
+	-ms-transition: all .5s ease-out;
+	-moz-transition: all .5s ease-out;
+	-webkit-transition: all .5s ease-out;
 	height:100%;
 }
+
+
+
+

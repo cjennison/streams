@@ -26,7 +26,7 @@ Streams.map = {
       zoomControl: true,
       zoomControlOptions: {
         style: google.maps.ZoomControlStyle.LARGE,
-        position: google.maps.ControlPosition.TOP_LEFT
+        position: google.maps.ControlPosition.LEFT_TOP
       },
       scaleControl: true,
       scaleControlOptions: {
@@ -36,8 +36,10 @@ Streams.map = {
       streetViewControlOptions: {
         position: google.maps.ControlPosition.LEFT_TOP
       }
+      
+      
     };
-
+  
     // Construct the map:
     var map = GMap.map(Streams.map.view[0], options);
 

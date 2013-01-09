@@ -12,6 +12,8 @@ Streams.app_control.apps.basin = {
     var prompt_header = $('<div id="prompt_header">');
     var prompt        = $('<div id="prompt">');
     var rscript       = $('<div id="rscript">');
+    
+    var save_message  = $('<div id="save_message">');
 
     prompt_header.html('Right click the map to select a point to delineate a basin.');
   
@@ -19,7 +21,8 @@ Streams.app_control.apps.basin = {
       .append(loader.append(message))
       .append(prompt_header)
       .append(prompt)
-      .append(rscript);
+      .append(rscript)
+      .append(save_message);
     this.view = basin_view;
     prompt.empty();
         rscript.empty();
@@ -77,6 +80,10 @@ Streams.app_control.apps.basin = {
         rscript.empty();
         
         prompt_header.fadeIn();
+        
+         Streams.app_control.addClass(".basinSelection-control", "get-basin");
+         Streams.app_control.removeClass(".basinSelection-control", "drainage-model");
+         Streams.app_control.removeClass(".basinSelection-control", "select-basin");
       }
       
 
@@ -160,10 +167,17 @@ Streams.app_control.apps.basin = {
       // are interested in.
       function verify_basin () {
       	 Streams.app_control.addClass(".basinSelection-control", "select-basin");
-        var p1 = $('<p>Use this point?</p>' +
-                   '<center><p><button id="p1-yes" href="">Use This Point</button>' + '<br>' +
-                   '<p><button id="p1-no" href="">Pick a New Point</button>' 
+      	 Streams.app_control.removeClass(".basinSelection-control", "get-basin");
+        var p1 = $('<center><p><h1>Use this point?</h1></p>' +
+                   '<button id="p1-yes" href="">Use This Point</button><br>' + 
+                   '<button id="p1-no" href="">Pick a New Point</button>' 
                    );
+                   
+        //Save Basin Prompt           
+        var sv = $('<br><center><h2>Basin Reference Name</h2>' + '<br />' + 
+        		'<input id="refName" value="Enter Name"></input><br />' +
+        		'<button id="savebtn" href="">Save Basin</button>');
+        save_message.html(sv);
 
         prompt.html(p1);
         $(p1).find('#p1-yes').click(function (event) {
@@ -199,6 +213,8 @@ Streams.app_control.apps.basin = {
           rscript.hide();
           rscript.append(url);
           rscript.fadeIn('slow', function () {})
+          Streams.app_control.removeClass(".basinSelection-control", "select-basin");
+          Streams.app_control.addClass(".basinSelection-control", "drainage-model");
         });
 
         $(p2).find('#p2-newbasin').click(function (event) {

@@ -6,6 +6,7 @@ Streams.app_control.apps.weather_models = {
   init : function () {
     //// Grab the app view ////
     var template       = Handlebars.templates.weather;
+    console.log(template);
 
     // Nothing in context yet!
     var context = { };
@@ -27,6 +28,8 @@ Streams.app_control.apps.weather_models = {
     precipSlider1Val.text(1);
     precipSlider2Val.text(1);
     meanTempChangeVal.text(0);
+    
+    console.log(view.find('#weather-mode-app'));
 
     precipSlider1.slider(
       { max     : 50,
@@ -106,6 +109,7 @@ Streams.app_control.apps.weather_models = {
     
     runButton.button();
     runButton.click(function (event) {
+    	console.log("RUN")
       runButton.button('option', 'disabled', true);
       that.run();
       setTimeout(statusCheck, 3000);

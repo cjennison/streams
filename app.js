@@ -29,6 +29,8 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   app.use(express.static(__dirname + '/users'));
+  app.use(express.static(config.server.BasinsDir));
+  app.use(express.static(config.server.UsersDir));
 });
 
 app.configure('development', function(){

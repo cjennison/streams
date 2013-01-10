@@ -3,16 +3,16 @@
 Streams.app_control.apps.weather_models = {
   name : 'Weather and Climate Models',
   order: 2,
+  
+  
+
+  
   init : function () {
-    //// Grab the app view ////
-    var template       = Handlebars.templates.weather;
-    console.log(template);
-
-    // Nothing in context yet!
-    var context = { };
-
-    //// Initialize View ////
-    var view              = $(template(context));
+  	
+   
+    var view              = $('#weather-models-app');
+    $(view).addClass("application");
+    
     var precipSlider1     = view.find('#precip01');
     var precipSlider1Val  = view.find('#precip01-value');
     var precipSlider2     = view.find('#precip02');
@@ -29,7 +29,7 @@ Streams.app_control.apps.weather_models = {
     precipSlider2Val.text(1);
     meanTempChangeVal.text(0);
     
-    console.log(view.find('#weather-mode-app'));
+    
 
     precipSlider1.slider(
       { max     : 50,
@@ -42,6 +42,8 @@ Streams.app_control.apps.weather_models = {
         }
       }
     );
+    
+    
     
     precipSlider2.slider(
       { max     : 50,
@@ -146,5 +148,7 @@ Streams.app_control.apps.weather_models = {
         }, 5000);
       }
     });
+    
   }
+  
 };

@@ -4,33 +4,9 @@ Streams.app_control.apps.basin = {
   name : 'Basin Selection',
   order: 1,
   init : function () {
-    //// Initialize View ////
-    
-    var basin_view    = $('<div id="basin-app">');
-    var loader        = $('<div id="loader">');
-    var message       = $('<div id="msg">');
-    var prompt_header = $('<div id="prompt_header">');
-    var prompt        = $('<div id="prompt">');
-    var rscript       = $('<div id="rscript">');
-    
-    var save_message  = $('<div id="save_message">');
-
-    prompt_header.html('Right click the map to select a point to delineate a basin.');
-  
-    basin_view
-      .append(loader.append(message))
-      .append(prompt_header)
-      .append(prompt)
-      .append(rscript)
-      .append(save_message);
-    this.view = basin_view;
-    prompt.empty();
-        rscript.empty();
-        
-    $(basin_view).addClass("basinApplication");
-   
-	
-    //// Initialize Functionality ////
+  	
+  	
+  	/// Initialize Functionality ////
 
     // This is used to disable event handlers when
     // a basin lookup is in progress. We want to disable
@@ -44,13 +20,121 @@ Streams.app_control.apps.basin = {
 
     // The next basin id:
     var nextBasinId = 0;
+    
 
+    //// Initialize View ////
+    var jsonData = '{"basins":[{"name":"basinOne", "id":293}, {"name":"basinTwo","id":192}]}';
+    var jsonObj = JSON && JSON.parse(jsonData) || $.parseJSON(jsonData);
+    console.log(jsonObj);
+    
+    var basin_view    = $('<div id="basin-app">');
+    var loader        = $('<div id="loader">');
+    var message       = $('<div id="msg">');
+    var prompt_header = $('<div id="prompt_header">');
+    var prompt        = $('<div id="prompt">');
+    var sim_period	  = $('<div id="sim">');
+    var basinList	  = $('<ul id="basinList">');
+    var rscript       = $('<div id="rscript">');
+    
+    var save_message  = $('<div id="save_message">');
+
+   
+    
+    
+  	//Append Items to Basin View
+    basin_view
+      .append(loader.append(message))
+      .append(prompt_header)
+      .append(prompt)
+      .append(rscript)
+      .append(basinList)
+      .append(sim_period)
+      .append(save_message);
+    this.view = basin_view;
+    prompt.empty();
+        rscript.empty();
+    
+    
+    //Add class to basin view
+    $(basin_view).addClass("basinApplication");
+   
+   //Add class to basin List
+   $(basinList).addClass("basinList");
+   
+   function startBasinDialog(){
+   	 prompt_header.html('<p>Right click the map to select a point to delineate a basin.</p>' + 
+    	'<br /><p> - OR - </p><br /> <p>Select a previous basin:</p>'
+    	);
+   }
+	
+	function loadSavedBasins(){
+		console.log("Loading Saved Basins");
+		for (var i=0;i<jsonObj.basins.length;i++){
+			console.log(jsonObj.basins[i]);
+			var listItem = $('<li>' + jsonObj.basins[i].name + ': ' + jsonObj.basins[i].id + '</li>');
+			$(listItem).attr("name", jsonObj.basins[i].name);
+			$(listItem).attr("id", jsonObj.basins[i].id);
+			listItem.id = jsonObj.basins[i].id;
+			basinList.append(listItem);	
+			$(listItem).bind('mousedown', function(e){	
+				console.log(e);
+				loadBasin($(this).attr("name"), $(this).attr("id"));
+			});	
+		}
+	}
+	
+	/**
+	 * Loads the Selected Basin
+ 	 * @param {Object} name Name of Basin
+ 	 * @param {Object} id Unique Id
+	 */
+	function loadBasin(name, id){
+		prompt_header.fadeIn();
+		Streams.map.hide();
+		basinList.empty();
+		prompt_header.html('<br><h2><center>Basin: ' + name + '</h2>')
+		prompt.html('<center><button id="newBasin">Select New Basin</button>')
+		
+		sim_period.html('<br><br><br><p><center><h2>Simulation Period:</h2><p><b><span class="years">30</span> Years<br><div id="years_slider"></div>')
+		var simText = $(sim_period).find(".years");
+		var simSlider = $(sim_period).find("#years_slider");
+		simSlider.slider(
+			 { 
+			max     : 80,
+	        min     : 0,
+	        range   : 'min',
+	        value   : 30,
+	        animate : 'fast',
+	        slide   : function (event, ui) {
+	          simText.text(ui.value);
+	        }
+	      }
+		)
+	
+		//Streams.app_control.addClass(".basinSelection-control", "full-height");
+		
+		$(prompt).find("#newBasin").bind("mousedown", function(){
+			$(prompt).empty();
+			$(prompt_header).empty();
+			sim_period.empty();
+			Streams.map.show();
+			loadSavedBasins();
+			
+			startBasinDialog();
+						
+		});
+	}
+	
+	
+	
+    //Loads Basin Delineation
     function rightClickEvent (event) {
+    	resetPrompt();
       // Return if a basin lookup is in progress:
       if (disableHandlers)
         return;
       
-     
+      basinList.empty();
       
       // Disable handlers:
       disableHandlers = true;
@@ -78,8 +162,10 @@ Streams.app_control.apps.basin = {
         disableHandlers = false;
         prompt.empty();
         rscript.empty();
-        
+        save_message.empty();
+        basinList.empty();
         prompt_header.fadeIn();
+        
         
          Streams.app_control.addClass(".basinSelection-control", "get-basin");
          Streams.app_control.removeClass(".basinSelection-control", "drainage-model");
@@ -166,45 +252,47 @@ Streams.app_control.apps.basin = {
       // the google map. It asks the user if this is the basin they
       // are interested in.
       function verify_basin () {
-      	 Streams.app_control.addClass(".basinSelection-control", "select-basin");
-      	 Streams.app_control.removeClass(".basinSelection-control", "get-basin");
+      	disableHandlers = false;
+      	Streams.app_control.addClass(".basinSelection-control", "select-basin");
+      	Streams.app_control.removeClass(".basinSelection-control", "get-basin");
         var p1 = $('<center><p><h1>Use this point?</h1></p>' +
-                   '<button id="p1-yes" href="">Use This Point</button><br>' + 
-                   '<button id="p1-no" href="">Pick a New Point</button>' 
+                   '<p>Enter a Unique Name for your basin and press Save.</p>'
                    );
                    
         //Save Basin Prompt           
         var sv = $('<br><center><h2>Basin Reference Name</h2>' + '<br />' + 
-        		'<input id="refName" value="Enter Name"></input><br />' +
+        		'<input type="text" id="refName" value="Enter Name"></input>' + '<br>' +
         		'<button id="savebtn" href="">Save Basin</button>');
         save_message.html(sv);
 
         prompt.html(p1);
-        $(p1).find('#p1-yes').click(function (event) {
+        $(sv).find('#savebtn').click(function (event) {
           event.preventDefault();
-          select_model();
+         
+          var saveName = $(sv).find('input').val();
+          console.log(saveName);
+          if(saveName == "Enter Name" || saveName == ""){
+          	return;
+          	this.alert("Please provide a basin name");
+          }
+           save_message.empty();
+          //select_model();
+          save_message.empty();
+          prompt.empty();
+          loadBasin(saveName, Math.floor(Math.random()*400));
         });
         
 		
-        $(p1).find('#p1-no').click(function (event) {
-          event.preventDefault();
-          resetPrompt();
-          // TODO: do I remove the basin from the display?
-        });
+       
         
       }
 
       // This function prompts the user to select model to run and
       // displays the results in the prompt view.
       function select_model () {
-        var p2 =
-          $('<p>Please choose a model to run:</p>' +
-            '<form>' +
-            '<input type="radio" name="model" id="p2-drainage">Drainage</input><br/>' +
-            '<input type="radio" name="model" disabled="disabled" id="p2-other">Other Model</input><br/>' +
-            '</form>' +
-            '<p>Or choose a <a href="" id="p2-newbasin">new basin</a>.</p>');
-        $('div#prompt').html(p2);
+       
+        
+        Streams.map.hide();
 
         $(p2).find('#p2-drainage').click(function (event) {
           var url = basin.drainage_url;
@@ -234,7 +322,13 @@ Streams.app_control.apps.basin = {
 
       return false;
     }
-
+	
+	//Start first basin dialog
+	startBasinDialog()
+	
+	//Load Saved Basins
+	loadSavedBasins();
+	
     // Now register the events:
     Streams.map.addListener('rightclick', rightClickEvent);
   }

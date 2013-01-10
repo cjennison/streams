@@ -4,9 +4,8 @@ Streams.app_control.apps.land_use_models = {
   init : function () {
     //// Initialize View ////
     // Nothing in context yet!
-    var context = { };
-    var template = Handlebars.templates['land-use-models'];
-    var view=$(template(context));
+    var view=$('#land-use-models-app');
+    $(view).addClass("application");
     
     var nullslider1 = view.find('.nullslider1');
     var nullbutton = view.find('.nullbutton');

@@ -6,6 +6,7 @@ Streams.app_control = {
   
   init : function () {
     this.view = $('<div id="app-control">');
+   
   },
   
   //Init Basin Selection
@@ -50,127 +51,36 @@ Streams.app_control = {
   },
   
   
-
+  // Starts the rendering for each accordion
   render : function () {
-  	
-  	/*
-    // Create the accordion:
-    var accordion = $('<div>');
-    
-    
-    
-    
-    // Create an array of the apps:
-    var apps = [];
-    for (var name in this.apps) {
-    	//console.log(this.apps[name])
-    	if(this.apps[name].name != "Basin Selection"){
-	      apps.push(this.apps[name]);
-     }
-    }
-
-    // Sort the apps by order property:
-    apps.sort(function (x, y) {
-      return x.order > y.order;
-    });
-
-    // Add the registered apps:
-    console.log('Loading Apps:');
-    for (var i = 0; i < apps.length; i++) {
-      var app = apps[i];
-      
-      console.log('    ' + app.name);
-      // Initialize the app:
-      app.init();
-      // Add to the app control view:
-      var header  = $('<h3><a href="#">' + app.name + '</a></h3>');
-      accordion.append(header);
-      accordion.append(app.view);
-    }
-    
-    // Append the accordion:
-    this.view.append(accordion);
-    
-    
-    // Append to the body element:
-    $('body').append(this.view);
-    // Make the element resiable and draggable:
-    //Streams.app_control.view.draggable();
-
-    // Accordion options:
-    var accordionOpts = {
-      header    : 'h3',
-      animated	: 'slide',
-      heightStyle : 'content',
-      fillSpace : true
-    };
-
-    // Apply some jQuery UI properties:
-    
-    accordion.accordion(accordionOpts);
-    */
-    
-    this.initBasinSelection();
-    
-    //Comment out if testing apps - TODO : Not Operational
-    this.createFakeAccordion();
+  	$('#steps-controls').addClass("steps");
+  	this.initBasinSelection();
+  	this.initSteps();
   },
   
-  createFakeAccordion: function(){
-  	
-  	//Create Container
-  	var steps = $('<div id="stepsSelection">');
-  	$(steps).addClass('steps-control');
-  	//Create According
-  	var stepsAccordion = $('<ul class="stepsSelector">');
-  	$(steps).append(stepsAccordion);
-  	
-  	 var apps = [];
-    for (var name in this.apps) {
-    	//console.log(this.apps[name])
-    	if(this.apps[name].name != "Basin Selection"){
-	      apps.push(this.apps[name]);
-     }
-    }
-
-    // Sort the apps by order property:
-    apps.sort(function (x, y) {
-      return x.order > y.order;
-    });
-
-    // Add the registered apps:
-    console.log('Loading Apps:');
-    for (var i = 0; i < apps.length; i++) {
-      var app = apps[i];
-      
-      console.log('    ' + app.name);
-      // Initialize the app:
-      app.init();
-      // Add to the app control view:
-      var list = $("<li>")
-      var header  = $('<h3><img src="images/accordion_bar.png" class="handle3">' + app.name + '</h3>');
-      stepsAccordion.append(list);
-      list.append(header);
-      list.append(app.view);
-    }
-    
-  	
-  	//Add Basin Container to Body  
-  	$('body').append(steps);
-  	
-  	$(stepsAccordion).hrzAccordion({containerClass     : "container3",
-			listItemClass      : "listItem3",					
-			
-			contentWrapper     : "contentWrapper3",
-			contentInnerWrapper: "contentInnerWrapper3",
-			handleClass        : "handle3",
-			openOnLoad:"1",
-			handleClassOver    : "handleOver3",
-			fixedWidth			: "400",
-			handleClassSelected: "handleSelected3"
-							  });
-  	
+  
+  initSteps: function(){
+  	$('#steps-controls').addClass("active");
+  	for (var name in this.apps){
+  		if(name != "basin"){
+  			this.apps[name].init();
+  			console.log(name);
+  		}
+  	}
   },
+  
+  //Disable Steps Controls
+  disableSteps: function(){
+  		$('#steps-controls').removeClass("active");
+  		//TODO: Add Placeholder
+  },
+  
+  //Enable Steps Controls
+  enableSteps: function(){
+  		$('#steps-controls').addClass("active");
+  		//TODO: Remove Placeholder
+  },
+  
   
   /**
    *Adds a class to the selected element  

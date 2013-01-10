@@ -14,5 +14,5 @@
 
   "BasinsDir" : "/home/node.js/data/basins",
 
-  "UsersDir"  : "/Users/tim/Documents/streams/users"
+  "UsersDir"  : "/home/node.js/users"
 }

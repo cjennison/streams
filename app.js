@@ -5,14 +5,15 @@ var http         = require('http'),
     mexec_routes = require('./routes/mexec'),
     notify       = require('./lib/notify'),
     reach        = require('./lib/reach'),
-    models       = require('./lib/models');
+    models       = require('./lib/models'),
+    config       = require('./lib/config');
 
 // Load the application configuration file:
-var streamsConfig = require('./streams.json');
+//var streamsConfig = require('./streams.json');
 
 // Display config file for debugging purposes:
 console.log('Streams Configuration:');
-console.log(streamsConfig);
+console.log(config.server);
 
 var app = module.exports = express();
 
@@ -39,7 +40,7 @@ app.configure('production', function(){
 });
 
 // Create a weather model object:
-var weatherModel = models.weatherModel(streamsConfig);
+var weatherModel = models.weatherModel(config.server);
 
 // Routes
 app.get ('/'          , routes.front);
@@ -59,8 +60,8 @@ app.get('/mexec', mexec_routes.exec);
 // Create the HTTP server:
 var server = http.createServer(app);
 
-server.listen(streamsConfig.port);
+server.listen(config.server.port);
 console.log("Express server listening on port %d in %s mode",
-            streamsConfig.port, app.settings.env);
+            config.server.port, app.settings.env);
 
 notify.listen(server);

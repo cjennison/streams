@@ -1,18 +1,21 @@
 var users = require('../lib/users');
 var mexec = require('../lib/mexec');
+var tools = require('./toolbox.js');
 var fs = require('fs');
 
 // Routes for the mexec library.
 exports.exec = function(req, res) {
 	var settings = req.body;
-	//var user = req.session.user; // TODO: assign user (login?)
-	var user = req.body.user;
+	var user = req.session.user; // TODO: look up a user by userName.
+	// var user = users.lookup(req.body.user);
+	// if(!user){
+	// 	//TODO:go to lockin page
+	// }
 	var runReady = true;
-	// TODO:
-	// - get the user
+
 	
 	//build up an array of runs from the setting
-	var runs = mexec.buildRuns(settings);
+	var runs = mexec.buildRuns(settings,user);
 	
 	// - get a new run directory for each run
 	
@@ -44,6 +47,6 @@ exports.exec = function(req, res) {
 	}
 	// - call mexec.runModels
 	if(runReady) {
-		mexec.runModels(runs,0,"xxxpath of the modelsxxx");
+		mexec.runModels(runs,0,"../lib/users");
 	}
 };

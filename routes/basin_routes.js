@@ -59,5 +59,5 @@ exports.addBasin_IDAlias = function(req,res){
     }else{
       res.json(list);
     }
-  })
+  });
 };

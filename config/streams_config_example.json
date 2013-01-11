@@ -14,5 +14,45 @@
 
   "BasinsDir" : "/home/node.js/data/basins",
 
-  "UsersDir"  : "/home/node.js/users"
+  "UsersDir"  : "/home/node.js/users",
+
+  "steps": {
+	"climate":[
+		{
+		"script":"weather_generator",
+		"display":"Stochastic Weather Generator"
+		},
+		{
+		"script":"baseline_historic",
+		"display":"Historic Baseline Climate"
+		},
+		{
+		"script":"baseline_shift",
+		"display":"Shifted Historic Climate"
+		},
+		{
+		"script":"baseline_gcm",
+		"display":"GCM Guideposts for Shifted Historic Climate"
+		},
+		{
+		"script":"bootstrap_extreme",
+		"display":"Simulate an Extreme Event"
+		}
+	],
+	"flow":[{
+		"script":"StreamFlowModel",
+		"display":"abcde Model"
+	}],
+	"land":[],
+	"barriers":[],
+	"streamtemp":[{
+		"script":"StreamTemperatureModel",
+		"display":"Non-linear Regression Model"
+	}],
+	"population":[{
+		"script":"WestbrookIPM",
+		"display":"Integral Population Model"
+	}]
+  }
 }
+

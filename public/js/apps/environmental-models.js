@@ -3,10 +3,10 @@ Streams.app_control.apps.environmental_models = {
   order: 3,
   init : function () {
     //// Initialize View ////
-    // Nothing in context yet!
-    var context = { };
-    var template = Handlebars.templates['environmental-models'];
-    var view=$(template(context));
+ 
+   var view = $('#environmental-models-app');
+   console.log(view);
+   $(view).addClass("application");
     
     var nullslider1 = view.find('.nullslider1');
     var nullbutton = view.find('.nullbutton');

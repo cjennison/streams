@@ -5,7 +5,9 @@ Streams.app_control.apps.fish_models = {
     // Nothing in context yet!
     var context = { };
     var template = Handlebars.templates['fish-models'];
-    var view=$(template(context));
+    var view=$('#fish-models-app');
+    $(view).addClass("application");
+    
     
     var nullslider2 = view.find('.nullslider2');
     var nullbutton = view.find('.nullbutton');
@@ -21,10 +23,5 @@ Streams.app_control.apps.fish_models = {
     
     this.view = view;
 
-    //// Initialize View ////
-    //var view = $('<div id="fish-models-app">');
-    //view.html('fish models app.');
-  
-    //this.view = view;
   }
 };

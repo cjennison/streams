@@ -119,6 +119,16 @@ Streams.map = {
 
   getState : function (position, fn) {
     GMap.state(position, fn);
+  },
+  
+  hide: function(){
+  	$(Streams.map.view).css('opacity', '0');
+  	$(Streams.map.view).css('pointer-events', 'none');
+  },
+  
+   show: function(){
+  	$(Streams.map.view).css('opacity', '1');
+  	$(Streams.map.view).css('pointer-events', '');
   }
 
 };

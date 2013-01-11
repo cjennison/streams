@@ -55,12 +55,12 @@ Streams.app_control = {
   render : function () {
   	$('#steps-controls').addClass("steps");
   	this.initBasinSelection();
-  	this.initSteps();
+  	//this.initSteps();
   },
   
   
   initSteps: function(){
-  	$('#steps-controls').addClass("active");
+  	//$('#steps-controls').addClass("active");
   	for (var name in this.apps){
   		if(name != "basin"){
   			this.apps[name].init();

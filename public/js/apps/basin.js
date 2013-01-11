@@ -91,6 +91,8 @@ Streams.app_control.apps.basin = {
 	function loadBasin(name, id){
 		prompt_header.fadeIn();
 		Streams.map.hide();
+		Streams.app_control.initSteps();
+		Streams.app_control.enableSteps();
 		basinList.empty();
 		prompt_header.html('<br><h2><center>Basin: ' + name + '</h2>')
 		prompt.html('<center><button id="newBasin">Select New Basin</button>')
@@ -119,7 +121,8 @@ Streams.app_control.apps.basin = {
 			sim_period.empty();
 			Streams.map.show();
 			loadSavedBasins();
-			
+			Streams.app_control.disableSteps();
+
 			startBasinDialog();
 						
 		});

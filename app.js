@@ -3,6 +3,7 @@ var http         = require('http'),
     routes       = require('./routes'),
     user_routes  = require('./routes/users'),
     mexec_routes = require('./routes/mexec'),
+    basin_routes = require('./routes/basin_routes'),
     notify       = require('./lib/notify'),
     reach        = require('./lib/reach'),
     models       = require('./lib/models'),
@@ -58,6 +59,11 @@ app.get('/users/:username/runs', user_routes.getRuns);
 
 // Routes for mexec:
 app.get('/mexec', mexec_routes.exec);
+
+// Routes for basin:
+app.get('/basin/predef'   , basin_routes.preDefinedBasins);
+app.get('/basin/info/:id' , basin_routes.basinInfo);
+app.get('/basin/user/list', basin_routes.userBasinList);
 
 // Create the HTTP server:
 var server = http.createServer(app);

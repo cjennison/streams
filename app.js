@@ -65,6 +65,8 @@ app.get('/basin/predef'   , basin_routes.preDefinedBasins);
 app.get('/basin/info/:id' , basin_routes.basinInfo);
 app.get('/basin/user/list', basin_routes.userBasinList);
 
+app.put('/basin/user/addAlias',basin_routes.addBasin_IDAlias);
+
 // Create the HTTP server:
 var server = http.createServer(app);
 

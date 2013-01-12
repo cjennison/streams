@@ -1,4 +1,3 @@
-
 /* Chris jennison accordion plugin */
 
 
@@ -35,6 +34,7 @@ ul#accordion li .toggle .title{
 	position:absolute;
 	text-align:center;
 	right:-260px;
+	color:#9b7538;
 	top:50%;
 	font-weight:900;
 	width:550px; -moz-transform: rotate(-90deg);  /* FF3.5+ */

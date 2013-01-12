@@ -163,12 +163,12 @@ span#beta {
 	-ms-transition: all 1s ease-out;
 	-moz-transition: all 1s ease-out;
 	-webkit-transition: all 1s ease-out;
-	
 	position:absolute;
 	top:40px;
 	left:40px;
 	width:350px;
-	height:100px;
+	height:550px;
+	background:white;
 }
 
 .basinSelection-control.select-basin{
@@ -201,6 +201,42 @@ span#beta {
 	list-style-type: none;
 	font-weight:400;
 }
+
+.basinSelector{
+	margin-right:0px;
+	width:300px;
+}
+
+
+
+
+.basinSelector .toggle{
+	position:absolute;
+	top:0px;
+	left:0;
+	width:30px;
+	height:550px;
+	background:#f7e7b5;
+	border-style:solid;
+	border-width:2px;
+	border-color:#ffbe57;
+}
+
+.basinSelector .toggle .title{
+	position:absolute;
+	text-align:center;
+	right:-260px;
+	color:#9b7538;
+	top:50%;
+	font-weight:900;
+	width:550px; -moz-transform: rotate(-90deg);  /* FF3.5+ */
+       -o-transform: rotate(-90deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-90deg);  /* Saf3.1+, Chrome */
+             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-90);  /* IE6,IE7 */
+         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-90)"; /* IE8 */
+}
+
+
 
 
 div#steps-control{

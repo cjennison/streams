@@ -22,72 +22,15 @@
   </ul>
 </div>
 
-<div id="accordionPlaceholder"></div>
 
 <div id="steps-controls">
-	<ul id="accordion1">
-		<li class="slide1">
-			<div class="slide_handle"><div></div></div>
-			<div class="slide_content">
-				<div id="weather-models-app">
-				<h3>Weather and Climate Models</h3>
-				  <div id="loader">
-				    <div id="message"></div>
-				  </div>
-				  <select name="weathertype" class="ui-state-default"><option>Stochastic Weather Generation</option>
-				    <option disabled="disabled">Downscaled Climate Scenario</option></select>
-				  <p><strong>Specify Amount Change</strong>
-				    <br>Please select values below for changes driving stochastically generated weather.
-				  </p>
-				  <p>
-				    
-				    <p>Mean Annual Precipitation (% change, 80-year mean) [<span id="precip01-value"></span>%]</p>
-				    <div id="precip01"></div>
-				    
-				    <p>Precipitation Annual Variance (% change, 80-year mean) [<span id="precip02-value"></span>%]</p>
-				    <div id="precip02"></div>
-				
-				    <p>Mean Annual Temperature (&deg;C change, 80-year mean) [<span id="mean-temp-value"></span>]</p>
-				    <div id="mean-temp"></div>
-				  </p>
-				  <p>
-				    <a id="run" href="#">Run Model</a>
-				  </p>
-				</div>
-			</div>
-		</li>
-		<li class="slide2">
-			<div class="slide_handle"><div></div></div>
-			<div class="slide_content">
-				<div id="environmental-models-app">
-		             <p align="center"><strong>Directly specify stream flow and temperature changes</strong></p>
-		             <p>Streamflow (% change): 0%</p>
-		             <div class="nullslider1"></div>
-		             <p>Stream temperature (% change): 0%</p>
-		             <div class="nullslider1"></div>
-		             <p align="center">
-		             <input class="nullbutton" value="Run Stream Models" type="submit">
-			         </p>
-				</div>				
-			</div>
-		</li>
-		<li class="slide3">
-			<div class="slide_handle"><div></div></div>
-			<div class="slide_content">
-				<div id="land-use-models-app">
-	             <p align="center"><input class="nullbutton" value="Launch Barrier Module" type="submit">
-	             <p>Riparian cover (% change): 0%
-	             <div class="nullslider1"></div>
-	             <p>Impervious surface area (% change): 0%
-	             <div class="nullslider1"></div>
-	             <p align="center"><input class="nullbutton" value="Run Land Use Model" type="submit">
-		     	 </p>
-			</div>
-			</div>
-		</li>
-		<li class="slide4">
-			<div class="slide_handle"><div></div></div>
-			<div class="slide_content">
+	<ul id="accordion">
+		
+		
+		
+		<li id="acc4" state="closed">
+			<div class="toggle"><span class="title">Fish Models</span></div>
+			<div class="content">
 				<div id="fish-models-app">
          		<h3>Fish Population Models</h3>
          		<table width:"100%" border="0" cellspacing="0" cellpadding="0" style="font-size:12px">
@@ -136,6 +79,65 @@
 
 	         
 				</div>				
+			</div>
+		</li>
+		<li id="acc3" state="closed">
+			<div class="toggle"><span class="title">Land Use Models</span></div>
+			<div class="content">
+				<div id="land-use-models-app">
+	             <p align="center"><input class="nullbutton" value="Launch Barrier Module" type="submit">
+	             <p>Riparian cover (% change): 0%
+	             <div class="nullslider1"></div>
+	             <p>Impervious surface area (% change): 0%
+	             <div class="nullslider1"></div>
+	             <p align="center"><input class="nullbutton" value="Run Land Use Model" type="submit">
+		     	 </p>
+			</div>
+			</div>
+		</li>
+		<li id="acc2" state="closed">
+			<div class="toggle"><span class="title">Stream Flow Models</span></div>
+			<div class="content">
+				<div id="environmental-models-app">
+		             <p align="center"><strong>Directly specify stream flow and temperature changes</strong></p>
+		             <p>Streamflow (% change): 0%</p>
+		             <div class="nullslider1"></div>
+		             <p>Stream temperature (% change): 0%</p>
+		             <div class="nullslider1"></div>
+		             <p align="center">
+		             <input class="nullbutton" value="Run Stream Models" type="submit">
+			         </p>
+				</div>				
+			</div>
+		</li>
+		<li id="acc1" state="closed">
+			<div class="toggle"> <span class="title">Weather and Environmental Models</span></div>
+			<div class="content">
+				<div id="weather-models-app">
+				<h3>Weather and Climate Models</h3>
+				  <div id="loader">
+				    <div id="message"></div>
+				  </div>
+				  <select name="weathertype" class="ui-state-default"><option>Stochastic Weather Generation</option>
+				    <option disabled="disabled">Downscaled Climate Scenario</option></select>
+				  <p><strong>Specify Amount Change</strong>
+				    <br>Please select values below for changes driving stochastically generated weather.
+				  </p>
+				  <p>
+				    
+				    <p>Mean Annual Precipitation (% change, 80-year mean) [<span id="precip01-value"></span>%]</p>
+				    <div id="precip01"></div>
+				    
+				    <p>Precipitation Annual Variance (% change, 80-year mean) [<span id="precip02-value"></span>%]</p>
+				    <div id="precip02"></div>
+				
+				    <p>Mean Annual Temperature (&deg;C change, 80-year mean) [<span id="mean-temp-value"></span>]</p>
+				    <div id="mean-temp"></div>
+				  </p>
+				  <p>
+				    <a id="run" href="#">Run Model</a>
+				  </p>
+				</div>
 			</div>
 		</li>
 		

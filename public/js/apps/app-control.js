@@ -3,6 +3,9 @@
 Streams.app_control = {
   name : 'AppControl',
   apps : { },
+  accordionLimit: 4,
+  accordionsOpen: 0,
+  openAccordionArray: [],
   
   init : function () {
     this.view = $('<div id="app-control">');
@@ -46,40 +49,89 @@ Streams.app_control = {
   	
   	
   	basinAccordion.accordion(accordionOpts);
-  	//basinAccordion.draggable();
   	
   },
   
   
   // Starts the rendering for each accordion
   render : function () {
-  	$('#steps-controls').addClass("steps");
   	this.initBasinSelection();
-  	//this.initSteps();
+  	this.initSteps();
+  	
+  	
   },
   
   
   initSteps: function(){
-  	//$('#steps-controls').addClass("active");
+  	$('#steps-controls').addClass("active");
+  	$('#steps-controls').addClass("steps");
   	for (var name in this.apps){
   		if(name != "basin"){
   			this.apps[name].init();
   			console.log(name);
   		}
   	}
+  	
+  	
+	
   },
   
   //Disable Steps Controls
   disableSteps: function(){
-  		$('#steps-controls').removeClass("active");
-  		//TODO: Add Placeholder
+  		//$('#steps-controls').removeClass("active");
+  		$('#acc1 .toggle').unbind();
+  		$('#acc2 .toggle').unbind();
+  		$('#acc3 .toggle').unbind();
+  		$('#acc4 .toggle').unbind();
   },
   
   //Enable Steps Controls
   enableSteps: function(){
-  		$('#steps-controls').addClass("active");
-  		//TODO: Remove Placeholder
+  		//$('#steps-controls').addClass("active");
+  		
+  		this.bindOpen("#acc1 .toggle");
+		this.bindOpen("#acc2 .toggle");
+		this.bindOpen("#acc3 .toggle");
+		this.bindOpen("#acc4 .toggle");
+		
+		this.bindClose("#acc1 .toggle");
+		this.bindClose("#acc2 .toggle");
+		this.bindClose("#acc3 .toggle");
+		this.bindClose("#acc4 .toggle");
   },
+  
+  bindOpen: function(target){
+		$(target).bind('mousedown', function(event){
+			if($(target).parent().attr("state") == "closed"){
+				$(target).parent().css('width', "440px");
+				var activate = setTimeout(function(){
+					$(target).parent().attr("state", "open");
+				}, 1000);
+				
+				//$(target).unbind();
+				//$(this).parent().bindClose(this);
+				this.accordionsOpen++;
+			}
+				
+				
+		});
+  },
+	
+  bindClose: function(target){
+		$(target).bind("mousedown", function(){
+			if($(target).parent().attr("state") == "open"){
+				console.log("ARG")
+				$(target).parent().css('width', "30px");
+				var activate = setTimeout(function(){
+					$(target).parent().attr("state", "closed");
+				}, 1000);
+				//$(target).unbind();
+				//this.bindOpen(this);
+				this.accordionsOpen--;
+			}
+		});
+  },
+
   
   
   /**

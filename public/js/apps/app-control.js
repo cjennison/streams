@@ -9,6 +9,35 @@ Streams.app_control = {
   
   init : function () {
     this.view = $('<div id="app-control">');
+    
+    var screenWidth = document.width;
+	console.log(screenWidth);
+		
+	this.accordionLimit = Math.floor((screenWidth / (480))) - 1;
+	console.log(this.accordionLimit);
+	
+	$(window).resize(function(){
+			var screenWidth = document.width;
+			console.log("Detected Window Resize: " + screenWidth);
+			
+			Streams.app_control.accordionLimit = Math.floor(screenWidth / 480) - 1;
+			console.log("Accordion limit is now: " + Streams.app_control.accordionLimit);
+			
+			var accordionsToClose = Streams.app_control.accordionsOpen - Streams.app_control.accordionLimit;
+			
+			//TODO: Close All Accordions in Resize
+			if(accordionsToClose > 0){
+				var closeableAccordions = [];
+				for(var i=0; i<$('#accordion li').length; i++){
+					if($('#accordion li').parent().attr("state") == "open"){
+					}
+					
+					
+				}
+				
+				console.log(closeableAccordions);
+			}
+		});
    
   },
   
@@ -102,32 +131,24 @@ Streams.app_control = {
   
   bindOpen: function(target){
 		$(target).bind('mousedown', function(event){
-			if($(target).parent().attr("state") == "closed"){
+			if($(target).parent().attr("state") == "closed" && Streams.app_control.accordionsOpen < Streams.app_control.accordionLimit){
 				$(target).parent().css('width', "440px");
 				var activate = setTimeout(function(){
 					$(target).parent().attr("state", "open");
 				}, 1000);
-				
-				//$(target).unbind();
-				//$(this).parent().bindClose(this);
-				this.accordionsOpen++;
+				Streams.app_control.accordionsOpen++;
 			}
-				
-				
 		});
   },
 	
   bindClose: function(target){
 		$(target).bind("mousedown", function(){
-			if($(target).parent().attr("state") == "open"){
-				console.log("ARG")
+			if($(target).parent().attr("state") == "open" ){
 				$(target).parent().css('width', "30px");
 				var activate = setTimeout(function(){
 					$(target).parent().attr("state", "closed");
 				}, 1000);
-				//$(target).unbind();
-				//this.bindOpen(this);
-				this.accordionsOpen--;
+				Streams.app_control.accordionsOpen--;
 			}
 		});
   },

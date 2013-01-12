@@ -20,6 +20,7 @@ ul#accordion li{
 }
 
 ul#accordion li .toggle{
+	cursor:pointer;
 	position:absolute;
 	top:29px;
 	width:30px;

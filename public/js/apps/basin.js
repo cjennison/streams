@@ -101,11 +101,15 @@ Streams.app_control.apps.basin = {
 			var listItem = $('<li>' + jsonObj[i].default_nickname + ': ' + jsonObj[i].basinid + '</li>');
 			$(listItem).attr("name", jsonObj[i].default_nickname);
 			$(listItem).attr("id", jsonObj[i].basinid);
+			$(listItem).attr("lat", jsonObj[i].lat);
+			$(listItem).attr("long", jsonObj[i].long);
+			$(listItem).attr("area", jsonObj[i].area);
+			
 			listItem.id = jsonObj[i].basinid;
 			basinList.append(listItem);	
 			$(listItem).bind('mousedown', function(e){	
 				console.log(e);
-				loadBasin($(this).attr("name"), $(this).attr("id"));
+				loadBasin($(this).attr("name"), $(this).attr("id"), $(this).attr("lat"), $(this).attr("long"), $(this).attr("area"));
 			});	
 			
 			
@@ -117,8 +121,21 @@ Streams.app_control.apps.basin = {
  	 * @param {Object} name Name of Basin
  	 * @param {Object} id Unique Id
 	 */
-	function loadBasin(name, id){
+	function loadBasin(name, id, lat, long, area){
 		prompt_header.fadeIn();
+		
+		 
+		 //var marker = Streams.map.makeMarker(pos, '');
+     	 //Streams.map.addMarker(marker);
+		
+		
+		
+		changeView(name, id, lat, long, area);
+		
+		
+	}
+	
+	function changeView(name, id, lat, long, area){
 		Streams.map.hide();
 		Streams.app_control.initSteps();
 		Streams.app_control.enableSteps();

@@ -39,8 +39,9 @@ ul#accordion li .toggle .title{
 	position:absolute;
 	text-align:center;
 	right:-260px;
-	color:#9b7538;
+	color:#397CC4;
 	top:50%;
+	font-size:20px;
 	font-weight:900;
 	width:550px; -moz-transform: rotate(-90deg);  /* FF3.5+ */
        -o-transform: rotate(-90deg);  /* Opera 10.5 */
@@ -51,8 +52,9 @@ ul#accordion li .toggle .title{
 
 ul#accordion li .content{
 	margin-left:34px;
+	margin-top:15px;
 	width:410px;
-	height:570px;
+	height:553px;
 }
 
 #acc4, #acc3, #acc2, #acc1{

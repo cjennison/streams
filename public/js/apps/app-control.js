@@ -201,7 +201,7 @@ Streams.app_control = {
 				$(target).parent().css('width', "440px");
 				var activate = setTimeout(function(){
 					$(target).parent().attr("state", "open");
-				}, 1000);
+				}, 400);
 				Streams.app_control.accordionsOpen++;
 			}
 		});
@@ -213,7 +213,7 @@ Streams.app_control = {
 				$(target).parent().css('width', "30px");
 				var activate = setTimeout(function(){
 					$(target).parent().attr("state", "closed");
-				}, 1000);
+				}, 400);
 				Streams.app_control.accordionsOpen--;
 			}
 		});

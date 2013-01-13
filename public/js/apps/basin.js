@@ -23,10 +23,6 @@ Streams.app_control.apps.basin = {
     
 
     //// Initialize View ////
-    var jsonData = '{"basins":[{"name":"basinOne", "id":293}, {"name":"basinTwo","id":192}]}';
-    var jsonObj = JSON && JSON.parse(jsonData) || $.parseJSON(jsonData);
-    console.log(jsonObj);
-    
     var basin_view    = $('<div id="basin-app">');
     var loader        = $('<div id="loader">');
     var message       = $('<div id="msg">');
@@ -65,36 +61,54 @@ Streams.app_control.apps.basin = {
    	 prompt_header.html('<center><h1>Basin Selection</h1><br><p>Right click the map to select a point to delineate a basin.</p>' + 
     	'<br /><p> - OR - </p><br /> <p>Select a previous basin:</p><hr>'
     	);
+    basinList.append('<br><center><img style="margin-right:40px" src="images/ajax-loader.gif"/>');
+
     	
      $(".panelBackground").css("opacity", "0");
    }
 	
+	//Starts Loading JSON Object from server
 	function loadSavedBasins(){
-		
-		
 		var json = $.get('/basin/predef');
+		checkCompletedLoad(json);
 		
+	}
+	
+	//Checks load status
+	function checkCompletedLoad(jsonGetObject){
 		setTimeout(function(){
-			console.log(json);
-		}, 5000)
-		//console.log(json);
+			if(jsonGetObject.readyState == 4){
+				var jsonResponse = jsonGetObject.responseText;
+				jsonObj = JSON && JSON.parse(jsonResponse) || $.parseJSON(jsonResponse);
+				console.log(jsonObj);
+				this.clearInterval();
+				displayLoadedBasins(jsonObj);
+			} else {
+				checkCompletedLoad(jsonGetObject)
+			}
+		}, 1000);
+	}
+	
+	//Display Loaded Basin
+	function displayLoadedBasins(jsonData){
+		basinList.empty();
 		
-		console.log("Loading Saved Basins");
-			
-		for (var i=0;i<jsonObj.basins.length;i++){
-			console.log(jsonObj.basins[i]);
+		for (var i=0;i<jsonData.length;i++){
+			console.log(jsonData[i]);
 			
 		
-			
-			var listItem = $('<li>' + jsonObj.basins[i].name + ': ' + jsonObj.basins[i].id + '</li>');
-			$(listItem).attr("name", jsonObj.basins[i].name);
-			$(listItem).attr("id", jsonObj.basins[i].id);
-			listItem.id = jsonObj.basins[i].id;
+				
+			var listItem = $('<li>' + jsonObj[i].default_nickname + ': ' + jsonObj[i].basinid + '</li>');
+			$(listItem).attr("name", jsonObj[i].default_nickname);
+			$(listItem).attr("id", jsonObj[i].basinid);
+			listItem.id = jsonObj[i].basinid;
 			basinList.append(listItem);	
 			$(listItem).bind('mousedown', function(e){	
 				console.log(e);
 				loadBasin($(this).attr("name"), $(this).attr("id"));
 			});	
+			
+			
 		}
 	}
 	

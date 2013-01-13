@@ -68,12 +68,12 @@ Streams.map = {
     //                                            clickable : false });
     // westbrook.setMap(map);
 
-    var sites = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/Sites.kml',
+    var sites = new google.maps.KmlLayer('http://felek.cns.umass.edu:9998/6780791/BasinOutline.kml',
                                              { preserveViewport : false,
                                                clickable : false });
     sites.setMap(map);
 
-    var Watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/Watershed.kml',
+    var Watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:9998/6780791/NHDplusFlowlines.kml',
                                              { preserveViewport : false,
                                                clickable : false });
     Watershed.setMap(map);

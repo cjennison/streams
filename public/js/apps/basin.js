@@ -57,6 +57,12 @@ Streams.app_control.apps.basin = {
    //Add class to basin List
    $(basinList).addClass("basinList");
    
+    //Start first basin dialog
+	startBasinDialog();
+	
+	//Load Saved Basins
+	loadSavedBasins();
+   
    function startBasinDialog(){
    	 prompt_header.html('<center><h1>Basin Selection</h1><br><p>Right click the map to select a point to delineate a basin.</p>' + 
     	'<br /><p> - OR - </p><br /> <p>Select a previous basin:</p><hr>'
@@ -210,7 +216,7 @@ Streams.app_control.apps.basin = {
       
       // This resets the prompt view to select another basin:
       function resetPrompt () {
-        disableHandlers = false;
+       // disableHandlers = false;
         prompt.empty();
         rscript.empty();
         save_message.empty();
@@ -261,7 +267,7 @@ Streams.app_control.apps.basin = {
         info.setContent('<div class="infowindow">Retrieving data...</div>');
         Streams.map.openInfoWindow(info, marker);
         
-        prompt_header.fadeOut();
+        prompt_header.empty();
       }
 
       // This function is invoked when the KML data has been
@@ -280,6 +286,10 @@ Streams.app_control.apps.basin = {
         basin.drainage_url = data.props.drainId;
         // Remove marker:
         marker.setMap(null);
+        
+        
+        Streams.map.displayKML();
+        
         // Verify basin:
         verify_basin();
       }
@@ -294,14 +304,14 @@ Streams.app_control.apps.basin = {
         Streams.map.deleteMarker(marker);
         prompt.append('<p class="error">Error: ' + data.msg + '</p>');
         console.log(data.msg);
-        disableHandlers = false;
+        //disableHandlers = false;
       }
 
       // This function prompts the user when the basin is overlayed onto
       // the google map. It asks the user if this is the basin they
       // are interested in.
       function verify_basin () {
-      	disableHandlers = false;
+      	//disableHandlers = false;
       
         var p1 = $('<center><p><h1>Use this point?</h1></p>' +
                    '<p>Enter a Unique Name for your basin and press Save.</p>'
@@ -309,11 +319,12 @@ Streams.app_control.apps.basin = {
                    
         //Save Basin Prompt           
         var sv = $('<br><center><h2>Basin Reference Name</h2>' + '<br />' + 
-        		'<input type="text" id="refName" value="Enter Name"></input>' + '<br>' +
+        		'<input type="text" id="refName" class="runInput" value=" Enter Name"></input>' + '<br>' +
         		'<button id="savebtn" href="">Save Basin</button>');
         save_message.html(sv);
 
         prompt.html(p1);
+        $(sv).find('#savebtn').button();
         $(sv).find('#savebtn').click(function (event) {
           event.preventDefault();
          
@@ -359,7 +370,7 @@ Streams.app_control.apps.basin = {
         });
         
         // Allow the map to be clicked again:
-        disableHandlers = false;
+        //disableHandlers = false;
       }
 
       //// The Main Driver ////
@@ -371,13 +382,11 @@ Streams.app_control.apps.basin = {
       return false;
     }
 	
-	//Start first basin dialog
-	startBasinDialog()
 	
-	//Load Saved Basins
-	loadSavedBasins();
 	
     // Now register the events:
     Streams.map.addListener('rightclick', rightClickEvent);
   }
+  
+ 
 };

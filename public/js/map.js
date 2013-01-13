@@ -12,30 +12,19 @@ Streams.map = {
     var options = {
       center : GMap.latlng(42.39019, -72.43307),
       zoom : 16,
-      mapTypeId : google.maps.MapTypeId.TERRAIN,
-
-      mapTypeControl: true,
-      mapTypeControlOptions: {
-        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-        position: google.maps.ControlPosition.TOP_CENTER
-      },
-      panControl: false,
-      panControlOptions: {
-        position: google.maps.ControlPosition.TOP_RIGHT
-      },
-      zoomControl: true,
-      zoomControlOptions: {
-        style: google.maps.ZoomControlStyle.LARGE,
-        position: google.maps.ControlPosition.LEFT_TOP
-      },
-      scaleControl: true,
-      scaleControlOptions: {
-        position: google.maps.ControlPosition.TOP_CENTER
-      },
-      streetViewControl: false,
-      streetViewControlOptions: {
-        position: google.maps.ControlPosition.LEFT_TOP
-      }
+       mapTypeId: google.maps.MapTypeId.TERRAIN,
+		  mapTypeControl:true,
+		  streetViewControl:false,
+		  panControl:false,
+		  mapTypeControlOptions: 
+		  	{
+          	style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        	position: google.maps.ControlPosition.TOP_LEFT
+		    },
+		  zoomControlOptions: 
+		  	{
+        	position: google.maps.ControlPosition.LEFT_TOP
+		    } 
       
       
     };
@@ -68,20 +57,27 @@ Streams.map = {
     //                                            clickable : false });
     // westbrook.setMap(map);
 
-    var sites = new google.maps.KmlLayer('http://felek.cns.umass.edu:9998/6780791/BasinOutline.kml',
-                                             { preserveViewport : false,
-                                               clickable : false });
-    sites.setMap(map);
-
-    var Watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:9998/6780791/NHDplusFlowlines.kml',
-                                             { preserveViewport : false,
-                                               clickable : false });
-    Watershed.setMap(map);
+    
 
     // google.maps.event.addListener(westbrook, 'click', function (event) {
     //   console.debug(event);
     // });
     //// TESTING ////
+    
+    
+  },
+  
+  
+  displayKML: function (){
+  	var sites = new google.maps.KmlLayer('http://felek.cns.umass.edu:9998/6780791/BasinOutline.kml',
+                                             { preserveViewport : false,
+                                               clickable : false });
+    sites.setMap(this._map);
+
+    var Watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:9998/6780791/NHDplusFlowlines.kml',
+                                             { preserveViewport : false,
+                                               clickable : false });
+    Watershed.setMap(this._map);
   },
 
   addListener : function (event, fn) {

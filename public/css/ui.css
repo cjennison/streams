@@ -154,7 +154,7 @@ a.ui-slider-handle.ui-state-default.ui-corner-all{
 .runModel{
 	position: relative;
 	width: 100%;
-	bottom: -34px;
+	bottom: 6px;
 }
 
 .runModel input{
@@ -163,4 +163,16 @@ a.ui-slider-handle.ui-state-default.ui-corner-all{
 	border: 1px solid #D67205;
 	font-size: 14px;
 	font-weight: 500;
+	margin-bottom:10px;
 }
+
+
+.runInput{
+	width: 300px;
+	height: 24px;
+	border: 1px solid #D67205;
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom:10px;
+}
+

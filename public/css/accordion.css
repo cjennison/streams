@@ -28,7 +28,7 @@ ul#accordion li .toggle{
 	position:absolute;
 	top:29px;
 	width:30px;
-	height:550px;
+	height:500px;
 	background:#f7e7b5;
 	border-style:solid;
 	border-width:2px;
@@ -54,7 +54,7 @@ ul#accordion li .content{
 	margin-left:34px;
 	margin-top:15px;
 	width:410px;
-	height:553px;
+	height:503px;
 }
 
 #acc4, #acc3, #acc2, #acc1{

@@ -64,6 +64,7 @@ app.get('/mexec', mexec_routes.exec);
 app.get('/basin/predef'   , basin_routes.preDefinedBasins);
 app.get('/basin/info/:id' , basin_routes.basinInfo);
 app.get('/basin/user/list', basin_routes.userBasinList);
+app.post('/basin/user/delineate', basin_routes.delineateBasin);
 
 app.put('/basin/user/addAlias',basin_routes.addBasin_IDAlias);
 

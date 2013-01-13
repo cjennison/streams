@@ -61,3 +61,23 @@ exports.addBasin_IDAlias = function(req,res){
     }
   })
 };
+
+exports.delineateBasin = function (req, res) {
+  var user = req.session.user;
+  if (!user) {
+    res.redirect('/login');
+  }
+  else {
+    var lat = req.body.lat;
+    var lng = req.body.lng;
+
+    if (!lat || !lng) {
+      res.json({ err : 'Bad request. Expected latitude/longitude' });
+    }
+    else {
+      basin.delineateBasin(lat, lng, function (err, basinId) {
+        res.json({ basinId: basinId });
+      });
+    }
+  }
+};

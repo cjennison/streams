@@ -1,10 +1,13 @@
 /* Chris jennison accordion plugin */
-
-
 ul#accordion{
 	list-style-type: none;
 	margin-right:50px;
 	color:black;
+	
+		-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+
 }
 
 ul#accordion li{
@@ -13,6 +16,7 @@ ul#accordion li{
 	-ms-transition: all .4s ease-in-out;
 	-moz-transition: all .4s ease-in-out;
 	-webkit-transition: all .4s ease-in-out;
+	
 	display:inline-block;
 	width:30px;
 	overflow: hidden;
@@ -40,14 +44,26 @@ ul#accordion li .toggle .title{
 	font-weight:900;
 	width:550px; -moz-transform: rotate(-90deg);  /* FF3.5+ */
        -o-transform: rotate(-90deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(-90deg);  /* Saf3.1+, Chrome */
+    -webkit-transform: rotate(-90deg);  /* Saf3.1+, Chrome */
              filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-90);  /* IE6,IE7 */
          -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-90)"; /* IE8 */
 }
+
 ul#accordion li .content{
 	margin-left:34px;
 	width:410px;
-	height:550px;
+	height:570px;
+}
+
+#acc4, #acc3, #acc2, #acc1{
+	height:570px;
+	margin-top:0px;
+	
+	/*
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	*/
 }
 
 

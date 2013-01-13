@@ -30,9 +30,8 @@ Streams.app_control = {
 				var closeableAccordions = [];
 				for(var i=0; i<$('#accordion li').length; i++){
 					if($('#accordion li').parent().attr("state") == "open"){
+						
 					}
-					
-					
 				}
 				
 				console.log(closeableAccordions);
@@ -92,8 +91,38 @@ Streams.app_control = {
   
   
   initSteps: function(){
-  	$('#steps-controls').addClass("active");
   	$('#steps-controls').addClass("steps");
+  	$('#logos').css("left", "10px");
+  	$('#logos').css("bottom", "100px");
+  	
+  	$("#user").css("left", "50px");
+  	$("#user").css("bottom", "100px");
+  	
+  	
+  	//TODO: Turn into error function
+  	$('#steps-controls').bind('click', function(){
+		if(!$(this).hasClass('active')){
+			console.log("Please select a basin before starting steps");
+			var errorMessage = $('<div class="ErrorMessage"></div');
+			var message = $('<span class="eMessage">Please Select a Basin</span>');
+			$(errorMessage).append(message);
+			$('body').append(errorMessage);
+			
+			
+			
+			setTimeout(function(){
+				$(errorMessage).css('bottom', '100px');
+				//
+				setTimeout(function(){
+					$(errorMessage).css('bottom', '0px');
+					
+					$(errorMessage).remove();
+				}, 2000)
+			}, 100)
+		} 
+  	})
+  	
+  
   	for (var name in this.apps){
   		if(name != "basin"){
   			this.apps[name].init();
@@ -107,17 +136,33 @@ Streams.app_control = {
   
   //Disable Steps Controls
   disableSteps: function(){
-  		//$('#steps-controls').removeClass("active");
+  		$('#steps-controls').removeClass("active");
   		$('#acc1 .toggle').unbind();
   		$('#acc2 .toggle').unbind();
   		$('#acc3 .toggle').unbind();
   		$('#acc4 .toggle').unbind();
+  		
+  		$('#logos').css("right", "");
+		$('#logos').css("left", "10px");
+		
+		$('#logos ul li').css("display", "inline-block");
+		
+		$('#logos').css("bottom", "100px");
+		$('#logos').css("top", "");
+		
+		$("#user").css("left", "50px");
+  		$("#user").css("bottom", "100px");
+  		$("#user").css("right", "");
+  		$("#user").css("top", "");
+  		
+  		$("#user").addClass("stepsState");
+
   },
   
   //Enable Steps Controls
   enableSteps: function(){
   		//$('#steps-controls').addClass("active");
-  		
+  		$('#steps-controls').addClass("active");
   		this.bindOpen("#acc1 .toggle");
 		this.bindOpen("#acc2 .toggle");
 		this.bindOpen("#acc3 .toggle");
@@ -127,6 +172,25 @@ Streams.app_control = {
 		this.bindClose("#acc2 .toggle");
 		this.bindClose("#acc3 .toggle");
 		this.bindClose("#acc4 .toggle");
+		
+		$('#logos ul li').css("display", "block");
+		
+		//TODO: Set Classes for each of these
+		
+		$('#logos').css("right", "50px");
+		$('#logos').css("left", "");
+		
+		$('#logos').css("bottom", "");
+		$('#logos').css("top", "0px");
+		
+		$("#user").css("left", "");
+  		$("#user").css("bottom", "");
+  		$("#user").css("right", "10px");
+  		$("#user").css("top", "470px");
+  		
+  		$("#user").addClass("stepsState");
+
+		
   },
   
   bindOpen: function(target){

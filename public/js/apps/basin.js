@@ -62,15 +62,30 @@ Streams.app_control.apps.basin = {
    $(basinList).addClass("basinList");
    
    function startBasinDialog(){
-   	 prompt_header.html('<p>Right click the map to select a point to delineate a basin.</p>' + 
-    	'<br /><p> - OR - </p><br /> <p>Select a previous basin:</p>'
+   	 prompt_header.html('<center><h1>Basin Selection</h1><br><p>Right click the map to select a point to delineate a basin.</p>' + 
+    	'<br /><p> - OR - </p><br /> <p>Select a previous basin:</p><hr>'
     	);
+    	
+     $(".panelBackground").css("opacity", "0");
    }
 	
 	function loadSavedBasins(){
+		
+		
+		var json = $.get('/basin/predef');
+		
+		setTimeout(function(){
+			console.log(json);
+		}, 5000)
+		//console.log(json);
+		
 		console.log("Loading Saved Basins");
+			
 		for (var i=0;i<jsonObj.basins.length;i++){
 			console.log(jsonObj.basins[i]);
+			
+		
+			
 			var listItem = $('<li>' + jsonObj.basins[i].name + ': ' + jsonObj.basins[i].id + '</li>');
 			$(listItem).attr("name", jsonObj.basins[i].name);
 			$(listItem).attr("id", jsonObj.basins[i].id);
@@ -96,6 +111,8 @@ Streams.app_control.apps.basin = {
 		basinList.empty();
 		prompt_header.html('<br><h2><center>Basin: ' + name + '</h2>')
 		prompt.html('<center><button id="newBasin">Select New Basin</button>')
+		
+		$(".panelBackground").css("opacity", ".5");
 		
 		sim_period.html('<br><br><br><p><center><h2>Simulation Period:</h2><p><b><span class="years">30</span> Years<br><div id="years_slider"></div>')
 		var simText = $(sim_period).find(".years");
@@ -170,9 +187,7 @@ Streams.app_control.apps.basin = {
         prompt_header.fadeIn();
         
         
-         Streams.app_control.addClass(".basinSelection-control", "get-basin");
-         Streams.app_control.removeClass(".basinSelection-control", "drainage-model");
-         Streams.app_control.removeClass(".basinSelection-control", "select-basin");
+       
       }
       
 
@@ -208,8 +223,8 @@ Streams.app_control.apps.basin = {
 		
 		$(message).empty();
 		
-        message.append('Retrieving (~1min) @ ' + lat + ', ' + lng);
-        message.append('<img src="images/ajax-loader.gif"/>');
+        message.append('<center><h2 style="margin-top:200px;">Retrieving (~1min) @ <br>' + lat + ', ' + lng + "</h2>");
+        message.append('<br><center><img style="margin-right:140px" src="images/ajax-loader.gif"/>');
         console.log("Looking for Position");
 
         info.setContent('<div class="infowindow">Retrieving data...</div>');
@@ -256,8 +271,7 @@ Streams.app_control.apps.basin = {
       // are interested in.
       function verify_basin () {
       	disableHandlers = false;
-      	Streams.app_control.addClass(".basinSelection-control", "select-basin");
-      	Streams.app_control.removeClass(".basinSelection-control", "get-basin");
+      
         var p1 = $('<center><p><h1>Use this point?</h1></p>' +
                    '<p>Enter a Unique Name for your basin and press Save.</p>'
                    );
@@ -296,6 +310,7 @@ Streams.app_control.apps.basin = {
        
         
         Streams.map.hide();
+        
 
         $(p2).find('#p2-drainage').click(function (event) {
           var url = basin.drainage_url;
@@ -304,8 +319,7 @@ Streams.app_control.apps.basin = {
           rscript.hide();
           rscript.append(url);
           rscript.fadeIn('slow', function () {})
-          Streams.app_control.removeClass(".basinSelection-control", "select-basin");
-          Streams.app_control.addClass(".basinSelection-control", "drainage-model");
+       
         });
 
         $(p2).find('#p2-newbasin').click(function (event) {

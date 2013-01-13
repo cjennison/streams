@@ -76,6 +76,8 @@ Streams.app_control.apps.basin = {
 	//Starts Loading JSON Object from server
 	function loadSavedBasins(){
 		var json = $.get('/basin/predef');
+		basinList.fadeIn();
+
 		checkCompletedLoad(json);
 		
 	}
@@ -129,15 +131,37 @@ Streams.app_control.apps.basin = {
 	 */
 	function loadBasin(name, id, lat, long, area){
 		prompt_header.fadeIn();
-		
+		console.log(id);
+		Streams.map.displayKML(id);
 		 
-		 //var marker = Streams.map.makeMarker(pos, '');
-     	 //Streams.map.addMarker(marker);
+		//changeView(name, id, lat, long, area);
+		$(prompt).empty();
+		$(prompt_header).empty();
+		basinList.fadeOut();
+		sim_period.empty();
 		
 		
 		
-		changeView(name, id, lat, long, area);
-		
+        //Save Basin Prompt           
+        var sv = $('<br><center><h2>Choose this Basin?</h2>' + '<br />' + 
+        		'<button id="yesbtn" href="">Yes</button><button id="nobtn" href="">No</button>');
+        save_message.html(sv);
+
+		$(sv).find('#nobtn').button();
+        $(sv).find('#yesbtn').button();
+        $(sv).find('#yesbtn').click(function (event) {
+          event.preventDefault();
+                    save_message.empty();
+
+          changeView(name, id);
+
+        });
+         $(sv).find('#nobtn').click(function (event) {
+          event.preventDefault();
+          save_message.empty();
+		  startBasinDialog();
+			loadSavedBasins();
+        });
 		
 	}
 	
@@ -145,7 +169,7 @@ Streams.app_control.apps.basin = {
 		Streams.map.hide();
 		Streams.app_control.initSteps();
 		Streams.app_control.enableSteps();
-		basinList.empty();
+		//basinList.empty();
 		prompt_header.html('<br><h2><center>Basin: ' + name + '</h2>')
 		prompt.html('<center><button id="newBasin">Select New Basin</button>')
 		
@@ -174,10 +198,10 @@ Streams.app_control.apps.basin = {
 			$(prompt_header).empty();
 			sim_period.empty();
 			Streams.map.show();
-			loadSavedBasins();
 			Streams.app_control.disableSteps();
-
+			save_message.empty();
 			startBasinDialog();
+			loadSavedBasins();
 						
 		});
 	}
@@ -288,7 +312,7 @@ Streams.app_control.apps.basin = {
         marker.setMap(null);
         
         
-        Streams.map.displayKML();
+       
         
         // Verify basin:
         verify_basin();
@@ -311,7 +335,7 @@ Streams.app_control.apps.basin = {
       // the google map. It asks the user if this is the basin they
       // are interested in.
       function verify_basin () {
-      	//disableHandlers = false;
+      	disableHandlers = false;
       
         var p1 = $('<center><p><h1>Use this point?</h1></p>' +
                    '<p>Enter a Unique Name for your basin and press Save.</p>'
@@ -334,15 +358,13 @@ Streams.app_control.apps.basin = {
           	return;
           	this.alert("Please provide a basin name");
           }
-           save_message.empty();
-          //select_model();
           save_message.empty();
           prompt.empty();
-          loadBasin(saveName, Math.floor(Math.random()*400));
+          changeView(saveName);
         });
         
-		
-       
+        // TEMPORARY TODO: BASIN DELINEATION
+       Streams.map.displayKML('west_brook');
         
       }
 

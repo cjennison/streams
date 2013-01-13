@@ -121,7 +121,7 @@ div#logos > p {
 
 div#user {
   position: fixed;
-  z-index:1;
+  z-index:0;
   background:rgba(200,200,200, .8);
 }
 

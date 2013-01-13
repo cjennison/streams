@@ -52,8 +52,7 @@ Streams.app_control = {
   	
   	
   	
-  	var basinList = $("<div>");
-  	$(basinAccordion).append(basinList);
+  	
   	
   	//Get Basin Selection Application
   	var basinApp = this.apps.basin;
@@ -61,8 +60,10 @@ Streams.app_control = {
   	
   	//Place Header on Accordion
   	var header  = $('<div class="toggle">'+ '<span class="title">' + basinApp.name + '</span></div>');
-      basinList.append(header);
-      basinList.append(basinApp.view);
+      basinAccordion.append(header);
+    var content  = $('<div class="content"></div>');
+      content.append(basinApp.view);
+       basinAccordion.append(content);
     
     //Add Basin Container to Body  
   	$('body').append(basin);
@@ -74,7 +75,8 @@ Streams.app_control = {
     };
   	
   	
-  	
+  	this.bindOpen(".basinSelector .toggle");
+  	this.bindClose(".basinSelector .toggle");
   	
   	//basinAccordion.accordion(accordionOpts);
   	

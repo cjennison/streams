@@ -144,7 +144,8 @@ div#backgroundGraphic{
 	position:absolute;
 	width:100%;
 	height:100%;
-	background:#AAAAAA;
+	background:url(../images/ocean.jpg);
+	background-size:100% 100%;
 	left:0;
 	top:0;
 }

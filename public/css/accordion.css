@@ -1,79 +1,75 @@
+/* Chris jennison accordion plugin */
+ul#accordion{
+	list-style-type: none;
+	margin-right:50px;
+	color:black;
+	
+		-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
 
-#accordion1 {
-	color:#fff;
-	height:600px;
-	list-style:none;
-	margin:0;
-	overflow:scroll;
-	padding:0;
-	text-shadow:0 1px 0 #333;
-	width:500px;
-	background:white;
 }
-#accordion1 li {
-	height:240px;
-	position:relative;
+
+ul#accordion li{
+	/* -- transition is the magic sauce for animation -- */
+	-o-transition: all .4s ease-in-out;
+	-ms-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
+	
+	display:inline-block;
+	width:30px;
+	overflow: hidden;
+	float:right;
 }
-#accordion1 .slide_handle {
-	background:url(../images/handles.png);
-	bottom:0;
+
+ul#accordion li .toggle{
 	cursor:pointer;
-	left:0;
 	position:absolute;
-	top:0;
-	width:40px;
+	top:29px;
+	width:30px;
+	height:550px;
+	background:#f7e7b5;
+	border-style:solid;
+	border-width:2px;
+	border-color:#ffbe57;
 }
-#accordion1 .slide2 .slide_handle { background-position:-40px 0; }
-#accordion1 .slide3 .slide_handle { background-position:-80px 0; }
-#accordion1 .slide4 .slide_handle { background-position:-120px 0; }
-#accordion1 .slide_handle div {
-	background:url(images/arrows.gif);
-	bottom:16px;
-	height:7px;
-	left:16px;
+
+ul#accordion li .toggle .title{
 	position:absolute;
-	width:7px;
+	text-align:center;
+	right:-260px;
+	color:#9b7538;
+	top:50%;
+	font-weight:900;
+	width:550px; -moz-transform: rotate(-90deg);  /* FF3.5+ */
+       -o-transform: rotate(-90deg);  /* Opera 10.5 */
+    -webkit-transform: rotate(-90deg);  /* Saf3.1+, Chrome */
+             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-90);  /* IE6,IE7 */
+         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-90)"; /* IE8 */
 }
-#accordion1 .slide_opened .slide_handle { cursor:default; }
-#accordion1 .slide_opened .slide_handle div { background-position:0 -7px; }
-#accordion1 .slide_content {
-	bottom:0;
-	left:40px; /* Matches the width of .slide_handle */
-	position:absolute;
-	right:0;
-	top:0;
+
+ul#accordion li .content{
+	margin-left:34px;
+	width:410px;
+	height:570px;
 }
-#accordion1 .slide_content a img { border:0; }
-#accordion1 .slide_caption {
-	background:url(images/black-30pct.png); /* You could use rgba instead, but that means less browser support */
-	bottom:0;
-	left:0;
-	padding:10px 20px;
-	position:absolute;
-	right:0;
-	/* To change the height of the caption, set the captionHeight option in script.js */
+
+#acc4, #acc3, #acc2, #acc1{
+	height:570px;
+	margin-top:0px;
+	
+	/*
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	*/
 }
-#accordion1 .slide_caption_toggle {
-	cursor:pointer;
-	height:10px;
-	left:0;
-	position:absolute;
-	right:0;
-	top:0;
-}
-#accordion1 .slide_caption_toggle div {
-	background:url(images/toggle-caption.png) no-repeat 50% -10px;
-	height:100%;
-}
-#accordion1 .slide_caption_toggle:hover { background:url(images/black-30pct.png); }
-#accordion1 .slide_caption_collapsed .slide_caption_toggle div { background-position:50% 0; }
-#accordion1 a {
-	background:none;
-	color:#fff;
-	text-shadow:0 1px 0 #333;
-}
-#accordion1 a:hover { text-decoration:none; }
-#accordion1 .slide4 .slide_content { background:url(images/digital-noise.png) 100% 0; }
+
+
+
+
+
 
 
 

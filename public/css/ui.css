@@ -26,3 +26,58 @@
 
 
 
+/* Error Message */
+.ErrorMessage{
+	-o-transition: all .5s ease-out;
+	-ms-transition: all .5s ease-out;
+	-moz-transition: all .5s ease-out;
+	-webkit-transition: all .5s ease-out;
+	width:200px;
+	height:30px;
+	background:red;
+	position:absolute;
+	color:black;
+	bottom:0px;
+	left:50%;
+	margin-left:-100px;
+}
+
+.ErrorMessage .eMessage{
+	width:100%;
+	text-align: center;
+	color:white;
+	font-weight:900;
+	margin-left:25px;
+	margin-top:40px;
+}
+
+#user{
+	z-index:100;
+}
+
+#user p{
+	background:none;
+}
+
+
+/* UI Overrides */
+a.ui-slider-handle.ui-state-default.ui-corner-all{
+	width:15px;
+	height:20px;
+	margin-top:19px;
+	border-radius: 0px;
+	background:blue;
+}
+
+.ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all{
+	border-radius: 0px;
+	border:none;
+	height:50px;
+	width:200px;
+	background:url(../images/slider.png);
+	background-size:100% 100%;
+}
+
+.ui-slider-range.ui-widget-header.ui-slider-range-min{
+	background:none;
+}

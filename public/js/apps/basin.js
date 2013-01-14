@@ -72,7 +72,7 @@ Streams.app_control.apps.basin = {
     	
      $(".panelBackground").css("opacity", "0");
      
-     changeView("name", 'id');
+     //changeView("name", 'id');
 
    }
 	
@@ -80,9 +80,16 @@ Streams.app_control.apps.basin = {
 	function loadSavedBasins(){
 		var json = $.get('/basin/predef');
 		basinList.fadeIn();
+		
+		
+		var data = $.post('/basin/user/delineate', 90, 90);
+		console.log(data)
 
 		checkCompletedLoad(json);
 		
+	}
+	function checkMe(){
+		console.log("COOL");
 	}
 	
 	//Checks load status
@@ -240,6 +247,7 @@ Streams.app_control.apps.basin = {
       };
       basinTable[basin.id] = basin;
       
+     
       //// STATE MACHINE ////
       
       // This resets the prompt view to select another basin:

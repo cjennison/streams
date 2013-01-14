@@ -2,31 +2,33 @@ Streams.graphs = {
 	
 	
 	
-	init:function(container, graphState){
+	init:function(container, state, min, max, xLabel, yLabel){
 
-		this.setupGraph(container, graphState);
+		this.setupGraph(container, state, min, max, xLabel, yLabel);
 
 	},
 	
 	
 	
-	setupGraph:function(container, state){
-		 var stage = new Kinetic.Stage({
+	setupGraph:function(container, state, min, max, xLabel, yLabel){
+	//Define the stage
+	 var stage = new Kinetic.Stage({
         container: container,
         width: 578,
         height: 100
       });
-
+	
+	//Define the working layer
       var layer = new Kinetic.Layer();
-
+    //Left Node
       var leftNode = new Kinetic.Circle({
         x: 40,
         y: stage.getHeight() / 2,
-        radius: 10,
+        radius: 3,
         fill: 'orange',
         
       });
-      
+     //Right Node
       var rightNode = new Kinetic.Circle({
         x: 380,
         y: stage.getHeight() / 2,
@@ -40,6 +42,7 @@ Streams.graphs = {
         }
       });
       
+      //Central Line
       var line = new Kinetic.Line({
       	points: [leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()],
       	stroke: 'orange',
@@ -54,6 +57,7 @@ Streams.graphs = {
         }
       });
       
+      //Variance Line
       var vline = new Kinetic.Line({
       	points: [leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()],
       	stroke: 'grey',
@@ -68,6 +72,7 @@ Streams.graphs = {
         }
       });
       
+      //BG for MouseEvents
       var bg = new Kinetic.Rect({
       	x:0,
       	y:0,
@@ -75,25 +80,8 @@ Streams.graphs = {
       	height: stage.getWidth(),
       	fill:'white',
       });
-       
-       //Draw
-       var graphImageObj = new Image();
-       graphImageObj.onload = function() {
-		stage.draw();
-      }
-      graphImageObj.src = 'images/graphbg.png';
-      
-
-     
-     
-     var graphImage = new Kinetic.Image({
-	      	 x: 0,
-	          y: stage.getHeight() / 2 - 59,
-	          image: graphImageObj,
-	          width: 400,
-	          height: 118
-	      });
-
+	
+	//Contain all elements within group
       var group = new Kinetic.Group({
       	dragBoundFunc: function(pos) {
           return {
@@ -102,21 +90,23 @@ Streams.graphs = {
           }
         }
       });
+      
+      
+      
+      //Add All Elements to the Group
+      
+      
       if(state == "mean_var"){
       	 group.add(vline);
       	 console.log("ADDED LINE")
       }
-      
 	  group.add(line);
-      
       group.add(leftNode);
       group.add(rightNode);
-      // add the shape to the layer
+      
+      //Add Elements to Layer
       layer.add(bg);
-     layer.add(graphImage);
-      
-      
-
+      layer.add(drawGraph());
       layer.add(group);
       
       var startingY = 0;
@@ -204,6 +194,69 @@ Streams.graphs = {
       	
       	
       	 stage.draw();
+      }
+      
+      //Draw Graph Background
+      function drawGraph(){
+      	
+      	var YAxis = new Kinetic.Line({
+	        points: [40, 0, 40, stage.getHeight()],
+	        stroke: 'black',
+	        strokeWidth: 1
+	       
+	      });
+	    
+	    var XAxis = new Kinetic.Line({
+	        points: [40, stage.getHeight()/2 + 1, 370, stage.getHeight()/2 + 1],
+	        stroke: 'black',
+	        strokeWidth: 1
+	       
+	      });
+	      
+	     var XAxisText = new Kinetic.Text({
+	        x: stage.getWidth() / 2 - 120,
+	        y: stage.getHeight()/2 + 15,
+	        text: xLabel,
+	        fontSize: 13,
+	        fontFamily: 'Calibri',
+	        fill: 'black'
+	      });
+	      
+	      var YAxisText = new Kinetic.Text({
+	        x: 40,
+	        y: stage.getHeight()/2 + 20,
+	        text: yLabel,
+	        fontSize: 13,
+	        fontFamily: 'Calibri',
+	        offset: [20, (stage.getHeight()/2 + 15)/2],
+	        fill: 'black'
+	      });
+	      
+	      YAxisText.setRotationDeg(-90);
+		   
+		   
+		  var YAxisNumber= new Kinetic.Text({
+	        x: 25,
+	        y: stage.getHeight()/2 + 40,
+	        text: min + "        0        " + max,
+	        fontSize: 15,
+	        fontFamily: 'Calibri',
+	        fill: 'black'
+	      });    
+	       YAxisNumber.setRotationDeg(-90);
+	      
+	    var graphGroup = new Kinetic.Group({
+	      	
+	      });
+	      
+	      graphGroup.add(YAxis);
+	      graphGroup.add(XAxis);
+	      graphGroup.add(XAxisText);
+	      graphGroup.add(YAxisText);
+	       graphGroup.add(YAxisNumber);
+	      
+      
+      return graphGroup;
       }
 
       // add the layer to the stage

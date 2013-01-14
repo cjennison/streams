@@ -28,8 +28,8 @@ Streams.app_control.apps.weather_models = {
     precipSlider1Val.text(1);
     precipSlider2Val.text(1);
     meanTempChangeVal.text(0);
-    this.setupGraph('graphcontainer1', 'mean_var');
-    this.setupGraph('graphcontainer2', 'temp');
+    this.setupGraph('graphcontainer1', 'mean_var', -5, 5, "Time Over Years", "Percent Change");
+    this.setupGraph('graphcontainer2', 'temp', -15, 15, "Time Over Years", "Annual Temp");
     
     
 
@@ -127,9 +127,8 @@ Streams.app_control.apps.weather_models = {
   	 $(obj).text(num);
   },
   
-  setupGraph : function(container, state){
-  	console.log(state);
-  	Streams.graphs.init(container, state);
+  setupGraph : function(container, state, min, max, xLabel, yLabel){
+  	Streams.graphs.init(container, state, min, max, xLabel, yLabel);
   }
   
 };

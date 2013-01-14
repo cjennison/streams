@@ -123,8 +123,7 @@ Streams.app_control.apps.weather_models = {
   },
   
   updateText:function(obj, num){
-  	console.log(obj);
-  	 $(obj).text(num);
+  	 $(obj).val(num);
   },
   
   setupGraph : function(container, state, min, max, xLabel, yLabel){

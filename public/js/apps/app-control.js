@@ -158,6 +158,13 @@ Streams.app_control = {
   		$("#user").css("top", "");
   		
   		$("#user").addClass("stepsState");
+  		
+  		for(var i=1;i<=4;i++){
+  			$('#acc' + i).css('width', "30px");
+			$('#acc1'+ i).parent().attr("state", "closed");
+  		}
+  		
+
 
   },
   

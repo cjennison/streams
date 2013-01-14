@@ -21,19 +21,31 @@ Streams.graphs = {
 	//Define the working layer
       var layer = new Kinetic.Layer();
     //Left Node
-      var leftNode = new Kinetic.Circle({
-        x: 40,
+    handle = new Image();
+    handle.src = "images/graphHandle.png";
+      var leftNode = new Kinetic.Image({
+        x: 44,
         y: stage.getHeight() / 2,
-        radius: 3,
-        fill: 'orange',
+        image:handle,
+        width:20,
+        height:40,
+        offset:[0, 18],
+        dragBoundFunc: function(pos) {
+          return {
+            x: this.getAbsolutePosition().x,
+            y: pos.y
+          }
+        }
         
       });
      //Right Node
-      var rightNode = new Kinetic.Circle({
+      var rightNode = new Kinetic.Image({
         x: 380,
         y: stage.getHeight() / 2,
-        radius: 10,
-        fill: 'orange',
+         image:handle,
+        width:20,
+        height:40,
+        offset:[20, 18],
         dragBoundFunc: function(pos) {
           return {
             x: this.getAbsolutePosition().x,
@@ -45,7 +57,7 @@ Streams.graphs = {
       //Central Line
       var line = new Kinetic.Line({
       	points: [leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()],
-      	stroke: 'orange',
+      	stroke: 'blue',
         strokeWidth: 2,
         lineCap: 'round',
         lineJoin: 'round',
@@ -72,6 +84,27 @@ Streams.graphs = {
         }
       });
       
+      arrow = new Image();
+    arrow.src = "images/arrowsHandle.png";
+      var leftArrow = new Kinetic.Image({
+      	x: 50,
+        y: stage.getHeight() / 2,
+         image:arrow,
+        width:20,
+        height:40,
+        offset:[20, 18],
+       
+      })
+      var rightArrow = new Kinetic.Image({
+      	x: 400,
+        y: stage.getHeight() / 2,
+         image:arrow,
+        width:20,
+        height:40,
+        offset:[20, 18],
+       
+      })
+      
       //BG for MouseEvents
       var bg = new Kinetic.Rect({
       	x:0,
@@ -94,16 +127,17 @@ Streams.graphs = {
       
       
       //Add All Elements to the Group
-      
-      
+       group.add(leftNode);
       if(state == "mean_var"){
       	 group.add(vline);
-      	 console.log("ADDED LINE")
+      	 vline.setOpacity(.5);
       }
+     
 	  group.add(line);
-      group.add(leftNode);
+     
       group.add(rightNode);
-      
+      group.add(leftArrow);
+       group.add(rightArrow);
       //Add Elements to Layer
       layer.add(bg);
       layer.add(drawGraph());
@@ -115,7 +149,9 @@ Streams.graphs = {
       
       
       
-      
+      setInterval(function(){
+      	stage.draw();
+      }, 1000);
       
     	
       vline.on('mousedown', function(){
@@ -167,8 +203,11 @@ Streams.graphs = {
       	mouseY = 0;
       })
       
-		 rightNode.setDraggable(true);
+		rightNode.setDraggable(true);
+		leftNode.setDraggable(true);
+		
       rightNode.on('dragstart', function() {
+      		resizing = false;
       	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
       });
       rightNode.on('dragmove', function() {
@@ -178,17 +217,52 @@ Streams.graphs = {
       	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
       });
       
+      leftNode.on('dragstart', function() {
+      		resizing = false;
+      	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
+      });
+      leftNode.on('dragmove', function() {
+      	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
+      });
+      leftNode.on('dragend', function() {
+      	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
+      });
+      
       function updateLine(points){
       	line.setPoints(points);
       	vline.setPoints(points);
+      	leftNode.setRotation(-1*(leftNode.getY()-50)/250);
+      	rightNode.setRotation(1*(rightNode.getY()-50)/250);
+      	leftArrow.setY(leftNode.getY());
+      	rightArrow.setY(rightNode.getY());
       	
-      	var changeInY = Math.round((((rightNode.getY()-50)*-1)/10)-.2);
-      	
-      	
+      	var changeInY = Math.round((rightNode.getY() - 50)/min/2);
+      	var changeInY_Left = Math.round((leftNode.getY() - 50)/min/2);
       	 if(state == "mean_var"){
-      		Streams.app_control.apps.weather_models.updateText('#precip01-value', changeInY);
+      	 	changeInY = Math.round((rightNode.getY() - 50)/min/2);
+      	 	if(changeInY > max){
+      	 		changeInY = max;
+      	 	} else if(changeInY < min) {
+      	 		changeInY = min;
+      	 	}
+      	 	 Streams.app_control.apps.weather_models.updateText('#mean_1', changeInY_Left);
+      		Streams.app_control.apps.weather_models.updateText('#mean_2', changeInY);
       	 } else  if(state == "temp"){
-      	 	 Streams.app_control.apps.weather_models.updateText('#mean-temp-value', changeInY);
+      	 	changeInY = Math.round(((rightNode.getY() - 50)/min)*4.75);
+      	 	changeInY_Left = Math.round(((leftNode.getY() - 50)/min)*4.75);
+      	 	if(changeInY > max){
+      	 		changeInY = max;
+      	 	} else if(changeInY < min) {
+      	 		changeInY = min;
+      	 	}
+      	 	
+      	 	if(changeInY_Left > max){
+      	 		changeInY_Left = max;
+      	 	} else if(changeInY_Left < min) {
+      	 		changeInY_Left = min;
+      	 	}
+      	 	Streams.app_control.apps.weather_models.updateText('#mean_temp_2', changeInY);
+			Streams.app_control.apps.weather_models.updateText('#mean_temp_1', changeInY_Left);
 
       	 }
       	

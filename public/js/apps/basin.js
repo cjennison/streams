@@ -72,7 +72,7 @@ Streams.app_control.apps.basin = {
     	
      $(".panelBackground").css("opacity", "0");
      
-      changeView("name", 'id');
+     changeView("name", 'id');
 
    }
 	
@@ -190,6 +190,7 @@ Streams.app_control.apps.basin = {
 	        animate : 'fast',
 	        slide   : function (event, ui) {
 	          simText.text(ui.value);
+	          Streams.yearRange = ui.value;
 	        }
 	      }
 		)

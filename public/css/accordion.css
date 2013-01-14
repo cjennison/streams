@@ -26,8 +26,8 @@ ul#accordion li{
 ul#accordion li .toggle{
 	cursor:pointer;
 	position:absolute;
-	top:29px;
-	width:30px;
+	top:30px;
+	width:32px;
 	height:500px;
 	background:#f7e7b5;
 	border-style:solid;

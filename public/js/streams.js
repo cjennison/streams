@@ -1,4 +1,5 @@
 var Streams = {
+	 yearRange: 0,
   // A constructor function to create Streams objects:
 	make: function(options) {
 
@@ -19,6 +20,7 @@ var Streams = {
     var geom  = options.geom || 'KML';
     var downl = options.downl || 'False';
     var cid   = options.cid || 'UT Demo';
+   
 
     // Create the URL:
     var url = '?' +

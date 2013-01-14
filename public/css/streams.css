@@ -360,3 +360,7 @@ table{
 	opacity:0;
 	pointer-events:none;
 }
+
+canvas{
+	left:0;
+}

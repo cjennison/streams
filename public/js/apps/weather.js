@@ -13,10 +13,10 @@ Streams.app_control.apps.weather_models = {
     var view              = $('#weather-models-app');
     $(view).addClass("application");
     
-    var precipSlider1     = view.find('#precip01');
     var precipSlider1Val  = view.find('#precip01-value');
-    var precipSlider2     = view.find('#precip02');
     var precipSlider2Val  = view.find('#precip02-value');
+    var graph1			  = view.find('#graphcontainer1');
+    var graph2			  = view.find('#graphcontainer2');
     var meanTempChange    = view.find('#mean-temp');
     var meanTempChangeVal = view.find('#mean-temp-value');
     var runButton         = view.find('#run');
@@ -28,47 +28,18 @@ Streams.app_control.apps.weather_models = {
     precipSlider1Val.text(1);
     precipSlider2Val.text(1);
     meanTempChangeVal.text(0);
+    this.setupGraph('graphcontainer1', 'mean_var');
+    this.setupGraph('graphcontainer2', 'temp');
     
     
 
-    precipSlider1.slider(
-      { max     : 50,
-        min     : -50,
-        range   : 'min',
-        value   : 1,
-        animate : 'fast',
-        slide   : function (event, ui) {
-          precipSlider1Val.text(ui.value);
-        }
-      }
-    );
+   
     
     
     
-    precipSlider2.slider(
-      { max     : 50,
-        min     : -50,
-        range   : 'min',
-        value   : 1,
-        animate : 'fast',
-        slide   : function (event, ui) {
-          precipSlider2Val.text(ui.value);
-        }
-      }
-    );
+   
 
-    meanTempChange.slider(
-      { max     : 7,
-        min     : 0,
-        range   : 'min',
-        value   : 0,
-        step: 0.25,
-        animate : 'fast',
-        slide   : function (event, ui) {
-          meanTempChangeVal.text(ui.value);
-        }
-      }
-    );
+   
 
     // Save the context of this object:
     var that = this;
@@ -149,6 +120,16 @@ Streams.app_control.apps.weather_models = {
       }
     });
     
+  },
+  
+  updateText:function(obj, num){
+  	console.log(obj);
+  	 $(obj).text(num);
+  },
+  
+  setupGraph : function(container, state){
+  	console.log(state);
+  	Streams.graphs.init(container, state);
   }
   
 };

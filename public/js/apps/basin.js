@@ -167,7 +167,7 @@ Streams.app_control.apps.basin = {
 	
 	function changeView(name, id, lat, long, area){
 		Streams.map.hide();
-		Streams.app_control.initSteps();
+		//Streams.app_control.initSteps();
 		Streams.app_control.enableSteps();
 		//basinList.empty();
 		prompt_header.html('<br><h2><center>Basin: ' + name + '</h2>')

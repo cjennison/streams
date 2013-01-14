@@ -24,12 +24,12 @@ Streams.graphs = {
     handle = new Image();
     handle.src = "images/graphhandle.png";
       var leftNode = new Kinetic.Image({
-        x: 44,
+        x: 54,
         y: stage.getHeight() / 2,
         image:handle,
         width:20,
         height:40,
-        offset:[0, 18],
+        offset:[10, 20],
         dragBoundFunc: function(pos) {
           return {
             x: this.getAbsolutePosition().x,
@@ -40,12 +40,28 @@ Streams.graphs = {
       });
      //Right Node
       var rightNode = new Kinetic.Image({
-        x: 380,
+        x: 370,
         y: stage.getHeight() / 2,
          image:handle,
         width:20,
         height:40,
-        offset:[20, 18],
+        offset:[10, 20],
+        dragBoundFunc: function(pos) {
+          return {
+            x: this.getAbsolutePosition().x,
+            y: pos.y
+          }
+        }
+      });
+      
+      //Right Node
+      var centerNode = new Kinetic.Image({
+        x: stage.getWidth()/2 - 90,
+        y: stage.getHeight() / 2,
+         image:handle,
+        width:20,
+        height:40,
+       offset:[10, 20],
         dragBoundFunc: function(pos) {
           return {
             x: this.getAbsolutePosition().x,
@@ -73,7 +89,7 @@ Streams.graphs = {
       var vline = new Kinetic.Line({
       	points: [leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()],
       	stroke: 'grey',
-        strokeWidth: 10,
+        strokeWidth: 15,
         lineCap: 'round',
         lineJoin: 'round',
         dragBoundFunc: function(pos) {
@@ -127,17 +143,29 @@ Streams.graphs = {
       
       
       //Add All Elements to the Group
-       group.add(leftNode);
+      
       if(state == "mean_var"){
       	 group.add(vline);
+      	  group.add(centerNode);
       	 vline.setOpacity(.5);
+      	 
+      	 centerNode.on('mousedown', function(){
+	      	startingY = stage.getMousePosition().y;
+	      	mouseY = stage.getMousePosition().y;
+	      	console.log("Starting Resize")
+	      	resizing = true;
+	      });
+	      
+	      
       }
      
 	  group.add(line);
      
-      group.add(rightNode);
+     
       group.add(leftArrow);
-       group.add(rightArrow);
+      group.add(rightArrow);
+       group.add(rightNode);
+       group.add(leftNode);
       //Add Elements to Layer
       layer.add(bg);
       layer.add(drawGraph());
@@ -154,17 +182,7 @@ Streams.graphs = {
       }, 1000);
       
     	
-      vline.on('mousedown', function(){
-      	startingY = stage.getMousePosition().y;
-      	mouseY = stage.getMousePosition().y;
-      	resizing = true;
-      });
       
-      line.on('mousedown', function(){
-      	startingY = stage.getMousePosition().y;
-      	mouseY = stage.getMousePosition().y;
-      	resizing = true;
-      });
       
       layer.on('mousemove', function(){
       	if(!resizing){
@@ -207,7 +225,7 @@ Streams.graphs = {
 		leftNode.setDraggable(true);
 		
       rightNode.on('dragstart', function() {
-      		resizing = false;
+      	//resizing = false;
       	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
       });
       rightNode.on('dragmove', function() {
@@ -235,6 +253,8 @@ Streams.graphs = {
       	rightNode.setRotation(1*(rightNode.getY()-50)/250);
       	leftArrow.setY(leftNode.getY());
       	rightArrow.setY(rightNode.getY());
+      	
+      	centerNode.setY((leftNode.getY() + rightNode.getY())/2);
       	
       	var changeInY = Math.round((rightNode.getY() - 50)/min/2);
       	var changeInY_Left = Math.round((leftNode.getY() - 50)/min/2);

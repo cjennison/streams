@@ -232,12 +232,11 @@ span#beta {
 
 .basinSelector li{
 	/* -- transition is the magic sauce for animation -- */
-	
-	
-	display:inline-block;
-	width:350px;
+	display: inline-block;
+	width: 250px;
+	left: 50%;
+	margin-left: -18px;
 	overflow: hidden;
-	float:right;
 }
 
 

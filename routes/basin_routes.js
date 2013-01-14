@@ -59,7 +59,7 @@ exports.addBasin_IDAlias = function(req,res){
     }else{
       res.json(list);
     }
-  })
+  });
 };
 
 exports.delineateBasin = function (req, res) {

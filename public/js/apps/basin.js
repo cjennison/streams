@@ -23,10 +23,6 @@ Streams.app_control.apps.basin = {
     
 
     //// Initialize View ////
-    var jsonData = '{"basins":[{"name":"basinOne", "id":293}, {"name":"basinTwo","id":192}]}';
-    var jsonObj = JSON && JSON.parse(jsonData) || $.parseJSON(jsonData);
-    console.log(jsonObj);
-    
     var basin_view    = $('<div id="basin-app">');
     var loader        = $('<div id="loader">');
     var message       = $('<div id="msg">');
@@ -61,40 +57,68 @@ Streams.app_control.apps.basin = {
    //Add class to basin List
    $(basinList).addClass("basinList");
    
+    //Start first basin dialog
+	startBasinDialog();
+	
+	//Load Saved Basins
+	loadSavedBasins();
+   
    function startBasinDialog(){
    	 prompt_header.html('<center><h1>Basin Selection</h1><br><p>Right click the map to select a point to delineate a basin.</p>' + 
     	'<br /><p> - OR - </p><br /> <p>Select a previous basin:</p><hr>'
     	);
+    basinList.append('<br><center><img style="margin-right:40px" src="images/ajax-loader.gif"/>');
+
     	
      $(".panelBackground").css("opacity", "0");
    }
 	
+	//Starts Loading JSON Object from server
 	function loadSavedBasins(){
-		
-		
 		var json = $.get('/basin/predef');
+		checkCompletedLoad(json);
 		
+	}
+	
+	//Checks load status
+	function checkCompletedLoad(jsonGetObject){
 		setTimeout(function(){
-			console.log(json);
-		}, 5000)
-		//console.log(json);
+			if(jsonGetObject.readyState == 4){
+				var jsonResponse = jsonGetObject.responseText;
+				jsonObj = JSON && JSON.parse(jsonResponse) || $.parseJSON(jsonResponse);
+				console.log(jsonObj);
+				this.clearInterval();
+				displayLoadedBasins(jsonObj);
+			} else {
+				checkCompletedLoad(jsonGetObject)
+			}
+		}, 1000);
+	}
+	
+	//Display Loaded Basin
+	function displayLoadedBasins(jsonData){
+		basinList.empty();
 		
-		console.log("Loading Saved Basins");
-			
-		for (var i=0;i<jsonObj.basins.length;i++){
-			console.log(jsonObj.basins[i]);
+		for (var i=0;i<jsonData.length;i++){
+			console.log(jsonData[i]);
 			
 		
+				
+			var listItem = $('<li>' + jsonObj[i].default_nickname + ': ' + jsonObj[i].basinid + '</li>');
+			$(listItem).attr("name", jsonObj[i].default_nickname);
+			$(listItem).attr("id", jsonObj[i].basinid);
+			$(listItem).attr("lat", jsonObj[i].lat);
+			$(listItem).attr("long", jsonObj[i].long);
+			$(listItem).attr("area", jsonObj[i].area);
 			
-			var listItem = $('<li>' + jsonObj.basins[i].name + ': ' + jsonObj.basins[i].id + '</li>');
-			$(listItem).attr("name", jsonObj.basins[i].name);
-			$(listItem).attr("id", jsonObj.basins[i].id);
-			listItem.id = jsonObj.basins[i].id;
+			listItem.id = jsonObj[i].basinid;
 			basinList.append(listItem);	
 			$(listItem).bind('mousedown', function(e){	
 				console.log(e);
-				loadBasin($(this).attr("name"), $(this).attr("id"));
+				loadBasin($(this).attr("name"), $(this).attr("id"), $(this).attr("lat"), $(this).attr("long"), $(this).attr("area"));
 			});	
+			
+			
 		}
 	}
 	
@@ -103,8 +127,21 @@ Streams.app_control.apps.basin = {
  	 * @param {Object} name Name of Basin
  	 * @param {Object} id Unique Id
 	 */
-	function loadBasin(name, id){
+	function loadBasin(name, id, lat, long, area){
 		prompt_header.fadeIn();
+		
+		 
+		 //var marker = Streams.map.makeMarker(pos, '');
+     	 //Streams.map.addMarker(marker);
+		
+		
+		
+		changeView(name, id, lat, long, area);
+		
+		
+	}
+	
+	function changeView(name, id, lat, long, area){
 		Streams.map.hide();
 		Streams.app_control.initSteps();
 		Streams.app_control.enableSteps();
@@ -179,7 +216,7 @@ Streams.app_control.apps.basin = {
       
       // This resets the prompt view to select another basin:
       function resetPrompt () {
-        disableHandlers = false;
+       // disableHandlers = false;
         prompt.empty();
         rscript.empty();
         save_message.empty();
@@ -230,7 +267,7 @@ Streams.app_control.apps.basin = {
         info.setContent('<div class="infowindow">Retrieving data...</div>');
         Streams.map.openInfoWindow(info, marker);
         
-        prompt_header.fadeOut();
+        prompt_header.empty();
       }
 
       // This function is invoked when the KML data has been
@@ -249,6 +286,10 @@ Streams.app_control.apps.basin = {
         basin.drainage_url = data.props.drainId;
         // Remove marker:
         marker.setMap(null);
+        
+        
+        Streams.map.displayKML();
+        
         // Verify basin:
         verify_basin();
       }
@@ -263,14 +304,14 @@ Streams.app_control.apps.basin = {
         Streams.map.deleteMarker(marker);
         prompt.append('<p class="error">Error: ' + data.msg + '</p>');
         console.log(data.msg);
-        disableHandlers = false;
+        //disableHandlers = false;
       }
 
       // This function prompts the user when the basin is overlayed onto
       // the google map. It asks the user if this is the basin they
       // are interested in.
       function verify_basin () {
-      	disableHandlers = false;
+      	//disableHandlers = false;
       
         var p1 = $('<center><p><h1>Use this point?</h1></p>' +
                    '<p>Enter a Unique Name for your basin and press Save.</p>'
@@ -278,11 +319,12 @@ Streams.app_control.apps.basin = {
                    
         //Save Basin Prompt           
         var sv = $('<br><center><h2>Basin Reference Name</h2>' + '<br />' + 
-        		'<input type="text" id="refName" value="Enter Name"></input>' + '<br>' +
+        		'<input type="text" id="refName" class="runInput" value=" Enter Name"></input>' + '<br>' +
         		'<button id="savebtn" href="">Save Basin</button>');
         save_message.html(sv);
 
         prompt.html(p1);
+        $(sv).find('#savebtn').button();
         $(sv).find('#savebtn').click(function (event) {
           event.preventDefault();
          
@@ -328,7 +370,7 @@ Streams.app_control.apps.basin = {
         });
         
         // Allow the map to be clicked again:
-        disableHandlers = false;
+        //disableHandlers = false;
       }
 
       //// The Main Driver ////
@@ -340,13 +382,11 @@ Streams.app_control.apps.basin = {
       return false;
     }
 	
-	//Start first basin dialog
-	startBasinDialog()
 	
-	//Load Saved Basins
-	loadSavedBasins();
 	
     // Now register the events:
     Streams.map.addListener('rightclick', rightClickEvent);
   }
+  
+ 
 };

@@ -41,7 +41,16 @@
 			<div class="toggle"><span class="title">Fish Models</span></div>
 			<div class="content">
 				<div id="fish-models-app">
-         		<h3>Fish Population Models</h3>
+				<div id="loader">
+				    <div id="message"></div>
+				  </div>
+         		 <div class="runTypeSelect">
+					  <select name="runType" class="selectRun">
+					  	<option>Create New Run</option>
+					  	<option disabled="disabled">No Existing Runs Found</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
          		<table width:"100%" border="0" cellspacing="0" cellpadding="0" style="font-size:12px">
                       <tr>
                         <td></td>
@@ -94,6 +103,16 @@
 			<div class="toggle"><span class="title">Land Use Models</span></div>
 			<div class="content">
 				<div id="land-use-models-app">
+				<div id="loader">
+				    <div id="message"></div>
+				  </div>
+				 <div class="runTypeSelect">
+					  <select name="runType" class="selectRun">
+					  	<option>Create New Run</option>
+					  	<option disabled="disabled">No Existing Runs Found</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
 	             <p align="center"><input class="nullbutton" value="Launch Barrier Module" type="submit">
 	             <p>Riparian cover (% change): 0%
 	             <div class="nullslider1"></div>
@@ -108,6 +127,16 @@
 			<div class="toggle"><span class="title">Stream Flow Models</span></div>
 			<div class="content">
 				<div id="environmental-models-app">
+				<div id="loader">
+				    <div id="message"></div>
+				  </div>
+				 <div class="runTypeSelect">
+					  <select name="runType" class="selectRun">
+					  	<option>Create New Run</option>
+					  	<option disabled="disabled">No Existing Runs Found</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
 		             <p align="center"><strong>Directly specify stream flow and temperature changes</strong></p>
 		             <p>Streamflow (% change): 0%</p>
 		             <div class="nullslider1"></div>
@@ -123,17 +152,27 @@
 			<div class="toggle"> <span class="title">Weather and Environmental Models</span></div>
 			<div class="content">
 				<div id="weather-models-app">
-				<h3>Weather and Climate Models</h3>
+				
 				  <div id="loader">
 				    <div id="message"></div>
 				  </div>
-				  <select name="weathertype" class="ui-state-default"><option>Stochastic Weather Generation</option>
-				    <option disabled="disabled">Downscaled Climate Scenario</option></select>
-				  <p><strong>Specify Amount Change</strong>
-				    <br>Please select values below for changes driving stochastically generated weather.
-				  </p>
-				  <p>
-				    
+				  <div class="runTypeSelect">
+					  <select name="runType" class="selectRun">
+					  	<option>Create New Run</option>
+					  	<option disabled="disabled">No Existing Runs Found</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
+				  <p style="float:left;width:50px;margin-left:18px"> Model: </p>
+				 <div class="styledSelect">
+					 <select name="weathertype" class="selectRun">
+					  <option>Stochastic Weather Generation</option>
+				   	 <option disabled="disabled">Downscaled Climate Scenario</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
+				 
+
 				    <p>Mean Annual Precipitation (% change, 80-year mean) [<span id="precip01-value"></span>%]</p>
 				    <div id="precip01"></div>
 				    
@@ -144,7 +183,10 @@
 				    <div id="mean-temp"></div>
 				  </p>
 				  <p>
-				    <a id="run" href="#">Run Model</a>
+				  	<div class="runModel">
+				  		<input class="runInput" value="Enter a run name"></input><br>
+				    	<a id="run" href="#">Run with these settings</a>
+				  	</div>
 				  </p>
 				</div>
 			</div>

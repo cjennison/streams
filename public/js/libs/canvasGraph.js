@@ -22,7 +22,7 @@ Streams.graphs = {
       var layer = new Kinetic.Layer();
     //Left Node
     handle = new Image();
-    handle.src = "images/graphHandle.png";
+    handle.src = "images/graphhandle.png";
       var leftNode = new Kinetic.Image({
         x: 44,
         y: stage.getHeight() / 2,
@@ -288,9 +288,18 @@ Streams.graphs = {
 	      });
 	      
 	     var XAxisText = new Kinetic.Text({
-	        x: stage.getWidth() / 2 - 120,
-	        y: stage.getHeight()/2 + 15,
+	        x: stage.getWidth() / 2 - 100,
+	        y: stage.getHeight()/2 + 30,
 	        text: xLabel,
+	        fontSize: 13,
+	        fontFamily: 'Calibri',
+	        fill: 'black'
+	      });
+	      
+	      var XAxisNumber = new Kinetic.Text({
+	        x: stage.getWidth() / 2 - 240,
+	        y: stage.getHeight()/2 + 20,
+	        text: "2012                                                                                    2093",
 	        fontSize: 13,
 	        fontFamily: 'Calibri',
 	        fill: 'black'
@@ -328,6 +337,7 @@ Streams.graphs = {
 	      graphGroup.add(XAxisText);
 	      graphGroup.add(YAxisText);
 	       graphGroup.add(YAxisNumber);
+	       graphGroup.add(XAxisNumber);
 	      
       
       return graphGroup;

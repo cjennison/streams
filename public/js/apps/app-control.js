@@ -13,14 +13,14 @@ Streams.app_control = {
     var screenWidth = document.width;
 	console.log(screenWidth);
 		
-	this.accordionLimit = Math.floor((screenWidth / (480))) - 1;
+	this.accordionLimit = Math.floor((screenWidth / (440))) - 1;
 	console.log(this.accordionLimit);
 	
 	$(window).resize(function(){
 			var screenWidth = document.width;
 			console.log("Detected Window Resize: " + screenWidth);
 			
-			Streams.app_control.accordionLimit = Math.floor(screenWidth / 480) - 1;
+			Streams.app_control.accordionLimit = Math.floor(screenWidth / 440) - 1;
 			console.log("Accordion limit is now: " + Streams.app_control.accordionLimit);
 			
 			var accordionsToClose = Streams.app_control.accordionsOpen - Streams.app_control.accordionLimit;
@@ -50,8 +50,8 @@ Streams.app_control = {
   	var basinAccordion = $('.basinSelector');
   	$(basin).append(basinAccordion);
   	
-  	
-  	
+  	var basinLi = $('<li></li>')
+  	 basinAccordion.append(basinLi);
   	
   	
   	//Get Basin Selection Application
@@ -59,11 +59,11 @@ Streams.app_control = {
   	basinApp.init();
   	
   	//Place Header on Accordion
-  	var header  = $('<div class="toggle">'+ '<span class="title">' + basinApp.name + '</span></div>');
-      basinAccordion.append(header);
-    var content  = $('<div class="content"></div>');
+  	var header  = $('<div class="toggle" state="open">'+ '<span class="title">' + basinApp.name + '</span></div>');
+      basinLi.append(header);
+    var content  = $('<div class="content" ></div>');
       content.append(basinApp.view);
-       basinAccordion.append(content);
+       basinLi.append(content);
     
     //Add Basin Container to Body  
   	$('body').append(basin);
@@ -75,11 +75,35 @@ Streams.app_control = {
     };
   	
   	
-  	this.bindOpen(".basinSelector .toggle");
-  	this.bindClose(".basinSelector .toggle");
-  	
+  	//this.bindOpen(".basinSelector li .toggle");
+  	//this.bindClose(".basinSelector li .toggle");
+  	this.bindBasinOpen();
+  	this.bindBasinClose();
   	//basinAccordion.accordion(accordionOpts);
   	
+  },
+  
+  
+  bindBasinOpen:function(){
+  	$(".basinSelector li .toggle").bind("mousedown", function(){
+  		if($(".basinSelector li .toggle").attr("state") == "open"){
+	  		$(".basinSelector li .content").css("left","-340px");
+	  		var activate = setTimeout(function(){
+					$(".basinSelector li .toggle").attr("state", "closed");
+			}, 400);
+		}
+  	});
+  },
+  
+   bindBasinClose:function(){
+  	$(".basinSelector li .toggle").bind("mousedown", function(){
+  		if($(".basinSelector li .toggle").attr("state") == "closed"){
+	  		$(".basinSelector li .content").css("left","-10px");
+	  		var activate = setTimeout(function(){
+					$(".basinSelector li .toggle").attr("state", "open");
+			}, 400);
+		}
+  	});
   },
   
   

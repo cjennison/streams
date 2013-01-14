@@ -72,7 +72,7 @@ Streams.app_control.apps.basin = {
     	
      $(".panelBackground").css("opacity", "0");
      
-     changeView("name", 'id');
+     //changeView("name", 'id');
 
    }
 	

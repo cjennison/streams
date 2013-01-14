@@ -28,8 +28,8 @@ Streams.app_control.apps.weather_models = {
     precipSlider1Val.text(1);
     precipSlider2Val.text(1);
     meanTempChangeVal.text(0);
-    this.setupGraph('graphcontainer1', 'mean_var', -5, 5, "Time Over Years", "Percent Change");
-    this.setupGraph('graphcontainer2', 'temp', -15, 15, "Time Over Years", "Annual Temp");
+    this.setupGraph('graphcontainer1', 'mean_var', -5, 5, "Time", "Percent Change");
+    this.setupGraph('graphcontainer2', 'temp', -15, 15, "Time", "Annual Temp");
     
     
 
@@ -94,9 +94,9 @@ Streams.app_control.apps.weather_models = {
 
   run : function () {
     var view  = this.view;
-    var prec1 = view.find('#precip01-value').text();
-    var prec2 = view.find('#precip02-value').text();
-    var tempc = view.find('#mean-temp-value').text();
+    var prec1 = view.find('#mean_1').val();
+    var prec2 = view.find('#precip02-value').val();
+    var tempc = view.find('#mean_temp_2').val();
     var msg   = view.find('#message');
 
     var url = '/weather-model-exec';
@@ -109,7 +109,7 @@ Streams.app_control.apps.weather_models = {
     
     $.get(url + qry, function (data) {
       if (data.status === 0) {
-        msg.html('<img src="images/ajax-loader.gif"/>');
+        //msg.html('<img classrc="images/ajax-loader.gif"/>');
         msg.append('Running weather model...');
       }
       else {

@@ -11,7 +11,7 @@ Streams.map = {
     // Options for the default map to display.
     var options = {
       center : GMap.latlng(42.39019, -72.43307),
-      zoom : 16,
+      zoom : 11,
        mapTypeId: google.maps.MapTypeId.TERRAIN,
 		  mapTypeControl:true,
 		  streetViewControl:false,
@@ -68,13 +68,13 @@ Streams.map = {
   },
   
   
-  displayKML: function (){
-  	var sites = new google.maps.KmlLayer('http://felek.cns.umass.edu:9998/6780791/BasinOutline.kml',
+  displayKML: function (id){
+  	var sites = new google.maps.KmlLayer('http://felek.cns.umass.edu:8888/' + id + '/BasinOutline.kml',
                                              { preserveViewport : false,
                                                clickable : false });
     sites.setMap(this._map);
 
-    var Watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:9998/6780791/NHDplusFlowlines.kml',
+    var Watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:8888/' + id + '/NHDplusFlowlines.kml',
                                              { preserveViewport : false,
                                                clickable : false });
     Watershed.setMap(this._map);

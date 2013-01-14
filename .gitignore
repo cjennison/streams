@@ -6,3 +6,5 @@ public/images/StocWeather.png
 public/images/models
 .DS_Store
 config/streams.json
+lib/mexec/a.json
+lib/mexec/buildrunTest.json

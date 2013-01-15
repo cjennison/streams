@@ -5,47 +5,11 @@ var fs = require('fs');
 // Routes for the mexec library.
 exports.exec = function(req, res) {
 	var settings = req.body;
-	var user = req.session.user; // TODO: look up a user by userName.
-	// var user = users.lookup(req.body.user);
-	// if(!user){
-	// 	//TODO:go to lockin page
-	// }
-	var runReady = true;
-
-	
+	var user = req.session.user; 
 	//build up an array of runs from the setting
-	var runs = mexec.buildRuns(settings,user);
+	var runs = mexec.buildRuns(settings,user);	
 	
-	// - get a new run directory for each run
-	
-	// for( var idx =0; idx<runs.length;idx++ ) {
-	// 	var aRun = runs[idx];
-	// 	//generate a runId with uuid
-	// 	if(aRun.runId===''){
-	// 		aRun.runId = 1234;
-	// 	}
-	// 	var path = __dirname + '/../lib/mexec' + user + '/' + aRun.scriptName + '/'+aRun.runId;
-	// 	mexec.mkdir_p(path);
-
-	// 	// - create settings file
-	// 	fs.writeFile(path+'/'+aRun.scriptName+'.setting', aRun, function(err) {
-	// 		console.log(err);
-	// 		if(err) {
-	// 			console.log("cannot save setting for the model: " + aRun.scriptName);
-	// 			//TODO: remove the path with nodejs-done
-	// 			mexec.rimraf(path,function(err){
-	// 				if(err){
-	// 					console.log("cannot remove path: "+path);
-	// 				}
-	// 			});
-	// 			throw err;
-	// 			//return;
-	// 		}
-	// 		console.log("setting for " + aRun.scriptName + " is saved");
-	// 	});
-	// }
-	// - call mexec.runModels
-	if(runReady) {
+	if(runs.length>0) {
 		mexec.runModels(runs,0,"../lib/users");
 	}
 };

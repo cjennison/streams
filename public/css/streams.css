@@ -285,7 +285,7 @@ span#beta {
 
 
 
-
+/* Steps Control */
 div#steps-control{
 	width:1000px;
 	height:1000px;
@@ -326,6 +326,7 @@ div#steps-control{
 			-ms-user-select: none;
 			user-select: none;
 }
+
 
 table{
 	width:300px;
@@ -400,6 +401,10 @@ canvas{
 .application input{
 	width:20px;
 }
+
+
+/* D3 Styling TODO: Move to different file */
+
 
 .node circle {
   cursor: pointer;

@@ -115,7 +115,7 @@ Streams.app_control = {
   	
   },
   
-  
+  //Starts Step Controls
   initSteps: function(){
   	$('#steps-controls').addClass("steps");
   	$('#logos').css("left", "10px");
@@ -226,6 +226,9 @@ Streams.app_control = {
 		
   },
   
+  /**
+   *Binds the target to open itself 
+   */
   bindOpen: function(target){
 		$(target).bind('mousedown', function(event){
 			if($(target).parent().attr("state") == "closed" && Streams.app_control.accordionsOpen < Streams.app_control.accordionLimit){
@@ -237,7 +240,10 @@ Streams.app_control = {
 			}
 		});
   },
-	
+
+  /**
+   *Binds the target to close itself 
+   */
   bindClose: function(target){
 		$(target).bind("mousedown", function(){
 			if($(target).parent().attr("state") == "open" ){

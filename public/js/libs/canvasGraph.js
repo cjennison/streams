@@ -1,7 +1,15 @@
 Streams.graphs = {
 	
 	
-	
+	/**
+	 * Initializes the Graph Setup
+	 * @param {Object} container
+	 * @param {Object} state
+	 * @param {Object} min
+	 * @param {Object} max
+	 * @param {Object} xLabel
+	 * @param {Object} yLabel
+	 */
 	init:function(container, state, min, max, xLabel, yLabel){
 
 		this.setupGraph(container, state, min, max, xLabel, yLabel);

@@ -6,7 +6,9 @@ Streams.app_control.apps.weather_models = {
   
   
 
-  
+  /**
+   *Starts the Weather Model View 
+   */
   init : function () {
   	
    
@@ -33,13 +35,6 @@ Streams.app_control.apps.weather_models = {
     
     
 
-   
-    
-    
-    
-   
-
-   
 
     // Save the context of this object:
     var that = this;
@@ -122,10 +117,24 @@ Streams.app_control.apps.weather_models = {
     
   },
   
+  /**
+   * 
+   * @param {Object} obj
+   * @param {Object} num
+   */
   updateText:function(obj, num){
   	 $(obj).val(num);
   },
   
+  /**
+   * Sets up a Graph
+ * @param {Object} container ID of the object being instantiated with the graph
+ * @param {Object} state Type of graph to track
+ * @param {Object} min Min Data Amount
+ * @param {Object} max Max Data Amount
+ * @param {Object} xLabel X Axis Label
+ * @param {Object} yLabel Y Axis Label
+   */
   setupGraph : function(container, state, min, max, xLabel, yLabel){
   	Streams.graphs.init(container, state, min, max, xLabel, yLabel);
   }

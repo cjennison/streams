@@ -92,7 +92,7 @@ Streams.app_control.apps.basin = {
 		console.log("COOL");
 	}
 	
-	//Checks load status
+	//Checks load status of jsonObject
 	function checkCompletedLoad(jsonGetObject){
 		setTimeout(function(){
 			if(jsonGetObject.readyState == 4){
@@ -175,6 +175,14 @@ Streams.app_control.apps.basin = {
 		
 	}
 	
+	/**
+	 * Sets the view to the Step Selection 
+ * @param {Object} name
+ * @param {Object} id
+ * @param {Object} lat
+ * @param {Object} long
+ * @param {Object} area
+	 */
 	function changeView(name, id, lat, long, area){
 		Streams.map.hide();
 		//Streams.app_control.initSteps();

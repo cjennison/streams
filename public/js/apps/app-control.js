@@ -188,6 +188,8 @@ Streams.app_control = {
 			$('#acc1'+ i).parent().attr("state", "closed");
   		}
   		
+  		
+  		$("#tree").removeClass("active");
 
 
   },
@@ -223,7 +225,7 @@ Streams.app_control = {
   		
   		$("#user").addClass("stepsState");
 
-		
+		$("#tree").addClass("active");
   },
   
   /**

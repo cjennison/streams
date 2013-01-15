@@ -13,4 +13,7 @@ $(function () {
 
   Streams.map.render();
   Streams.app_control.render();
+  
+  Chart.init();
+  
 });

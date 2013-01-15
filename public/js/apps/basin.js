@@ -82,8 +82,11 @@ Streams.app_control.apps.basin = {
 		basinList.fadeIn();
 		
 		
-		var data = $.post('/basin/user/delineate', 90, 90);
-		console.log(data)
+		var data = $.post('/basin/user/delineate', { lat:'72', lng:'42'});
+		setTimeout(function(){
+			console.log(data)
+		},2000);
+		
 
 		checkCompletedLoad(json);
 		

@@ -81,6 +81,8 @@ Streams.app_control.apps.basin = {
 		var json = $.get('/basin/predef');
 		basinList.fadeIn();
 		
+		console.log("CHECKING PRED BASINS------------------------------");
+		setTimeout(function(){console.log(json)},4000);
 		
 		var data = $.post('/basin/user/delineate', { lat:'72', lng:'42'});
 		setTimeout(function(){

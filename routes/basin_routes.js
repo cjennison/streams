@@ -79,9 +79,10 @@ exports.delineateBasin = function(req, res) {
       basin.delineateBasin(lat, lng, function(err, basinId) {
         if(err) {
           res.json(err);
+        }else{
+        	a.basinID = basinId;
+        	res.json(a);
         }
-        a.basinID = basinId;
-        res.json(a);
       });
       //res.json(a);
     }

@@ -78,12 +78,12 @@ exports.delineateBasin = function(req, res) {
       var a = {basinID: "xxx"};
       basin.delineateBasin(lat, lng, function(err, basinId) {
         if(err) {
-          res.json(console.log(err.msg));
+          res.json(err);
         }
         a.basinID = basinId;
-        res.json({ basinid: basinId });
+        res.json(a);
       });
-      res.json(a);
+      //res.json(a);
     }
   }
 };

@@ -62,7 +62,7 @@ exports.addBasin_IDAlias = function(req,res){
   });
 };
 
-exports.delineateBasin = function (req, res) {
+exports.delineateBasin = function(req, res) {
   var user = req.session.user;
   if (!user) {
     res.redirect('/login');
@@ -76,8 +76,10 @@ exports.delineateBasin = function (req, res) {
     }
     else {
       var a = {basinID: "xxx"};
-      basin.delineateBasin(lat, lng, function (err, basinId) {
-        if(err) {res.json(console.log(err.msg));}
+      basin.delineateBasin(lat, lng, function(err, basinId) {
+        if(err) {
+          res.json(console.log(err.msg));
+        }
         a.basinID = basinId;
         res.json({ basinid: basinId });
       });

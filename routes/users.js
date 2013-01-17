@@ -18,3 +18,14 @@ exports.getRuns = function (req, res) {
     });
   }
 };
+
+exports.getRunResult = function(req,res){
+  var user = req.session.user;
+  //TODO: may be need to verify a user, but not right now.
+  var result = user.getRunResult(req.param.scriptname, req.param.runID);
+  if(result){
+    res.json(result);
+  }else{
+    res.json({msg:"cannot obtain the run result"});
+  }
+};

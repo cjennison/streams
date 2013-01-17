@@ -75,10 +75,13 @@ exports.delineateBasin = function (req, res) {
       res.json({ err : 'Bad request. Expected latitude/longitude' });
     }
     else {
+      var a = {basinID: "xxx"};
       basin.delineateBasin(lat, lng, function (err, basinId) {
         if(err) {res.json(console.log(err.msg));}
+        a.basinID = basinId;
         res.json({ basinid: basinId });
       });
+      res.json(a);
     }
   }
 };

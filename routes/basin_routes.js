@@ -68,8 +68,8 @@ exports.delineateBasin = function(req, res) {
     res.redirect('/login');
   }
   else {
-    var lat = req.body.lat;
-    var lng = req.body.lng;
+    var lat = parseInt(req.body.lat);
+    var lng = parseInt(req.body.lng);
 
     if (!lat || !lng) {
       res.json({ err : 'Bad request. Expected latitude/longitude' });

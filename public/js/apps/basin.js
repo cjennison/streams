@@ -78,19 +78,39 @@ Streams.app_control.apps.basin = {
 	
 	//Starts Loading JSON Object from server
 	function loadSavedBasins(){
-		var json = $.get('/basin/predef');
-		basinList.fadeIn();
-		
-		console.log("CHECKING PRED BASINS------------------------------");
-		setTimeout(function(){console.log(json)},4000);
-		
-		var data = $.post('/basin/user/delineate', { lat:'72', lng:'42'});
-		setTimeout(function(){
-			console.log(data)
-		},2000);
-		
+    $.get('/basin/predef', function (predefs) {
+      $.post('/basin/user/delineate', { lat: 42.415948, lng: -72.635729}, function (test_basin) {
+        console.log('Response received from basin delineation: ');
+        console.log(' -> ' + JSON.stringify(test_basin));
+        var basins = predefs;
+        basinList.fadeIn();      
+        if (test_basin.basinID) {
+          $.get('/basin/info/' + test_basin.basinID, function (test_basin) {
+            console.log('basins: ' + JSON.stringify(basins));
+            console.log('basin information: ' + JSON.stringify(test_basin));
+            basins.push(test_basin);
+            console.log('basins: ' + JSON.stringify(basins));
+            displayLoadedBasins(basins);  
+          });
+        }
+        else {
+          displayLoadedBasins(basins);
+        }
+      });  
+    });
 
-		checkCompletedLoad(json);
+		// var json = $.get('/basin/predef');
+		// basinList.fadeIn();
+		
+		// console.log("CHECKING PRED BASINS------------------------------");
+		// setTimeout(function(){console.log(json)},4000);
+		
+		// var data = $.post('/basin/user/delineate', { lat: 42.415948, lng: -72.635729}, function (data) {
+  //     console.log('Response received from basin delineation: ');
+  //     console.log(' -> ' + JSON.stringify(data));
+  //   });		
+
+		// checkCompletedLoad(json);
 		
 	}
 	function checkMe(){
@@ -113,15 +133,21 @@ Streams.app_control.apps.basin = {
 	}
 	
 	//Display Loaded Basin
-	function displayLoadedBasins(jsonData){
+	function displayLoadedBasins(jsonObj){
 		basinList.empty();
 		
-		for (var i=0;i<jsonData.length;i++){
-			console.log(jsonData[i]);
+		for (var i=0;i<jsonObj.length;i++){
+			console.log(jsonObj[i]);
 			
-		
-				
-			var listItem = $('<li>' + jsonObj[i].default_nickname + ': ' + jsonObj[i].basinid + '</li>');
+      var itemText;
+      if (jsonObj[i].alias) {
+        itemText = jsonObj[i].alias + ' [' + jsonObj[i].basinid + ']';
+      }
+      else {
+        itemText = jsonObj[i].basinid;
+      }
+
+			var listItem = $('<li>' + itemText + '</li>');
 			$(listItem).attr("name", jsonObj[i].default_nickname);
 			$(listItem).attr("id", jsonObj[i].basinid);
 			$(listItem).attr("lat", jsonObj[i].lat);

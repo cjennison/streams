@@ -4,6 +4,8 @@ Streams.app_control.apps.basin = {
   name : 'Basin Selection',
   order: 1,
   basinTable: {},
+
+  currentBasin: undefined,
   
   getBasin : function (basinId) {
     return this.basinTable[basinId];
@@ -242,7 +244,7 @@ Streams.app_control.apps.basin = {
           event.preventDefault();
                     save_message.empty();
 
-          changeView(name, id);
+          changeView(basin);
 
         });
          $(sv).find('#nobtn').click(function (event) {
@@ -263,13 +265,15 @@ Streams.app_control.apps.basin = {
  * @param {Object} long
  * @param {Object} area
 	 */
-	function changeView(name, id, lat, long, area){
+	function changeView(basin){
 		Streams.map.hide();
 		//Streams.app_control.initSteps();
 		Streams.app_control.enableSteps();
 		//basinList.empty();
-		prompt_header.html('<br><h2><center>Basin: ' + name + '</h2>')
-		prompt.html('<center><button id="newBasin">Select New Basin</button>')
+		prompt_header.html('<br><h2><center>Basin: ' + 
+                       (basin.name ? basin.name : basin.id) +
+                       '</h2>');
+		prompt.html('<center><button id="newBasin">Select New Basin</button>');
 		
 		$(".panelBackground").css("opacity", ".5");
 		
@@ -300,8 +304,8 @@ Streams.app_control.apps.basin = {
 			Streams.app_control.disableSteps();
 			save_message.empty();
 			startBasinDialog();
-			loadSavedBasins();
-						
+      basin.hideKmlLayer();
+			loadSavedBasins();						
 		});
 	}
 	
@@ -379,7 +383,7 @@ Streams.app_control.apps.basin = {
           { lat: position.lat(), 
             lng: position.lng() }, 
             function (basinData) {
-              // Get the basin if we already have it.
+              // // Get the basin if we already have it.
               var basin;
               if (basinTable[basinData.basinID]) {
                 basin = basinTable[basinData.basinID];
@@ -503,12 +507,8 @@ Streams.app_control.apps.basin = {
 
           save_message.empty();
           prompt.empty();
-          changeView(saveName);
-        });
-        
-        // TEMPORARY TODO: BASIN DELINEATION
-       Streams.map.displayKML('west_brook');
-        
+          changeView(basin);
+        });        
       }
 
       // This function prompts the user to select model to run and

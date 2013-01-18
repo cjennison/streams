@@ -41,6 +41,10 @@
 		"weather_generator": {
 			"name": "weather_generator",
 			"model": "climiate"
+		},
+
+		"baseline_historic": {
+			
 		}
 	},
 

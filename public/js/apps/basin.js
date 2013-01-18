@@ -305,6 +305,7 @@ Streams.app_control.apps.basin = {
 
       // This function sends a message to the server to initiate a
       // KML download from streamstats.
+      // DEPRECATED
       function request_kml () {
         // Grab the socket:
         var socket   = Streams.socket;
@@ -322,6 +323,30 @@ Streams.app_control.apps.basin = {
                  });
                  
         
+      }
+
+      // ### request_kml()
+      // This function sends an HTTP request to the server to invoke the
+      // basin delineation process:
+      function delineateBasin() {
+        var position = marker.getPosition();
+        $.post('/basin/user/delineate', 
+          { lat: position.lat(), 
+            lng: position.lng() }, 
+            function (basin) {
+              var url = 'http://' + document.location.host + 
+                        '/' + basin.basinID + '/BasinOutline.kml';
+              message.fadeOut('slow', function () { });
+              // Close the info window:
+              Streams.map.closeInfoWindow(info);
+              var kml = Streams.map.loadKMLLayer(url);
+              // Save kml object in the basin object:
+              basin.kml = kml;
+              // Remove marker:
+              marker.setMap(null);
+              // Verify basin:
+              verify_basin();
+            });
       }
 
       // This function displays the initial loading messages
@@ -450,7 +475,8 @@ Streams.app_control.apps.basin = {
       Streams.socket.on('kmldone', receive_kml);
       Streams.socket.on('kmlerror', kml_error);
       retrieve_info();
-      request_kml();
+      //request_kml();
+      delineateBasin();
 
       return false;
     }

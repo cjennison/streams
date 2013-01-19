@@ -3,8 +3,74 @@
 Streams.app_control.apps.basin = {
   name : 'Basin Selection',
   order: 1,
+  basinTable: {},
+  
+  getBasin : function (basinId) {
+    return this.basinTable[basinId];
+  },
+
   init : function () {
-  	
+  	// Keeps track of basins.
+    var basinTable  = this.basinTable;
+
+    // A basin object:
+    function Basin(options) {
+      if (!options.id) {
+        throw 'Basin requires an id to be initialized.';
+      }
+
+      // Keep a reference of the basin table:
+      this.basinTable = basinTable;
+
+      // Standard options:
+      this.name = options.name || undefined;
+      this.id   = options.id   || undefined;
+      this.lat  = options.lat  || undefined;
+      this.lng  = options.lng  || undefined;
+      this.area = options.area || undefined;
+
+      // Save the URL in the Basin object:
+      this.url  = 'http://' + document.location.host + 
+                  '/' + options.id + '/BasinOutline.kml';
+      // Load the KML object:
+      this.kml  = Streams.map.makeKMLLayer(this.url);      
+      // Save the map:
+      this.map  = Streams.map.getMap();
+      // Initially the KML layer is not visible:
+      this.show = false;
+
+      // Add to the basin table:
+      this.basinTable[this.id] = this;
+    }
+
+    Basin.prototype.removeFromTable = function () {
+      delete this.basinTable[this.id];
+    };
+
+    Basin.prototype.addToTable = function () {
+      this.basinTable[this.id] = this;
+    };
+
+    Basin.prototype.showKmlLayer = function () {
+      if (this.show)
+        return;
+      else {
+        this.kml.setMap(this.map);
+        this.show = true;
+      }
+    };
+
+    Basin.prototype.hideKmlLayer = function () {
+      this.kml.setMap(null);
+      this.show = false;
+    };
+
+    Basin.prototype.setName = function (name) {
+      this.name = name;
+      $.post('/basin/user/set-alias', 
+             { basin_id    : this.id,
+               basin_alias : name });
+    };
   	
   	/// Initialize Functionality ////
 
@@ -13,14 +79,6 @@ Streams.app_control.apps.basin = {
     // the selection of another basin when a lookup is
     // in progress.
     var disableHandlers = false;
-
-    // Keeps track of basins.
-    // NOTE: Do we need this? Do we ever need to consult this table?
-    var basinTable  = {};
-
-    // The next basin id:
-    var nextBasinId = 0;
-    
 
     //// Initialize View ////
     var basin_view    = $('<div id="basin-app">');
@@ -78,41 +136,13 @@ Streams.app_control.apps.basin = {
 	
 	//Starts Loading JSON Object from server
 	function loadSavedBasins(){
-    $.get('/basin/predef', function (predefs) {
-      $.post('/basin/user/delineate', { lat: 42.415948, lng: -72.635729}, function (test_basin) {
-        console.log('Response received from basin delineation: ');
-        console.log(' -> ' + JSON.stringify(test_basin));
-        var basins = predefs;
-        basinList.fadeIn();      
-        if (test_basin.basinID) {
-          $.get('/basin/info/' + test_basin.basinID, function (test_basin) {
-            console.log('basins: ' + JSON.stringify(basins));
-            console.log('basin information: ' + JSON.stringify(test_basin));
-            basins.push(test_basin);
-            console.log('basins: ' + JSON.stringify(basins));
-            displayLoadedBasins(basins);  
-          });
-        }
-        else {
-          displayLoadedBasins(basins);
-        }
-      });  
-    });
-
-		// var json = $.get('/basin/predef');
-		// basinList.fadeIn();
-		
-		// console.log("CHECKING PRED BASINS------------------------------");
-		// setTimeout(function(){console.log(json)},4000);
-		
-		// var data = $.post('/basin/user/delineate', { lat: 42.415948, lng: -72.635729}, function (data) {
-  //     console.log('Response received from basin delineation: ');
-  //     console.log(' -> ' + JSON.stringify(data));
-  //   });		
-
-		// checkCompletedLoad(json);
-		
+		var json = $.get('/basin/predef');
+		basinList.fadeIn();	
+		console.log("CHECKING PRED BASINS------------------------------");
+		setTimeout(function(){console.log(json)},4000);
+		checkCompletedLoad(json);
 	}
+
 	function checkMe(){
 		console.log("COOL");
 	}
@@ -173,7 +203,25 @@ Streams.app_control.apps.basin = {
 	function loadBasin(name, id, lat, long, area){
 		prompt_header.fadeIn();
 		console.log(id);
-		Streams.map.displayKML(id);
+
+    // Look for basin in basin table or create a new one:
+    var basin;
+    if (basinTable[id]) {
+      basin = basinTable[id];
+    }
+    else {		
+      var basin = new Basin({ name : name, 
+                              id   : id,
+                              lat  : lat,
+                              lng  : long,
+                              area : area });
+
+      // Add the basin to the table of basins:
+      basinTable[basin.id] = basin;
+    }
+
+    // Show the basin layer in the map:
+    basin.showKmlLayer();
 		 
 		//changeView(name, id, lat, long, area);
 		$(prompt).empty();
@@ -198,10 +246,11 @@ Streams.app_control.apps.basin = {
 
         });
          $(sv).find('#nobtn').click(function (event) {
+          basin.hideKmlLayer();
           event.preventDefault();
           save_message.empty();
-		  startBasinDialog();
-			loadSavedBasins();
+		      startBasinDialog();
+		      loadSavedBasins();
         });
 		
 	}
@@ -279,13 +328,10 @@ Streams.app_control.apps.basin = {
       var info   = Streams.map.makeInfoWindow();
 
       // Create and add a new basin object:
-      var basin  = {
-        id     : nextBasinId++,
+      var basin  = {        
         marker : marker,
         info   : info
-      };
-      basinTable[basin.id] = basin;
-      
+      };      
      
       //// STATE MACHINE ////
       
@@ -297,9 +343,6 @@ Streams.app_control.apps.basin = {
         save_message.empty();
         basinList.empty();
         prompt_header.fadeIn();
-        
-        
-       
       }
       
 
@@ -330,22 +373,43 @@ Streams.app_control.apps.basin = {
       // basin delineation process:
       function delineateBasin() {
         var position = marker.getPosition();
+        // TODO: At some point we should cache the lat/lng -> basin mapping so
+        // we can avoid the post request.
         $.post('/basin/user/delineate', 
           { lat: position.lat(), 
             lng: position.lng() }, 
-            function (basin) {
-              var url = 'http://' + document.location.host + 
-                        '/' + basin.basinID + '/BasinOutline.kml';
+            function (basinData) {
+              // Get the basin if we already have it.
+              var basin;
+              if (basinTable[basinData.basinID]) {
+                basin = basinTable[basinData.basinID];
+              }
+              else {
+                // Create the new basin:
+                var basin = new Basin({ id   : basinData.basinID,
+                                        lat  : basinData.lat,
+                                        lng  : basinData.lng,
+                                        area : basinData.area
+                                      });
+              }
+
+              // Hide the message:
               message.fadeOut('slow', function () { });
+
               // Close the info window:
               Streams.map.closeInfoWindow(info);
-              var kml = Streams.map.loadKMLLayer(url);
-              // Save kml object in the basin object:
-              basin.kml = kml;
+
+              // Show the KML layer in the map:
+              basin.showKmlLayer();
+
+              // Add the basin to the basin table:
+              basinTable[basin.id] = basin;
+
               // Remove marker:
               marker.setMap(null);
+
               // Verify basin:
-              verify_basin();
+              verify_basin(basin);
             });
       }
 
@@ -410,7 +474,7 @@ Streams.app_control.apps.basin = {
       // This function prompts the user when the basin is overlayed onto
       // the google map. It asks the user if this is the basin they
       // are interested in.
-      function verify_basin () {
+      function verify_basin (basin) {
       	disableHandlers = false;
       
         var p1 = $('<center><p><h1>Use this point?</h1></p>' +
@@ -434,6 +498,9 @@ Streams.app_control.apps.basin = {
           	return;
           	this.alert("Please provide a basin name");
           }
+
+          basin.setName(saveName);
+
           save_message.empty();
           prompt.empty();
           changeView(saveName);

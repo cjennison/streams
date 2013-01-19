@@ -66,7 +66,7 @@ var GMap = (function init() {
 
     kml: function (map, location) {
       return new KmlLayer(location,
-                          { preserveViewport: true,
+                          { preserveViewport: false,
                             map: map });
     },
 

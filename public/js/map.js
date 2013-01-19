@@ -113,8 +113,16 @@ Streams.map = {
     return GMap.kml(this._map, url);
   },
 
+  makeKMLLayer : function (url) {
+    return GMap.kml(null, url);
+  },
+
   getState : function (position, fn) {
     GMap.state(position, fn);
+  },
+
+  getMap : function () {
+    return this._map;
   },
   
   hide: function(){

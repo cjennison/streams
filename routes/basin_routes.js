@@ -49,9 +49,7 @@ exports.userBasinList = function (req, res) {
 
 exports.addBasin_IDAlias = function(req,res){
   var user = req.session.user;
-  //TODO: to comfirm with Chris about the format of the request content.
-  var IDAlias = req.body; 
-  console.log("route add basin alias: "+ user);
+  var IDAlias = req.body;   
   basin.addBasin_IDAlias(user,IDAlias,function(err,list){
     if(err){
       console.log('Error updating ID-Alias: '+IDAlias);

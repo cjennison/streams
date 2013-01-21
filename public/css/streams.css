@@ -73,18 +73,17 @@ div#prompt_header {
 }
 
 div#map {
-  display : block;
-  position: absolute;
-  top     : 0;
-  z-index : 0;
-  border  : 1px solid black;
-  
-  top:40px;
-  left:50%;
-  width:600px;
-  height:500px;
-  margin-left:-285px;
-  
+display: block;
+position: absolute;
+top: 0;
+z-index: 0;
+border: 1px solid black;
+top: 40px;
+left: 400px;
+width: 60%;
+height: 800px;
+box-shadow: 10px 20px 25px 0px #4D4D4D;
+margin-left: 350px;
 }
 
 
@@ -184,7 +183,7 @@ span#beta {
 	top:40px;
 	left:40px;
 	width:350px;
-	height:503px;
+	height:550px;
 	
 	
 }
@@ -253,19 +252,22 @@ span#beta {
 	border-color:#ffbe57;
 }
 
-.basinSelector li .content{
-	-o-transition: all .4s ease-in-out;
-	-ms-transition: all .4s ease-in-out;
-	-moz-transition: all .4s ease-in-out;
-	-webkit-transition: all .4s ease-in-out;
-	position: absolute;
-	top: -15px;
-	left:-10px;
-	margin-left: 41px;
-	margin-top: 15px;
-	width: 300px;
-	height: 503px;
-	background: white;
+.basinSelector li .content {
+-o-transition: all .4s ease-in-out;
+-ms-transition: all .4s ease-in-out;
+-moz-transition: all .4s ease-in-out;
+-webkit-transition: all .4s ease-in-
+
+out;
+position: absolute;
+top: -15px;
+left: -10px;
+margin-left: 41px;
+margin-top: 15px;
+width: 300px;
+height: 503px;
+background: white;
+box-shadow: 10px 20px 25px 0px #4D4D4D;
 }
 
 .basinSelector .toggle .title{
@@ -301,7 +303,7 @@ div#steps-control{
 		
 	right:190px;
 	top:10px;
-	opacity:.5;
+	opacity:1;
 	
 	
 	

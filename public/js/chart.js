@@ -15,7 +15,7 @@ var Chart = {
 		    .projection(function(d) { return [d.y, d.x]; });
 		
 		var vis = d3.select("#tree").append("svg:svg")
-		    .attr("width", w + m[1] + m[3])
+		    .attr("width", "100%")
 		    .attr("height", h + m[0] + m[2])
 		  .append("svg:g")
 		    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
@@ -35,11 +35,13 @@ var Chart = {
 		
 		  // Initialize the display to show a few nodes.
 		  root.children.forEach(toggleAll);
-		  //toggle(root.children[1]);
-		 // toggle(root);
+		  toggle(root.children[0]);
+		  toggle(root.children[0].children[0]);
+		  toggle(root.children[0].children[0].children[0]);
 		
 		  update(root);
 		});
+		
 		function update(source) {
 			
 		  console.log(source);

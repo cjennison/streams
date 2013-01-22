@@ -17,7 +17,7 @@ Streams.app_control = {
 	console.log(this.accordionLimit);
 	
 	$(window).resize(function(){
-			var screenWidth = document.width;
+			var screenWidth = document.width;node
 			console.log("Detected Window Resize: " + screenWidth);
 			
 			Streams.app_control.accordionLimit = Math.floor(screenWidth / 440) - 1;

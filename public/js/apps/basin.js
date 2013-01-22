@@ -121,26 +121,55 @@ Streams.app_control.apps.basin = {
 	startBasinDialog();
 	
 	//Load Saved Basins
-	loadSavedBasins();
+	loadPredefinedBasins();
    
    function startBasinDialog(){
-   	 prompt_header.html('<center><h1>Basin Selection</h1><br><p>Right click the map to select a point to delineate a basin.</p>' + 
-    	'<br /><p> - OR - </p><br /> <p>Select a previous basin:</p><hr>'
-    	);
-    basinList.append('<br><center><img style="margin-right:40px" src="images/ajax-loader.gif"/>');
-
-    	
-     $(".panelBackground").css("opacity", "0");
+	   	prompt_header.html('<center><h1>Basin Selection</h1><br><p>Right click the map to select a point to delineate a basin.</p>' + 
+	    	'<br /><p> - OR - </p><br /> <p><h2>Select:</h2> <div class="basinSelect"> <select name="runType" class="selectRun" id="basinSelectDropdown"> ' + 
+	    	' <option value="predef">Predefined Basins</option> <option value="saved">Saved Basins</option>    </select>  <div class="selectImage"></div> </div> </p><hr>'
+	    	);
+	    basinList.append('<br><center><img style="margin-right:40px" src="images/ajax-loader.gif"/>');
+	
+	    	
+	     $(".panelBackground").css("opacity", "0");
+	     
+	     var basinSelect = $(prompt_header).find("#basinSelectDropdown");
+	     var basinLoader;
+	     $(basinSelect).change(function(){
+	     		console.log($(prompt_header).find('#basinSelectDropdown option:selected').val());
+	     		basinLoader = $(prompt_header).find('#basinSelectDropdown option:selected').val();
+	     		
+	     		switch(basinLoader){
+	     			case "saved":
+	     				console.log("Save");
+	     				loadSavedBasins();
+	     				break;
+	     				
+	     			case "predef":
+	     				console.log("Predefined");
+	     				loadPredefinedBasins();
+	     				break;
+	     		}
+	     		
+	     });
      
      //changeView("name", 'id');
 
    }
-	
-	//Starts Loading JSON Object from server
-	function loadSavedBasins(){
+   //Starts Loading JSON Object from server
+	function loadPredefinedBasins(){
 		var json = $.get('/basin/predef');
 		basinList.fadeIn();	
 		console.log("CHECKING PRED BASINS------------------------------");
+		setTimeout(function(){console.log(json)},4000);
+		checkCompletedLoad(json);
+	}
+	
+	//Starts Loading JSON Object from server
+	function loadSavedBasins(){
+		var json = $.get('/basin/user/list');
+		basinList.fadeIn();	
+		console.log("CHECKING SAVED BASINS------------------------------");
 		setTimeout(function(){console.log(json)},4000);
 		checkCompletedLoad(json);
 	}
@@ -180,7 +209,7 @@ Streams.app_control.apps.basin = {
       }
 
 			var listItem = $('<li>' + itemText + '</li>');
-			$(listItem).attr("name", jsonObj[i].default_nickname);
+			$(listItem).attr("name", jsonObj[i].alias);
 			$(listItem).attr("id", jsonObj[i].basinid);
 			$(listItem).attr("lat", jsonObj[i].lat);
 			$(listItem).attr("long", jsonObj[i].long);
@@ -204,7 +233,7 @@ Streams.app_control.apps.basin = {
 	 */
 	function loadBasin(name, id, lat, long, area){
 		prompt_header.fadeIn();
-		console.log(id);
+		console.log(name);
 
     // Look for basin in basin table or create a new one:
     var basin;
@@ -252,7 +281,7 @@ Streams.app_control.apps.basin = {
           event.preventDefault();
           save_message.empty();
 		      startBasinDialog();
-		      loadSavedBasins();
+		      loadPredefinedBasins();
         });
 		
 	}
@@ -304,8 +333,8 @@ Streams.app_control.apps.basin = {
 			Streams.app_control.disableSteps();
 			save_message.empty();
 			startBasinDialog();
-      basin.hideKmlLayer();
-			loadSavedBasins();						
+     		basin.hideKmlLayer();
+			loadPredefinedBasins();						
 		});
 	}
 	
@@ -428,11 +457,11 @@ Streams.app_control.apps.basin = {
 		
 		$(message).empty();
 		
-        message.append('<center><h2 style="margin-top:200px;">Retrieving (~1min) @ <br>' + lat + ', ' + lng + "</h2>");
+        message.append('<center><h2 style="margin-top:200px;">Delineating Basin from Selection Point: </h2><h3> Latitude: ' + lat + ', <br>Longitude: ' + lng + "</h2>");
         message.append('<br><center><img style="margin-right:140px" src="images/ajax-loader.gif"/>');
         console.log("Looking for Position");
 
-        info.setContent('<div class="infowindow">Retrieving data...</div>');
+        info.setContent('<div class="infowindow">Delineating Basin...</div>');
         Streams.map.openInfoWindow(info, marker);
         
         prompt_header.empty();
@@ -487,11 +516,15 @@ Streams.app_control.apps.basin = {
                    
         //Save Basin Prompt           
         var sv = $('<br><center><h2>Basin Reference Name</h2>' + '<br />' + 
-        		'<input type="text" id="refName" class="runInput" value=" Enter Name"></input>' + '<br>' +
+        		'<input type="text" id="refName" class="runInput" value=" Enter Name" onclick="this.value=\'\'"></input>' + '<br>' +
         		'<button id="savebtn" href="">Save Basin</button>');
         save_message.html(sv);
 
         prompt.html(p1);
+        
+        $(sv).find('input').bind("click");
+        
+        
         $(sv).find('#savebtn').button();
         $(sv).find('#savebtn').click(function (event) {
           event.preventDefault();

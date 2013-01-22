@@ -118,6 +118,40 @@ a.ui-slider-handle.ui-state-default.ui-corner-all{
 	background-size: 100% 100%;
 }
 
+.basinSelect select{
+	background: transparent;
+	width: 314px;
+	padding: 5px;
+	font-size: 16px;
+	line-height: 1;
+	border: 0;
+	border-radius: 0;
+	height: 34px;
+}
+
+.basinSelect{
+	width: 268px;
+	position: relative;
+	top: -20px;
+	margin-top: 20px;
+	margin-left: 6px;
+	height: 34px;
+	overflow: hidden;
+	border: 1px solid #D67205;
+	color: black;
+	font-weight: 400;
+}
+
+.basinSelect .selectImage{
+	background: url(../images/dropdown_arrow.png);
+	position: absolute;
+	width: 20px;
+	height: 16px;
+	margin-top: -26px;
+	margin-left: 245px;
+	background-size: 100% 100%;
+}
+
 .runTypeSelect select{
 	background:transparent;
 	width: 360px;

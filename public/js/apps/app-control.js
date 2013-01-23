@@ -148,7 +148,7 @@ Streams.app_control = {
 		} 
   	})
   	
-  
+  	console.log(this.apps);
   	for (var name in this.apps){
   		if(name != "basin"){
   			this.apps[name].init();
@@ -168,6 +168,7 @@ Streams.app_control = {
   		$('#acc3 .toggle').unbind();
   		$('#acc4 .toggle').unbind();
   		$('#acc5 .toggle').unbind();
+  		$('#acc6 .toggle').unbind();
   		
   		$('#logos').css("right", "");
 		$('#logos').css("left", "10px");
@@ -184,7 +185,7 @@ Streams.app_control = {
   		
   		$("#user").addClass("stepsState");
   		
-  		for(var i=1;i<=5;i++){
+  		for(var i=1;i<=6;i++){
   			$('#acc' + i).css('width', "30px");
 			$('#acc1'+ i).parent().attr("state", "closed");
   		}
@@ -204,12 +205,14 @@ Streams.app_control = {
 		this.bindOpen("#acc3 .toggle");
 		this.bindOpen("#acc4 .toggle");
 		this.bindOpen("#acc5 .toggle");
+		this.bindOpen("#acc6 .toggle");
 		
 		this.bindClose("#acc1 .toggle");
 		this.bindClose("#acc2 .toggle");
 		this.bindClose("#acc3 .toggle");
 		this.bindClose("#acc4 .toggle");
 		this.bindClose("#acc5 .toggle");
+		this.bindClose("#acc6 .toggle");
 		
 		$('#logos ul li').css("display", "block");
 		

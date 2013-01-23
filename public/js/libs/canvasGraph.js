@@ -22,7 +22,7 @@ Streams.graphs = {
 	//Define the stage
 	 var stage = new Kinetic.Stage({
         container: container,
-        width: 578,
+        width: 398,
         height: 100
       });
 	

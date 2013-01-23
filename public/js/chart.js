@@ -2,7 +2,7 @@ var Chart = {
 	
 	//Initialize Graph
 	init:function(){
-		var m = [20, 120, 20, 120],
+		var m = [190, 120, 190, 120],
 		    w = 800 - m[1] - m[3],
 		    h = 300 - m[0] - m[2],
 		    i = 0,
@@ -18,12 +18,12 @@ var Chart = {
 		    .attr("width", "100%")
 		    .attr("height", h + m[0] + m[2])
 		  .append("svg:g")
-		    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+		    .attr("transform", "translate(" + 200 + "," + 270 + ")");
 		
 		d3.json("../json/data.json", function(json) {
 		  root = json;
 		  root.x0 = h / 2;
-		  root.y0 = 0;
+		  root.y0 = 200;
 		  console.log(root);
 		
 		  function toggleAll(d) {

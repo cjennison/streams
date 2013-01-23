@@ -101,30 +101,42 @@
 				</div>				
 			</div>
 		</li>
-		<li id="acc3" state="closed">
-			<div class="toggle"><span class="title">Land Use Models</span></div>
+		
+		<li id="acc6" state="closed">
+			<div class="toggle"><span class="title">Stream Temparature</span></div>
 			<div class="content">
-				<div id="land-use-models-app">
+			
+				<div id="streamtemp-models-app">
 				<div id="loader">
 				    <div id="message"></div>
 				  </div>
-				 <div class="runTypeSelect">
+					 <div class="runTypeSelect">
 					  <select name="runType" class="selectRun">
 					  	<option>Create New Run</option>
 					  	<option disabled="disabled">No Existing Runs Found</option>
 					  </select>
 					  <div class="selectImage"></div>
 				  </div>
-	             <p align="center"><input class="nullbutton" value="Launch Barrier Module" type="submit">
-	             <p>Riparian cover (% change): 0%
-	             <div class="nullslider1"></div>
-	             <p>Impervious surface area (% change): 0%
-	             <div class="nullslider1"></div>
-	             <p align="center"><input class="nullbutton" value="Run Land Use Model" type="submit">
-		     	 </p>
-			</div>
+				  <p style="float:left;width:50px;margin-left:18px"> Model: </p>
+				 <div class="styledSelect">
+					 <select name="weathertype" class="selectRun">
+					  <option>Non-Linear Regression</option>
+				   	 <option>Downscaled Climate Scenario</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
+				  <br>
+				  <p>
+				  <div class="runModel">
+				  		<input class="runInput" value=" Enter a run name"></input><br>
+				    	<a id="run" href="#">Run with these settings</a>
+				  	</div>
+				</div>
+				
+				
 			</div>
 		</li>
+		
 		<li id="acc2" state="closed">
 			<div class="toggle"><span class="title">Stream Flow Models</span></div>
 			<div class="content">
@@ -148,6 +160,30 @@
 		             <input class="nullbutton" value="Run Stream Models" type="submit">
 			         </p>
 				</div>				
+			</div>
+		</li>
+		<li id="acc3" state="closed">
+			<div class="toggle"><span class="title">Land Use Models</span></div>
+			<div class="content">
+				<div id="land-use-models-app">
+				<div id="loader">
+				    <div id="message"></div>
+				  </div>
+				 <div class="runTypeSelect">
+					  <select name="runType" class="selectRun">
+					  	<option>Create New Run</option>
+					  	<option disabled="disabled">No Existing Runs Found</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
+	             <p align="center"><input class="nullbutton" value="Launch Barrier Module" type="submit">
+	             <p>Riparian cover (% change): 0%
+	             <div class="nullslider1"></div>
+	             <p>Impervious surface area (% change): 0%
+	             <div class="nullslider1"></div>
+	             <p align="center"><input class="nullbutton" value="Run Land Use Model" type="submit">
+		     	 </p>
+			</div>
 			</div>
 		</li>
 		<li id="acc1" state="closed">

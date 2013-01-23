@@ -91,6 +91,7 @@ Streams.app_control.apps.basin = {
     var sim_period	  = $('<div id="sim">');
     var basinList	  = $('<ul id="basinList">');
     var rscript       = $('<div id="rscript">');
+    var basinListObject;
     
     var save_message  = $('<div id="save_message">');
 
@@ -135,6 +136,10 @@ Streams.app_control.apps.basin = {
 	     
 	     var basinSelect = $(prompt_header).find("#basinSelectDropdown");
 	     var basinLoader;
+	     $(basinList).css("display", "block");
+	     basinListObject = basinSelect;
+       
+	     
 	     $(basinSelect).change(function(){
 	     		console.log($(prompt_header).find('#basinSelectDropdown option:selected').val());
 	     		basinLoader = $(prompt_header).find('#basinSelectDropdown option:selected').val();
@@ -336,6 +341,21 @@ Streams.app_control.apps.basin = {
      		basin.hideKmlLayer();
 			loadPredefinedBasins();						
 		});
+		
+		var basinButton = $("#prompt #newBasin");
+		
+		$(basinButton).button();
+		$(basinButton).bind("click", function(){
+			$(prompt).empty();
+			$(prompt_header).empty();
+			sim_period.empty();
+			Streams.map.show();
+			Streams.app_control.disableSteps();
+			save_message.empty();
+			startBasinDialog();
+     		basin.hideKmlLayer();
+			loadPredefinedBasins();
+		});
 	}
 	
 	
@@ -460,6 +480,7 @@ Streams.app_control.apps.basin = {
         message.append('<center><h2 style="margin-top:200px;">Delineating Basin from Selection Point: </h2><h3> Latitude: ' + lat + ', <br>Longitude: ' + lng + "</h2>");
         message.append('<br><center><img style="margin-right:140px" src="images/ajax-loader.gif"/>');
         console.log("Looking for Position");
+        $(basinList).css("display", "none");
 
         info.setContent('<div class="infowindow">Delineating Basin...</div>');
         Streams.map.openInfoWindow(info, marker);
@@ -517,13 +538,27 @@ Streams.app_control.apps.basin = {
         //Save Basin Prompt           
         var sv = $('<br><center><h2>Basin Reference Name</h2>' + '<br />' + 
         		'<input type="text" id="refName" class="runInput" value=" Enter Name" onclick="this.value=\'\'"></input>' + '<br>' +
-        		'<button id="savebtn" href="">Save Basin</button>');
+        		'<button id="savebtn" href="">Save Basin</button><button id="cancelbtn" href="">Cancel</button>');
+        		
+        
+        
         save_message.html(sv);
 
         prompt.html(p1);
         
         $(sv).find('input').bind("click");
         
+        
+        $(sv).find('#cancelbtn').button();
+        $(sv).find('#cancelbtn').click(function (event){
+        	event.preventDefault();
+        	
+        	save_message.empty();
+         	prompt.empty();
+        	startBasinDialog();
+        	loadPredefinedBasins();
+        	
+        });
         
         $(sv).find('#savebtn').button();
         $(sv).find('#savebtn').click(function (event) {

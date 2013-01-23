@@ -167,6 +167,7 @@ Streams.app_control = {
   		$('#acc2 .toggle').unbind();
   		$('#acc3 .toggle').unbind();
   		$('#acc4 .toggle').unbind();
+  		$('#acc5 .toggle').unbind();
   		
   		$('#logos').css("right", "");
 		$('#logos').css("left", "10px");
@@ -183,14 +184,14 @@ Streams.app_control = {
   		
   		$("#user").addClass("stepsState");
   		
-  		for(var i=1;i<=4;i++){
+  		for(var i=1;i<=5;i++){
   			$('#acc' + i).css('width', "30px");
 			$('#acc1'+ i).parent().attr("state", "closed");
   		}
   		
-  		
+  		$("#acc5").css("display", "none")
   		$("#tree").removeClass("active");
-
+		$('#basinSelection').css("display", "block");
 
   },
   
@@ -202,11 +203,13 @@ Streams.app_control = {
 		this.bindOpen("#acc2 .toggle");
 		this.bindOpen("#acc3 .toggle");
 		this.bindOpen("#acc4 .toggle");
+		this.bindOpen("#acc5 .toggle");
 		
 		this.bindClose("#acc1 .toggle");
 		this.bindClose("#acc2 .toggle");
 		this.bindClose("#acc3 .toggle");
 		this.bindClose("#acc4 .toggle");
+		this.bindClose("#acc5 .toggle");
 		
 		$('#logos ul li').css("display", "block");
 		
@@ -226,6 +229,31 @@ Streams.app_control = {
   		$("#user").addClass("stepsState");
 
 		$("#tree").addClass("active");
+		
+		$("#acc5").css("display", "block")
+		
+		
+		$("#acc5 #years_slider").slider(
+			 { 
+			max     : 80,
+	        min     : 0,
+	        range   : 'min',
+	        value   : 30,
+	        animate : 'fast',
+	        slide   : function (event, ui) {
+	          $("#acc5 .years").text(ui.value);
+	          Streams.yearRange = ui.value;
+	        }
+	      }
+		)
+		
+		$('#basinSelection').css("display", "none");
+		
+		$('#acc1').css('width', "440px");
+		$('#acc1').parent().attr("state", "open");
+		$('#acc5').css('width', "440px");
+		$('#acc5').parent().attr("state", "open");
+		accordionsOpen = 2;
   },
   
   /**

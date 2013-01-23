@@ -1,5 +1,8 @@
 var Chart = {
 	
+	tree:null,
+	
+	
 	//Initialize Graph
 	init:function(){
 		var m = [190, 120, 190, 120],
@@ -19,6 +22,8 @@ var Chart = {
 		    .attr("height", h + m[0] + m[2])
 		  .append("svg:g")
 		    .attr("transform", "translate(" + 200 + "," + 270 + ")");
+		    
+		this.tree = $("#tree");
 		
 		d3.json("../json/data.json", function(json) {
 		  root = json;
@@ -168,5 +173,10 @@ var Chart = {
 		    d._children = null;
 		  }
 		}
+	},
+	
+	addThumbnail:function(img){
+		var thumbnail = img;
+		this.tree.append('<img src=' + thumbnail + '/>');
 	}
 }

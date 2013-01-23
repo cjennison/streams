@@ -36,6 +36,10 @@ Streams.app_control.apps.basin = {
       this.url  = 'http://' + document.location.host + 
                   '/' + options.id + '/BasinOutline.kml';
       // Load the KML object:
+      
+      this.thumbnail = 'http://' + document.location.host + 
+                  '/' + options.id + '/basin.svg';
+      
       this.kml  = Streams.map.makeKMLLayer(this.url);      
       // Save the map:
       this.map  = Streams.map.getMap();
@@ -259,6 +263,7 @@ Streams.app_control.apps.basin = {
 
     // Show the basin layer in the map:
     basin.showKmlLayer();
+    console.log(basin);
 		 
 		//changeView(name, id, lat, long, area);
 		$(prompt).empty();
@@ -309,6 +314,11 @@ Streams.app_control.apps.basin = {
                        (basin.name ? basin.name : basin.id) +
                        '</h2>');
 		prompt.html('<center><button id="newBasin">Select New Basin</button>');
+		
+		//Chart.addThumbnail(basin.thumbnail);
+		console.log(basin.thumbnail);
+		
+		$('body').append('<ul id="thumbnailList"><li><div class="svgDisplay" style="background:url(' + basin.thumbnail + '); background-size:100% 100%" id="basinSvg"></div></li></ul>');
 		
 		$(".panelBackground").css("opacity", ".5");
 		$("#basinTitle").html = "Basin: " +  (basin.name ? basin.name : basin.id)

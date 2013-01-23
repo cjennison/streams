@@ -20,6 +20,7 @@ Streams.app_control.apps.basin = {
       if (!options.id) {
         throw 'Basin requires an id to be initialized.';
       }
+      console.log("ID: " + options.id);
 
       // Keep a reference of the basin table:
       this.basinTable = basinTable;
@@ -302,7 +303,7 @@ Streams.app_control.apps.basin = {
 	function changeView(basin){
 		Streams.map.hide();
 		//Streams.app_control.initSteps();
-		Streams.app_control.enableSteps();
+		Streams.app_control.enableSteps(basin.name ? basin.name : basin.id);
 		//basinList.empty();
 		prompt_header.html('<br><h2><center>Basin: ' + 
                        (basin.name ? basin.name : basin.id) +
@@ -310,7 +311,7 @@ Streams.app_control.apps.basin = {
 		prompt.html('<center><button id="newBasin">Select New Basin</button>');
 		
 		$(".panelBackground").css("opacity", ".5");
-		
+		$("#basinTitle").html = "Basin: " +  (basin.name ? basin.name : basin.id)
 		sim_period.html('<br><br><br><p><center><h2>Simulation Period:</h2><p><b><span class="years">30</span> Years<br><div id="years_slider"></div>')
 		var simText = $(sim_period).find(".years");
 		var simSlider = $(sim_period).find("#years_slider");

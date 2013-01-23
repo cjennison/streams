@@ -17,7 +17,7 @@ Streams.app_control = {
 	console.log(this.accordionLimit);
 	
 	$(window).resize(function(){
-			var screenWidth = document.width;node
+			var screenWidth = document.width;
 			console.log("Detected Window Resize: " + screenWidth);
 			
 			Streams.app_control.accordionLimit = Math.floor(screenWidth / 440) - 1;
@@ -197,7 +197,7 @@ Streams.app_control = {
   },
   
   //Enable Steps Controls
-  enableSteps: function(){
+  enableSteps: function(name){
   		//$('#steps-controls').addClass("active");
   		$('#steps-controls').addClass("active");
   		this.bindOpen("#acc1 .toggle");
@@ -234,6 +234,7 @@ Streams.app_control = {
 		$("#tree").addClass("active");
 		
 		$("#acc5").css("display", "block")
+		$("#acc5 #basinTitle").html("Basin: " + name);
 		
 		
 		$("#acc5 #years_slider").slider(
@@ -246,6 +247,7 @@ Streams.app_control = {
 	        slide   : function (event, ui) {
 	          $("#acc5 .years").text(ui.value);
 	          Streams.yearRange = ui.value;
+	          Streams.graphs.updateDate(ui.value);
 	        }
 	      }
 		)

@@ -79,7 +79,9 @@ a.ui-slider-handle.ui-state-default.ui-corner-all{
 }
 
 .ui-slider-range.ui-widget-header.ui-slider-range-min{
-	background:none;
+	background:rgba(100,100,100,.5);
+	height:15px;
+	margin-top: 17px;
 }
 
 /* Drop Downs */

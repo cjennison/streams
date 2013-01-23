@@ -1,5 +1,23 @@
 Streams.graphs = {
 	
+	precipObjects: {
+		stage:null,
+		leftNode:null,
+		rightNode:null,
+		thickness:null,
+		dateLength:2093,
+		dateLabel:null,
+	},
+	
+	tempObjects: {
+		stage:null,
+		leftNode:null,
+		rightNode:null,
+		thickness:null,
+		dateLength:2093,
+		dateLabel:null,
+	},
+	
 	
 	/**
 	 * Initializes the Graph Setup
@@ -16,7 +34,12 @@ Streams.graphs = {
 
 	},
 	
-	
+	updateDate:function(date){
+		var d = new Date();
+		this.tempObjects.dateLabel.textArr[0] = "                              "+ d.getFullYear() +"                                                                                    " + (d.getFullYear() + date);
+		this.precipObjects.dateLabel.textArr[0] = "                              "+ d.getFullYear() +"                                                                                    " + (d.getFullYear() + date);
+		//this.precipObjects.stage.draw();
+	},
 	
 	setupGraph:function(container, state, min, max, xLabel, yLabel){
 	//Define the stage
@@ -25,6 +48,8 @@ Streams.graphs = {
         width: 398,
         height: 100
       });
+      
+     Streams.graphs.precipObjects.stage = stage;
 	
 	//Define the working layer
       var layer = new Kinetic.Layer();
@@ -39,13 +64,24 @@ Streams.graphs = {
         height:40,
         offset:[10, 20],
         dragBoundFunc: function(pos) {
+        	var lowY = pos.y > 85 ? 85 : pos.y;
+        	var highY = pos.y < 15 ? 15 : pos.y;
+        	var newY;
+        	if(pos.y > 50){
+        		newY = lowY;
+        	} else {
+        		newY = highY;
+        	}
           return {
             x: this.getAbsolutePosition().x,
-            y: pos.y
+            y: newY
           }
         }
         
       });
+      
+     
+      
      //Right Node
       var rightNode = new Kinetic.Image({
         x: 370,
@@ -55,9 +91,17 @@ Streams.graphs = {
         height:40,
         offset:[10, 20],
         dragBoundFunc: function(pos) {
+        	var lowY = pos.y > 85 ? 85 : pos.y;
+        	var highY = pos.y < 15 ? 15 : pos.y;
+        	var newY;
+        	if(pos.y > 50){
+        		newY = lowY;
+        	} else {
+        		newY = highY;
+        	}
           return {
             x: this.getAbsolutePosition().x,
-            y: pos.y
+            y: newY
           }
         }
       });
@@ -187,7 +231,7 @@ Streams.graphs = {
       
       setInterval(function(){
       	stage.draw();
-      }, 1000);
+      }, 100);
       
     	
       
@@ -264,20 +308,19 @@ Streams.graphs = {
       	
       	centerNode.setY((leftNode.getY() + rightNode.getY())/2);
       	
-      	var changeInY = Math.round((rightNode.getY() - 50)/min/2);
-      	var changeInY_Left = Math.round((leftNode.getY() - 50)/min/2);
+      	var changeInY = Math.round((rightNode.getY() - 50)/min/1.5);
+      	var changeInY_Left = Math.round((leftNode.getY() - 50)/min/1.5);
       	 if(state == "mean_var"){
-      	 	changeInY = Math.round((rightNode.getY() - 50)/min/2);
       	 	if(changeInY > max){
       	 		changeInY = max;
       	 	} else if(changeInY < min) {
       	 		changeInY = min;
       	 	}
-      	 	 Streams.app_control.apps.weather_models.updateText('#mean_1', changeInY_Left);
+      	 	Streams.app_control.apps.weather_models.updateText('#mean_1', changeInY_Left);
       		Streams.app_control.apps.weather_models.updateText('#mean_2', changeInY);
       	 } else  if(state == "temp"){
-      	 	changeInY = Math.round(((rightNode.getY() - 50)/min)*4.75);
-      	 	changeInY_Left = Math.round(((leftNode.getY() - 50)/min)*4.75);
+      	 	changeInY = Math.round(((rightNode.getY() - 50)/min)*6.5);
+      	 	changeInY_Left = Math.round(((leftNode.getY() - 50)/min)*6.5);
       	 	if(changeInY > max){
       	 		changeInY = max;
       	 	} else if(changeInY < min) {
@@ -327,7 +370,7 @@ Streams.graphs = {
 	      var XAxisNumber = new Kinetic.Text({
 	        x: stage.getWidth() / 2 - 240,
 	        y: stage.getHeight()/2 + 20,
-	        text: "2012                                                                                    2093",
+	        text: "                              2013                                                                                    2043",
 	        fontSize: 13,
 	        fontFamily: 'Calibri',
 	        fill: 'black'
@@ -368,12 +411,25 @@ Streams.graphs = {
 	       graphGroup.add(XAxisNumber);
 	      
       
+       if(state == "mean_var"){
+      	//this.precipObjects.dateLabel = XAxisNumber;
+      	Streams.graphs.precipObjects.dateLabel = XAxisNumber;
+      } else if(state == "temp"){
+      	Streams.graphs.tempObjects.dateLabel = XAxisNumber;
+      }
+      
+      
       return graphGroup;
       }
-
+		
+		
+		//this.precipObjects.dateLabel.text = 'Potato';
       // add the layer to the stage
       stage.add(layer);
      
 	}
+	
+	
+	
 	
 }

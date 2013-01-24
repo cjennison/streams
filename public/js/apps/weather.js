@@ -25,16 +25,39 @@ Streams.app_control.apps.weather_models = {
 
     // The message element to display information:
     var msg               = view.find('#message');
+    var model = $('div#weather-models-app.application .styledSelect select');
+	console.log(model);
 
     // Set initial values for the sliders.
     precipSlider1Val.text(1);
     precipSlider2Val.text(1);
     meanTempChangeVal.text(0);
+    //weathermodels
     this.setupGraph('graphcontainer1', 'mean_var', -5, 5, "Time", "Percent Change");
     this.setupGraph('graphcontainer2', 'temp', -15, 15, "Time", "Annual Temp");
     
+    //basinemodels
+    this.setupGraph('baselineHistoric_graphcontainer1', 'mean_var', -5, 5, "Time", "Percent Change");
+    this.setupGraph('baselineHistoric_graphcontainer2', 'temp', -15, 15, "Time", "Annual Temp");
     
-
+    
+	model.change(function(){
+		console.log($(this).val())
+		console.log($('div#weather-models-app.application ' + '#' + $(this).val()));
+		
+		console.log($('div#weather-models-app.application .app_content .app'));
+		var appContent = $('div#weather-models-app.application .app_content .app');
+		for(var i=0;i<appContent.length;i++){
+			if($(appContent[i]).hasClass("active")){
+				$(appContent[i]).removeClass("active")
+			}
+		}
+		
+		$('div#weather-models-app.application ' + '#' + $(this).val()).addClass("active")
+	})
+	
+	
+	
 
     // Save the context of this object:
     var that = this;
@@ -78,10 +101,10 @@ Streams.app_control.apps.weather_models = {
     runButton.button();
     runButton.click(function (event) {
     	console.log("RUN")
-      runButton.button('option', 'disabled', true);
-      that.run();
-      setTimeout(statusCheck, 3000);
-      return false;
+      	runButton.button('option', 'disabled', true);
+      	that.run();
+      	setTimeout(statusCheck, 3000);
+     	return false;
     });
   
     this.view = view;
@@ -89,7 +112,36 @@ Streams.app_control.apps.weather_models = {
 
   run : function () {
   	
-  	Streams.Mexec.fillDataObject();
+  	var model = $('div#weather-models-app.application .styledSelect select');
+  	
+  	//Passed Variables
+  	var scriptName = $(model).val();
+  	var precip_mean_y1 = $('#mean_1').val();
+  	var precip_mean_yn = $('#mean_2').val();
+  	var precip_var_y1 = $('#precip02-value').val();
+  	var temp_mean_y1 = $('#mean_temp_1').val();
+  	var temp_mean_yn = $('#mean_temp_2').val();
+  	var n_years = Streams.yearRange || 30;
+  	var run_alias = "something";
+  	
+  	var climate = {	flag:true,
+  					scriptName:scriptName,
+  					precip_mean_y1:precip_mean_y1,
+  					precip_mean_yn:precip_mean_yn,
+  					precip_var_y1:precip_var_y1,
+  					precip_var_yn:null,
+  					temp_mean_y1:temp_mean_y1,
+  					temp_mean_yn:temp_mean_yn,
+  					n_years:n_years,
+  					run_alias:run_alias};
+  	console.log(scriptName + " " + precip_mean_y1 + " " +precip_mean_yn + " " +temp_mean_y1 + " " +temp_mean_yn + " " +n_years);
+  	
+  	
+	var test = $.get('/mexec?climate:{flag:true, scriptName:"weather_generator"}');
+		
+		setTimeout(function(){
+			console.log(test);
+		},3000)
   	
   	/*
     var view  = this.view;

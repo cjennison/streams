@@ -2,25 +2,26 @@ Streams.Mexec = {
 	name : 'Mexec',
 	
 	dataObject:{
-		testdata:null,
+		
 	},
 	
 	/**
 	 * 
  * @param {Object} options All params
 	 */
-	fillDataObject:function(){
-		this.Data({test:"Onions"
-		
-								});
-		
-		console.log(this.dataObject);
+	fillDataObject:function(object){
+		this.dataObject = object;
 		
 	},
 	
-	Data:function(options){
-		var data = this.dataObject;
-		data.test = options.test || undefined;
+	
+	
+	run:function(){
+		var test = $.get('/mexec?climate:{flag:true, scriptName:"weather_generator"}');
+		
+		setTimeout(function(){
+			console.log(test);
+		},3000)
 	}
 	
 };

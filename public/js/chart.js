@@ -28,7 +28,7 @@ var Chart = {
 		d3.json("../json/data.json", function(json) {
 		  root = json;
 		  root.x0 = h / 2;
-		  root.y0 = 200;
+		  root.y0 = 000;
 		  console.log(root);
 		
 		  function toggleAll(d) {

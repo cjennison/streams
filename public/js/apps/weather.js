@@ -88,6 +88,10 @@ Streams.app_control.apps.weather_models = {
   },
 
   run : function () {
+  	
+  	Streams.Mexec.fillDataObject();
+  	
+  	/*
     var view  = this.view;
     var prec1 = view.find('#mean_1').val();
     var prec2 = view.find('#precip02-value').val();
@@ -114,6 +118,7 @@ Streams.app_control.apps.weather_models = {
         }, 5000);
       }
     });
+    */
     
   },
   

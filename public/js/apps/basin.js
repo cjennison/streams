@@ -350,7 +350,8 @@ Streams.app_control.apps.basin = {
 			save_message.empty();
 			startBasinDialog();
      		basin.hideKmlLayer();
-			loadPredefinedBasins();						
+			loadPredefinedBasins();	
+			$("#thumbnailList").remove();					
 		});
 		
 		var basinButton = $("#prompt #newBasin");
@@ -366,6 +367,7 @@ Streams.app_control.apps.basin = {
 			startBasinDialog();
      		basin.hideKmlLayer();
 			loadPredefinedBasins();
+			$("#thumbnailList").remove();	
 		});
 	}
 	

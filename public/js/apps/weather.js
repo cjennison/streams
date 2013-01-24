@@ -37,8 +37,8 @@ Streams.app_control.apps.weather_models = {
     this.setupGraph('graphcontainer2', 'temp', -15, 15, "Time", "Annual Temp");
     
     //basinemodels
-    this.setupGraph('baselineHistoric_graphcontainer1', 'mean_var', -5, 5, "Time", "Percent Change");
-    this.setupGraph('baselineHistoric_graphcontainer2', 'temp', -15, 15, "Time", "Annual Temp");
+    this.setupGraph('baselineHistoric_graphcontainer1', 'base_mean_var', -5, 5, "Time", "Percent Change");
+    this.setupGraph('baselineHistoric_graphcontainer2', 'base_temp', -15, 15, "Time", "Annual Temp");
     
     
 	model.change(function(){

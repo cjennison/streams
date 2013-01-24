@@ -193,6 +193,7 @@ Streams.app_control = {
   		$("#acc5").css("display", "none")
   		$("#tree").removeClass("active");
 		$('#basinSelection').css("display", "block");
+		Streams.app_control.accordionsOpen = 0;
 
   },
   
@@ -258,7 +259,7 @@ Streams.app_control = {
 		$('#acc1').parent().attr("state", "open");
 		$('#acc5').css('width', "440px");
 		$('#acc5').parent().attr("state", "open");
-		accordionsOpen = 2;
+		Streams.app_control.accordionsOpen = 2;
   },
   
   /**

@@ -21,7 +21,7 @@ var Chart = {
 		    .attr("width", "100%")
 		    .attr("height", h + m[0] + m[2])
 		  .append("svg:g")
-		    .attr("transform", "translate(" + 200 + "," + 270 + ")");
+		    .attr("transform", "translate(" + 200 + "," + 100 + ")");
 		    
 		this.tree = $("#tree");
 		

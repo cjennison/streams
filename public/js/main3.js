@@ -7,7 +7,7 @@ Streams.socket = io.connect();
 
 $(function () {
 	
-	document.body.style.zoom="75%"
+	document.body.style.zoom="90%"
 	
   Streams.view = $('body');
   

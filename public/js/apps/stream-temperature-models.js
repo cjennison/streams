@@ -1,6 +1,6 @@
-Streams.app_control.apps.stream_temp_models = {
-	name : 'Stream Temperature Models',
-	order: 4,
+Streams.app_control.apps.stream_flow_models = {
+	name : 'Stream Flow Models',
+	order: 3,
 	
 	
 	
@@ -8,7 +8,7 @@ Streams.app_control.apps.stream_temp_models = {
    *Starts the Stream Temperature Model View 
    */
   init : function () {
-    var view = $('#streamtemp-models-app');
+    var view = $('#streamtemp-flow-app');
     $(view).addClass("application");
     
     var runButton = view.find('#run');

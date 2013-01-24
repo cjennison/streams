@@ -6,6 +6,9 @@ var Streams = {};
 Streams.socket = io.connect();
 
 $(function () {
+	
+	document.body.style.zoom="75%"
+	
   Streams.view = $('body');
   
   Streams.map.init();

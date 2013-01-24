@@ -8,16 +8,10 @@ Streams.app_control.apps.environmental_models = {
    console.log(view);
    $(view).addClass("application");
     
-    var nullslider1 = view.find('.nullslider1');
-    var nullbutton = view.find('.nullbutton');
+    var runbutton = view.find('#run');
     
-    nullbutton.button({disabled:true});
-    nullslider1.slider({
-      value:0,
-      min:-50,
-      max:50,
-      disabled:true
-    });
+    runbutton.button();
+   
     
     this.view = view;
 

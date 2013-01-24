@@ -53,49 +53,37 @@
 					  </select>
 					  <div class="selectImage"></div>
 				  </div>
-         		<table width:"100%" border="0" cellspacing="0" cellpadding="0" style="font-size:12px">
-                      <tr>
-                        <td></td>
-                        <td colspan="2" align="center" width="30"><strong>Growth</strong></td>
-                        <td width="30">&nbsp;</td>
-                        <td colspan="2" align="center" width="30"><strong>Survival</strong></td>
-                      </tr>
-                      <tr>
-                      	<td></td>
-                      	<td align="left">0</td>
-                        <td align="right">1</td>
-                        <td></td>
-                      	<td align="left">0</td>
-                        <td align="right">1</td>
-                      <tr>
-                      	<td>Spring</td>
-                        <td colspan="2" align="center"><div class="nullslider2"></div></td>
-                        <td></td>
-                        <td colspan="2" align="center"><div class="nullslider2"></div></td>
-                      </tr>
-                      <tr>
-                      	<td>Summer</td>
-                        <td colspan="2" align="center"><div class="nullslider2"></div></td>
-                        <td></td>
-                        <td colspan="2" align="center"><div class="nullslider2"></div></td>
-                      </tr>                      
-                      <tr>
-                      	<td>Fall</td>
-                        <td colspan="2" align="center"><div class="nullslider2"></div></td>
-                        <td></td>
-                        <td colspan="2" align="center"><div class="nullslider2"></div></td>
-                      </tr>                      
-                      <tr>
-                      	<td>Winter</td>
-                        <td colspan="2" align="center"><div class="nullslider2"></div></td>
-                        <td></td>
-                        <td colspan="2" align="center"><div class="nullslider2"></div></td>
-                      </tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td colspan="6" align="center">
-                      	<input type="submit"  class="nullbutton" name="fishmodel" value="Run Fish Model" >
-                      </td></tr>
-                </table>
+				  <p style="float:left;width:50px;margin-left:18px"> Model: </p>
+				  <div class="styledSelect">
+					 <select name="fishpopulation" class="selectRun">
+					  <option value="IPM_WB_trout">IPM WB Trout</option>
+					  <option value="IPM_WB_salmon">IPM WB Salmon</option>
+					  <option value="IPM_WB_salmon">IPM WB Salmon</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
+				   <div class="app_content">
+			            <div id="IPM_WB_trout" class="app active">
+						   
+						   </div>
+						    <div id="IPM_WB_salmon" class="app">
+						   		<p>Stocking Stage (% change): <span class="stockingNumber">50</span>
+		             			<div class="stockingslider1"></div>
+		             			<p>Stocking Count (% change): <span class="countNumber">50</span>
+		             			<div class="countslider1"></div>
+						   </div>
+						   <div id="IPM_WB_salmon" class="app">
+						   
+						   </div>
+			       </div>
+				  <br>
+				  <p>
+				  <div class="runModel">
+				  		<input class="runInput" value=" Enter a run name"></input><br>
+				    	<a id="run" href="#">Run with these settings</a>
+				  	</div>
+				
+         		
 
 	         
 				</div>				
@@ -106,7 +94,7 @@
 			<div class="toggle"><span class="title">Stream Temparature</span></div>
 			<div class="content">
 			
-				<div id="streamtemp-models-app">
+				<div id="streamtemp-flow-app">
 				<div id="loader">
 				    <div id="message"></div>
 				  </div>
@@ -119,12 +107,14 @@
 				  </div>
 				  <p style="float:left;width:50px;margin-left:18px"> Model: </p>
 				 <div class="styledSelect">
-					 <select name="weathertype" class="selectRun">
+					 <select name="streamtemp" class="selectRun">
 					  <option>Non-Linear Regression</option>
-				   	 <option>Downscaled Climate Scenario</option>
 					  </select>
 					  <div class="selectImage"></div>
 				  </div>
+				    <div class="app_content">
+			            
+			       </div>
 				  <br>
 				  <p>
 				  <div class="runModel">
@@ -151,14 +141,20 @@
 					  </select>
 					  <div class="selectImage"></div>
 				  </div>
-		             <p align="center"><strong>Directly specify stream flow and temperature changes</strong></p>
-		             <p>Streamflow (% change): 0%</p>
-		             <div class="nullslider1"></div>
-		             <p>Stream temperature (% change): 0%</p>
-		             <div class="nullslider1"></div>
-		             <p align="center">
-		             <input class="nullbutton" value="Run Stream Models" type="submit">
-			         </p>
+				   <p style="float:left;width:50px;margin-left:18px"> Model: </p>
+				  <div class="styledSelect">
+					 <select name="streamflow" class="selectRun">
+					  <option value="abcde_regional">ABCDE Regional</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
+				   <div class="app_content">
+			            
+			       </div>
+			        <div class="runModel" style="margin-top:50px">
+				  		<input type="text" class="runInput" value=" Enter a run name" ></input><br>
+				    	<a id="run" href="#">Run with these settings</a>
+				  	</div>
 				</div>				
 			</div>
 		</li>
@@ -176,13 +172,24 @@
 					  </select>
 					  <div class="selectImage"></div>
 				  </div>
-	             <p align="center"><input class="nullbutton" value="Launch Barrier Module" type="submit">
-	             <p>Riparian cover (% change): 0%
-	             <div class="nullslider1"></div>
-	             <p>Impervious surface area (% change): 0%
-	             <div class="nullslider1"></div>
-	             <p align="center"><input class="nullbutton" value="Run Land Use Model" type="submit">
-		     	 </p>
+				  <p style="float:left;width:50px;margin-left:18px"> Model: </p>
+				  <div class="styledSelect">
+					 <select name="land" class="selectRun">
+					  <option value="lcad_query">LCAD Query</option>
+					  </select>
+					  <div class="selectImage"></div>
+				  </div>
+				  <div class="app_content">
+		             <p>Riparian cover (% change): <span class="riparianNumber">50</span>%
+		             <div class="riparianslider1"></div>
+		             <p>Impervious surface area (% change): <span class="surfaceNumber">50</span>%
+		             <div class="surfaceslider1"></div>
+			     	 </p>
+			     </div>
+			     <div class="runModel" style="margin-top:50px">
+				  		<input type="text" class="runInput" value=" Enter a run name" ></input><br>
+				    	<a id="run" href="#">Run with these settings</a>
+				  	</div>
 			</div>
 			</div>
 		</li>
@@ -205,9 +212,9 @@
 				 <div class="styledSelect">
 					 <select name="weathertype" class="selectRun">
 					  <option value="weather_generator">Stochastic Weather Generation</option>
-				   	  <option value="baseline_historic">Baseline Historic</option>
-				   	  <option value="baseline_shift">Baseline Shift</option>
-				   	  <option value="gcm_downscaled">GCM Downscaled</option>
+				   	  <option value="baseline_shift">Baseline Shift from Historic</option>
+				   	  <option value="baseline_historic">Historic Baseline</option>
+				   	  <option value="gcm_downscaled">GCM Downscaled Time Series</option>
 				   	  <option value="temp_extreme">Temperature Extreme</option>
 				   	  <option value="drought_extreme">Drought Extreme</option>
 					  </select>
@@ -229,7 +236,7 @@
 							  </p>
 							  <p>
 						  </div>
-						  <div id="baseline_historic" class="app">
+						  <div id="baseline_shift" class="app">
 						  	<p style="margin-top:-15px; float:left; margin-left:3px; text-align:left"><b>Precipitation</b> - change in mean: in 2013: <input id="mean_1" value="1">% in 2093: <input id="mean_2" value="1">%<br> 
 							    <div id="c_variance" style="position: relative;top: -14px;">change in variance:<input id="precip02-value" value="1"></input>%</div> 
 							    </p>				   
@@ -243,6 +250,18 @@
 							  </p>
 							  <p>
 						  </div>
+						   <div id="baseline_historic" class="app">
+						   
+						   </div>
+						    <div id="gcm_downscaled" class="app">
+						   
+						   </div>
+						   <div id="temp_extreme" class="app">
+						   
+						   </div>
+						   <div id="drought_extreme" class="app">
+						   
+						   </div>
 				  </div>
 				  	<div class="runModel">
 				  		<input type="text" class="runInput" value=" Enter a run name" ></input><br>

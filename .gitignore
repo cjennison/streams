@@ -10,3 +10,4 @@ config/streams.json
 lib/mexec/a.json
 lib/mexec/buildrunTest.js
 lib/mexec/test
+logs

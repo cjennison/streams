@@ -122,37 +122,44 @@ Streams.app_control.apps.weather_models = {
   	var temp_mean_y1 = $('#mean_temp_1').val();
   	var temp_mean_yn = $('#mean_temp_2').val();
   	var n_years = Streams.yearRange || 30;
-  	var run_alias = "something";
+  	var basin_id = 198273918;
+  	var run_alias = $('div#weather-models-app.application .runModel .runInput').val();
+  	
+  	if(run_alias == "" || run_alias == " Enter a run name"){
+  		run_alias = Math.ceil(Math.random()*100000);
+  	}
   	
   	var climate = {	flag:true,
   					scriptName:scriptName,
+  					basin_id:basin_id,
   					precip_mean_y1:precip_mean_y1,
   					precip_mean_yn:precip_mean_yn,
   					precip_var_y1:precip_var_y1,
-  					precip_var_yn:null,
+  					precip_var_yn:precip_var_y1,
   					temp_mean_y1:temp_mean_y1,
   					temp_mean_yn:temp_mean_yn,
   					n_years:n_years,
   					run_alias:run_alias};
-  	console.log(scriptName + " " + precip_mean_y1 + " " +precip_mean_yn + " " +temp_mean_y1 + " " +temp_mean_yn + " " +n_years);
-  	
+
+	console.log("I am sending the Climate Object");
+	console.log(climate);  	
   	
 	var test = $.post('/mexec', {"webinfo": {
 		"climate": {
-			"flag": true,
-			"alias": "RunName1",
-			"scriptName": "weather_generator",
-			"basin_id": "west_brook",
+			"flag": climate.flag,
+			"alias": climate.run_alias,
+			"scriptName": climate.scriptName,
+			"basin_id": climate.basin_id,
 			"preceding": {
 
 			},
-			"precip_mean_y1": 0,
-			"precip_mean_yn": 0,
-			"precip_var_y1": 0,
-			"precip_var_yn": 0,
-			"temp_mean_y1": 0,
-			"temp_mean_yn": 0,
-			"n_years": 81,
+			"precip_mean_y1": climate.precip_mean_y1,
+			"precip_mean_yn": climate.precip_mean_yn,
+			"precip_var_y1": climate.precip_var_y1,
+			"precip_var_yn": climate.precip_var_yn,
+			"temp_mean_y1": climate.temp_mean_y1,
+			"temp_mean_yn": climate.temp_mean_yn,
+			"n_years": climate.n_years,
 	
 			"wet_threshold":0
 		}}});

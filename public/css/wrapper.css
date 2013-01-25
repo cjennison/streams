@@ -1,0 +1,9 @@
+#inputWrapper{
+	-o-transition: all 1s ease-out;
+	-ms-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	-webkit-transition: all 1s ease-out;
+	
+	
+	width:100%;
+}

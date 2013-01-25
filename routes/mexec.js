@@ -2,6 +2,22 @@ var users = require('../lib/users');
 var mexec = require('../lib/mexec');
 var fs = require('fs');
 
+exports.checkARun = function(req,res){
+	var scriptname = req.body;
+	if(scriptname){
+		var stat = mexec.checkARun(scriptname);
+		if(stat){
+			res.json(true);
+		}else if(stat === false){
+			res.json(false);
+		}else{
+			res.json("the run of the model does not exists");
+		}
+	}else{
+		res.json("format incorrect");
+	}
+};
+
 // Routes for the mexec library.
 exports.exec = function(req, res) {
 	var settings = req.body;

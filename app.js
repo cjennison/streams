@@ -50,10 +50,10 @@ app.get ('/'          , routes.front);
 app.get ('/login'     , routes.login);
 app.post('/login-user', routes.login_user);
 app.get ('/streams'   , routes.main);
-
+/*
 app.get('/weather-model-exec', models.weather_model_exec);
 app.get('/weather-model-exec/status', models.weather_model_status);
-
+*/
 // Routes for users:
 app.get('/users/:username/runs', user_routes.getRuns);
 

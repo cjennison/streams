@@ -9,7 +9,7 @@ exports.exec = function(req, res) {
 	if(!settings || ! user){
 		res.json("get request info not exists or user is not valid");
 	}else{
-		var files = fs.readdirSync("../../users/testuser1/weather_generator");
+		var files = fs.readdirSync("/home/node.js/users/testuser1/weather_generator");
 		res.json(files);
 	}
 	//build up an array of runs from the setting

@@ -4,10 +4,10 @@ var fs = require('fs');
 
 // Routes for the mexec library.
 exports.exec = function(req, res) {
-	var settings = req.body;
+	var settings = req.query;
 	var user = req.session.user;
 	if(!settings || ! user){
-		res.json("posted run info not exists or user is not valid");
+		res.json("get request info not exists or user is not valid");
 	}else{
 		var files = fs.readdirSync("../../users/testuser1/weather_generator");
 		res.json(files);

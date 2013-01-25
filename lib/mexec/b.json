@@ -4,7 +4,7 @@
 			"flag": true,
 			"scriptName": "weather_generator",
 			"runid": "f7d321e9-a00c-4485-9042-4f1b5444d4d3",
-			"basin": "west_brook",
+			"basin_id": "west_brook",
 			"preceding": {
 
 			},
@@ -18,6 +18,16 @@
 	
 			"wet_threshold":0
 
+		},
+		
+		"flow":{
+			"flag":true,
+			"basin_id": "west_brook",
+			"scriptName": "StreamFlowModel",
+			"preceding": {
+				"climate":"weather_generator"
+			}
 		}
+		
 	}
 }

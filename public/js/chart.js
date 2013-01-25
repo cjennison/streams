@@ -7,7 +7,7 @@ var Chart = {
 	init:function(){
 		var m = [190, 120, 190, 120],
 		    w = 800 - m[1] - m[3],
-		    h = 300 - m[0] - m[2],
+		    h = 385 - m[0] - m[2],
 		    i = 0,
 		    root;
 		
@@ -21,7 +21,7 @@ var Chart = {
 		    .attr("width", "100%")
 		    .attr("height", h + m[0] + m[2])
 		  .append("svg:g")
-		    .attr("transform", "translate(" + 200 + "," + 100 + ")");
+		    .attr("transform", "translate(" + 200 + "," + 260 + ")");
 		    
 		this.tree = $("#tree");
 		

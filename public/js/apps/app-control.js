@@ -13,7 +13,7 @@ Streams.app_control = {
     var screenWidth = document.width;
 	console.log(screenWidth);
 		
-	this.accordionLimit = Math.floor((screenWidth / (440))) - 1;
+	this.accordionLimit = Math.floor((screenWidth / (400))) - 1;
 	console.log(this.accordionLimit);
 	
 	$(window).resize(function(){
@@ -66,7 +66,7 @@ Streams.app_control = {
        basinLi.append(content);
     
     //Add Basin Container to Body  
-  	$('body').append(basin);
+  	//$('body').append(basin);
   	
   	var accordionOpts = {
       header    : 'h3',

@@ -4,7 +4,7 @@ var fs = require('fs');
 
 // Routes for the mexec library.
 exports.exec = function(req, res) {
-	var settings = req.query;
+	var settings = req.body;
 	var user = req.session.user;
 	if(!settings || ! user){
 		res.json("get request info not exists or user is not valid");

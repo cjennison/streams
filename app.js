@@ -58,7 +58,7 @@ app.get('/weather-model-exec/status', models.weather_model_status);
 app.get('/users/:username/runs', user_routes.getRuns);
 
 // Routes for mexec:
-app.get('/mexec', mexec_routes.exec);
+app.post('/mexec', mexec_routes.exec);
 
 // Routes for basin:
 app.get('/basin/predef'   , basin_routes.preDefinedBasins);

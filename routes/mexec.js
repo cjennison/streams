@@ -6,6 +6,12 @@ var fs = require('fs');
 exports.exec = function(req, res) {
 	var settings = req.body;
 	var user = req.session.user;
+	if(!settings || ! user){
+		res.json("posted run info not exists or user is not valid");
+	}else{
+		var files = fs.readdirSync("../../users/testuser1/weather_generator");
+		res.json(files);
+	}
 	//build up an array of runs from the setting
 	var runs = mexec.buildRuns(settings,user);
 	

@@ -1,7 +1,7 @@
 var users = require('../lib/users');
 var mexec = require('../lib/mexec');
 var fs = require('fs');
-var RModelP = require('./config').ModelDir+'/r'
+var RModelP = require('../lib/config').ModelDir+'/r'
 
 
 

@@ -137,11 +137,11 @@ Streams.app_control.apps.weather_models = {
   	console.log(scriptName + " " + precip_mean_y1 + " " +precip_mean_yn + " " +temp_mean_y1 + " " +temp_mean_yn + " " +n_years);
   	
   	
-	var test = $.post('/mexec', {"webInfo": {
+	var test = $.post('/mexec', {"webinfo": {
 		"climate": {
 			"flag": true,
+			"alias": "RunName1",
 			"scriptName": "weather_generator",
-			"runid": "f7d321e9-a00c-4485-9042-4f1b5444d4d3",
 			"basin_id": "west_brook",
 			"preceding": {
 
@@ -155,16 +155,6 @@ Streams.app_control.apps.weather_models = {
 			"n_years": 81,
 	
 			"wet_threshold":0
-
-		},
-		
-		"flow":{
-			"flag":true,
-			"basin_id": "west_brook",
-			"scriptName": "StreamFlowModel",
-			"preceding": {
-				"climate":"weather_generator"
-			}
 		}}});
 		
 		setTimeout(function(){

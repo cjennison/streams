@@ -8,6 +8,7 @@ var RModelP = require('../lib/config').ModelDir+'/r'
 // Routes for the mexec library.
 exports.exec = function(req, res) {
 	var settings = req.body;
+  console.log(JSON.stringify(settings));
 	var user = req.session.user;
 	if(!settings || ! user){
 		res.json("get request info not exists or user is not valid");
@@ -17,8 +18,10 @@ exports.exec = function(req, res) {
 	}
 	//build up an array of runs from the setting
 	var runs = mexec.buildRuns(settings,user);
-	
-	if(runs.length>0) {//TODO: set the directory for the r scripts
+
+	console.log(runs);
+  
+	if(runs.length>0) {
 		mexec.runModels(runs,0,RModelP);
 	}
 };

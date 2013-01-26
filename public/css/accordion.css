@@ -1,12 +1,10 @@
 /* Chris jennison accordion plugin */
 ul#accordion{
 	list-style-type: none;
-	margin-right:50px;
+	margin-right:10px;
 	color:black;
 	
-		-moz-box-shadow: 3px 3px 4px #000;
-	-webkit-box-shadow: 3px 3px 4px #000;
-	box-shadow: 3px 3px 4px #000;
+	
 
 }
 

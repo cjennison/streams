@@ -303,7 +303,7 @@ div#steps-control{
 .steps{
 	position:absolute;
 		
-	right:190px;
+	right:212px;
 	top:10px;
 	opacity:1;
 	
@@ -405,24 +405,7 @@ canvas{
 }
 
 
-#thumbnailList{
-	position:absolute;
-	list-style-type: none;	
-	bottom: 200px;
-	left: 114px;
-}
 
-#thumbnailList li{
-	display:inline-block;
-}
-
-
-.svgDisplay{
-	width: 100px;
-	height: 100px;
-	background: url(http://felek.cns.umass.edu:8888/6780965/basin.svg);
-	background-size: 100% 100%;
-}
 
 .app{
 	display:none;

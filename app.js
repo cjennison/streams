@@ -29,7 +29,6 @@ app.configure(function(){
   app.use(express.session({ secret : 'streams' }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-  app.use(express.static(__dirname + '/users'));
   app.use(express.static(config.server.BasinsDir));
   app.use(express.static(config.server.UsersDir));
 });
@@ -58,7 +57,7 @@ app.get('/weather-model-exec/status', models.weather_model_status);
 app.get('/users/:username/runs', user_routes.getRuns);
 
 // Routes for mexec:
-app.post('/mexec', mexec_routes.exec);
+//app.post('/mexec', mexec_routes.exec2);
 
 // Routes for basin:
 app.get('/basin/predef'   , basin_routes.preDefinedBasins);

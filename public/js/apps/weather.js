@@ -68,7 +68,7 @@ Streams.app_control.apps.weather_models = {
     // image files are available for display.
     function statusCheck () {
       console.log('statusCheck called');
-      $.get('/weather-model-exec/status', function (data) {
+      $.get('/mexec/status', function (data) {
         var entry = data;
 
         console.log(JSON.stringify(entry));
@@ -137,7 +137,35 @@ Streams.app_control.apps.weather_models = {
   	console.log(scriptName + " " + precip_mean_y1 + " " +precip_mean_yn + " " +temp_mean_y1 + " " +temp_mean_yn + " " +n_years);
   	
   	
-	var test = $.get('/mexec?climate:{flag:true, scriptName:"weather_generator"}');
+	var test = $.post('/mexec', {"webInfo": {
+		"climate": {
+			"flag": true,
+			"alias": "RunName1",
+			"scriptName": "weather_generator",
+			"basin_id": "west_brook",
+			"preceding": {
+
+			},
+			"precip_mean_y1": 0,
+			"precip_mean_yn": 0,
+			"precip_var_y1": 0,
+			"precip_var_yn": 0,
+			"temp_mean_y1": 0,
+			"temp_mean_yn": 0,
+			"n_years": 81,
+	
+			"wet_threshold":0
+
+		},
+		
+		"flow":{
+			"flag":true,
+			"basin_id": "west_brook",
+			"scriptName": "StreamFlowModel",
+			"preceding": {
+				"climate":"weather_generator"
+			}
+		}}});
 		
 		setTimeout(function(){
 			console.log(test);

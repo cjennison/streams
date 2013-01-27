@@ -11,18 +11,19 @@ exports.exec = function(req, res) {
 	var user = req.session.user;  	
 	if(!settings || ! user.name){
 		res.json("get request info not exists or user is not valid");
-	}else{		
-		res.json(settings);
+	}else{
+		user = new users.User(user.name);
+		//build up an array of runs from the setting
+		var runs = mexec.buildRuns(settings,user);
+		
+		//console.log(runs);
+		res.json(runs);
+		if(runs.length>0) {
+			mexec.runModels(runs,0,RScriptDir);
+		}
+		
 	}
-	user = new users.User(user.name);
-	//build up an array of runs from the setting
-	var runs = mexec.buildRuns(settings,user);
 	
-	//console.log(runs);
-  
-	if(runs.length>0) {
-		mexec.runModels(runs,0,RScriptDir);
-	}
 };
 
 // 

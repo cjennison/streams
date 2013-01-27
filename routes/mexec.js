@@ -1,31 +1,27 @@
 var users = require('../lib/users');
 var mexec = require('../lib/mexec');
 var fs = require('fs');
-var RModelP = require('../config/streams.json').ModelDir+'/r'
-
-exports.exec2 = function (req, res) {
-  res.json({'Name:' : 'Tim'});
-};
+var RScriptDir = require('../config/streams.json').ModelsDir +'/r';
 
 // Routes for the mexec library.
 exports.exec = function(req, res) {
-	var settings = req.body;
-	var user = req.session.user;
-  console.log('******' + settings.toString());
-	if(!settings || ! user){
+	
+	var settings = req.body.webInfo;
+	console.log(settings.climate.n_years)
+	var user = req.session.user;  	
+	if(!settings || ! user.name){
 		res.json("get request info not exists or user is not valid");
-	}else{
-		//var files = fs.readdirSync("/home/node.js/users/testuser1/weather_generator/13b380fc-7203-42ab-bde8-74961c40a069");
-		//res.json(files);
-    res.json(settings);
+	}else{		
+		res.json(settings);
 	}
-  return;
-  
+	user = new users.User(user.name);
 	//build up an array of runs from the setting
 	var runs = mexec.buildRuns(settings,user);
 	
-	if(runs.length>0) {//TODO: set the directory for the r scripts
-		mexec.runModels(runs,0,RModelP);
+	//console.log(runs);
+  
+	if(runs.length>0) {
+		mexec.runModels(runs,0,RScriptDir);
 	}
 };
 

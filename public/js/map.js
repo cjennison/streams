@@ -41,7 +41,7 @@ Streams.map = {
     //                                      { preserveViewport :  true,
     //                                        clickable : true });
     //gadges.setMap(map);
-    var ct_watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:9999/ct_watershed.kmz',
+    var ct_watershed = new google.maps.KmlLayer('http://felek.cns.umass.edu:8888/ct_watershed.kmz',
                                                 { preserveViewport :  true,
                                                   clickable : false });
     ct_watershed.setMap(map);

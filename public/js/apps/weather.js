@@ -155,7 +155,6 @@ Streams.app_control.apps.weather_models = {
 			"n_years": 81,
 	
 			"wet_threshold":0
-
 		},
 		
 		"flow":{
@@ -165,6 +164,7 @@ Streams.app_control.apps.weather_models = {
 			"preceding": {
 				"climate":"weather_generator"
 			}
+
 		}}});
 		
 		setTimeout(function(){

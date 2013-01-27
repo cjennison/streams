@@ -14,8 +14,7 @@ exports.exec = function(req, res) {
 	}else{
 		user = new users.User(user.name);
 		//build up an array of runs from the setting
-		var runs = mexec.buildRuns(settings,user);
-		
+		var runs = mexec.buildRuns(settings,user);		
 		//console.log(runs);
 		res.json(runs);
 		if(runs.length>0) {

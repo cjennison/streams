@@ -18,7 +18,7 @@ $(function () {
   Streams.app_control.render();
   
   Chart.init("#tree", "../json/data.json", 800, 385, 200, 260, 180);
-  Chart.init("#treeContainer", "../json/data.json", 1100, 385, 40, 100, 147);
+  Chart.init("#treeContainer", "../json/data.json", 1100, 385, 55, 100, 147);
   initNavigation();
   
 });

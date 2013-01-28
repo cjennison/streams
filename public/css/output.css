@@ -38,7 +38,9 @@
 	position:absolute;
 	width:1100px;
 	text-align: center;
-	font-size:30px;
+	font-size:26px;
+	margin-top:10px;
+	margin-left:-50px;
 }
 
 #treeContainer ul li{
@@ -47,8 +49,49 @@
 	text-align:center;
 	display:inline-block;
 	font-size: 15px;
+	
+	font-weight:900;
+	 
 }
 
 #treeContainer svg{
 	margin-left:70px;
 }
+
+#graphContainer{
+	position:absolute;
+	width:1100px;
+	color:white;
+	left:50%;
+	margin-left:-550px;
+}
+
+#graphContainer ul{	
+	list-style-type: none; 
+	margin-top:40px;
+		margin-left:0px;
+
+	width:100%;
+}
+
+#graphContainer #outputTitle{
+	position:absolute;
+	width:1100px;
+	text-align: center;
+		margin-top:10px;
+
+	font-size:26px;
+	margin-left:-50px;
+}
+
+#graphContainer ul li{
+	margin-left:40px;
+	width:100px;
+	text-align:center;
+	display:inline-block;
+	font-size: 15px;
+	
+	font-weight:900;
+	 
+}
+

@@ -40,6 +40,7 @@
 	background:url("../images/navWindow.png");
 	top:35px;
 	left:-162px;
+	z-index:10000;
 }
 
 #navigation:hover{

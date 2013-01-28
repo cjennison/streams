@@ -95,3 +95,21 @@
 	 
 }
 
+#graphSelectionList li .graphList{
+	position: absolute;
+	margin-left: -75px;
+	top: 30px;
+}
+
+.graphBox{
+	text-align:center;
+	width:100px;
+	height:20px;
+	background:orange;
+}
+
+#graphContainer #graphSelectionList .graphList li{
+	display:block;
+	margin-top:20px;
+}
+

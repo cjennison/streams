@@ -163,7 +163,7 @@ Streams.app_control.apps.basin = {
 	     		
 	     });
      
-     //changeView("name", 'id');
+     changeView("name", 'id');
 
    }
    //Starts Loading JSON Object from server

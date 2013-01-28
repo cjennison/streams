@@ -318,7 +318,7 @@ Streams.app_control.apps.basin = {
 		//Chart.addThumbnail(basin.thumbnail);
 		console.log(basin.thumbnail);
 		
-		$('body').append('<ul id="thumbnailList"><li><div class="svgDisplay" style="background:url(' + basin.thumbnail + '); background-size:100% 100%" id="basinSvg"></div></li></ul>');
+		$('#inputWrapper').append('<ul id="thumbnailList"><li><div class="svgDisplay" style="background:url(' + basin.thumbnail + '); background-size:100% 100%" id="basinSvg"></div></li></ul>');
 		
 		$(".panelBackground").css("opacity", ".5");
 		$("#basinTitle").html = "Basin: " +  (basin.name ? basin.name : basin.id)

@@ -4,10 +4,10 @@ var Chart = {
 	
 	
 	//Initialize Graph
-	init:function(){
-		var m = [190, 120, 190, 120],
-		    w = 800 - m[1] - m[3],
-		    h = 385 - m[0] - m[2],
+	init:function(object, dataJson, width, height, xPos, yPos, nodeLength){
+		var m = [180, 100, 180, 100],
+		    w = width - m[1] - m[3],
+		    h = height - m[0] - m[2],
 		    i = 0,
 		    root;
 		
@@ -17,15 +17,15 @@ var Chart = {
 		var diagonal = d3.svg.diagonal()
 		    .projection(function(d) { return [d.y, d.x]; });
 		
-		var vis = d3.select("#tree").append("svg:svg")
+		var vis = d3.select(object).append("svg:svg")
 		    .attr("width", "100%")
 		    .attr("height", h + m[0] + m[2])
 		  .append("svg:g")
-		    .attr("transform", "translate(" + 200 + "," + 260 + ")");
+		    .attr("transform", "translate(" + xPos + "," + yPos + ")");
 		    
 		this.tree = $("#tree");
 		
-		d3.json("../json/data.json", function(json) {
+		d3.json(dataJson, function(json) {
 		  root = json;
 		  root.x0 = h / 2;
 		  root.y0 = 000;
@@ -57,7 +57,7 @@ var Chart = {
 		  var nodes = tree.nodes(root).reverse();
 		
 		  // Normalize for fixed-depth.
-		  nodes.forEach(function(d) { d.y = d.depth * 180; });
+		  nodes.forEach(function(d) { d.y = d.depth * nodeLength; });
 		
 		  // Update the nodes…
 		  var node = vis.selectAll("g.node")

@@ -4,16 +4,21 @@
  "image": "null",
  "children": [
   {
-   "name": "Run 1",
+   "name": "Climate",
    "children": [
     {
-     "name": "cluster",
+     "name": "Land",
      "children": [
       {
-      "name": "AgglomerativeCluster", 
+      "name": "Flow", 
       "children": [
         {
-        	"name": "RunRunRun"
+        	"name": "Temp",
+        	"children": [
+	        {
+	        	"name": "Fish"
+	        }
+	       ]
         }
        ]
       }

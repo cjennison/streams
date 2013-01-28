@@ -122,7 +122,7 @@ Streams.app_control.apps.weather_models = {
   	var temp_mean_y1 = $('#mean_temp_1').val();
   	var temp_mean_yn = $('#mean_temp_2').val();
   	var n_years = Streams.yearRange || 30;
-  	var basin_id = 198273918;
+  	var basin_id = 6089763;
   	var run_alias = $('div#weather-models-app.application .runModel .runInput').val();
   	
   	if(run_alias == "" || run_alias == " Enter a run name"){

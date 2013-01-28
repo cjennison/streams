@@ -178,34 +178,8 @@ Streams.app_control.apps.weather_models = {
 			console.log(test);
 		},3000)
   	
-  	/*
-    var view  = this.view;
-    var prec1 = view.find('#mean_1').val();
-    var prec2 = view.find('#precip02-value').val();
-    var tempc = view.find('#mean_temp_2').val();
-    var msg   = view.find('#message');
-
-    var url = '/weather-model-exec';
-    var qry = '?prec1=' + prec1 + '&' +
-              'prec2=' + prec2 + '&' +
-              'tempc=' + tempc;
-
-    msg.empty();
-    msg.show();
-    
-    $.get(url + qry, function (data) {
-      if (data.status === 0) {
-        //msg.html('<img classrc="images/ajax-loader.gif"/>');
-        msg.append('Running weather model...');
-      }
-      else {
-        msg.text(data.message);
-        setTimeout(function () {
-          msg.fadeOut();
-        }, 5000);
-      }
-    });
-    */
+  	enableButton("inputButton");
+  	enableButton("outputButton");
     
   },
   

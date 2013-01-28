@@ -11,7 +11,7 @@
 	opacity:0;
 	pointer-events:none;
 	bottom:100px;
-	left:0;
+	left:-50px;
 	background:rgba(200,200,200,.5);
 }
 

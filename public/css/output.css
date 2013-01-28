@@ -1,0 +1,19 @@
+#outputTree{
+	position:absolute;
+	width:100%;
+	height:400px;
+	background:rgba(200,200,200,.5);
+	
+	top:0;
+	left:-50px;
+}
+
+#outputSelector{
+	position:absolute;
+	width:100%;
+	height:250px;
+	background:rgba(0,0,200,.5);
+	
+	top:450px;
+	left:-50px;
+}

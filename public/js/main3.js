@@ -17,8 +17,8 @@ $(function () {
   Streams.map.render();
   Streams.app_control.render();
   
-  Chart.init("#tree", "../json/data.json", 800, 385, 200, 260, 180);
-  Chart.init("#treeContainer", "../json/data.json", 1100, 385, 55, 100, 147);
+  Chart.init("#tree", "../json/data.json", 800, 385, 200, 260, 180, 180, 25);
+  Chart.init("#treeContainer", "../json/data2.json", 1100, 385, 55, 100, 147, 80, 25);
   initNavigation();
   
 });
@@ -30,20 +30,26 @@ function initNavigation(){
 	$("#navigation #graphButton").button({disabled:true});
 	
 	$("#navigation #inputButton").bind("click", function(){
-		//initOutput();
+		removeOutput();
 		$("#inputWrapper").css("top","0%");
 		$("#outputWrapper").css("top","100%");
+		$("#graphWrapper").css("top","200%");
 	});
-	
-	
 	
 	$("#navigation #outputButton").bind("click", function(){
 		initOutput();
 		$("#inputWrapper").css("top","-100%");
 		$("#outputWrapper").css("top","0%");
+		$("#graphWrapper").css("top","100%");
 	});
 	
-	
+	$("#navigation #graphButton").bind("click", function(){
+		removeOutput();
+		initGraph();
+		$("#inputWrapper").css("top","-200%");
+		$("#outputWrapper").css("top","-100%");
+		$("#graphWrapper").css("top","0%");
+	});
 }
 
 function enableButton(button){

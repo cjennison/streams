@@ -25,6 +25,18 @@
 	
 }
 
+#graphWrapper{
+	-o-transition: all 1s ease-out;
+	-ms-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	-webkit-transition: all 1s ease-out;
+	
+	position:absolute;
+	height:100%;
+	width:100%;
+	top:200%;
+}
+
 
 
 

@@ -180,6 +180,7 @@ Streams.app_control.apps.weather_models = {
   	
   	enableButton("inputButton");
   	enableButton("outputButton");
+  	enableButton("graphButton");
     
   },
   

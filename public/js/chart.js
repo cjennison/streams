@@ -4,8 +4,8 @@ var Chart = {
 	
 	
 	//Initialize Graph
-	init:function(object, dataJson, width, height, xPos, yPos, nodeLength){
-		var m = [180, 100, 180, 100],
+	init:function(object, dataJson, width, height, xPos, yPos, nodeLength, xSpread, textSize){
+		var m = [xSpread, 140, xSpread, 140],
 		    w = width - m[1] - m[3],
 		    h = height - m[0] - m[2],
 		    i = 0,
@@ -28,7 +28,7 @@ var Chart = {
 		d3.json(dataJson, function(json) {
 		  root = json;
 		  root.x0 = h / 2;
-		  root.y0 = 000;
+		  root.y0 = w/ 2;
 		  console.log(root);
 		
 		  function toggleAll(d) {
@@ -75,7 +75,7 @@ var Chart = {
 		
 		  nodeEnter.append("svg:text")
 		      .attr("x", -8)
-		      .attr("dy", "1.35em")
+		      .attr("dy", textSize + "px")
 		      .attr("text-anchor",  "start")
 		      .text(function(d) { return d.name; })
 		      .style("fill-opacity", 1e-6);
@@ -152,14 +152,7 @@ var Chart = {
 		    d.y0 = d.y;
 		  });
 		  
-		  //Close Other Nodes
-		  if(siblings){
-		  	siblings.forEach(function(d){
-		  		if(d.id != id){
-		  			toggle(d);
-		  		}
-		  	})
-		  }
+		  
 		 
 		}
 		

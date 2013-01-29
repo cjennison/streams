@@ -55,6 +55,7 @@
 }
 
 #treeContainer svg{
+	margin-top:-75px;
 	margin-left:70px;
 }
 
@@ -124,4 +125,18 @@
 
 .graphText{
 	color:black;
+}
+
+#inputDropBox{
+	display:none;
+	position: fixed;
+	width: 300px;
+	height: 200px;
+	top: 427px;
+	left: -252px;
+	background: white;
+}
+
+#inputDropBox.active{
+	left: -150px;
 }

@@ -42,10 +42,12 @@ function initOutput(){
 		DragHandler.attach($(".graphBox")[i]);
 	}
 	
+	$("#inputDropBox").css("display", "none");
 	
 }
 
 
 function removeOutput(){
-	
+	$("#inputDropBox").css("display", "none");
+	$('#graphSelectionList').remove();
 }

@@ -1,0 +1,127 @@
+
+{
+ "name": "West Brook basin",
+ "image": "null",
+ "children": [
+ 
+ 
+ 
+  {
+   "name": "Precipitation up 10%",
+   "children": [
+    {
+     "name": "Low development scenario",
+     "children": [
+      {
+      "name": "Stream Flow", 
+      "children": [
+        {
+        	"name": "Stream Temperature",
+        	"children": [
+	        {
+	        	"name": "West Brook trout IPM"
+	        },
+	        {
+	        	"name": "West Brook salmon IPM"
+	        },
+	        {
+	        	"name": "West Brook Dail-Madsen"
+	        }
+	       ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  
+  
+  
+  {
+   "name": "Precipitation down 10%",
+   "children": [
+    {
+     "name": "Low development scenario",
+     "children": [
+      {
+      "name": "Stream Flow", 
+      "children": [
+        {
+        	"name": "Stream Temperature",
+        	"children": [
+	        {
+	        	"name": "West Brook trout IPM"
+	        },
+	        {
+	        	"name": "West Brook salmon IPM"
+	        },
+	        {
+	        	"name": "West Brook Dail-Madsen"
+	        }
+	       ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  
+  
+  
+  {
+   "name": "Air temp up 2 degrees",
+   "children": [
+    {
+     "name": "Low development scenario",
+     "children": [
+      {
+      "name": "Stream Flow", 
+      "children": [
+        {
+        	"name": "Stream Temperature",
+        	"children": [
+	        {
+	        	"name": "West Brook trout IPM"
+	        }
+	       ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  
+  
+  
+  {
+   "name": "Air temp up 4 degrees",
+   "children": [
+    {
+     "name": "Low development scenario",
+     "children": [
+      {
+      "name": "Stream Flow", 
+      "children": [
+        {
+        	"name": "Stream Temperature",
+        	"children": [
+	        {
+	        	"name": "West Brook trout IPM"
+	        }
+	       ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+  
+  
+  
+      
+ ]
+}

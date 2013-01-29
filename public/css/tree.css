@@ -29,7 +29,8 @@
 }
 
 .node text {
-  font-size: 19px;
+  font-size: 12px;
+  width:90px;
   opacity:1;
 }
 

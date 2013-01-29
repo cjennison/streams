@@ -134,17 +134,31 @@ a:hover {
 	position:absolute;
 	list-style-type: none;	
 	bottom: 158px;
-left: 20px;
+	left: 10px;
 }
 
 #thumbnailList li{
 	display:inline-block;
+	margin-left:10px;
+}
+
+#climateSvg{
+	background: url("../images/climate_thumbnail.svg");
+	background-size: 100% 100%;
+}
+
+#fishSvg{
+	background: url("../images/population_thumbnail.gif");
+	background-size: 100% 100%;
+}
+
+#flowSvg{
+	background: url("../images/flow_thumbnail.svg");
+	background-size: 100% 100%;
 }
 
 
 .svgDisplay{
 	width: 200px;
 	height: 200px;
-	background: url(http://felek.cns.umass.edu:8888/6780965/basin.svg);
-	background-size: 100% 100%;
 }

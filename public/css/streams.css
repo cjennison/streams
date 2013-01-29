@@ -184,8 +184,6 @@ span#beta {
 	left:40px;
 	width:350px;
 	height:550px;
-	
-	
 }
 
 .basinSelection-control.select-basin{
@@ -404,9 +402,6 @@ canvas{
 	width:20px;
 }
 
-
-
-
 .app{
 	display:none;
 }
@@ -414,6 +409,7 @@ canvas{
 .app .active{
 	display:block;
 }
+
 
 
 

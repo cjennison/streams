@@ -12,6 +12,14 @@ Streams.app_control.apps.environmental_models = {
     
     runbutton.button();
    
+    $(runbutton).bind('click', function(){
+    	var ullist = $("#thumbnailList");
+	  	var list = $("<li>");
+	  	var thumb = $("<div class='svgDisplay' id='flowSvg'> </div>");
+	  	$(list).append(thumb);
+	  	$(ullist).append(list);
+    });
+    
     
     this.view = view;
 

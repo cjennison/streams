@@ -64,6 +64,16 @@ Streams.app_control.apps.fish_models = {
     
     
     this.view = view;
+    
+    
+    $(runbutton).bind('click', function(){
+    	var ullist = $("#thumbnailList");
+	  	var list = $("<li>");
+	  	var thumb = $("<div class='svgDisplay' id='fishSvg'> </div>");
+	  	$(list).append(thumb);
+	  	$(ullist).append(list);
+    });
+    
 
   }
 };

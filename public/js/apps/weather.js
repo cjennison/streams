@@ -101,7 +101,7 @@ Streams.app_control.apps.weather_models = {
     runButton.button();
     runButton.click(function (event) {
     	console.log("RUN")
-      	runButton.button('option', 'disabled', true);
+      	//runButton.button('option', 'disabled', true);
       	that.run();
       	setTimeout(statusCheck, 3000);
      	return false;
@@ -181,6 +181,12 @@ Streams.app_control.apps.weather_models = {
   	enableButton("inputButton");
   	enableButton("outputButton");
   	enableButton("graphButton");
+  	
+  	var ullist = $("#thumbnailList");
+  	var list = $("<li>");
+  	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
+  	$(list).append(thumb);
+  	$(ullist).append(list);
     
   },
   

@@ -50,7 +50,8 @@ path.link {
 }
 #chart, #header, #footer {
   position: absolute;
-  top: 0;
+  top: 20px;
+  left:100px;
 }
 
 #header, #footer {

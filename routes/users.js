@@ -4,7 +4,7 @@ var users = require('../lib/users');
 exports.getRuns = function (req, res) {
   var username = req.params.username;
 
-  if (!username) {
+ if (!username) {
     res.json({ message : 'require a username' });
   }
   else if (!users.exists(username)) {
@@ -28,4 +28,33 @@ exports.getRunResult = function(req,res){
   }else{
     res.json({msg:"cannot obtain the run result"});
   }
+};
+
+exports.getRunTree = function(req,res){
+  var user = new users.User(req.session.user);
+  var tree;
+  if(req.body.preRunIDs){
+    tree = user.getRunTree(prerunIDs);
+    res.json(tree);
+  }
+  /*tree = {
+    "34343-434":{
+      model: "climate",
+      scriptname: "weather_generator",
+      runid: "34343-434",
+      basinid:"west-brook",
+      child:{
+        "1234":"1234",
+        "2345":"2345"
+      }
+    },
+    "1234":{
+      model: "flow",
+      scriptname: "streamFlowModel",
+      runid: "1234",
+      basinid:"west-brook",
+      child:{
+      }
+    }
+  };*/
 };

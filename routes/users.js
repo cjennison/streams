@@ -31,7 +31,7 @@ exports.getRunResult = function(req,res){
 };
 
 exports.getRunTree = function(req,res){
-  var user = new users.User(req.session.user);
+  var user = new users.User(req.session.user.name);
   var tree;
   if(req.body.preRunIDs){
     tree = user.getRunTree(prerunIDs);
@@ -58,3 +58,37 @@ exports.getRunTree = function(req,res){
     }
   };*/
 };
+
+
+//get basinid from request
+//return a run tree with basin as root 
+exports.getTreeFromBasin = function(req,res){
+  var user = new users.User(req.session.user.name);
+  if(!user){
+    res.json('user invalid,please login');
+    return;
+  }
+  var tree = {};
+  var basinid = req.body.basinid;
+  if(!basinid){
+    res.json('unmatched data structure for basin ID, post basinid=xxx');
+    return;
+  }
+  if(!fs.existsSync(user.dir+'/tree/modelTrees.json')){
+    console.log();
+    res.json('no mode tree record exist: there is no run that has be executed!');
+    return ;
+  }
+  var allruns = fs.readFileSync(user.dir+'/tree/modelTrees.json');
+  if(!allruns){
+    res.json(tree);
+    return;
+  }
+  tree = JSON.parse(allruns);
+  if(tree[basinid]){
+    res.json(allruns[basinid]);
+  }else{
+    console.log('no run is based on the current basin ID: '+basinid);
+    res.json({});
+  }
+}

@@ -5,7 +5,7 @@ var RScriptDir = require('../config/streams.json').ModelsDir +'/r';
 
 // Routes for the mexec library.
 exports.exec = function(req, res) {
-	
+	var user = new users.User(req.session.user.name);
 	var settings = req.body.webInfo;
 	console.log(settings.climate.n_years)
 	var user = req.session.user;  	

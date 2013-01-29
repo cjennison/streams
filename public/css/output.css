@@ -140,3 +140,47 @@
 #inputDropBox.active{
 	left: -150px;
 }
+
+#basinImage{
+	position:absolute;
+	top:20px;
+	left:110px;
+	
+	width:400px;
+	height:400px;
+	background:url("../images/basin.svg");
+	background-size:100% 100%;
+}
+
+#climateImage{
+	position:absolute;
+	top:20px;
+	right:180px;
+	
+	width:400px;
+	height:400px;
+	background:url("../images/climate_thumbnail.svg");
+	background-size:100% 100%;
+}
+
+#flowImage{
+	position:absolute;
+	bottom:150px;
+	left:110px;
+	
+	width:400px;
+	height:400px;
+	background:url("../images/flow_thumbnail.svg");
+	background-size:100% 100%;
+}
+
+#fishImage{
+	position:absolute;
+	bottom:150px;
+	right:180px;
+	
+	width:400px;
+	height:400px;
+	background:url("../images/population_thumbnail.gif");
+	background-size:100% 100%;
+}

@@ -14,7 +14,7 @@
 	height:250px;
 	background:rgba(0,0,200,.7);
 	
-	top:450px;
+	top:400px;
 	left:-50px;
 }
 
@@ -102,14 +102,26 @@
 }
 
 .graphBox{
+	position: relative;
+	cursor:pointer;
 	text-align:center;
 	width:100px;
 	height:20px;
-	background:orange;
+	background: #f7e7b5;
+	border-style: solid;
+	border-width: 4px;
+	border-color: #ffbe57;
+	box-shadow: 1px 5px 14px -3px #4D4D4D;
 }
 
-#graphContainer #graphSelectionList .graphList li{
-	display:block;
-	margin-top:20px;
+#graphContainer #graphSelectionList li{
+	position: relative;
+	top: -52px;
+	left: -10px;
+	margin-top:4px;
+	margin-left: 45px;
 }
 
+.graphText{
+	color:black;
+}

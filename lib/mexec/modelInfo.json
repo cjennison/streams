@@ -20,7 +20,7 @@
 
 		"flow": {
 			"idx": 4,
-			"dependency": ["climate"],
+			"dependency": ["land"],
 			"scripts": ["abcde_regional"]
 		},
 
@@ -48,6 +48,6 @@
 		}
 	},
 
-	"modelArray": ["climate", "flow", "land", "barriers", "streamtemp", "population"]
+	"modelArray": ["climate", "land", "barriers", "flow", "streamtemp", "population"]
 
 }

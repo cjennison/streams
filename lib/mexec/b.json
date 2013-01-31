@@ -14,10 +14,19 @@
 			"precip_var_yn": 0,
 			"temp_mean_y1": 0,
 			"temp_mean_yn": 0,
-			"n_years": 81,
+			"n_years": 30,
 	
 			"wet_threshold":0
 
+		},
+
+		"land":{
+			"flag":true,
+			"basin_id": "west_brook",
+			"scriptName": "landoo",
+			"preceding": {
+				"climate":"weather_generator"
+			}
 		},
 		
 		"flow":{
@@ -25,7 +34,7 @@
 			"basin_id": "west_brook",
 			"scriptName": "StreamFlowModel",
 			"preceding": {
-				"climate":"weather_generator"
+				"land":"landoo"
 			}
 		}
 		

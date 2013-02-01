@@ -54,15 +54,16 @@ function removeOutput(){
 
 
 
-function buildCheckBoxes(numBoxes){
+function buildCheckBoxes(numBoxes, runArray){
 	console.log("Building " + numBoxes + " boxes.");
+	console.log(runArray)
 	$("#checkBoxes").remove();
 	
 	var container = $("<div id='checkBoxes'><ul>");
 	var ul = $("<ul>");
 	
 	for(var i=0;i<numBoxes;i++){
-		var checkbox = $("<li style='margin-top:" + 120/numBoxes + "px'><input type='checkbox' name='c1' value='cc'>");
+		var checkbox = $("<li style='margin-top:" + runArray[i].x + "px'><input type='checkbox' name='c1' value='cc'>");
 		var label = $('<label for="c1"><span></span></label>');
 		$(ul).append(checkbox);
 		$(checkbox).append(label);

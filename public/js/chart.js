@@ -146,6 +146,7 @@ var Chart = {
 		  
 		  
 		  var numNodes = 0;
+		  var runArray = [];
 		  // Stash the old positions for transition.
 		  nodes.forEach(function(d) {
 		    d.x0 = d.x;
@@ -155,6 +156,7 @@ var Chart = {
 		    if(!d.toggled){
 		    	if(!d.children){
 		    		numNodes++;
+		    		runArray.push(d);
 		    	}
 		    } 
 		    
@@ -162,7 +164,7 @@ var Chart = {
 		  });
 		  
 		  if(type == "output"){
-		  	buildCheckBoxes(numNodes);
+		  	buildCheckBoxes(numNodes, runArray);
 		  	
 		  }
 		 

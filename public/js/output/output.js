@@ -51,3 +51,25 @@ function removeOutput(){
 	$("#inputDropBox").css("display", "none");
 	$('#graphSelectionList').remove();
 }
+
+
+
+function buildCheckBoxes(numBoxes){
+	console.log("Building " + numBoxes + " boxes.");
+	$("#checkBoxes").remove();
+	
+	var container = $("<div id='checkBoxes'><ul>");
+	var ul = $("<ul>");
+	
+	for(var i=0;i<numBoxes;i++){
+		var checkbox = $("<li style='margin-top:" + 120/numBoxes + "px'><input type='checkbox' name='c1' value='cc'>");
+		var label = $('<label for="c1"><span></span></label>');
+		$(ul).append(checkbox);
+		$(checkbox).append(label);
+	}
+	
+	
+	$(container).append(ul);
+	$("#treeContainer").append(container);
+	
+}

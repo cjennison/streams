@@ -17,8 +17,8 @@ $(function () {
   Streams.map.render();
   Streams.app_control.render();
   
-  Chart.init("#tree", "../json/data.json", 800, 385, 200, 260, 210, 180, 25);
-  Chart.init("#treeContainer", "../json/data2.json", 1100, 385, 55, 100, 147, 80, 25);
+  Chart.init("#tree", "../json/data.json", 800, 385, 200, 260, 210, 180, 25, "null");
+  Chart.init("#treeContainer", "../json/data2.json", 1100, 385, 55, 100, 147, 80, 25, "output");
   initNavigation();
   
 });
@@ -26,7 +26,7 @@ $(function () {
 
 function initNavigation(){
 	$("#navigation #inputButton").button({disabled:true});
-	$("#navigation #outputButton").button({disabled:true});
+	$("#navigation #outputButton").button({disabled:false});
 	$("#navigation #graphButton").button({disabled:true});
 	
 	$("#navigation #inputButton").bind("click", function(){

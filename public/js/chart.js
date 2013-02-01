@@ -4,7 +4,7 @@ var Chart = {
 	
 	
 	//Initialize Graph
-	init:function(object, dataJson, width, height, xPos, yPos, nodeLength, xSpread, textSize){
+	init:function(object, dataJson, width, height, xPos, yPos, nodeLength, xSpread, textSize, type){
 		var m = [xSpread, 140, xSpread, 140],
 		    w = width - m[1] - m[3],
 		    h = height - m[0] - m[2],
@@ -28,8 +28,9 @@ var Chart = {
 		d3.json(dataJson, function(json) {
 		  root = json;
 		  root.x0 = h / 2;
-		  root.y0 = w/ 2;
+		  root.y0 = w / 2;
 		  console.log(root);
+		  
 		
 		  function toggleAll(d) {
 		    if (d.children) {
@@ -49,7 +50,7 @@ var Chart = {
 		
 		function update(source) {
 			
-		  console.log(source);
+		  //console.log(source);
 			
 		  var duration = d3.event && d3.event.altKey ? 5000 : 500;
 		
@@ -57,7 +58,7 @@ var Chart = {
 		  var nodes = tree.nodes(root).reverse();
 		
 		  // Normalize for fixed-depth.
-		  nodes.forEach(function(d) { d.y = d.depth * nodeLength; });
+		  nodes.forEach(function(d) { d.y = d.depth * nodeLength; d.toggled = false });
 		
 		  // Update the nodes…
 		  var node = vis.selectAll("g.node")
@@ -141,32 +142,50 @@ var Chart = {
 		  var siblings;
 		  if(source.parent){
 		  	siblings = source.parent.children;
-		  	console.log(siblings);
 		  }
 		  
-		  console.log("CURRENT ID: " + id);
 		  
+		  var numNodes = 0;
 		  // Stash the old positions for transition.
 		  nodes.forEach(function(d) {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
+		    
+		    
+		    if(!d.toggled){
+		    	if(!d.children){
+		    		numNodes++;
+		    	}
+		    } 
+		    
+		    //console.log(d);
 		  });
 		  
-		  
+		  if(type == "output"){
+		  	buildCheckBoxes(numNodes);
+		  	
+		  }
 		 
 		}
 		
 		// Toggle children.
 		function toggle(d) {
 		  if (d.children) {
+		  	d.toggled = false;
+		  	console.log("TOGGLING OFF")
 		    d._children = d.children;
 		    d.children = null;
 		  } else {
+		  	console.log("TOGGLING ON");
+		  	d.toggled = true;
 		    d.children = d._children;
 		    d._children = null;
 		  }
+		  //console.log(d);
 		}
 	},
+	
+	
 	
 	addThumbnail:function(img){
 		var thumbnail = img;

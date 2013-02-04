@@ -70,7 +70,15 @@
 #graphContainer ul{	
 	list-style-type: none; 
 	margin-top:40px;
-		margin-left:0px;
+	margin-left:-100px;
+
+	width:100%;
+}
+
+#graphContainer #graphSelectionList{	
+	list-style-type: none; 
+	margin-top:16px;
+	margin-left:-100px;
 
 	width:100%;
 }
@@ -86,14 +94,21 @@
 }
 
 #graphContainer ul li{
-	margin-left:40px;
+	margin-left:73px;
 	width:100px;
 	text-align:center;
 	display:inline-block;
 	font-size: 15px;
-	
 	font-weight:900;
-	 
+}
+
+#graphSelectionList{
+	position: absolute;
+	top: 20px;
+}
+
+#graphSelectionList li{
+
 }
 
 #graphSelectionList li .graphList{
@@ -106,12 +121,14 @@
 	position: relative;
 	cursor:pointer;
 	text-align:center;
-	width:100px;
+	width:160px;
 	height:20px;
+	overflow:hidden;
 	background: #f7e7b5;
 	border-style: solid;
 	border-width: 4px;
 	border-color: #ffbe57;
+	margin-top:10px;
 	box-shadow: 1px 5px 14px -3px #4D4D4D;
 }
 
@@ -120,7 +137,7 @@
 	top: -52px;
 	left: -10px;
 	margin-top:4px;
-	margin-left: 45px;
+	margin-left: 80px;
 }
 
 .graphText{

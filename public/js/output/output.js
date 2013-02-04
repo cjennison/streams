@@ -2,7 +2,23 @@ var Output = {};
 
 function initOutput(){
 
+	
+	
+}
+
+
+function removeOutput(){
+	$("#inputDropBox").css("display", "none");
+	$('#graphSelectionList').remove();
+}
+
+function buildGraphBoxes(runArray){
+	console.log(runArray);
 	console.log("Initializing Outputs");
+	
+	$("#graphSelectionList").remove();
+	
+	
 	var graphContainer = $('#graphContainer');
 	var graphSelectionList = $('<ul id="graphSelectionList">');
 	
@@ -12,27 +28,21 @@ function initOutput(){
 		var listItem = $("<li>");
 		var graphUnorderedList = $("<ul id='" + graphType[q] + "GraphList' class='graphList'></ul>")
 		
-		
-		//TODO: Get Info from JSON
-		for(var f = 0 ;f < Math.floor(Math.random()*4) + 1;f++){
-			var graphBoxListItem = $("<li>");
-			var graphBox = $('<div class="graphBox"></div>');
-			var graphText = $('<span class="graphText"></span>');
-			$(graphText).text("Run Name");
-			$(graphBox).append(graphText);
-			$(graphBoxListItem).append(graphBox);
-			$(graphUnorderedList).append(graphBoxListItem);
-		}
-		
-		
-		
-		
 		$(listItem).append(graphUnorderedList);
 		$(graphSelectionList).append(listItem);
 		
 	}
 	
 	$(graphContainer).append(graphSelectionList);
+	
+	
+	for(var c = 0;c < runArray.length; c++){
+		var list = $("#" + graphType[runArray[c].depth] + "GraphList");
+		console.log(runArray[0]);
+		var box = $("<div class='graphBox' style='color:black; font-size:12px'></div>")
+		$(box).html(runArray[c].name)
+		list.append(box);
+	}
 	
 	
 	
@@ -43,15 +53,7 @@ function initOutput(){
 	}
 	
 	$("#inputDropBox").css("display", "none");
-	
 }
-
-
-function removeOutput(){
-	$("#inputDropBox").css("display", "none");
-	$('#graphSelectionList').remove();
-}
-
 
 
 function buildCheckBoxes(numBoxes, runArray){

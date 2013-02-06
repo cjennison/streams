@@ -169,6 +169,39 @@
 	background-size:100% 100%;
 }
 
+#northeastImage{
+	position:absolute;
+	top:20px;
+	right:180px;
+	
+	width:500px;
+	height:400px;
+	background:url("../images/sample_temp_image.svg");
+	background-size:100% 100%;
+}
+
+#southwestImage{
+	position:absolute;
+	bottom:150px;
+	left:110px;
+	
+width: 500px;
+height: 400px;
+background: url("../images/sample_precip_image.svg");
+	background-size:100% 100%;
+}
+
+#southeastImage{
+	position:absolute;
+	bottom:150px;
+	right:180px;
+	
+width: 500px;
+height: 400px;
+background: url("../images/sample_flow_image.svg");
+	background-size:100% 100%;
+}
+
 #climateImage{
 	position:absolute;
 	top:20px;

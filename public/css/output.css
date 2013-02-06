@@ -176,7 +176,7 @@
 	
 	width:500px;
 	height:400px;
-	background:url("../images/sample_temp_image.svg");
+	background:url("../images/sample_temp_graph.svg");
 	background-size:100% 100%;
 }
 
@@ -187,7 +187,7 @@
 	
 width: 500px;
 height: 400px;
-background: url("../images/sample_precip_image.svg");
+background: url("../images/sample_precip_graph.svg");
 	background-size:100% 100%;
 }
 
@@ -198,7 +198,7 @@ background: url("../images/sample_precip_image.svg");
 	
 width: 500px;
 height: 400px;
-background: url("../images/sample_flow_image.svg");
+background: url("../images/sample_flow_graph.svg");
 	background-size:100% 100%;
 }
 

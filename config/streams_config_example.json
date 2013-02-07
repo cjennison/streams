@@ -1,0 +1,58 @@
+{
+  "port": 8888,
+
+	"RScript":
+    {
+      "Home"      : "/home/austin/WebStuff",
+      "FromImages": "/home/austin/WebStuff/Images",
+      "ToImages"  : "/home/node.js/streams/public/images/models"
+    },
+
+  "DataDir"   : "/home/node.js/data",
+
+  "ModelsDir" : "/home/node.js/models",
+
+  "BasinsDir" : "/home/node.js/data/basins",
+
+  "UsersDir"  : "/home/node.js/users",
+
+  "steps": {
+	"climate":[
+		{
+		"script":"weather_generator",
+		"display":"Stochastic Weather Generator"
+		},
+		{
+		"script":"baseline_historic",
+		"display":"Historic Baseline Climate"
+		},
+		{
+		"script":"baseline_shift",
+		"display":"Shifted Historic Climate"
+		},
+		{
+		"script":"baseline_gcm",
+		"display":"GCM Guideposts for Shifted Historic Climate"
+		},
+		{
+		"script":"bootstrap_extreme",
+		"display":"Simulate an Extreme Event"
+		}
+	],
+	"flow":[{
+		"script":"StreamFlowModel",
+		"display":"abcde Model"
+	}],
+	"land":[],
+	"barriers":[],
+	"streamtemp":[{
+		"script":"StreamTemperatureModel",
+		"display":"Non-linear Regression Model"
+	}],
+	"population":[{
+		"script":"WestbrookIPM",
+		"display":"Integral Population Model"
+	}]
+  }
+}
+

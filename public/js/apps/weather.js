@@ -129,6 +129,8 @@ Streams.app_control.apps.weather_models = {
   		run_alias = Math.ceil(Math.random()*100000);
   	}
   	
+  	console.log(run_alias);
+  	
   	var climate = {	flag:true,
   					scriptName:scriptName,
   					basin_id:basin_id,
@@ -144,7 +146,7 @@ Streams.app_control.apps.weather_models = {
 	console.log("I am sending the Climate Object");
 	console.log(climate);  	
   	
-	var test = $.post('/mexec', {"webInfo": {
+	var serverResponse = $.post('/mexec', {"webInfo": {
 		"climate": {
 			"flag": climate.flag,
 			"alias": climate.run_alias,
@@ -174,20 +176,33 @@ Streams.app_control.apps.weather_models = {
 
 		}}});
 		
-		setTimeout(function(){
-			console.log(test);
-		},3000)
+		Status.addQueue(climate);
+		
+		var checkRespo = setInterval(function(){
+			if(serverResponse.readyState == 4){
+				console.log("READY");
+				clearInterval(checkRespo);
+				Output.runInformation.parseResponse(serverResponse.responseText);
+				Streams.app_control.apps.weather_models.addThumbnail();
+			}
+		},1000)
   	
   	enableButton("inputButton");
   	enableButton("outputButton");
   	enableButton("graphButton");
   	
+  
+    
+  },
+  
+  addThumbnail:function(){
   	var ullist = $("#thumbnailList");
   	var list = $("<li>");
+  	var listLine = $("#thumbnailList li");
+  	if(listLine.length > 4) {return;}
   	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
   	$(list).append(thumb);
   	$(ullist).append(list);
-    
   },
   
   /**

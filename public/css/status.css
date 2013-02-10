@@ -33,3 +33,41 @@
 	background:url("../images/statushandle.png") no-repeat;
 	background-size:100% 100%;
 }
+
+#statusBar ul{
+	list-style-type: none;
+	margin-left: -42px;
+	margin-top: 10px;
+}
+
+#statusBar ul li {
+	display:inline-block;
+	cursor:pointer;
+	width:100px;
+	height:80px;
+	background:white;
+	margin-left:10px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #ffbe57;
+	box-shadow: 1px 5px 14px -3px #4D4D4D;
+}
+
+#statusBar ul li span{
+	position:absolute;
+	color:#1C94C4;
+	width:100px;
+	margin-top:20px;
+	
+	font-size:16px;
+	text-align:center;
+}
+#statusBar ul li .status{
+	position:absolute;
+	color:#1C94C4;
+	width:100px;
+	margin-top:50px;
+	
+	font-size:16px;
+	text-align:center;
+}

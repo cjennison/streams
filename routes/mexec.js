@@ -18,6 +18,7 @@ exports.exec = function(req, res) {
 		//console.log(runs);
 		res.json(runs);
 		if(runs.length>0) {
+			mexec.saveModelTree(runs,user);
 			mexec.runModels(runs,0,RScriptDir);
 		}
 		

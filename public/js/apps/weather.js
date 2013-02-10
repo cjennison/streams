@@ -182,8 +182,10 @@ Streams.app_control.apps.weather_models = {
 			if(serverResponse.readyState == 4){
 				console.log("READY");
 				clearInterval(checkRespo);
-				Output.runInformation.parseResponse(serverResponse.responseText);
+				var output = Output.runInformation.parseResponse(serverResponse.responseText);
 				Streams.app_control.apps.weather_models.addThumbnail();
+				Status.clearQueueObject(output[0].alias);
+				console.log(output)
 			}
 		},1000)
   	

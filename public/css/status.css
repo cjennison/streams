@@ -41,6 +41,10 @@
 }
 
 #statusBar ul li {
+	-o-transition: all .5s ease-out;
+	-ms-transition: all .5s ease-out;
+	-moz-transition: all .5s ease-out;
+	-webkit-transition: all .5s ease-out;
 	display:inline-block;
 	cursor:pointer;
 	width:100px;
@@ -51,6 +55,11 @@
 	border-width: 2px;
 	border-color: #ffbe57;
 	box-shadow: 1px 5px 14px -3px #4D4D4D;
+	opacity:0;
+}
+
+#statusBar ul li.active{
+	opacity: 1;
 }
 
 #statusBar ul li span{

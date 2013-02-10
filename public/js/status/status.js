@@ -23,12 +23,15 @@ var Status = {
 	
 	addQueue:function(queueObject){
 		var queueList = $("#statusBar ul");
-		var listItem = $("<li></li>");
+		var listItem = $("<li class='statList' alias=" + queueObject.run_alias + "></li>");
 		console.log(queueObject)
 		var name = $("<span class='runtitle'>" + queueObject.run_alias + "</span>")
 		var status = $("<span class='status'>Processing..</span>")
 		$(listItem).append(status);
-				$(listItem).append(name);
+		$(listItem).append(name);
+		
+		$(listItem).bind('click', function(){Status.gotoOutputWithRun(this)});
+
 
 		$(queueList).append(listItem);
 		
@@ -41,7 +44,30 @@ var Status = {
 						$("#statusBar").attr("state", "closed");
 					}, 4000)
 			}
-	}
+			
+			setTimeout(function(){$(listItem).addClass("active")},20);
+	},
 	
+	clearQueueObject:function(runName){
+		console.log(runName);
+		var lists = $(".statList");
+		for(var i = 0;i<lists.length;i++){
+			if($(lists)[i].getAttribute("alias") == runName){
+				var span = $(lists)[i].children[0];
+				console.log($(span).html());
+				$(span).html("Completed");
+				
+				
+			}
+		} 
+	},
+	
+	gotoOutputWithRun:function(info){
+		console.log(info);
+		initOutput();
+		$("#inputWrapper").css("top","-100%");
+		$("#outputWrapper").css("top","0%");
+		$("#graphWrapper").css("top","100%");
+	}
 
 };

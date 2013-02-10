@@ -129,7 +129,7 @@ Streams.app_control.apps.basin = {
 	//Load Saved Basins
 	loadPredefinedBasins();
    
-   function startBasinDialog(){
+   function startBasinDialog(presetValue){
 	   	prompt_header.html('<center><h1>Basin Selection</h1><br><p>Right click the map to select a point to delineate a basin.</p>' + 
 	    	'<br /><p> - OR - </p><br /> <p><h2>Select:</h2> <div class="basinSelect"> <select name="runType" class="selectRun" id="basinSelectDropdown"> ' + 
 	    	' <option value="predef">Predefined Basins</option> <option value="saved">Saved Basins</option>    </select>  <div class="selectImage"></div> </div> </p><hr>'
@@ -143,7 +143,11 @@ Streams.app_control.apps.basin = {
 	     var basinLoader;
 	     $(basinList).css("display", "block");
 	     basinListObject = basinSelect;
-       
+       		basinList.empty();
+
+	     if(presetValue){
+	     	
+	     }
 	     
 	     $(basinSelect).change(function(){
 	     		console.log($(prompt_header).find('#basinSelectDropdown option:selected').val());
@@ -210,17 +214,17 @@ Streams.app_control.apps.basin = {
 		for (var i=0;i<jsonObj.length;i++){
 			console.log(jsonObj[i]);
 			
-      var itemText;
-      if (jsonObj[i].alias) {
-        itemText = jsonObj[i].alias + ' [' + jsonObj[i].basinid + ']';
-      }
-      else {
-        itemText = jsonObj[i].basinid;
-      }
+		      var itemText;
+		      if (jsonObj[i].basin_alias) {
+		        itemText = jsonObj[i].basin_alias + ' [' + jsonObj[i].basin_id + ']';
+		      }
+		      else {
+		        itemText = jsonObj[i].basin_id;
+		      }
 
 			var listItem = $('<li>' + itemText + '</li>');
-			$(listItem).attr("name", jsonObj[i].alias);
-			$(listItem).attr("id", jsonObj[i].basinid);
+			$(listItem).attr("name", jsonObj[i].basin_alias);
+			$(listItem).attr("id", jsonObj[i].basin_id);
 			$(listItem).attr("lat", jsonObj[i].lat);
 			$(listItem).attr("long", jsonObj[i].long);
 			$(listItem).attr("area", jsonObj[i].area);
@@ -245,25 +249,25 @@ Streams.app_control.apps.basin = {
 		prompt_header.fadeIn();
 		console.log(name);
 
-    // Look for basin in basin table or create a new one:
-    var basin;
-    if (basinTable[id]) {
-      basin = basinTable[id];
-    }
-    else {		
-      var basin = new Basin({ name : name, 
-                              id   : id,
-                              lat  : lat,
-                              lng  : long,
-                              area : area });
-
-      // Add the basin to the table of basins:
-      basinTable[basin.id] = basin;
-    }
-
-    // Show the basin layer in the map:
-    basin.showKmlLayer();
-    console.log(basin);
+	    // Look for basin in basin table or create a new one:
+	    var basin;
+	    if (basinTable[id]) {
+	      basin = basinTable[id];
+	    }
+	    else {		
+	      var basin = new Basin({ name : name, 
+	                              id   : id,
+	                              lat  : lat,
+	                              lng  : long,
+	                              area : area });
+	
+	      // Add the basin to the table of basins:
+	      basinTable[basin.id] = basin;
+	    }
+	
+	    // Show the basin layer in the map:
+	    basin.showKmlLayer();
+	    console.log(basin);
 		 
 		//changeView(name, id, lat, long, area);
 		$(prompt).empty();

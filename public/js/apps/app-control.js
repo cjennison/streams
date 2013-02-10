@@ -77,13 +77,13 @@ Streams.app_control = {
   	
   	//this.bindOpen(".basinSelector li .toggle");
   	//this.bindClose(".basinSelector li .toggle");
-  	this.bindBasinOpen();
-  	this.bindBasinClose();
+  	//this.bindBasinOpen();
+  	//this.bindBasinClose();
   	//basinAccordion.accordion(accordionOpts);
   	
   },
   
-  
+  /*
   bindBasinOpen:function(){
   	$(".basinSelector li .toggle").bind("mousedown", function(){
   		if($(".basinSelector li .toggle").attr("state") == "open"){
@@ -105,6 +105,7 @@ Streams.app_control = {
 		}
   	});
   },
+  */
   
   
   // Starts the rendering for each accordion

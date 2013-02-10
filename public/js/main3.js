@@ -7,8 +7,7 @@ Streams.socket = io.connect();
 
 $(function () {
 	
-	//document.body.style.zoom="90%"
-	getUserAccount();
+	
 	
   Streams.view = $('body');
   
@@ -23,12 +22,6 @@ $(function () {
   initNavigation();
   Status.init();
 });
-function getUserAccount(){
-	var basinlist = $.get('/basin/user/list');
-	setTimeout(function(){
-		console.log(basinlist);
-	}, 2000)
-}
 
 function initNavigation(){
 	$("#navigation #inputButton").button({disabled:true});

@@ -29,7 +29,7 @@ exports.getRunResult = function(req,res){
     res.json({msg:"cannot obtain the run result"});
   }
 };
-
+/*
 exports.getRunTree = function(req,res){
   var user = new users.User(req.session.user.name);
   var tree;
@@ -56,9 +56,9 @@ exports.getRunTree = function(req,res){
       child:{
       }
     }
-  };*/
+  };
 };
-
+*/
 
 //get basinid from request
 //return a run tree with basin as root 

@@ -68,27 +68,12 @@ exports.getTreeFromBasin = function(req,res){
     res.json('user invalid,please login');
     return;
   }
-  var tree = {};
   var basinid = req.body.basinid;
-  if(!basinid){
-    res.json('unmatched data structure for basin ID, post basinid=xxx');
-    return;
-  }
-  if(!fs.existsSync(user.dir+'/tree/modelTrees.json')){
-    console.log();
-    res.json('no mode tree record exist: there is no run that has be executed!');
-    return ;
-  }
-  var allruns = fs.readFileSync(user.dir+'/tree/modelTrees.json');
-  if(!allruns){
-    res.json(tree);
-    return;
-  }
-  tree = JSON.parse(allruns);
-  if(tree[basinid]){
-    res.json(allruns[basinid]);
-  }else{
-    console.log('no run is based on the current basin ID: '+basinid);
-    res.json({});
-  }
+  user.getRunTreeFromBasin(basinid,function(err,tree){
+    if(err){
+      res.json(err);
+    }else{
+      res.json(tree);
+    }
+  });
 }

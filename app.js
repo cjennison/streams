@@ -55,7 +55,13 @@ app.get('/weather-model-exec/status', models.weather_model_status);
 */
 // Routes for users:
 app.get('/users/:username/runs', user_routes.getRuns);
-app.post('/user/getreefrompre',user_routes.getRunTree);
+//app.post('/user/getreefrompre',user_routes.getRunTree);
+app.post('/users/script/runs',user_routes.getRunsOfAScript);
+app.post('/users/script/run/result',user_routes.getRunResult);
+//Routes for run Tree
+app.post('/basin/user/gettreefrombasin',user_routes.getTreeFromBasin);
+
+
 // Routes for mexec:
 app.post('/mexec', mexec_routes.exec);
 
@@ -66,6 +72,7 @@ app.get('/basin/user/list', basin_routes.userBasinList);
 app.post('/basin/user/delineate', basin_routes.delineateBasin);
 app.post('/basin/user/set-alias', basin_routes.addBasin_IDAlias);
 
+//Routes for run Tree
 app.post('/basin/user/gettreefrombasin',user_routes.getTreeFromBasin);
 
 // Create the HTTP server:

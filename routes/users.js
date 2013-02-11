@@ -19,8 +19,29 @@ exports.getRuns = function (req, res) {
   }
 };
 
+exports.getRunsOfAScript = function(req,res){
+  var username = req.session.user.name;
+  var scriptname = req.body.scriptname;
+ if (!username) {
+    res.json({ message : 'require a username' });
+  }
+  else if (!users.exists(username)) {
+    res.json({ message : 'user does not exist' });
+  }
+  else {
+    var u = users.lookup(username);    
+    u.getRunsOfAScript(scriptname,function(err,runs){
+      if(err) {
+        res.json(err);
+        return;
+      }
+      res.json(runs);
+    })
+  }
+}
+
 exports.getRunResult = function(req,res){
-  var user = req.session.user;
+  var user = new users.User(req.session.user.name);
   //TODO: may be need to verify a user, but not right now.
   var result = user.getRunResult(req.param.scriptname, req.param.runID);
   if(result){

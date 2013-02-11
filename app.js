@@ -55,7 +55,7 @@ app.get('/weather-model-exec/status', models.weather_model_status);
 */
 // Routes for users:
 app.get('/users/:username/runs', user_routes.getRuns);
-//app.post('/user/getreefrompre',user_routes.getRunTree);
+app.post('/user/getreefrompre',user_routes.getRunTree);
 app.post('/users/script/runs',user_routes.getRunsOfAScript);
 app.post('/users/script/run/result',user_routes.getRunResult);
 //Routes for run Tree

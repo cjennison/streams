@@ -38,7 +38,7 @@ exports.getRunsOfAScript = function(req,res){
       res.json(runs);
     })
   }
-}
+};
 
 exports.getRunResult = function(req,res){
   var user = new users.User(req.session.user.name);

@@ -3,8 +3,16 @@ var mexec = require('../lib/mexec');
 var fs = require('fs');
 var RScriptDir = require('../config/streams.json').ModelsDir +'/r';
 
+var runs = require('../lib/models');
+exports.exec = function (req, res) {
+	var user  = req.session.user;
+  var spec  = req.body.webInfo;
+  var runID = runs.executeRun(user, spec);
+  res.json({ 'runID' : runID });
+};
+
 // Routes for the mexec library.
-exports.exec = function(req, res) {
+exports.exec2 = function(req, res) {
 	var user = new users.User(req.session.user.name);
 	var settings = req.body.webInfo;
 	console.log(settings.climate.n_years)

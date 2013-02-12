@@ -3,5 +3,5 @@
   "version": "0.0.1",
   "author": "Tim Richards <tim.d.richards@gmail.com>",
   "description": "a library for communicating to models.",
-  "main": "./models.js"
+  "main": "./models2.js"
 }

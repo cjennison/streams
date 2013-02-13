@@ -182,16 +182,7 @@ Streams.app_control.apps.weather_models = {
 	
 			"wet_threshold":0
 		},
-		
-		"flow":{
-			"flag":true,
-			"basin_id": "west_brook",
-			"scriptName": "StreamFlowModel",
-			"preceding": {
-				"climate":"weather_generator"
-			}
-
-		}}});
+		}});
 		
 		Status.addQueue(climate);
 		
@@ -200,13 +191,9 @@ Streams.app_control.apps.weather_models = {
 				console.log(serverResponse)
 				clearInterval(checkRespo);
 				var output = Output.runInformation.parseResponse(serverResponse.responseText);
-				Streams.app_control.apps.weather_models.addThumbnail(output[0].run_dir);
-				Streams.app_control.apps.weather_models.getResults(output);
-
-				
-				
+				Streams.app_control.addThumbnail(output[0].run_dir);
+				Streams.app_control.apps.weather_models.getResults(output);				
 				Status.clearQueueObject(output[0].alias);
-				//console.log(output)
 			}
 		},1000)
   	
@@ -227,18 +214,7 @@ Streams.app_control.apps.weather_models = {
 			  	}, 2000)
   },
   
-  addThumbnail:function(dir){
-  	var ullist = $("#thumbnailList");
-  	var list = $("<li>");
-  	var listLine = $("#thumbnailList li");
-  	if(listLine.length > 4) {return;}
-  	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
-  	console.log('http://' + document.location.host + 
-                  '/' + dir + '/thumbnail.svg');
-  	//$(thumb).css("background", "url('http://" + document.location.host + dir + "/thumbnail.svg')");
-  	$(list).append(thumb);
-  	$(ullist).append(list);
-  },
+
   
   /**
    * 

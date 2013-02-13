@@ -317,6 +317,21 @@ Streams.app_control = {
   	} else {
   		console.log(div + " does not have classname: " + className)
   	}
-  }
+  },
+  
+  
+  addThumbnail:function(dir){
+  	var ullist = $("#thumbnailList");
+  	var list = $("<li>");
+  	var listLine = $("#thumbnailList li");
+  	if(listLine.length > 4) {return;}
+  	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
+  	console.log('http://' + document.location.host + 
+                  '/' + dir + '/thumbnail.svg');
+  	//$(thumb).css("background", "url('http://" + document.location.host + dir + "/thumbnail.svg')");
+  	$(list).append(thumb);
+  	$(ullist).append(list);
+  },
+  
   
 };

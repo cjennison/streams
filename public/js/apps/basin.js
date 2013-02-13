@@ -50,7 +50,6 @@ Streams.app_control.apps.basin = {
       this.basinTable[this.id] = this;
       
       Streams.app_control.apps.basin.basin = this;
-      console.log("BASIN");
       console.log(this);
     }
 

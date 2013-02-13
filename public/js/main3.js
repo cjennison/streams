@@ -1,13 +1,15 @@
 /** The main module for the Streams application.
  */
 var Streams = {};
+Streams.user = null;
 
 // Connect to the server using SocketIO:
 Streams.socket = io.connect();
 
 $(function () {
 	
-	
+Streams.user = $(".username").html();
+console.log(Streams.user);
 	
   Streams.view = $('body');
   

@@ -6,7 +6,7 @@ Streams.app_control.apps.weather_models = {
   
   
 	getRuns: function(){
-		var runs = $.get('/users/testuser1/runs');
+		var runs = $.get('/users/' + Streams.user + '/runs');
 		var check = setInterval(function(){
 			console.log(runs);
 			if(runs.readyState == 4){
@@ -39,8 +39,7 @@ Streams.app_control.apps.weather_models = {
     // The message element to display information:
     var msg               = view.find('#message');
     var model = $('div#weather-models-app.application .styledSelect select');
-	console.log(model);
-	//var runData = Streams.app_control.apps.weather_models.getRuns();
+	var runData = Streams.app_control.apps.weather_models.getRuns();
 	
 
 	

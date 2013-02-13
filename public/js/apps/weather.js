@@ -5,7 +5,20 @@ Streams.app_control.apps.weather_models = {
   order: 2,
   
   
-
+	getRuns: function(){
+		var runs = $.get('/users/testuser1/runs');
+		var check = setInterval(function(){
+			console.log(runs);
+			if(runs.readyState == 4){
+				clearInterval(check);
+				console.log(runs);
+				return runs;
+			}
+		}, 2000)
+		return null;
+	},
+	
+	
   /**
    *Starts the Weather Model View 
    */
@@ -27,7 +40,11 @@ Streams.app_control.apps.weather_models = {
     var msg               = view.find('#message');
     var model = $('div#weather-models-app.application .styledSelect select');
 	console.log(model);
+	//var runData = Streams.app_control.apps.weather_models.getRuns();
+	
 
+	
+	
     // Set initial values for the sliders.
     precipSlider1Val.text(1);
     precipSlider2Val.text(1);
@@ -180,14 +197,20 @@ Streams.app_control.apps.weather_models = {
 		
 		var checkRespo = setInterval(function(){
 			if(serverResponse.readyState == 4){
-				console.log("READY");
+				console.log(serverResponse)
 				clearInterval(checkRespo);
 				var output = Output.runInformation.parseResponse(serverResponse.responseText);
-				Streams.app_control.apps.weather_models.addThumbnail();
+				Streams.app_control.apps.weather_models.addThumbnail(output[0].run_dir);
+				Streams.app_control.apps.weather_models.getResults(output);
+
+				
+				
 				Status.clearQueueObject(output[0].alias);
-				console.log(output)
+				//console.log(output)
 			}
 		},1000)
+  	
+  	
   	
   	enableButton("inputButton");
   	enableButton("outputButton");
@@ -197,12 +220,22 @@ Streams.app_control.apps.weather_models = {
     
   },
   
-  addThumbnail:function(){
+  getResults:function(output){
+  	var res = $.post('users/script/run/result', {'script_name':output[0].scriptname, 'run_id':output[0].runid})
+			  	setTimeout(function(){
+			  		console.log(res);
+			  	}, 2000)
+  },
+  
+  addThumbnail:function(dir){
   	var ullist = $("#thumbnailList");
   	var list = $("<li>");
   	var listLine = $("#thumbnailList li");
   	if(listLine.length > 4) {return;}
   	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
+  	console.log('http://' + document.location.host + 
+                  '/' + dir + '/thumbnail.svg');
+  	//$(thumb).css("background", "url('http://" + document.location.host + dir + "/thumbnail.svg')");
   	$(list).append(thumb);
   	$(ullist).append(list);
   },

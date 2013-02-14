@@ -4,7 +4,7 @@ Streams.app_control.apps.basin = {
   name : 'Basin Selection',
   order: 1,
   basinTable: {},
-
+	basin:null,
   currentBasin: undefined,
   
   getBasin : function (basinId) {
@@ -48,6 +48,9 @@ Streams.app_control.apps.basin = {
 
       // Add to the basin table:
       this.basinTable[this.id] = this;
+      
+      Streams.app_control.apps.basin.basin = this;
+      console.log(this);
     }
 
     Basin.prototype.removeFromTable = function () {

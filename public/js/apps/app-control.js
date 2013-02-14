@@ -261,6 +261,8 @@ Streams.app_control = {
 		$('#acc5').css('width', "440px");
 		$('#acc5').parent().attr("state", "open");
 		Streams.app_control.accordionsOpen = 2;
+		
+		Streams.app_control.apps.weather_models.getRuns();
   },
   
   /**
@@ -315,6 +317,21 @@ Streams.app_control = {
   	} else {
   		console.log(div + " does not have classname: " + className)
   	}
-  }
+  },
+  
+  
+  addThumbnail:function(dir){
+  	var ullist = $("#thumbnailList");
+  	var list = $("<li>");
+  	var listLine = $("#thumbnailList li");
+  	if(listLine.length > 4) {return;}
+  	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
+  	console.log('http://' + document.location.host + 
+                  '/' + dir + '/thumbnail.svg');
+  	//$(thumb).css("background", "url('http://" + document.location.host + dir + "/thumbnail.svg')");
+  	$(list).append(thumb);
+  	$(ullist).append(list);
+  },
+  
   
 };

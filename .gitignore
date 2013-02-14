@@ -11,3 +11,6 @@ lib/mexec/a.json
 lib/mexec/buildrunTest.js
 lib/mexec/test
 logs
+cookie.txt
+mexec.json
+mexec.sh

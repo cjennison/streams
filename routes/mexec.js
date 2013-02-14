@@ -11,6 +11,11 @@ exports.exec = function (req, res) {
   res.json({ 'runID' : runID });
 };
 
+exports.check = function (req, res) {
+  var runID = req.body.runID;
+  res.json(runs.checkRunStatus(runID));
+};
+
 // Routes for the mexec library.
 exports.exec2 = function(req, res) {
 	var user = new users.User(req.session.user.name);

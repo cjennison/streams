@@ -58,6 +58,7 @@ app.post('/basin/user/gettreefrombasin',user_routes.getTreeFromBasin);
 
 // Routes for mexec:
 app.post('/mexec', mexec_routes.exec);
+app.post('/mexec/status', mexec_routes.check);
 
 // Routes for basin:
 app.get('/basin/predef'   , basin_routes.preDefinedBasins);

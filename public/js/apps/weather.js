@@ -39,7 +39,7 @@ Streams.app_control.apps.weather_models = {
     // The message element to display information:
     var msg               = view.find('#message');
     var model = $('div#weather-models-app.application .styledSelect select');
-	var runData = Streams.app_control.apps.weather_models.getRuns();
+	//var runData = Streams.app_control.apps.weather_models.getRuns();
 	
 
 	
@@ -164,6 +164,7 @@ Streams.app_control.apps.weather_models = {
   	
 	var serverResponse = $.post('/mexec', {"webInfo": {
 		"climate": {
+			"step": "climate",
 			"flag": climate.flag,
 			"alias": climate.run_alias,
 			"scriptName": climate.scriptName,
@@ -184,18 +185,26 @@ Streams.app_control.apps.weather_models = {
 		}});
 		
 		Status.addQueue(climate);
+	
 		
-		var checkRespo = setInterval(function(){
+		var checkRespo = setTimeout(function(){
 			if(serverResponse.readyState == 4){
 				console.log(serverResponse)
 				clearInterval(checkRespo);
 				var output = Output.runInformation.parseResponse(serverResponse.responseText);
-				Streams.app_control.addThumbnail(output[0].run_dir);
+				console.log(output)
+				
+				var runStatus = $.post('/mexec/status', {"runID":output.runID});
+				
+				Status.runningProcesses.push(runStatus);
+				/*
+				Streams.app_control.addThumbnail(output[0].runID);
 				Streams.app_control.apps.weather_models.getResults(output);				
 				Status.clearQueueObject(output[0].alias);
+				*/
 			}
 		},1000)
-  	
+  		
   	
   	
   	enableButton("inputButton");
@@ -207,10 +216,23 @@ Streams.app_control.apps.weather_models = {
   },
   
   getResults:function(output){
-  	var res = $.post('users/script/run/result', {'script_name':output[0].scriptname, 'run_id':output[0].runid})
-			  	setTimeout(function(){
-			  		console.log(res);
-			  	}, 2000)
+  	
+  },
+  
+  getStatus:function(){
+  	//console.log(statusObject);
+  	//console.log(Status.runningProcesses);
+  	for (var i = 0;i < Status.runningProcesses.length;i++){
+  		//console.log(Status.runningProcesses[i].responseText);
+  		var output = Output.runInformation.parseResponse(Status.runningProcesses[i].responseText);
+  		var obj = Output.runInformation.parseResponse(output);
+  		console.log(output);
+  		console.log(obj);
+  	}
+  	
+  	
+  	
+  	//console.log(output);
   },
   
 

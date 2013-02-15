@@ -37,6 +37,11 @@ Streams.app_control = {
 				console.log(closeableAccordions);
 			}
 		});
+		
+		//Always Run Me
+		var process = setInterval(function(){
+					Streams.app_control.apps.weather_models.getStatus();
+				}, 1000);
    
   },
   
@@ -273,7 +278,7 @@ Streams.app_control = {
 		$('#acc5').parent().attr("state", "open");
 		Streams.app_control.accordionsOpen = 2;
 		
-		Streams.app_control.apps.weather_models.getRuns();
+		//Streams.app_control.apps.weather_models.getRuns();
   },
   
   /**

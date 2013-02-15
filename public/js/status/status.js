@@ -1,5 +1,7 @@
 var Status = {
-
+	
+	runningProcesses: [],
+	
 	init:function(){
 		console.log("INIT STATUS");
 		

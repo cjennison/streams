@@ -176,11 +176,11 @@ var Chart = {
 		function toggle(d) {
 		  if (d.children) {
 		  	d.toggled = false;
-		  	console.log("TOGGLING OFF")
+		  	//console.log("TOGGLING OFF")
 		    d._children = d.children;
 		    d.children = null;
 		  } else {
-		  	console.log("TOGGLING ON");
+		  	//console.log("TOGGLING ON");
 		  	d.toggled = true;
 		    d.children = d._children;
 		    d._children = null;

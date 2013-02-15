@@ -3,6 +3,40 @@ var Status = {
 	init:function(){
 		console.log("INIT STATUS");
 		
+		$("#navBar #navButton").bind('click', function(){
+			if($("#navBar").attr("state") == "closed"){
+				$("#navBar").addClass("active");
+				$("#navBar").attr("state", "open");
+				
+				$(this).bind('mouseout', function(){
+					setTimeout(function(){
+						$("#navBar").removeClass("active");
+						$("#navBar").attr("state", "closed");
+					}, 4000)
+				})
+			} else {
+				$("#navBar").removeClass("active");
+				$("#navBar").attr("state", "closed");
+			}
+		});
+		
+		$("#loginBar #loginButton").bind('click', function(){
+			if($("#loginBar").attr("state") == "closed"){
+				$("#loginBar").addClass("active");
+				$("#loginBar").attr("state", "open");
+				
+				$(this).bind('mouseout', function(){
+					setTimeout(function(){
+						$("#loginBar").removeClass("active");
+						$("#loginBar").attr("state", "closed");
+					}, 4000)
+				})
+			} else {
+				$("#loginBar").removeClass("active");
+				$("#loginBar").attr("state", "closed");
+			}
+		});
+		
 		$("#statusBar #statusButton").bind('click', function(){
 			if($("#statusBar").attr("state") == "closed"){
 				$("#statusBar").addClass("active");

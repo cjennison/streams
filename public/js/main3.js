@@ -26,25 +26,25 @@ console.log(Streams.user);
 });
 
 function initNavigation(){
-	$("#navigation #inputButton").button({disabled:true});
-	$("#navigation #outputButton").button({disabled:false});
-	$("#navigation #graphButton").button({disabled:true});
+	$("#navBar #inputButton").button({disabled:false});
+	$("#navBar #outputButton").button({disabled:false});
+	$("#navBar #graphButton").button({disabled:false});
 	
-	$("#navigation #inputButton").bind("click", function(){
+	$("#navBar #inputButton").bind("click", function(){
 		removeOutput();
 		$("#inputWrapper").css("top","0%");
 		$("#outputWrapper").css("top","100%");
 		$("#graphWrapper").css("top","200%");
 	});
 	
-	$("#navigation #outputButton").bind("click", function(){
+	$("#navBar #outputButton").bind("click", function(){
 		initOutput();
 		$("#inputWrapper").css("top","-100%");
 		$("#outputWrapper").css("top","0%");
 		$("#graphWrapper").css("top","100%");
 	});
 	
-	$("#navigation #graphButton").bind("click", function(){
+	$("#navBar #graphButton").bind("click", function(){
 		removeOutput();
 		initGraph();
 		$("#inputWrapper").css("top","-200%");

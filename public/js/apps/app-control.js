@@ -164,12 +164,17 @@ Streams.app_control = {
   //Disable Steps Controls
   disableSteps: function(){
   		$('#steps-controls').removeClass("active");
+  		for(var i=1;i<=6;i++){
+  			$('#acc' + i + ' .toggle').unbind();
+  		}
+  		/*
   		$('#acc1 .toggle').unbind();
   		$('#acc2 .toggle').unbind();
   		$('#acc3 .toggle').unbind();
   		$('#acc4 .toggle').unbind();
   		$('#acc5 .toggle').unbind();
   		$('#acc6 .toggle').unbind();
+  		*/
   		
   		$('#logos').css("right", "");
 		$('#logos').css("left", "10px");
@@ -202,6 +207,12 @@ Streams.app_control = {
   enableSteps: function(name){
   		//$('#steps-controls').addClass("active");
   		$('#steps-controls').addClass("active");
+  		for(var i=1;i<=6;i++){
+  			this.bindOpen("#acc" + i + " .toggle");
+  			this.bindClose("#acc" + i + " .toggle");
+  			this.bindCloseIcon("#acc" + i + " .custom-ui-icon");
+  		}
+  		/*
   		this.bindOpen("#acc1 .toggle");
 		this.bindOpen("#acc2 .toggle");
 		this.bindOpen("#acc3 .toggle");
@@ -215,7 +226,7 @@ Streams.app_control = {
 		this.bindClose("#acc4 .toggle");
 		this.bindClose("#acc5 .toggle");
 		this.bindClose("#acc6 .toggle");
-		
+		*/
 		$('#logos ul li').css("display", "block");
 		
 		//TODO: Set Classes for each of these
@@ -289,6 +300,19 @@ Streams.app_control = {
 				$(target).parent().css('width', "30px");
 				var activate = setTimeout(function(){
 					$(target).parent().attr("state", "closed");
+				}, 400);
+				Streams.app_control.accordionsOpen--;
+			}
+		});
+  },
+  
+  bindCloseIcon: function(target){
+  	console.log("CLICK ICON")
+		$(target).bind("mousedown", function(){
+			if($(target).parent().parent().parent().attr("state") == "open" ){
+				$(target).parent().parent().parent().css('width', "30px");
+				var activate = setTimeout(function(){
+					$(target).parent().parent().parent().attr("state", "closed");
 				}, 400);
 				Streams.app_control.accordionsOpen--;
 			}

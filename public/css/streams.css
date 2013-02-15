@@ -410,6 +410,16 @@ canvas{
 	display:block;
 }
 
+.application .custom-ui-icon{
+	position: relative;
+	left: 362px;
+	top: 10px;
+	width: 36px;
+	margin-bottom: -46px;
+	height: 36px;
+	background: url('../images/minimize.png');
+	cursor:pointer;
+}
 
 
 

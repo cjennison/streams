@@ -140,7 +140,7 @@ Streams.app_control.apps.basin = {
    function startBasinDialog(presetValue){
 	   	prompt_header.html('<center><h1>Basin Selection</h1>' + 
 	    	' <p><h2>Select:</h2><br> <div class="basinSelect"> <select name="runType" class="selectRun" id="basinSelectDropdown"> ' + 
-	    	' <option value="new">Define a New Basin</option><option value="predef">Predefined Basins</option> <option value="saved">Saved Basins</option>    </select>  <div class="selectImage"></div> </div> </p>'
+	    	' <option value="new">Define a New Basin</option><option value="predef">Predefined Basins</option> <option value="saved">My Saved Basins</option>    </select>  <div class="selectImage"></div> </div> </p>'
 	    	);
 	    basinList.append('<br><center><img style="margin-right:40px" src="images/ajax-loader.gif"/>');
 	

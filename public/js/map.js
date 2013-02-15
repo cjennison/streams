@@ -114,6 +114,7 @@ Streams.map = {
   },
 
   makeKMLLayer : function (url) {
+  	console.log(url);
     return GMap.kml(null, url);
   },
 

@@ -35,12 +35,15 @@ Streams.app_control.apps.basin = {
       // Save the URL in the Basin object:
       this.url  = 'http://' + document.location.host + 
                   '/' + options.id + '/BasinOutline.kml';
+      this.flowUrl  = 'http://' + document.location.host + 
+                  '/' + options.id + '/NHDplusFlowlines.kml';            
       // Load the KML object:
       
       this.thumbnail = 'http://' + document.location.host + 
                   '/' + options.id + '/basin.svg';
       
-      this.kml  = Streams.map.makeKMLLayer(this.url);      
+      this.kml  = Streams.map.makeKMLLayer(this.url);    
+      this.flowKml = Streams.map.makeKMLLayer(this.flowUrl);  
       // Save the map:
       this.map  = Streams.map.getMap();
       // Initially the KML layer is not visible:
@@ -66,6 +69,7 @@ Streams.app_control.apps.basin = {
         return;
       else {
         this.kml.setMap(this.map);
+        this.flowKml.setMap(this.map);
         this.show = true;
       }
     };

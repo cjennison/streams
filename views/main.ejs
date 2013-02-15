@@ -25,10 +25,12 @@
 	<div id="map">
 	</div>
 	
+	<!--
 	<div id="user">
 	  <p>Logged in as <span class="username"><%= user %></span></p>
 	  <a href="../login" style="margin-bottom:-40px">Sign Out</a>
 	</div>
+	-->
 	
 	<div id="basinSelection">
 		<ul class="basinSelector">
@@ -392,9 +394,9 @@
 </div>
 <div id="loginBar" state="closed">
 	<div id="loginButton"> </div>
-	<ul>
-	
-	</ul>
+	 <h3 class="loginstatus">Logged in as <span class="username"><%= user %></span><br>
+	  <a href="../login" style="margin-bottom:-40px">Sign Out</a></h3>
+	 
 </div>
 <div id="statusBar" state="closed">
 	<div id="statusButton"> </div>

@@ -175,7 +175,8 @@ Streams.app_control.apps.basin = {
 	     				break;
 	     				
 	     			case "new":
-	     				basin_view.remove(basinList)
+	     				basinList.empty();
+	     				$(basinList).remove()
 	     				break;
 	     		}
 	     		

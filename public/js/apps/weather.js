@@ -6,7 +6,7 @@ Streams.app_control.apps.weather_models = {
   
   
 	getRuns: function(){
-		var runs = $.get('/users/' + Streams.user + '/runs');
+		var runs = $.post('/users/script/runs', {'scriptname': "weather_generator"});
 		var check = setInterval(function(){
 			console.log(runs);
 			if(runs.readyState == 4){
@@ -39,7 +39,7 @@ Streams.app_control.apps.weather_models = {
     // The message element to display information:
     var msg               = view.find('#message');
     var model = $('div#weather-models-app.application .styledSelect select');
-	//var runData = Streams.app_control.apps.weather_models.getRuns();
+	var runData = Streams.app_control.apps.weather_models.getRuns();
 	
 
 	
@@ -119,7 +119,7 @@ Streams.app_control.apps.weather_models = {
     	console.log("RUN")
       	//runButton.button('option', 'disabled', true);
       	that.run();
-      	setTimeout(statusCheck, 3000);
+      	//setTimeout(statusCheck, 3000);
      	return false;
     });
   

@@ -103,6 +103,7 @@ Streams.app_control.apps.basin = {
     var sim_period	  = $('<div id="sim">');
     var basinList	  = $('<ul id="basinList">');
     var rscript       = $('<div id="rscript">');
+    
     var basinListObject;
     
     var save_message  = $('<div id="save_message">');
@@ -116,7 +117,7 @@ Streams.app_control.apps.basin = {
       .append(prompt_header)
       .append(prompt)
       .append(rscript)
-      .append(basinList)
+      //.append(basinList)
       .append(sim_period)
       .append(save_message);
     this.view = basin_view;
@@ -137,9 +138,9 @@ Streams.app_control.apps.basin = {
 	loadPredefinedBasins();
    
    function startBasinDialog(presetValue){
-	   	prompt_header.html('<center><h1>Basin Selection</h1><br><p>Right click the map to select a point to delineate a basin.</p>' + 
-	    	'<br /><p> - OR - </p><br /> <p><h2>Select:</h2> <div class="basinSelect"> <select name="runType" class="selectRun" id="basinSelectDropdown"> ' + 
-	    	' <option value="predef">Predefined Basins</option> <option value="saved">Saved Basins</option>    </select>  <div class="selectImage"></div> </div> </p><hr>'
+	   	prompt_header.html('<center><h1>Basin Selection</h1>' + 
+	    	' <p><h2>Select:</h2><br> <div class="basinSelect"> <select name="runType" class="selectRun" id="basinSelectDropdown"> ' + 
+	    	' <option value="new">Define a New Basin</option><option value="predef">Predefined Basins</option> <option value="saved">Saved Basins</option>    </select>  <div class="selectImage"></div> </div> </p>'
 	    	);
 	    basinList.append('<br><center><img style="margin-right:40px" src="images/ajax-loader.gif"/>');
 	
@@ -163,12 +164,18 @@ Streams.app_control.apps.basin = {
 	     		switch(basinLoader){
 	     			case "saved":
 	     				console.log("Save");
+	     				basin_view.append(basinList)
 	     				loadSavedBasins();
 	     				break;
 	     				
 	     			case "predef":
 	     				console.log("Predefined");
+	     				basin_view.append(basinList)
 	     				loadPredefinedBasins();
+	     				break;
+	     				
+	     			case "new":
+	     				basin_view.remove(basinList)
 	     				break;
 	     		}
 	     		

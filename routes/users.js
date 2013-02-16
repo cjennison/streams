@@ -30,7 +30,7 @@ exports.getRunsOfAScript = function(req,res){
   }
   else {
     var u = users.lookup(username);    
-    u.getRunsOfAScript(scriptname,function(err,runs){
+    u.getRuns(scriptname,function(err,runs){
       if(err) {
         res.json(err);
         return;

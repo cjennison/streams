@@ -217,8 +217,8 @@ Streams.app_control.apps.weather_models = {
 				var output = Output.runInformation.parseResponse(serverResponse.responseText);
 				console.log(output)
 				
-				var runStatus = $.post('/mexec/status', {"runID":output.runID});
-				
+				var runStatus = $.post('/mexec/status', {"runID":output.runID}).done(function(data) { console.log("I FINISHED!") });
+				runStatus.alias = output.alias;
 				Status.runningProcesses.push(runStatus);
 				/*
 				Streams.app_control.addThumbnail(output[0].runID);
@@ -251,6 +251,22 @@ Streams.app_control.apps.weather_models = {
   		var obj = Output.runInformation.parseResponse(output);
   		console.log(output);
   		console.log(obj);
+  		if(obj.run[0].status == "DONE"){
+  			Status.runningProcesses.splice(i, 1);
+  			var settings = "http://" + document.location.host + '/' + obj.run[0].url + '/settings.json';
+			$.getJSON(settings, function(data){
+				console.log(data);
+				Status.clearQueueObject(data.alias, "COMPLETED");
+			})
+  		} else if(obj.run[0].status == "FAILED"){
+  			Status.runningProcesses.splice(i, 1);
+  			var settings = "http://" + document.location.host + '/' + obj.run[0].url + '/settings.json';
+			$.getJSON(settings, function(data){
+				console.log(data);
+				Status.clearQueueObject(data.alias, "FAILED");
+			})
+  			
+  		}
   	}
   	
   	

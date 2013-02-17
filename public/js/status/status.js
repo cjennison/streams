@@ -84,14 +84,14 @@ var Status = {
 			setTimeout(function(){$(listItem).addClass("active")},20);
 	},
 	
-	clearQueueObject:function(runName){
+	clearQueueObject:function(runName, result){
 		console.log(runName);
 		var lists = $(".statList");
 		for(var i = 0;i<lists.length;i++){
 			if($(lists)[i].getAttribute("alias") == runName){
 				var span = $(lists)[i].children[0];
 				console.log($(span).html());
-				$(span).html("Completed");
+				$(span).html(result);
 				
 				
 			}

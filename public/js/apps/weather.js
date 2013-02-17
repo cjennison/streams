@@ -3,21 +3,36 @@
 Streams.app_control.apps.weather_models = {
   name : 'Weather and Climate Models',
   order: 2,
-  
+  previousRunData: [],
   
 	getRuns: function(){
-		var runs = $.post('/users/script/runs', {'scriptname': "weather_generator"});
+		var runs = $.post('/users/script/runs', {'scriptname': "climate"});
 		var check = setInterval(function(){
-			console.log(runs);
+			//console.log(runs);
 			if(runs.readyState == 4){
 				clearInterval(check);
-				console.log(runs);
+				var parse = Output.runInformation.parseResponse(runs.responseText);
+				Streams.app_control.apps.weather_models.populateRunList(parse);
 				return runs;
 			}
 		}, 2000)
 		return null;
 	},
 	
+	populateRunList:function(rundata){
+		var selectorList = $("#weather-models-app .runTypeSelect .selectRun");
+		for(var i = 0;i < rundata.length;i++){
+			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
+			$.getJSON(settings, function(data){
+				var option = $("<option run-id=" + data.alias + ">" + data.alias + "</option>")
+				$(selectorList).append(option);
+			})
+		}
+		
+		Streams.app_control.apps.weather_models.previousRunData = rundata;
+		
+		
+	},
 	
   /**
    *Starts the Weather Model View 
@@ -35,11 +50,19 @@ Streams.app_control.apps.weather_models = {
     var meanTempChange    = view.find('#mean-temp');
     var meanTempChangeVal = view.find('#mean-temp-value');
     var runButton         = view.find('#run');
-
+    var select			  = view.find(".selectRun")
+	console.log(select)
     // The message element to display information:
     var msg               = view.find('#message');
     var model = $('div#weather-models-app.application .styledSelect select');
-	var runData = Streams.app_control.apps.weather_models.getRuns();
+    var runData = Streams.app_control.apps.weather_models.getRuns();
+    var runInterval = setInterval(function(){
+    	
+    	if(runData != null){
+    		clearInterval(runInterval);
+    		console.log(runData)
+    	}
+    }, 1000)
 	
 
 	

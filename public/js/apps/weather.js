@@ -218,6 +218,7 @@ Streams.app_control.apps.weather_models = {
 				console.log(output)
 				
 				var runStatus = $.post('/mexec/status', {"runID":output.runID}).done(function(data) { console.log("I FINISHED!") });
+			        runStatus.runID = output.runID;
 				runStatus.alias = output.alias;
 				Status.runningProcesses.push(runStatus);
 				/*
@@ -266,7 +267,14 @@ Streams.app_control.apps.weather_models = {
 				Status.clearQueueObject(data.alias, "FAILED");
 			})
   			
-  		}
+  		} else if (obj.run[0].status == "WORKING") {
+		  console.log('WORKING!!!: ' + Status.runningProcesses[i].runID);
+		  var runStatus = $.post('/mexec/status', 
+					 {"runID" : Status.runningProcesses[i].runID})		  
+		    .done(function(data) { console.log("I FINISHED!") });	
+		  runStatus.runID = Status.runningProcesses[i].runID;
+		  Status.runningProcesses[i] = runStatus;
+		}
   	}
   	
   	

@@ -105,7 +105,7 @@ div#logos ul{
 
 div#logos ul li > img {
   display: block;
-  width: 60px;
+
 }
 
 div#logos ul li {
@@ -154,9 +154,17 @@ div#backgroundGraphic{
 }
 
 span#beta {
-  font-family: Arial;
-  font-size: 30px;
-  color: red;
+	width: 60px;
+	vertical-align: middle;
+	font-size: 17px;
+	font-family: sans-serif;
+	color: orangeRed;
+	font-style: italic;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 0.15em 0.15em 0.2em black;
+
+
 }
 
 /* weather app */

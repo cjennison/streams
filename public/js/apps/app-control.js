@@ -351,15 +351,19 @@ Streams.app_control = {
   
   addThumbnail:function(dir){
   	var ullist = $("#thumbnailList");
-  	var list = $("<li>");
-  	var listLine = $("#thumbnailList li");
-  	if(listLine.length > 4) {return;}
-  	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
-  	console.log('http://' + document.location.host + 
-                  '/' + dir + '/thumbnail.svg');
-  	//$(thumb).css("background", "url('http://" + document.location.host + dir + "/thumbnail.svg')");
-  	$(list).append(thumb);
-  	$(ullist).append(list);
+  	//$(ullist).empty();
+  	console.log(dir[0].url);
+  	for(var i = 0;i < dir.length; i++){
+	  	var list = $("<li>");
+	  	var listLine = $("#thumbnailList li");
+	  	if(listLine.length > 4) {return;}
+	  	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
+	  	console.log('http://' + document.location.host + 
+	                  '/' + dir + '/thumbnail.svg');
+	  	$(thumb).css("background", "url('http://" + document.location.host + '/' + dir[i].url + "/thumbnail.svg')");
+	  	$(list).append(thumb);
+	  	$(ullist).append(list);
+  	}
   },
   
   getStatus:function(){
@@ -376,7 +380,8 @@ Streams.app_control = {
   			var settings = "http://" + document.location.host + '/' + obj.run[obj.run.length-1].url + '/settings.json';
 			$.getJSON(settings, function(data){
 				console.log(data);
-				Streams.app_control.addThumbnail(data.runID);
+				Streams.app_control.addThumbnail(obj.run);
+				console.log(obj.run[0].url + " : URLLLLLLLLLLLLLLLL")
 				Status.clearQueueObject(data.alias, "COMPLETED");
 			})
   		} else if(obj.run[0].status == "FAILED"){

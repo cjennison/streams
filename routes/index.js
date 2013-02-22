@@ -12,6 +12,16 @@ exports.main = function (req, res) {
   }
 };
 
+exports.about = function (req, res) {
+  res.render('about.ejs',
+             { 'title' : 'About The Project' });
+};
+
+exports.documentation = function (req, res) {
+  res.render('documentation.ejs',
+             { 'title' : 'Documentation' });
+};
+
 exports.front = function (req, res) {
   res.render('front',
              { 'title' : 'Streams' });

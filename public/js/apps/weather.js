@@ -155,12 +155,14 @@ Streams.app_control.apps.weather_models = {
   	
   	//Passed Variables
   	var scriptName = $(model).val();
-  	var precip_mean_y1 = $('#mean_1').val();
-  	var precip_mean_yn = $('#mean_2').val();
-  	var precip_var_y1 = $('#precip02-value').val();
-  	var temp_mean_y1 = $('#mean_temp_1').val();
-  	var temp_mean_yn = $('#mean_temp_2').val();
+  	var precip_mean_y1 = $('#' + scriptName + ' ' + '#mean_1').val();
+  	var precip_mean_yn = $('#' + scriptName + ' ' + '#mean_2').val();
+  	var precip_var_y1 = $('#' + scriptName + ' ' + '#precip02-value').val();
+  	var temp_mean_y1 = $('#' + scriptName + ' ' + '#mean_temp_1').val();
+  	var temp_mean_yn = $('#' + scriptName + ' ' + '#mean_temp_2').val();
   	var n_years = Streams.yearRange || 30;
+  	  	console.log(precip_mean_y1);
+
   	var basin_id = Streams.app_control.apps.basin.basin.id;
   	var run_alias = $('div#weather-models-app.application .runModel .runInput').val();
   	
@@ -239,48 +241,50 @@ Streams.app_control.apps.weather_models = {
     
   },
   
+  
+  getClimateInformation:function(){
+  	var model = $('div#weather-models-app.application .styledSelect select');
+  	
+  	//Passed Variables
+  	var scriptName = $(model).val();
+  	var precip_mean_y1 = $('#' + scriptName + ' ' + '#mean_1').val();
+  	var precip_mean_yn = $('#' + scriptName + ' ' + '#mean_2').val();
+  	var precip_var_y1 = $('#' + scriptName + ' ' + '#precip02-value').val();
+  	var temp_mean_y1 = $('#' + scriptName + ' ' + '#mean_temp_1').val();
+  	var temp_mean_yn = $('#' + scriptName + ' ' + '#mean_temp_2').val();
+  	var n_years = Streams.yearRange || 30;
+  	  	console.log(precip_mean_y1);
+
+  	var basin_id = Streams.app_control.apps.basin.basin.id;
+  	var run_alias = $('div#weather-models-app.application .runModel .runInput').val();
+  	
+  	if(run_alias == "" || run_alias == " Enter a run name"){
+  		run_alias = Math.ceil(Math.random()*100000);
+  	}
+  	
+  	console.log(run_alias);
+  	
+  	var climate = {	flag:true,
+  					scriptName:scriptName,
+  					basin_id:basin_id,
+  					precip_mean_y1:precip_mean_y1,
+  					precip_mean_yn:precip_mean_yn,
+  					precip_var_y1:precip_var_y1,
+  					precip_var_yn:precip_var_y1,
+  					temp_mean_y1:temp_mean_y1,
+  					temp_mean_yn:temp_mean_yn,
+  					n_years:n_years,
+  					run_alias:run_alias};
+  					
+  	return climate;
+  },
+  
+  
   getResults:function(output){
   	
   },
   
-  getStatus:function(){
-  	//console.log(statusObject);
-  	//console.log(Status.runningProcesses);
-  	for (var i = 0;i < Status.runningProcesses.length;i++){
-  		//console.log(Status.runningProcesses[i].responseText);
-  		var output = Output.runInformation.parseResponse(Status.runningProcesses[i].responseText);
-  		var obj = Output.runInformation.parseResponse(output);
-  		console.log(output);
-  		console.log(obj);
-  		if(obj.run[0].status == "DONE"){
-  			Status.runningProcesses.splice(i, 1);
-  			var settings = "http://" + document.location.host + '/' + obj.run[0].url + '/settings.json';
-			$.getJSON(settings, function(data){
-				console.log(data);
-				Status.clearQueueObject(data.alias, "COMPLETED");
-			})
-  		} else if(obj.run[0].status == "FAILED"){
-  			Status.runningProcesses.splice(i, 1);
-  			var settings = "http://" + document.location.host + '/' + obj.run[0].url + '/settings.json';
-			$.getJSON(settings, function(data){
-				console.log(data);
-				Status.clearQueueObject(data.alias, "FAILED");
-			})
-  			
-  		} else if (obj.run[0].status == "WORKING") {
-		  console.log('WORKING!!!: ' + Status.runningProcesses[i].runID);
-		  var runStatus = $.post('/mexec/status', 
-					 {"runID" : Status.runningProcesses[i].runID})		  
-		    .done(function(data) { console.log("I FINISHED!") });	
-		  runStatus.runID = Status.runningProcesses[i].runID;
-		  Status.runningProcesses[i] = runStatus;
-		}
-  	}
-  	
-  	
-  	
-  	//console.log(output);
-  },
+  
   
 
   

@@ -40,7 +40,7 @@ Streams.app_control = {
 		
 		//Always Run Me
 		var process = setInterval(function(){
-					Streams.app_control.apps.weather_models.getStatus();
+					Streams.app_control.getStatus();
 				}, 1000);
    
   },
@@ -362,5 +362,44 @@ Streams.app_control = {
   	$(ullist).append(list);
   },
   
+  getStatus:function(){
+  	//console.log(statusObject);
+  	//console.log(Status.runningProcesses);
+  	for (var i = 0;i < Status.runningProcesses.length;i++){
+  		//console.log(Status.runningProcesses[i].responseText);
+  		var output = Output.runInformation.parseResponse(Status.runningProcesses[i].responseText);
+  		var obj = Output.runInformation.parseResponse(output);
+  		console.log(output);
+  		console.log(obj);
+  		if(obj.run[0].status == "DONE"){
+  			Status.runningProcesses.splice(i, 1);
+  			var settings = "http://" + document.location.host + '/' + obj.run[obj.run.length-1].url + '/settings.json';
+			$.getJSON(settings, function(data){
+				console.log(data);
+				Streams.app_control.addThumbnail(data.runID);
+				Status.clearQueueObject(data.alias, "COMPLETED");
+			})
+  		} else if(obj.run[0].status == "FAILED"){
+  			Status.runningProcesses.splice(i, 1);
+  			var settings = "http://" + document.location.host + '/' + obj.run[obj.run.length-1].url + '/settings.json';
+			$.getJSON(settings, function(data){
+				console.log(data);
+				Status.clearQueueObject(data.alias, "FAILED");
+			})
+  			
+  		} else if (obj.run[0].status == "WORKING") {
+		  console.log('WORKING!!!: ' + Status.runningProcesses[i].runID);
+		  var runStatus = $.post('/mexec/status', 
+					 {"runID" : Status.runningProcesses[i].runID})		  
+		    .done(function(data) { console.log("I FINISHED!") });	
+		  runStatus.runID = Status.runningProcesses[i].runID;
+		  Status.runningProcesses[i] = runStatus;
+		}
+  	}
+  	
+  	
+  	
+  	//console.log(output);
+  },
   
 };

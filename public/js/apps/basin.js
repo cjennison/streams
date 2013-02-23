@@ -6,6 +6,7 @@ Streams.app_control.apps.basin = {
   basinTable: {},
 	basin:null,
   currentBasin: undefined,
+  basinThumbnail: null,
   
   getBasin : function (basinId) {
     return this.basinTable[basinId];
@@ -31,6 +32,8 @@ Streams.app_control.apps.basin = {
       this.lat  = options.lat  || undefined;
       this.lng  = options.lng  || undefined;
       this.area = options.area || undefined;
+
+	  this.hideKmlLayer();
 
       // Save the URL in the Basin object:
       this.url  = 'http://' + document.location.host + 
@@ -75,7 +78,9 @@ Streams.app_control.apps.basin = {
     };
 
     Basin.prototype.hideKmlLayer = function () {
+    	if(this.kml == undefined){ return; }
       this.kml.setMap(null);
+       this.flowKml.setMap(null);
       this.show = false;
     };
 
@@ -281,6 +286,7 @@ Streams.app_control.apps.basin = {
 	    }
 	
 	    // Show the basin layer in the map:
+	    basin.hideKmlLayer();
 	    basin.showKmlLayer();
 	    console.log(basin);
 		 
@@ -398,7 +404,9 @@ Streams.app_control.apps.basin = {
       // Return if a basin lookup is in progress:
       if (disableHandlers)
         return;
-      
+        if(Streams.app_control.apps.basin.basin != null){
+      		Streams.app_control.apps.basin.basin.hideKmlLayer();
+		}
       basinList.empty();
       
       // Disable handlers:
@@ -483,6 +491,9 @@ Streams.app_control.apps.basin = {
 
               // Close the info window:
               Streams.map.closeInfoWindow(info);
+			  
+			  
+	    basin.hideKmlLayer();
 
               // Show the KML layer in the map:
               basin.showKmlLayer();

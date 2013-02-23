@@ -351,7 +351,9 @@ Streams.app_control = {
   
   addThumbnail:function(dir){
   	var ullist = $("#thumbnailList");
-  	//$(ullist).empty();
+  	$(ullist).empty();
+  	var basinThumb = $('<li><div class="svgDisplay" style="background:url(' + Streams.app_control.apps.basin.basin.thumbnail + '); background-size:100% 100%" id="basinSvg"></div></li>');
+  	$(ullist).append(basinThumb);
   	console.log(dir[0].url);
   	for(var i = 0;i < dir.length; i++){
 	  	var list = $("<li>");

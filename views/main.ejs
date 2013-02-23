@@ -53,27 +53,27 @@
 						  </select>
 						  <div class="selectImage"></div>
 					  </div>
+					  
 					  <p style="float:left;width:50px;margin-left:18px"> Model: </p>
 					  <div class="styledSelect">
 						 <select name="fishpopulation" class="selectRun">
-						  <option value="IPM_WB_trout">IPM WB Trout</option>
-						  <option value="IPM_WB_salmon">IPM WB Salmon</option>
+						  <option value="WB_matrix_trout">Trout Pop. Growth Sensitivity</option>
+						  <option value="IPM_WB_salmon">Salmon Pop. Growth Model</option>
 						  </select>
 						  <div class="selectImage"></div>
 					  </div>
 					   <div class="app_content">
-				            <div id="IPM_WB_trout" class="app active">
+				            <div id="WB_matrix_trout" class="app">
 							   
-							   </div>
-							    <div id="IPM_WB_salmon" class="app">
+							</div>
+							   
+							<div id="IPM_WB_salmon" class="app">
 							   		<p>Stocking Stage (% change): <span class="stockingNumber">50</span>
 			             			<div class="stockingslider1"></div>
 			             			<p>Stocking Count (% change): <span class="countNumber">50</span>
 			             			<div class="countslider1"></div>
-							   </div>
-							   <div id="IPM_WB_salmon" class="app">
+							</div>
 							   
-							   </div>
 				       </div>
 					  <br>
 					  <p>
@@ -185,6 +185,15 @@
 						  <div class="selectImage"></div>
 					  </div>
 					  <div class="app_content">
+					  Emissions <div class="styledSelect" id="emissions" style="left:50px">
+						 <select name="land" class="emissionsModel" >
+						  <option value="A2">Higher CO2 Levels</option>
+						  <option value="A1b">Middle CO2 Levels</option>
+						  <option value="B1">Lower CO2 Levels</option>
+					  
+						  </select>
+						  <div class="selectImage"></div>
+					  </div>
 					  <!-- No Longer in Use
 			             <p>Riparian cover (% change): <span class="riparianNumber">50</span>%
 			             <div class="riparianslider1"></div>

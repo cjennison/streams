@@ -122,6 +122,7 @@ Streams.app_control.apps.environmental_models = {
 		"land": {
 			"step": "land",
 			"scriptName":prec_LandInformation.scriptName,
+			"scenario":prec_LandInformation.scenario,
 			"alias":prec_LandInformation.run_alias,
 		},
 		
@@ -163,4 +164,29 @@ Streams.app_control.apps.environmental_models = {
   	enableButton("outputButton");
   	enableButton("graphButton");
   },
+  
+   getFlowInformation:function(){
+  	var model = $('div#environment-models-app.application .styledSelect select');
+  	
+  	//Passed Variables
+  	var scriptName = $(model).val();
+
+	//Get Basin ID and ALIAS
+  	var basin_id = Streams.app_control.apps.basin.basin.id;
+  	var run_alias = $('div#environment-models-app.application .runModel .runInput').val();
+  	
+  	//if Basin Alias is null, create a name for them
+  	if(run_alias == "" || run_alias == " Enter a run name"){
+  		run_alias = Math.ceil(Math.random()*100000);
+  	}
+  	
+  	//Create sending Object
+  	var flow = {	flag:true,
+  					scriptName:scriptName,
+  					basin_id:basin_id,
+  					run_alias:run_alias
+  					};
+  					
+  	return flow;
+  }
 };

@@ -194,7 +194,7 @@ Streams.app_control.apps.basin = {
 	     		
 	     });
      
-    //changeView("name", 'id');
+   		//changeView("name", 'id');
 
    }
    //Starts Loading JSON Object from server
@@ -408,6 +408,7 @@ Streams.app_control.apps.basin = {
     //Loads Basin Delineation
     function rightClickEvent (event) {
     	resetPrompt();
+    	$(information).empty();
       // Return if a basin lookup is in progress:
       if (disableHandlers)
         return;

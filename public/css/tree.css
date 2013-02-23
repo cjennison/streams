@@ -132,15 +132,36 @@ a:hover {
 }
 
 #thumbnailList{
-	position:absolute;
-	list-style-type: none;	
-	bottom: 130px;
-	left: 10px;
+	position: absolute;
+	list-style-type: none;
+	width: 1400px;
+	bottom: 150px;
+	left: 50%;
+	margin-left: -776px;
 }
 
 #thumbnailList li{
 	display:inline-block;
 	margin-left:10px;
+}
+#thumbLabels{
+	position: absolute;
+	bottom: 262px;
+	list-style-type: none;
+	width: 1200px;
+	left: 50%;
+	margin-left: -629px;
+}
+
+#thumbLabels li{
+	display:inline-block;
+	font-weight:900;
+	margin-left:163px;
+}
+
+#thumbLabels li:first-child{
+	display:inline-block;
+	margin-left:0px;
 }
 
 #climateSvg{

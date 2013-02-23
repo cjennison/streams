@@ -213,7 +213,11 @@ Streams.app_control = {
   		//$('#steps-controls').addClass("active");
   		$('#steps-controls').addClass("active");
   		for(var i=1;i<=6;i++){
-  			this.bindOpen("#acc" + i + " .toggle");
+  			var amt = 440;
+  			if(i == 5){
+  				amt = 300
+  			}
+  			this.bindOpen("#acc" + i + " .toggle", amt);
   			this.bindClose("#acc" + i + " .toggle");
   			this.bindCloseIcon("#acc" + i + " .custom-ui-icon");
   		}
@@ -274,7 +278,7 @@ Streams.app_control = {
 		
 		$('#acc1').css('width', "440px");
 		$('#acc1').parent().attr("state", "open");
-		$('#acc5').css('width', "440px");
+		$('#acc5').css('width', "300px");
 		$('#acc5').parent().attr("state", "open");
 		Streams.app_control.accordionsOpen = 2;
 		
@@ -284,10 +288,10 @@ Streams.app_control = {
   /**
    *Binds the target to open itself 
    */
-  bindOpen: function(target){
+  bindOpen: function(target, amt){
 		$(target).bind('mousedown', function(event){
 			if($(target).parent().attr("state") == "closed" && Streams.app_control.accordionsOpen < Streams.app_control.accordionLimit){
-				$(target).parent().css('width', "440px");
+				$(target).parent().css('width', amt + "px");
 				var activate = setTimeout(function(){
 					$(target).parent().attr("state", "open");
 				}, 400);

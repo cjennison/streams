@@ -309,7 +309,7 @@ div#steps-control{
 .steps{
 	position:absolute;
 		
-	right:272px;
+	right:310px;
 	top:10px;
 	opacity:1;
 	
@@ -430,6 +430,9 @@ canvas{
 }
 
 
-
+#info{
+	width:300px;
+	text-align:center;
+}
 
 

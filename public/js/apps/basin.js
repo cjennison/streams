@@ -105,6 +105,7 @@ Streams.app_control.apps.basin = {
     var message       = $('<div id="msg">');
     var prompt_header = $('<div id="prompt_header">');
     var prompt        = $('<div id="prompt">');
+    var information   = $('<div id="info">')
     var sim_period	  = $('<div id="sim">');
     var basinList	  = $('<ul id="basinList">');
     var rscript       = $('<div id="rscript">');
@@ -122,6 +123,7 @@ Streams.app_control.apps.basin = {
       .append(prompt_header)
       .append(prompt)
       .append(rscript)
+      .append(information)
       //.append(basinList)
       .append(sim_period)
       .append(save_message);
@@ -149,7 +151,9 @@ Streams.app_control.apps.basin = {
 	    	);
 	    basinList.append('<br><center><img style="margin-right:40px" src="images/ajax-loader.gif"/>');
 	
-	    	
+	    	$(information).empty();
+	    	$(information).append("Right Click the Map to Delineate a Basin")
+
 	     $(".panelBackground").css("opacity", "0");
 	     
 	     var basinSelect = $(prompt_header).find("#basinSelectDropdown");
@@ -163,6 +167,8 @@ Streams.app_control.apps.basin = {
 	     }
 	     
 	     $(basinSelect).change(function(){
+	     		$(information).empty();
+
 	     		console.log($(prompt_header).find('#basinSelectDropdown option:selected').val());
 	     		basinLoader = $(prompt_header).find('#basinSelectDropdown option:selected').val();
 	     		
@@ -181,13 +187,14 @@ Streams.app_control.apps.basin = {
 	     				
 	     			case "new":
 	     				basinList.empty();
+	     				$(information).append("Right Click the Map to Delineate a Basin")
 	     				$(basinList).remove()
 	     				break;
 	     		}
 	     		
 	     });
      
-    changeView("name", 'id');
+    //changeView("name", 'id');
 
    }
    //Starts Loading JSON Object from server

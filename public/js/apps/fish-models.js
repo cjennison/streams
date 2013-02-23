@@ -68,7 +68,7 @@ Streams.app_control.apps.fish_models = {
     
     this.view = view;
     
-       var that = this;
+    var that = this;
 
     $(runbutton).bind('click', function(){
     	that.run();

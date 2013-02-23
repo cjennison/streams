@@ -95,7 +95,22 @@ var Status = {
 				
 				
 			}
-		} 
+		}
+		
+		
+		
+		
+				$("#statusBar").addClass("active");
+				$("#statusBar").attr("state", "open");
+				
+				$(this).bind('mouseout', function(){
+					setTimeout(function(){
+						$("#statusBar").removeClass("active");
+						$("#statusBar").attr("state", "closed");
+					}, 4000)
+				})
+			
+	 
 	},
 	
 	gotoOutputWithRun:function(info){

@@ -125,14 +125,14 @@ Streams.app_control.apps.land_use_models = {
   run : function () {
   	
   	
-  	var model = $('div#weather-models-app.application .styledSelect select');
+  	var model = $('div#land-use-models-app.application .styledSelect select');
   	
   	//Passed Variables
   	var scriptName = $(model).val();
 
 	//Get Basin ID and ALIAS
   	var basin_id = Streams.app_control.apps.basin.basin.id;
-  	var run_alias = $('div#weather-models-app.application .runModel .runInput').val();
+  	var run_alias = $('div#land-use-models-app.application .runModel .runInput').val();
   	
   	//if Basin Alias is null, create a name for them
   	if(run_alias == "" || run_alias == " Enter a run name"){
@@ -207,9 +207,30 @@ Streams.app_control.apps.land_use_models = {
   	enableButton("inputButton");
   	enableButton("outputButton");
   	enableButton("graphButton");
-  	
+  },
   
-    
+  getLandInformation:function(){
+  	var model = $('div#weather-models-app.application .styledSelect select');
+  	
+  	//Passed Variables
+  	var scriptName = $(model).val();
+
+	//Get Basin ID and ALIAS
+  	var basin_id = Streams.app_control.apps.basin.basin.id;
+  	var run_alias = $('div#weather-models-app.application .runModel .runInput').val();
+  	
+  	//if Basin Alias is null, create a name for them
+  	if(run_alias == "" || run_alias == " Enter a run name"){
+  		run_alias = Math.ceil(Math.random()*100000);
+  	}
+  	
+  	//Create sending Object
+  	var land = {	flag:true,
+  					scriptName:scriptName,
+  					basin_id:basin_id,
+  					run_alias:run_alias
+  					};
+  	return land;
   }
   
 }

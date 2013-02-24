@@ -10,7 +10,7 @@ Streams.app_control.apps.stream_flow_models = {
 			if(runs.readyState == 4){
 				clearInterval(check);
 				var parse = Output.runInformation.parseResponse(runs.responseText);
-				Streams.app_control.apps.weather_models.populateRunList(parse);
+				Streams.app_control.apps.stream_flow_models.populateRunList(parse);
 				return runs;
 				
 			}
@@ -28,7 +28,7 @@ Streams.app_control.apps.stream_flow_models = {
 			})
 		}
 		
-		Streams.app_control.apps.weather_models.previousRunData = rundata;
+		Streams.app_control.apps.stream_flow_models.previousRunData = rundata;
 		
 		
 	},
@@ -41,7 +41,7 @@ Streams.app_control.apps.stream_flow_models = {
     $(view).addClass("application");
     
     var model = $('div#streamtemp-flow-app.application .styledSelect select.selectRun');
-	var runData = Streams.app_control.apps.land_use_models.getRuns();
+	var runData = Streams.app_control.apps.stream_flow_models.getRuns();
     var runInterval = setInterval(function(){
     	
     	if(runData != null){

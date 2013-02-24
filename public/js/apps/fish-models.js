@@ -1,6 +1,39 @@
 Streams.app_control.apps.fish_models = {
   name : 'Fish Population Models',
   order: 5,
+  previousRunData: [],
+  
+  getRuns: function(){
+		var runs = $.post('/users/script/runs', {'scriptname': "population"});
+		var check = setInterval(function(){
+			//console.log(runs);
+			if(runs.readyState == 4){
+				clearInterval(check);
+				var parse = Output.runInformation.parseResponse(runs.responseText);
+				Streams.app_control.apps.fish_models.populateRunList(parse);
+				return runs;
+				
+			}
+		}, 2000)
+		return null;
+	},
+	
+	populateRunList:function(rundata){
+		var selectorList = $("#fish-models-app .runTypeSelect .selectRun");
+		for(var i = 0;i < rundata.length;i++){
+			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
+			$.getJSON(settings, function(data){
+				var option = $("<option run-id=" + data.alias + ">" + data.alias + "</option>")
+				$(selectorList).append(option);
+			})
+		}
+		
+		Streams.app_control.apps.fish_models.previousRunData = rundata;
+		
+		
+	},
+  
+  
   init : function () {
     // Nothing in context yet!
     var context = { };
@@ -15,6 +48,17 @@ Streams.app_control.apps.fish_models = {
     var stockingNumber = view.find('.stockingNumber');
     var countslider1 = view.find('.countslider1');
     var countNumber = view.find('.countNumber');
+    
+    
+    var runData = Streams.app_control.apps.fish_models.getRuns();
+
+    var runInterval = setInterval(function(){
+    	
+    	if(runData != null){
+    		clearInterval(runInterval);
+    		console.log(runData)
+    	}
+    }, 1000)
     
     var runbutton = view.find('#run');
     

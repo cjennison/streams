@@ -10,7 +10,7 @@ Streams.app_control.apps.land_use_models = {
 			if(runs.readyState == 4){
 				clearInterval(check);
 				var parse = Output.runInformation.parseResponse(runs.responseText);
-				Streams.app_control.apps.weather_models.populateRunList(parse);
+				Streams.app_control.apps.land_use_models.populateRunList(parse);
 				return runs;
 				
 			}
@@ -28,7 +28,7 @@ Streams.app_control.apps.land_use_models = {
 			})
 		}
 		
-		Streams.app_control.apps.weather_models.previousRunData = rundata;
+		Streams.app_control.apps.land_use_models.previousRunData = rundata;
 		
 		
 	},

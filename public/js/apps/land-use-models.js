@@ -28,9 +28,11 @@ Streams.app_control.apps.land_use_models = {
 			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
 			$.getJSON(settings, function(data){
 				console.log(data);
-				var option = $("<option run-id=" + data.alias + " basin_id=" + data.basin_id + " scriptName=" + data.scriptName + " scenario=" + data.scenario + ">" + data.alias + "</option>")
-				$(option).rundata = data;				
-				$(selectorList).append(option);
+				if(data.basin_id == Streams.app_control.apps.basin.basinId){
+					var option = $("<option run-id=" + data.alias + " basin_id=" + data.basin_id + " scriptName=" + data.scriptName + " scenario=" + data.scenario + ">" + data.alias + "</option>")
+					$(option).rundata = data;				
+					$(selectorList).append(option);
+				}
 			})
 		}
 		
@@ -128,6 +130,7 @@ Streams.app_control.apps.land_use_models = {
     
     var riparianNumber = view.find('.riparianNumber');
     var surfaceNumber = view.find('.surfaceNumber');
+    /*
     var runData = Streams.app_control.apps.land_use_models.getRuns();
     var runInterval = setInterval(function(){
     	
@@ -136,6 +139,7 @@ Streams.app_control.apps.land_use_models = {
     		console.log(runData)
     	}
     }, 1000)
+    */
     
      var that = this;
     

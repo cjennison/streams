@@ -28,9 +28,11 @@ Streams.app_control.apps.environmental_models = {
 			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
 			$.getJSON(settings, function(data){
 				console.log(data);
+				if(data.basin_id == Streams.app_control.apps.basin.basinId){
 				var option = $("<option run-id=" + data.alias + " basin_id=" + data.basin_id + " scriptName=" + data.scriptName + ">" + data.alias + "</option>")
 				$(option).rundata = data;				
 				$(selectorList).append(option);
+				}
 			})
 		}
 		
@@ -119,6 +121,8 @@ Streams.app_control.apps.environmental_models = {
    var view = $('#environmental-models-app');
    console.log(view);
    $(view).addClass("application");
+       
+       /*
        var runData = Streams.app_control.apps.environmental_models.getRuns();
 
     var runInterval = setInterval(function(){
@@ -128,7 +132,7 @@ Streams.app_control.apps.environmental_models = {
     		console.log(runData)
     	}
     }, 1000)
-    
+    */
      var that = this;
     var runbutton = view.find('#run');
     

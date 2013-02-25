@@ -28,10 +28,13 @@ Streams.app_control.apps.weather_models = {
 			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
 			$.getJSON(settings, function(data){
 				console.log(data);
+				if(data.basin_id == Streams.app_control.apps.basin.basinId){
+					var option = $("<option run-id=" + data.alias + " basin_id=" + data.basin_id +" n_years=" + data.n_years + " scriptName=" + data.scriptName + " precip_mean_y1=" + data.precip_mean_y1 + " precip_mean_yn=" + data.precip_mean_yn + " precip_var_y1=" + data.precip_var_y1 +" precip_var_yn=" + data.precip_var_yn + " temp_mean_y1=" + data.temp_mean_y1 + " temp_mean_yn=" + data.temp_mean_yn + ">" + data.alias + "</option>")
+					$(option).rundata = data;
+					$(selectorList).append(option);
+					console.log("I MATCH")
+				}
 				
-				var option = $("<option run-id=" + data.alias + " basin_id=" + data.basin_id +" n_years=" + data.n_years + " scriptName=" + data.scriptName + " precip_mean_y1=" + data.precip_mean_y1 + " precip_mean_yn=" + data.precip_mean_yn + " precip_var_y1=" + data.precip_var_y1 +" precip_var_yn=" + data.precip_var_yn + " temp_mean_y1=" + data.temp_mean_y1 + " temp_mean_yn=" + data.temp_mean_yn + ">" + data.alias + "</option>")
-				$(option).rundata = data;
-				$(selectorList).append(option);
 			})
 		}
 		
@@ -119,6 +122,8 @@ Streams.app_control.apps.weather_models = {
 	  	
 	  	$(model).prop("disabled", false)
 	  },
+	  
+	  
 	
   /**
    *Starts the Weather Model View 
@@ -141,6 +146,7 @@ Streams.app_control.apps.weather_models = {
     // The message element to display information:
     var msg               = view.find('#message');
     var model = $('div#weather-models-app.application .styledSelect select');
+   /*
     var runData = Streams.app_control.apps.weather_models.getRuns();
     var runInterval = setInterval(function(){
     	
@@ -150,7 +156,7 @@ Streams.app_control.apps.weather_models = {
     	}
     }, 1000)
 	
-	
+	*/
 	
 	
     // Set initial values for the sliders.

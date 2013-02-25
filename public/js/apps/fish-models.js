@@ -23,8 +23,10 @@ Streams.app_control.apps.fish_models = {
 		for(var i = 0;i < rundata.length;i++){
 			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
 			$.getJSON(settings, function(data){
+				if(data.basin_id == Streams.app_control.apps.basin.basinId){
 				var option = $("<option run-id=" + data.alias + ">" + data.alias + "</option>")
 				$(selectorList).append(option);
+				}
 			})
 		}
 		
@@ -137,7 +139,7 @@ Streams.app_control.apps.fish_models = {
     var countslider1 = view.find('.countslider1');
     var countNumber = view.find('.countNumber');
     
-    
+    /*
     var runData = Streams.app_control.apps.fish_models.getRuns();
 
     var runInterval = setInterval(function(){
@@ -147,6 +149,7 @@ Streams.app_control.apps.fish_models = {
     		console.log(runData)
     	}
     }, 1000)
+    */
     
     var runbutton = view.find('#run');
     

@@ -281,7 +281,7 @@ Streams.app_control = {
 		$('#acc5').css('width', "300px");
 		$('#acc5').parent().attr("state", "open");
 		Streams.app_control.accordionsOpen = 2;
-		
+		Streams.app_control.apps.weather_models.getRuns();
 		//Streams.app_control.apps.weather_models.getRuns();
   },
   

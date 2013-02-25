@@ -5,8 +5,10 @@ Streams.app_control.apps.basin = {
   order: 1,
   basinTable: {},
 	basin:null,
+	basinId:null,
   currentBasin: undefined,
   basinThumbnail: null,
+  basinTree:null,
   
   getBasin : function (basinId) {
     return this.basinTable[basinId];
@@ -32,7 +34,7 @@ Streams.app_control.apps.basin = {
       this.lat  = options.lat  || undefined;
       this.lng  = options.lng  || undefined;
       this.area = options.area || undefined;
-
+	  Streams.app_control.apps.basin.basinId = this.id;
 	  this.hideKmlLayer();
 
       // Save the URL in the Basin object:
@@ -228,6 +230,9 @@ Streams.app_control.apps.basin = {
 				console.log(jsonObj);
 				this.clearInterval();
 				displayLoadedBasins(jsonObj);
+				
+				
+				
 			} else {
 				checkCompletedLoad(jsonGetObject)
 			}
@@ -342,6 +347,18 @@ Streams.app_control.apps.basin = {
 		//Streams.app_control.initSteps();
 		Streams.app_control.enableSteps(basin.name ? basin.name : basin.id);
 		//basinList.empty();
+		var basintree = $.post('/basin/user/gettreefrombasin', {"basinid":basin.id}).done(function(data){
+			console.log(data);
+		})
+		
+		var basininterval = setTimeout(function(){
+			console.log(basintree);
+			var outputTree = Output.runInformation.parseResponse(basintree.responseText);
+			console.log(outputTree)
+		},8000);
+		
+		
+		
 		prompt_header.html('<br><h2><center>Basin: ' + 
                        (basin.name ? basin.name : basin.id) +
                        '</h2>');

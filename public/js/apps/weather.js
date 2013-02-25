@@ -24,15 +24,98 @@ Streams.app_control.apps.weather_models = {
 		for(var i = 0;i < rundata.length;i++){
 			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
 			$.getJSON(settings, function(data){
-				var option = $("<option run-id=" + data.alias + ">" + data.alias + "</option>")
+				console.log(data);
+				
+				var option = $("<option run-id=" + data.alias + " basin_id=" + data.basin_id +" n_years=" + data.n_years + " scriptName=" + data.scriptName + " precip_mean_y1=" + data.precip_mean_y1 + " precip_mean_yn=" + data.precip_mean_yn + " precip_var_y1=" + data.precip_var_y1 +" precip_var_yn=" + data.precip_var_yn + " temp_mean_y1=" + data.temp_mean_y1 + " temp_mean_yn=" + data.temp_mean_yn + ">" + data.alias + "</option>")
+				$(option).rundata = data;
 				$(selectorList).append(option);
 			})
 		}
 		
 		Streams.app_control.apps.weather_models.previousRunData = rundata;
 		
+		selectorList.change(function(){
+			if($("#weather-models-app .runTypeSelect .selectRun option:selected").html() == "Create New Run"){
+				Streams.app_control.apps.weather_models.enableInputs();
+			} else {
+				Streams.app_control.apps.weather_models.editSettings($("#weather-models-app .runTypeSelect .selectRun option:selected"));
+			}
+		});
 		
 	},
+	
+	editSettings:function(options){
+		console.log($(options).attr('scriptName'));
+		
+		var data = $(options).getAttributes();
+		console.log(data);
+		
+		var model = $('div#weather-models-app.application .styledSelect select');
+  	
+	  	/**
+	  	 * STAGE ONE
+	  	 * Change Script Name and Window 
+	  	 */
+	  	$(model).val(data.scriptname);
+	  	
+	  	var appContent = $('div#weather-models-app.application .app_content .app');
+		for(var i=0;i<appContent.length;i++){
+			if($(appContent[i]).hasClass("active")){
+				$(appContent[i]).removeClass("active")
+			}
+		}
+		
+		$('div#weather-models-app.application ' + '#' + $(model).val()).addClass("active")
+	  	
+	  	
+	  	/**
+	  	 * STAGE TWO
+	  	 * Change Script Values 
+	  	 */
+	  	$('#' + data.scriptname + ' ' + '#mean_1').val(data.precip_mean_y1);
+	  	
+	  	$('#' + data.scriptname + ' ' + '#mean_2').val(data.precip_mean_yn);
+	  	$('#' + data.scriptname + ' ' + '#precip02-value').val(data.precip_var_y1);
+	  	$('#' + data.scriptname + ' ' + '#mean_temp_1').val(data.temp_mean_y1);
+	  	$('#' + data.scriptname + ' ' + '#mean_temp_2').val(data.temp_mean_yn);
+	  	//var n_years = Streams.yearRange || 30;
+	  	
+	  	//DISABLE INPUTS
+  		Streams.app_control.apps.weather_models.disableInputs();
+  		
+	},
+	
+	disableInputs:function(){
+	  	var model = $('div#weather-models-app.application .styledSelect select');
+	
+	  	var view              = $('#weather-models-app');
+	  	var runButton         = view.find('#run');
+	
+	   	runButton.button('option', 'disabled', true);
+	
+	  	var inputs = $('#weather-models-app input');
+	  	for(var q = 0 ; q < inputs.length; q ++){
+	  		$(inputs[q]).prop('disabled', true);
+	  	}
+	  	
+	  	$(model).prop("disabled", true)
+	  },
+	  
+	  enableInputs:function(){
+	  	var model = $('div#weather-models-app.application .styledSelect select');
+	
+	  	var view              = $('#weather-models-app');
+	  	var runButton         = view.find('#run');
+	
+	   	runButton.button('option', 'disabled', false);
+	
+	  	var inputs = $('#weather-models-app input');
+	  	for(var q = 0 ; q < inputs.length; q ++){
+	  		$(inputs[q]).prop('disabled', false);
+	  	}
+	  	
+	  	$(model).prop("disabled", false)
+	  },
 	
   /**
    *Starts the Weather Model View 
@@ -64,7 +147,7 @@ Streams.app_control.apps.weather_models = {
     	}
     }, 1000)
 	
-
+	
 	
 	
     // Set initial values for the sliders.
@@ -141,7 +224,9 @@ Streams.app_control.apps.weather_models = {
     runButton.click(function (event) {
     	console.log("RUN")
       	//runButton.button('option', 'disabled', true);
+      	runButton.button('option', 'disabled', true);
       	that.run();
+      	
       	//setTimeout(statusCheck, 3000);
      	return false;
     });
@@ -150,12 +235,17 @@ Streams.app_control.apps.weather_models = {
   },
 
   run : function () {
-  	
+  	/*
+  	 var view              = $('#weather-models-app')[0];
+     var freeze = $("<div class='freeze'></div>");
+     $(view).append(freeze);
+     */
   	var model = $('div#weather-models-app.application .styledSelect select');
   	
   	//Passed Variables
   	var scriptName = $(model).val();
   	var precip_mean_y1 = $('#' + scriptName + ' ' + '#mean_1').val();
+  	
   	var precip_mean_yn = $('#' + scriptName + ' ' + '#mean_2').val();
   	var precip_var_y1 = $('#' + scriptName + ' ' + '#precip02-value').val();
   	var temp_mean_y1 = $('#' + scriptName + ' ' + '#mean_temp_1').val();
@@ -230,8 +320,9 @@ Streams.app_control.apps.weather_models = {
 				*/
 			}
 		},1000)
-  		
   	
+  	//DISABLE INPUTS
+  	Streams.app_control.apps.weather_models.disableInputs();
   	
   	enableButton("inputButton");
   	enableButton("outputButton");
@@ -239,7 +330,11 @@ Streams.app_control.apps.weather_models = {
   	
   
     
+    
+    
   },
+  
+  
   
   
   getClimateInformation:function(){
@@ -311,3 +406,5 @@ Streams.app_control.apps.weather_models = {
   }
   
 };
+
+

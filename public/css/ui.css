@@ -217,3 +217,12 @@ a.ui-slider-handle.ui-state-default.ui-corner-all{
 	margin-top:-6px;
 }
 
+.freeze{
+	position:absolute;
+	width:440px;
+	height:500px;
+	top:0;
+	left:0;
+	background:rgba(0,0,0,0.5);
+	z-index: 100;
+}

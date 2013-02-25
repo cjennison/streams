@@ -20,18 +20,98 @@ Streams.app_control.apps.land_use_models = {
 	
 	populateRunList:function(rundata){
 		var selectorList = $("#land-use-models-app .runTypeSelect .selectRun");
+		
+		if(selectorList.length == 0){
+			var option = $("<option disabled='true'>No Existing Runs Found</option>")
+		}
 		for(var i = 0;i < rundata.length;i++){
 			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
 			$.getJSON(settings, function(data){
-				var option = $("<option run-id=" + data.alias + ">" + data.alias + "</option>")
+				console.log(data);
+				var option = $("<option run-id=" + data.alias + " basin_id=" + data.basin_id + " scriptName=" + data.scriptName + " scenario=" + data.scenario + ">" + data.alias + "</option>")
+				$(option).rundata = data;				
 				$(selectorList).append(option);
 			})
 		}
 		
 		Streams.app_control.apps.land_use_models.previousRunData = rundata;
 		
-		
+		selectorList.change(function(){
+			if($("#land-use-models-app .runTypeSelect .selectRun option:selected").html() == "Create New Run"){
+				Streams.app_control.apps.land_use_models.enableInputs();
+			} else {
+				Streams.app_control.apps.land_use_models.editSettings($("#land-use-models-app .runTypeSelect .selectRun option:selected"));
+			}
+		});
 	},
+	
+	editSettings:function(options){
+		console.log($(options).attr('scriptName'));
+		
+		var data = $(options).getAttributes();
+		console.log(data);
+		
+		var model = $('div#land-use-models-app.application .styledSelect select');
+  	
+	  	/**
+	  	 * STAGE ONE
+	  	 * Change Script Name and Window 
+	  	 */
+	  	$(model).val(data.scriptname);
+	  	
+	  	var appContent = $('div#land-use-models-app.application .app_content .app');
+		for(var i=0;i<appContent.length;i++){
+			if($(appContent[i]).hasClass("active")){
+				$(appContent[i]).removeClass("active")
+			}
+		}
+		
+		$('div#land-use-models-app.application ' + '#' + $(model).val()).addClass("active")
+	  	
+	  	
+	  	/**
+	  	 * STAGE TWO
+	  	 * Change Script Values 
+	  	 */
+	  	$("div#land-use-models-app.application .app_content #emissions select").val(data.scenario);
+	  
+	  	
+	  	//DISABLE INPUTS
+  		Streams.app_control.apps.land_use_models.disableInputs();
+  		
+	},
+	
+	disableInputs:function(){
+	  	var model = $('div#land-use-models-app.application .styledSelect select');
+	
+	  	var view              = $('#land-use-models-app');
+	  	var runButton         = view.find('#run');
+	
+	   	runButton.button('option', 'disabled', true);
+	
+	  	var inputs = $('#land-use-models-app input');
+	  	for(var q = 0 ; q < inputs.length; q ++){
+	  		$(inputs[q]).prop('disabled', true);
+	  	}
+	  	
+	  	$(model).prop("disabled", true)
+	  },
+	  
+	  enableInputs:function(){
+	  	var model = $('div#land-use-models-app.application .styledSelect select');
+	
+	  	var view              = $('#land-use-models-app');
+	  	var runButton         = view.find('#run');
+	
+	   	runButton.button('option', 'disabled', false);
+	
+	  	var inputs = $('#land-use-models-app input');
+	  	for(var q = 0 ; q < inputs.length; q ++){
+	  		$(inputs[q]).prop('disabled', false);
+	  	}
+	  	
+	  	$(model).prop("disabled", false)
+	  },
 	
 	
   init : function () {
@@ -206,7 +286,8 @@ Streams.app_control.apps.land_use_models = {
 				
 			}
 		},1000)
-  		
+  		//DISABLE INPUTS
+  	Streams.app_control.apps.land_use_models.disableInputs();
   	
   	
   	console.log("RUNNING LAND USE MODEL")

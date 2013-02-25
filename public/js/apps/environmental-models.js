@@ -81,7 +81,7 @@ Streams.app_control.apps.environmental_models = {
   	var run_alias = $('div#environment-models-app.application .runModel .runInput').val();
   	
   	//if Basin Alias is null, create a name for them
-  	if(run_alias == "" || run_alias == " Enter a run name"){
+  	if(run_alias == "" || run_alias == " Enter a run name" || run_alias == undefined){
   		run_alias = Math.ceil(Math.random()*100000);
   	}
   	
@@ -92,7 +92,7 @@ Streams.app_control.apps.environmental_models = {
   					run_alias:run_alias
   					};
   	
- 	
+ 	console.log(flow.run_alias)
  	var prec_ClimateInformation = Streams.app_control.apps.weather_models.getClimateInformation();
   	var prec_LandInformation = Streams.app_control.apps.land_use_models.getLandInformation();
 

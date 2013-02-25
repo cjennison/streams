@@ -21,6 +21,9 @@ Streams.app_control.apps.weather_models = {
 	
 	populateRunList:function(rundata){
 		var selectorList = $("#weather-models-app .runTypeSelect .selectRun");
+		if(selectorList.length == 0){
+			var option = $("<option disabled='true'>No Existing Runs Found</option>")
+		}
 		for(var i = 0;i < rundata.length;i++){
 			var settings = "http://" + document.location.host + '/' + rundata[i].path + '/settings.json';
 			$.getJSON(settings, function(data){

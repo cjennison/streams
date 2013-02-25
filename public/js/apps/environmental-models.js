@@ -98,7 +98,7 @@ Streams.app_control.apps.environmental_models = {
 	  },
 	  
 	  enableInputs:function(){
-	  	var model = $('div#land-use-models-app.application .styledSelect select');
+	  	var model = $('div#environmental-models-app.application .styledSelect select');
 	
 	  	var view              = $('#environmental-models-app');
 	  	var runButton         = view.find('#run');

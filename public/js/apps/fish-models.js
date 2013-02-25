@@ -34,6 +34,94 @@ Streams.app_control.apps.fish_models = {
 	},
   
   
+  disableInputs:function(){
+	  	var model = $('div#fish-models-app.application .styledSelect select');
+	
+	  	var view              = $('#fish-models-app');
+	  	var runButton         = view.find('#run');
+	
+	   	runButton.button('option', 'disabled', true);
+	
+	  	var inputs = $('#fish-models-app input');
+	  	for(var q = 0 ; q < inputs.length; q ++){
+	  		$(inputs[q]).prop('disabled', true);
+	  	}
+	  	
+	  	$(model).prop("disabled", true)
+	  	
+	  	
+	    var stockingslider1 = view.find('.stockingslider1');
+    var stockingNumber = view.find('.stockingNumber');
+    var countslider1 = view.find('.countslider1');
+    var countNumber = view.find('.countNumber');
+	  	countslider1.slider({
+      		max    : 100,
+	        min     : 0,
+	        range   : 'min',
+	        value   : 50,
+	        animate : 'fast',
+     		 disabled:true,
+     		 slide   : function (event, ui) {
+     		 	countNumber.text(ui.value);
+     		 }
+    });
+    
+    stockingslider1.slider({
+      		max    : 100,
+	        min     : 0,
+	        range   : 'min',
+	        value   : 50,
+	        animate : 'fast',
+     		 disabled:true,
+     		 slide   : function (event, ui) {
+     		 	stockingNumber.text(ui.value);
+     		 }
+    });
+	  },
+	  
+	  enableInputs:function(){
+	  	var model = $('div#fish-models-app.application .styledSelect select');
+	
+	  	var view              = $('#fish-models-app');
+	  	var runButton         = view.find('#run');
+	
+	   	runButton.button('option', 'disabled', false);
+	
+	  	var inputs = $('#fish-models-app input');
+	  	for(var q = 0 ; q < inputs.length; q ++){
+	  		$(inputs[q]).prop('disabled', false);
+	  	}
+	  	 var stockingslider1 = view.find('.stockingslider1');
+    var stockingNumber = view.find('.stockingNumber');
+    var countslider1 = view.find('.countslider1');
+    var countNumber = view.find('.countNumber');
+	  	$(model).prop("disabled", false)
+	  	countslider1.slider({
+      		max    : 100,
+	        min     : 0,
+	        range   : 'min',
+	        value   : 50,
+	        animate : 'fast',
+     		 disabled:false,
+     		 slide   : function (event, ui) {
+     		 	countNumber.text(ui.value);
+     		 }
+    });
+    
+    stockingslider1.slider({
+      		max    : 100,
+	        min     : 0,
+	        range   : 'min',
+	        value   : 50,
+	        animate : 'fast',
+     		 disabled:false,
+     		 slide   : function (event, ui) {
+     		 	stockingNumber.text(ui.value);
+     		 }
+    });
+	  },
+  
+  
   init : function () {
     // Nothing in context yet!
     var context = { };
@@ -228,7 +316,8 @@ Streams.app_control.apps.fish_models = {
 			}
 		},1000)
   		
-  	
+  	  	  		Streams.app_control.apps.fish_models.disableInputs();
+
   	
   	console.log("RUNNING LAND USE MODEL")
   	enableButton("inputButton");

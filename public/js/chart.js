@@ -42,8 +42,8 @@ var Chart = {
 		  // Initialize the display to show a few nodes.
 		  root.children.forEach(toggleAll);
 		  toggle(root.children[0]);
-		  toggle(root.children[0].children[0]);
-		  toggle(root.children[0].children[0].children[0]);
+		 // toggle(root.children[0].children[0]);
+		 // toggle(root.children[0].children[0].children[0]);
 		
 		  update(root);
 		});
@@ -78,7 +78,7 @@ var Chart = {
 		      .attr("x", -8)
 		      .attr("dy", textSize + "px")
 		      .attr("text-anchor",  "start")
-		      .text(function(d) { return d.name; })
+		      .text(function(d) { return d.modelname; })
 		      .style("fill-opacity", 1e-6);
 		
 		  // Transition nodes to their new position.

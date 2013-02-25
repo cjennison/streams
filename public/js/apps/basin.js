@@ -355,6 +355,8 @@ Streams.app_control.apps.basin = {
 			console.log(basintree);
 			var outputTree = Output.runInformation.parseResponse(basintree.responseText);
 			console.log(outputTree)
+			//Chart.init("#treeContainer", "../json/data2.json", 1100, 455, 55, 70, 147, 80, 25, "output");
+
 		},8000);
 		
 		

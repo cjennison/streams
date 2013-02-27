@@ -295,7 +295,7 @@ Streams.app_control.apps.fish_models = {
 		}
 		
 		}});
-		
+		console.log(population);
 		Status.addQueue(population);
 	
 		

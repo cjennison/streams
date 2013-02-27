@@ -294,7 +294,7 @@ Streams.app_control.apps.weather_models = {
 			"scriptName": climate.scriptName,
 			"basin_id": climate.basin_id,
 			"preceding": {
-
+				"run_id": null,
 			},
 			"precip_mean_y1": climate.precip_mean_y1,
 			"precip_mean_yn": climate.precip_mean_yn,

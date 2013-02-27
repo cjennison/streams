@@ -171,7 +171,7 @@ Streams.app_control.apps.environmental_models = {
   	
   	//Create sending Object
   	var flow = {	flag:true,
-  					scriptName:scriptName,
+  					scriptName:"abcde_regional",
   					basin_id:basin_id,
   					run_alias:run_alias
   					};
@@ -212,7 +212,7 @@ Streams.app_control.apps.environmental_models = {
 		
 		"flow": {
 			"step": "flow",
-			"scriptName":flow.scriptName,
+			"scriptName":"abcde_regional",
 			"alias":flow.run_alias,
 		}
 		
@@ -220,7 +220,7 @@ Streams.app_control.apps.environmental_models = {
 		
 		Status.addQueue(flow);
 	
-		
+		console.log(flow);
 		var checkRespo = setTimeout(function(){
 			if(serverResponse.readyState == 4){
 				console.log(serverResponse)
@@ -267,7 +267,7 @@ Streams.app_control.apps.environmental_models = {
   	
   	//Create sending Object
   	var flow = {	flag:true,
-  					scriptName:scriptName,
+  					scriptName:"abcde_regional",
   					basin_id:basin_id,
   					run_alias:run_alias
   					};

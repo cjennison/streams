@@ -27,8 +27,7 @@
 	width:140px;
 	height:30px;
 	cursor:pointer;
-	left:50%;
-	margin-left:-70px;
+	right:310px;
 	top:-30px;
 	background:url("../images/statushandle.png") no-repeat;
 	background-size:100% 100%;
@@ -120,8 +119,7 @@
 #loginBar .loginstatus{
 	width:500px;
 	position:absolute;
-	left:50%;
-	margin-left:-250px;
+	right:165px;
 	text-align: center;
 }
 #loginBar .loginstatus a{
@@ -170,8 +168,7 @@
 	width:140px;
 	height:30px;
 	cursor:pointer;
-	left:50%;
-	margin-left:286px;
+	right: 20px;
 	top:-30px;
 	background:url("../images/navigationhandle.png") no-repeat;
 	background-size:100% 100%;

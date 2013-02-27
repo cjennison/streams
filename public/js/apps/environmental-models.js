@@ -212,7 +212,7 @@ Streams.app_control.apps.environmental_models = {
 
 		"flow": {
 			"step": "flow",
-			"scriptName":"abcde_regional",
+			"scriptName":"abcde_regionalization",
 			"alias":flow.run_alias,
 		}
 

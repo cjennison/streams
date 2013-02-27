@@ -215,7 +215,7 @@ Streams.app_control.apps.stream_flow_models = {
 		
 		"streamtemp": {
 			"step": "streamtemp",
-			"scriptName":"StreamTemperatureModel.R",
+			"scriptName":"StreamTemperatureModel",
 			"alias":streamtemp.run_alias,
 		}
 		
@@ -271,7 +271,7 @@ Streams.app_control.apps.stream_flow_models = {
 	  	
 	  	//Create sending Object
 	  	var streamtemp = {	flag:true,
-	  					scriptName:"StreamTemperatureModel.R",
+	  					scriptName:"StreamTemperatureModel",
 	  					basin_id:basin_id,
 	  					run_alias:run_alias
 	  					};

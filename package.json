@@ -11,6 +11,5 @@
     , "mkdirp": ">= 0.3.4"
     , "async": ">= 0.1.22"
     , "zombie": ">= 1.4.1"
-    , "webworker-threads": ">= 0.4.5"
   }
 }

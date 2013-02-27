@@ -220,7 +220,7 @@ Streams.app_control.apps.environmental_models = {
 		
 		Status.addQueue(flow);
 	
-		
+		console.log(flow);
 		var checkRespo = setTimeout(function(){
 			if(serverResponse.readyState == 4){
 				console.log(serverResponse)

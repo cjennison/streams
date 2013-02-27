@@ -35,6 +35,7 @@ exports.login = function (req, res) {
 exports.login_user = function (req, res) {
   var user = undefined;
 
+  console.log("post body: ")
   console.log('[login_user] req.body.username = ' + req.body.username);
   
   // Check to see if the username was sent as part

@@ -215,7 +215,7 @@ Streams.app_control.apps.stream_flow_models = {
 		
 		"streamtemp": {
 			"step": "streamtemp",
-			"scriptName":"nonlinear_regression",
+			"scriptName":"StreamTemperatureModel.R",
 			"alias":streamtemp.run_alias,
 		}
 		
@@ -271,7 +271,7 @@ Streams.app_control.apps.stream_flow_models = {
 	  	
 	  	//Create sending Object
 	  	var streamtemp = {	flag:true,
-	  					scriptName:"nonlinear_regression",
+	  					scriptName:"StreamTemperatureModel.R",
 	  					basin_id:basin_id,
 	  					run_alias:run_alias
 	  					};

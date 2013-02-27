@@ -267,7 +267,10 @@ Streams.app_control.apps.environmental_models = {
 
   	//Create sending Object
   	var flow = {	flag:true,
-  					scriptName:"abcde_regional",
+  					scriptName:"abcde_regionalization",
   					basin_id:basin_id,
   					run_alias:run_alias
   					};
+  	return flow;
+  	}
+  }

@@ -110,7 +110,11 @@ var Status = {
 					}, 4000)
 				})
 			
-	 
+	 Streams.app_control.apps.weather_models.enableInputs();
+	 Streams.app_control.apps.land_use_models.enableInputs();
+	 Streams.app_control.apps.environmental_models.enableInputs();
+	 Streams.app_control.apps.stream_flow_models.enableInputs();
+	 Streams.app_control.apps.fish_models.enableInputs();
 	},
 	
 	gotoOutputWithRun:function(info){

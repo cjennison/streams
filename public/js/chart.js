@@ -78,7 +78,7 @@ var Chart = {
 		      .attr("x", -8)
 		      .attr("dy", textSize + "px")
 		      .attr("text-anchor",  "start")
-		      .text(function(d) { return d.modelname; })
+		      .text(function(d) { return d.name; })
 		      .style("fill-opacity", 1e-6);
 		
 		  // Transition nodes to their new position.

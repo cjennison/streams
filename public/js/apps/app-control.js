@@ -382,7 +382,7 @@ Streams.app_control = {
   		var obj = Output.runInformation.parseResponse(output);
   		console.log(output);
   		console.log(obj);
-  		if(obj.run[0].status == "DONE"){
+  		if(obj.run[obj.run.length-1].status == "DONE"){
   			Status.runningProcesses.splice(i, 1);
   			var settings = "http://" + document.location.host + '/' + obj.run[obj.run.length-1].url + '/settings.json';
 			$.getJSON(settings, function(data){
@@ -391,7 +391,7 @@ Streams.app_control = {
 				console.log(obj.run[0].url + " : URLLLLLLLLLLLLLLLL")
 				Status.clearQueueObject(data.alias, "COMPLETED");
 			})
-  		} else if(obj.run[0].status == "FAILED"){
+  		} else if(obj.run[obj.run.length-1].status == "FAILED"){
   			Status.runningProcesses.splice(i, 1);
   			var settings = "http://" + document.location.host + '/' + obj.run[obj.run.length-1].url + '/settings.json';
 			$.getJSON(settings, function(data){
@@ -399,7 +399,7 @@ Streams.app_control = {
 				Status.clearQueueObject(data.alias, "FAILED");
 			})
   			
-  		} else if (obj.run[0].status == "WORKING") {
+  		} else if (obj.run[obj.run.length-1].status == "WORKING") {
 		  console.log('WORKING!!!: ' + Status.runningProcesses[i].runID);
 		  var runStatus = $.post('/mexec/status', 
 					 {"runID" : Status.runningProcesses[i].runID})		  

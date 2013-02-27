@@ -1,50 +1,98 @@
+
 {
-  "basinid": "west_brook",
-  "children": [
+ "name": "West Brook basin",
+ "basin_id": "sjgaljkf not sure if it's basinID or basin_id, etc",
+ "step":"basin",
+ "children": [
+  
+  {
+   "name": "Precipitation up 10%",
+   "runID": "sdfjksldfkj",
+   "step": "climate",
+   "children": [
     {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "3190aff7-9874-4300-a223-ec090ab7dc37"
-    },
+		"name": "Low development scenario",
+		"runID": "oihyodifb",
+		"step": "land",
+		"children": [
+		{
+			"name": "Regular Stream Flow", 
+			"runID": "vcwr",
+			"step": "flow",
+			"children": [
+			{
+				"name": "Stream Temperature",
+				"runID": "cvbs",
+				"step": "streamtemp",
+				"children": [
+				{
+					"name": "West Brook trout IPM",
+					"runID": "cepofiuwieo",
+					"step": "population"
+				},
+				{
+					"name": "West Brook salmon IPM",
+					"runID": "sdgwegf",
+					"step": "population"
+				},
+				{
+					"name": "West Brook Dail-Madsen",
+					"runID": "cepofiuwieo",
+					"step": "population"
+					
+				}
+				]
+			}
+			]
+		}
+		]
+	}
+	]
+  },
+  
+  
+  
+  {
+   "name": "Precipitation down 10%",
+   "runID": "sdfjksldfkj",
+   "step": "climate",
+   "children": [
     {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "0032e4aa-80e3-4062-b4ca-1902073c6fa2"
-    },
-    {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "ce36d74f-4d3f-4de5-9d64-4438b8169e94"
-    },
-    {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "6b6bd737-9e11-44f1-954b-f62a17a29a75"
-    },
-    {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "fe587407-5dda-4558-a992-a6c966fa56f6"
-    },
-    {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "a85c8607-5b13-43a4-ad31-cf34b829cb83"
-    },
-    {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "c6b8bb7f-69dc-4cea-9f04-a90a99ea9a41"
-    },
-    {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "32514e14-f172-4185-94d2-6ced59cb70bf"
-    },
-    {
-      "modelname": "climate",
-      "scriptName": "weather_generator",
-      "runid": "459e7c71-3b64-4be2-99eb-12402e63dcde"
+		"name": "Low development scenario",
+		"runID": "oihyodifb",
+		"step": "land",
+		"children": [
+		{
+			"name": "Stream Flow", 
+			"runID": "rhtsrg",
+			"step": "flow",
+			"children": [
+			{
+				"name": "Stream Temperature",
+				"children": [
+				{
+					"name": "West Brook trout IPM",
+					"runID": "ddfhsg",
+					"step": "population"
+				},
+				{
+					"name": "West Brook salmon IPM",
+					"runID": "nwae",
+					"step": "population"
+				},
+				{
+					"name": "West Brook Dail-Madsen",
+					"runID": "cvbsrfgrw",
+					"step": "population"
+				}
+				]
+			}
+			]
+		}
+     ]
     }
-  ]
+   ]
+  }
+        
+ ]
 }

@@ -386,6 +386,7 @@ Streams.app_control.apps.basin = {
 	        slide   : function (event, ui) {
 	          simText.text(ui.value);
 	          Streams.yearRange = ui.value;
+	          inputGraph.updateDate(ui.value);
 	        }
 	      }
 		)

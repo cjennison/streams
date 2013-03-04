@@ -36,8 +36,8 @@ Streams.graphs = {
 	
 	updateDate:function(date){
 		var d = new Date();
-		this.tempObjects.dateLabel.textArr[0] = "                              "+ d.getFullYear() +"                                                                                    " + (d.getFullYear() + date);
-		this.precipObjects.dateLabel.textArr[0] = "                              "+ d.getFullYear() +"                                                                                    " + (d.getFullYear() + date);
+		//this.tempObjects.dateLabel.textArr[0] = "                              "+ d.getFullYear() +"                                                                                    " + (d.getFullYear() + date);
+		//this.precipObjects.dateLabel.textArr[0] = "                              "+ d.getFullYear() +"                                                                                    " + (d.getFullYear() + date);
 		//this.precipObjects.stage.draw();
 	},
 	
@@ -207,8 +207,6 @@ Streams.graphs = {
 	      	console.log("Starting Resize")
 	      	resizing = true;
 	      });
-	      
-	      
       }
      
 	  group.add(line);

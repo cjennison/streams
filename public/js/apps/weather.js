@@ -159,6 +159,11 @@ Streams.app_control.apps.weather_models = {
     }, 1000)
 	
 	*/
+	inputGraph.initGraph("WeatherModel_Precipitation", "#graphcontainer1", "graphcontainer1", "variation", "<p>Precipitation - change in mean: in 2013: <input class='startNumber' value='0'></input>% in <span class='enddate'>2093</span>: <input class='endNumber' value='0'>%<br>- change in variance: in 2013: <input class='varstartNumber' value='0'></input>% in <span class='enddate'>2093</span>: <input class='varendNumber' value='0'></input>%", -5, 5, "Years", "Mean");
+	inputGraph.initGraph("WeatherModel_Temperature" , "#graphcontainer2", "graphcontainer2", "no_variation", "<p>Temperature - change in mean: in 2013: <input class='startNumber' value='0'></input>% in <span class='enddate'>2093</span>: <input class='endNumber' value='0'>%", -15, 15, "Years", "Mean");
+	
+	inputGraph.initGraph("Baseline_Precipitation", "#baselineHistoric_graphcontainer1", "baselineHistoric_graphcontainer1", "variation", "<p>Precipitation - change in mean: in 2013: <input class='startNumber' value='0'></input>% in <span class='enddate'>2093</span>: <input class='endNumber' value='0'>%<br>- change in variance: in 2013: <input class='varstartNumber' value='0'></input>% in <span class='enddate'>2093</span>: <input class='varendNumber' value='0'></input>%", -5, 5, "Years", "Mean");
+	inputGraph.initGraph("Baseline_Temperature" , "#baselineHistoric_graphcontainer2", "baselineHistoric_graphcontainer2", "no_variation", "<p>Temperature - change in mean: in 2013: <input class='startNumber' value='0'></input>% in <span class='enddate'>2093</span>: <input class='endNumber' value='0'>%", -15, 15, "Years", "Mean");
 	
 	
     // Set initial values for the sliders.
@@ -166,12 +171,12 @@ Streams.app_control.apps.weather_models = {
     precipSlider2Val.text(1);
     meanTempChangeVal.text(0);
     //weathermodels
-    this.setupGraph('graphcontainer1', 'mean_var', -5, 5, "Time", "Percent Change");
-    this.setupGraph('graphcontainer2', 'temp', -15, 15, "Time", "Annual Temp");
+   // this.setupGraph('graphcontainer1', 'mean_var', -5, 5, "Time", "Percent Change");
+   // this.setupGraph('graphcontainer2', 'temp', -15, 15, "Time", "Annual Temp");
     
     //basinemodels
-    this.setupGraph('baselineHistoric_graphcontainer1', 'base_mean_var', -5, 5, "Time", "Percent Change");
-    this.setupGraph('baselineHistoric_graphcontainer2', 'base_temp', -15, 15, "Time", "Annual Temp");
+    //this.setupGraph('baselineHistoric_graphcontainer1', 'base_mean_var', -5, 5, "Time", "Percent Change");
+   // this.setupGraph('baselineHistoric_graphcontainer2', 'base_temp', -15, 15, "Time", "Annual Temp");
     
     
 	model.change(function(){
@@ -246,6 +251,13 @@ Streams.app_control.apps.weather_models = {
   },
 
   run : function () {
+  	
+  	console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
+  	console.log(graphObject[0].startMeanVal)
+  	
+  	var curGraph = 0;
+  	
+  	
   	/*
   	 var view              = $('#weather-models-app')[0];
      var freeze = $("<div class='freeze'></div>");
@@ -255,12 +267,21 @@ Streams.app_control.apps.weather_models = {
   	
   	//Passed Variables
   	var scriptName = $(model).val();
-  	var precip_mean_y1 = $('#' + scriptName + ' ' + '#mean_1').val();
+  	if(scriptName == "weather_generator"){
+  		curGraph = 0;
+  	} else if(scriptName == "baseline_shift"){
+  		curGraph = 2;
+  	}
   	
-  	var precip_mean_yn = $('#' + scriptName + ' ' + '#mean_2').val();
-  	var precip_var_y1 = $('#' + scriptName + ' ' + '#precip02-value').val();
-  	var temp_mean_y1 = $('#' + scriptName + ' ' + '#mean_temp_1').val();
-  	var temp_mean_yn = $('#' + scriptName + ' ' + '#mean_temp_2').val();
+  	
+  	console.log(scriptName);
+  	var precip_mean_y1 = graphObject[curGraph].startMeanVal;
+  	
+  	var precip_mean_yn = graphObject[curGraph].endMeanVal;
+  	var precip_var_y1 = graphObject[curGraph].startVarVal;
+  	var precip_var_yn = graphObject[curGraph].endVarVal;
+  	var temp_mean_y1 = graphObject[curGraph+1].startMeanVal;
+  	var temp_mean_yn = graphObject[curGraph+1].endMeanVal;
   	var n_years = Streams.yearRange || 30;
   	  	console.log(precip_mean_y1);
 

@@ -166,6 +166,11 @@ Streams.app_control = {
 	
   },
   
+  removeLoader:function(){
+  	$("#loadingWindow").remove();
+  	$(".shadowBox").remove();
+  },
+  
   //Disable Steps Controls
   disableSteps: function(){
   		$('#steps-controls').removeClass("active");
@@ -210,6 +215,14 @@ Streams.app_control = {
   
   //Enable Steps Controls
   enableSteps: function(name){
+  	
+  		//Add Loading Screen
+	  	var body = $("#inputWrapper");
+		var loadingPrompt = $("<div id='loadingWindow'><h1>Loading Runs..</hi><br><img src='images/ajax-loader.gif'></div>")
+		$(body).append("<div class='shadowBox'></div>")
+		$(body).append(loadingPrompt);
+		
+  	
   		//$('#steps-controls').addClass("active");
   		$('#steps-controls').addClass("active");
   		for(var i=1;i<=6;i++){
@@ -363,10 +376,9 @@ Streams.app_control = {
   	for(var i = 0;i < dir.length; i++){
 	  	var list = $("<li>");
 	  	var listLine = $("#thumbnailList li");
-	  	if(listLine.length > 4) {return;}
+	  	if(listLine.length > 5) {return;}
 	  	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
-	  	console.log('http://' + document.location.host + 
-	                  '/' + dir + '/thumbnail.svg');
+	  	//console.log("http://" + document.location.host + '/' + dir[i].url + "/thumbnail.svg');
 	  	$(thumb).css("background", "url('http://" + document.location.host + '/' + dir[i].url + "/thumbnail.svg')");
 	  	$(list).append(thumb);
 	  	$(ullist).append(list);

@@ -439,3 +439,29 @@ canvas{
 }
 
 
+#loadingWindow{
+	position:absolute;
+	width:300px;
+	height:200px;
+	left:50%;
+	margin-left:-250px;
+	top:40%;
+	background:white;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #ffbe57;
+}
+
+#loadingWindow h1{
+	text-align: center;
+	margin-top:80px;
+}
+
+.shadowBox{
+	position: absolute;
+	left:-100px;
+	width:100%;
+	height:5000px;
+	background:rgba(0,0,0, .6);
+}
+

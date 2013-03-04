@@ -39,6 +39,8 @@ Streams.app_control.apps.weather_models = {
 		}
 		
 		Streams.app_control.apps.weather_models.previousRunData = rundata;
+		Streams.app_control.removeLoader();
+		
 		
 		selectorList.change(function(){
 			if($("#weather-models-app .runTypeSelect .selectRun option:selected").html() == "Create New Run"){

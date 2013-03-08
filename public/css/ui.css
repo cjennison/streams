@@ -111,6 +111,7 @@ a.ui-slider-handle.ui-state-default.ui-corner-all{
 }
 
 .styledSelect .selectImage{
+	
 	background: url(../images/dropdown_arrow.png);
 	position: absolute;
 	width: 20px;
@@ -118,6 +119,11 @@ a.ui-slider-handle.ui-state-default.ui-corner-all{
 	margin-top: -26px;
 	margin-left: 245px;
 	background-size: 100% 100%;
+	pointer-events:none;
+}
+
+.selectImage{
+	pointer-events:none;
 }
 
 .basinSelect select{

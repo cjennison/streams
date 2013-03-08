@@ -368,8 +368,11 @@ Streams.app_control.apps.weather_models = {
   	enableButton("graphButton");
   	
   
-    
-    
+    var selectorList = $("#weather-models-app .runTypeSelect .selectRun");
+	var option = $("<option selected run-id=" + climate.run_alias + " basin_id=" + climate.basin_id +" n_years=" + climate.n_years + " scriptName=" + climate.scriptName + " precip_mean_y1=" + climate.precip_mean_y1 + " precip_mean_yn=" + climate.precip_mean_yn + " precip_var_y1=" + climate.precip_var_y1 +" precip_var_yn=" + climate.precip_var_yn + " temp_mean_y1=" + climate.temp_mean_y1 + " temp_mean_yn=" + climate.temp_mean_yn + ">" + climate.run_alias + "</option>")
+					$(option).rundata = climate;
+					$(selectorList).append(option);
+					console.log(option);    
     
   },
   

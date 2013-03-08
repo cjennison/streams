@@ -298,6 +298,12 @@ Streams.app_control.apps.land_use_models = {
   	enableButton("inputButton");
   	enableButton("outputButton");
   	enableButton("graphButton");
+  	
+  	var selectorList = $("#land-use-models-app .runTypeSelect .selectRun");
+	var option = $("<option selected run-id=" + land.run_alias + " basin_id=" + land.basin_id + " scriptName=" + land.scriptName + " scenario=" + land.scenario + ">" + land.run_alias + "</option>")
+					$(option).rundata = land;
+					$(selectorList).append(option);
+					console.log(option);
   },
   
   getLandInformation:function(){

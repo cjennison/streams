@@ -110,6 +110,8 @@ Streams.app_control.apps.weather_models = {
 	  	}
 	  	
 	  	$(model).prop("disabled", true)
+	  	
+	  	inputGraph.disableInputs();
 	  },
 	  
 	  enableInputs:function(){
@@ -126,6 +128,8 @@ Streams.app_control.apps.weather_models = {
 	  	}
 	  	
 	  	$(model).prop("disabled", false)
+	  	
+	  	inputGraph.enableInputs();
 	  },
 	  
 	  

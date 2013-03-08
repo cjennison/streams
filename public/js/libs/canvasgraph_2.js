@@ -262,6 +262,8 @@ var inputGraph = (function () {
             
         })
         
+         graph.leftVarianceGroup = leftVarianceGroup;
+        
         var rightVarianceGroup = new Kinetic.Group({
         	dragBoundFunc: function (pos) {
                 var lowY = pos.y > 45 ? 45 : pos.y;
@@ -279,6 +281,8 @@ var inputGraph = (function () {
             }
             
         })
+        
+        graph.rightVarianceGroup = rightVarianceGroup;
 
         rightNode.setDraggable(true);
         leftNode.setDraggable(true);
@@ -595,11 +599,31 @@ var inputGraph = (function () {
         	}
    		}
    }
+   
+   function disableInputs(){
+   		for(var i=0;i<graphObject.length;i++){
+   			graphObject[i].leftNode.setDraggable(false);
+   			graphObject[i].rightNode.setDraggable(false);
+   			graphObject[i].rightVarianceGroup.setDraggable(false);
+   			graphObject[i].leftVarianceGroup.setDraggable(false);
+   		}
+   }
+   
+   function enableInputs(){
+   		for(var i=0;i<graphObject.length;i++){
+   			graphObject[i].leftNode.setDraggable(true);
+   			graphObject[i].rightNode.setDraggable(true);
+   			graphObject[i].rightVarianceGroup.setDraggable(true);
+   			graphObject[i].leftVarianceGroup.setDraggable(true);
+   		}
+   }
     
 
     return {
         initGraph: initGraph,
+        enableInputs:enableInputs,
         populateInputs:populateInputs,
         updateDate:updateDate,
+        disableInputs:disableInputs,
     }
 })();

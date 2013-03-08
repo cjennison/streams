@@ -80,6 +80,9 @@ Streams.app_control.apps.weather_models = {
 	  	 * STAGE TWO
 	  	 * Change Script Values 
 	  	 */
+	  	
+	  	inputGraph.populateInputs(data);
+	  	
 	  	$('#' + data.scriptname + ' ' + '#mean_1').val(data.precip_mean_y1);
 	  	
 	  	$('#' + data.scriptname + ' ' + '#mean_2').val(data.precip_mean_yn);
@@ -300,7 +303,7 @@ Streams.app_control.apps.weather_models = {
   					precip_mean_y1:precip_mean_y1,
   					precip_mean_yn:precip_mean_yn,
   					precip_var_y1:precip_var_y1,
-  					precip_var_yn:precip_var_y1,
+  					precip_var_yn:precip_var_yn,
   					temp_mean_y1:temp_mean_y1,
   					temp_mean_yn:temp_mean_yn,
   					n_years:n_years,
@@ -370,15 +373,33 @@ Streams.app_control.apps.weather_models = {
   
   
   getClimateInformation:function(){
+  	var curGraph = 0;
+  	
+  	
+  	/*
+  	 var view              = $('#weather-models-app')[0];
+     var freeze = $("<div class='freeze'></div>");
+     $(view).append(freeze);
+     */
   	var model = $('div#weather-models-app.application .styledSelect select');
   	
   	//Passed Variables
   	var scriptName = $(model).val();
-  	var precip_mean_y1 = $('#' + scriptName + ' ' + '#mean_1').val();
-  	var precip_mean_yn = $('#' + scriptName + ' ' + '#mean_2').val();
-  	var precip_var_y1 = $('#' + scriptName + ' ' + '#precip02-value').val();
-  	var temp_mean_y1 = $('#' + scriptName + ' ' + '#mean_temp_1').val();
-  	var temp_mean_yn = $('#' + scriptName + ' ' + '#mean_temp_2').val();
+  	if(scriptName == "weather_generator"){
+  		curGraph = 0;
+  	} else if(scriptName == "baseline_shift"){
+  		curGraph = 2;
+  	}
+  	
+  	
+  	console.log(scriptName);
+  	var precip_mean_y1 = graphObject[curGraph].startMeanVal;
+  	
+  	var precip_mean_yn = graphObject[curGraph].endMeanVal;
+  	var precip_var_y1 = graphObject[curGraph].startVarVal;
+  	var precip_var_yn = graphObject[curGraph].endVarVal;
+  	var temp_mean_y1 = graphObject[curGraph+1].startMeanVal;
+  	var temp_mean_yn = graphObject[curGraph+1].endMeanVal;
   	var n_years = Streams.yearRange || 30;
   	  	console.log(precip_mean_y1);
 
@@ -397,7 +418,7 @@ Streams.app_control.apps.weather_models = {
   					precip_mean_y1:precip_mean_y1,
   					precip_mean_yn:precip_mean_yn,
   					precip_var_y1:precip_var_y1,
-  					precip_var_yn:precip_var_y1,
+  					precip_var_yn:precip_var_yn,
   					temp_mean_y1:temp_mean_y1,
   					temp_mean_yn:temp_mean_yn,
   					n_years:n_years,

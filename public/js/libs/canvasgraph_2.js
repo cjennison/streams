@@ -16,7 +16,7 @@ var inputGraph = (function () {
         //console.log(newgraph);
 
 
-        createGraph(newgraph, $(html), $(container), kinContainer, type, min, max, xLabel, yLabel);
+        createGraph(newgraph, $(html), $(container), kinContainer, type, min, max, xLabel, yLabel, name);
 
         graphObject.push(newgraph);
 
@@ -25,8 +25,8 @@ var inputGraph = (function () {
         //createGraph(name);
         
        setInterval(function(){
-       	if(Streams.yearRange == null){return}
-       	updateDate(Streams.yearRange);
+	       	if(Streams.yearRange == null){return}
+	       	updateDate(Streams.yearRange);
        },100)
 
     }
@@ -57,13 +57,13 @@ var inputGraph = (function () {
 	 * @param {Object} min
 	 * @param {Object} max
 	 */
-    function createGraph(graph, html, container, kinContainer, type, min, max, xLabel, yLabel) {
+    function createGraph(graph, html, container, kinContainer, type, min, max, xLabel, yLabel, name) {
         $(container).append(html);
         console.log(container);
         graph.container = container;
         graph.type = type;
-		var difference_left = 3;
-		var difference_right = 9;
+		graph.difference_left = 3;
+		graph.difference_right = 9;
         var stage = new Kinetic.Stage({
             container: kinContainer,
             width: 398,
@@ -130,7 +130,7 @@ var inputGraph = (function () {
                 }
             }
         });
-        graph.leftNode = rightNode;
+        graph.rightNode = rightNode;
 
         //Right Node
         var centerNode = new Kinetic.Image({
@@ -152,7 +152,7 @@ var inputGraph = (function () {
 		//Variance Left Top
 		var varLeftTop = new Kinetic.Image({
 			x: 34,
-            y: stage.getHeight() / 2 - difference_left + 10,
+            y: stage.getHeight() / 2 - graph.difference_left + 10,
             image: varHandle,
             width: 20,
             height: 20,
@@ -176,7 +176,7 @@ var inputGraph = (function () {
 		//Variance Left Top
 		var varLeftBottom = new Kinetic.Image({
 			x: 34,
-            y: stage.getHeight() / 2 + difference_left + 10,
+            y: stage.getHeight() / 2 + graph.difference_left + 10,
             image: varHandle,
             width: 20,
             height: 20,
@@ -200,7 +200,7 @@ var inputGraph = (function () {
 		//Variance Left Top
 		var varRightTop = new Kinetic.Image({
 			x: 390,
-            y: stage.getHeight() / 2 - difference_right + 10,
+            y: stage.getHeight() / 2 - graph.difference_right + 10,
             image: varHandle,
             width: 20,
             height: 20,
@@ -211,7 +211,7 @@ var inputGraph = (function () {
 		//Variance Left Top
 		var varRightBottom = new Kinetic.Image({
 			x: 390,
-            y: stage.getHeight() / 2 + difference_right + 10,
+            y: stage.getHeight() / 2 + graph.difference_right + 10,
             image: varHandle,
             width: 20,
             height: 20,
@@ -236,7 +236,7 @@ var inputGraph = (function () {
 
         //Variance Line
         var vline = new Kinetic.Polygon({
-            points:[leftNode.getX(), leftNode.getY() - difference_left, rightNode.getX(), rightNode.getY() - difference_right, rightNode.getX(), rightNode.getY() + difference_right, leftNode.getX(), leftNode.getY() + difference_left, leftNode.getX(), leftNode.getY() - difference_left],
+            points:[leftNode.getX(), leftNode.getY() - graph.difference_left, rightNode.getX(), rightNode.getY() - graph.difference_right, rightNode.getX(), rightNode.getY() + graph.difference_right, leftNode.getX(), leftNode.getY() + graph.difference_left, leftNode.getX(), leftNode.getY() - graph.difference_left],
            // points: [leftNode.getX(), leftNode.getY() - 10, 73, 160, 340, 23, 500, 109, 499, 139, 342, 93],
         fill: 'rgba(0,0,0, .5)',
         stroke: 'none',
@@ -312,17 +312,17 @@ var inputGraph = (function () {
         rightVarianceGroup.on('dragmove', function(ev){
 			if(lastRightY > ev.clientY){
 				console.log("LESSER")
-				if(difference_right <= 20){
-					difference_right++;
+				if(graph.difference_right <= 20){
+					graph.difference_right++;
 				} else {
-					difference_right = 20;
+					graph.difference_right = 20;
 				}
 			} else {
 				console.log("GREATER")
-				if(difference_right >= 0){
-					difference_right--;
+				if(graph.difference_right >= 0){
+					graph.difference_right--;
 				} else {
-					difference_right = 0;
+					graph.difference_right = 0;
 				}
 			}
 			updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
@@ -335,17 +335,17 @@ var inputGraph = (function () {
         leftVarianceGroup.on('dragmove', function(ev){
 			if(lastLeftY > ev.clientY){
 				console.log("LESSER")
-				if(difference_left <= 20){
-					difference_left++;
+				if(graph.difference_left <= 20){
+					graph.difference_left++;
 				} else {
-					difference_left = 20;
+					graph.difference_left = 20;
 				}
 			} else {
 				console.log("GREATER")
-				if(difference_left >= 0){
-					difference_left--;
+				if(graph.difference_left >= 0){
+					graph.difference_left--;
 				} else {
-					difference_left = 0;
+					graph.difference_left = 0;
 				}
 			}
 			updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
@@ -372,23 +372,55 @@ var inputGraph = (function () {
 	      	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
 	      });
 	      leftNode.on('dragend', function() {
-	      	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
 	      });
         
-        function updateLine(points){
+        setInterval(function(){
+	      	updateLineWithoutText([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
+        },100)
+        
+        function updateLineWithoutText(points){
         	line.setPoints(points);
-	      	vline.setPoints([leftNode.getX(), leftNode.getY() - difference_left, rightNode.getX(), rightNode.getY() - difference_right, rightNode.getX(), rightNode.getY() + difference_right, leftNode.getX(), leftNode.getY() + difference_left, leftNode.getX(), leftNode.getY() - difference_left]);
-			varLeftTop.setY(leftNode.getY() - difference_left + 10);
-			varLeftBottom.setY(leftNode.getY() + difference_left + 10);
-			varRightTop.setY(rightNode.getY() - difference_right + 10);
-			varRightBottom.setY(rightNode.getY() + difference_right + 10);
+	      	vline.setPoints([leftNode.getX(), leftNode.getY() - graph.difference_left, rightNode.getX(), rightNode.getY() - graph.difference_right, rightNode.getX(), rightNode.getY() + graph.difference_right, leftNode.getX(), leftNode.getY() + graph.difference_left, leftNode.getX(), leftNode.getY() - graph.difference_left]);
+			varLeftTop.setY(leftNode.getY() - graph.difference_left + 10);
+			varLeftBottom.setY(leftNode.getY() + graph.difference_left + 10);
+			varRightTop.setY(rightNode.getY() - graph.difference_right + 10);
+			varRightBottom.setY(rightNode.getY() + graph.difference_right + 10);
 			
 	      	var changeInY = Math.round((rightNode.getY() - 50)/min/1.5);
       		var changeInY_Left = Math.round((leftNode.getY() - 50)/min/1.5);
 	      	
 	      	if(type == "no_variation"){
 	      		changeInY = Math.round(((rightNode.getY() - 50)/min)*6.5);
-      	 	changeInY_Left = Math.round(((leftNode.getY() - 50)/min)*6.5);
+      	 		changeInY_Left = Math.round(((leftNode.getY() - 50)/min)*6.5);
+	      	}
+	      	if(changeInY > max){
+      	 		changeInY = max;
+      	 	} else if(changeInY < min) {
+      	 		changeInY = min;
+      	 	}
+      	 	
+      	 	if(changeInY_Left > max){
+      	 		changeInY_Left = max;
+      	 	} else if(changeInY_Left < min) {
+      	 		changeInY_Left = min;
+      	 	}
+	      	stage.draw();
+        }
+        
+        function updateLine(points){
+        	line.setPoints(points);
+	      	vline.setPoints([leftNode.getX(), leftNode.getY() - graph.difference_left, rightNode.getX(), rightNode.getY() - graph.difference_right, rightNode.getX(), rightNode.getY() + graph.difference_right, leftNode.getX(), leftNode.getY() + graph.difference_left, leftNode.getX(), leftNode.getY() - graph.difference_left]);
+			varLeftTop.setY(leftNode.getY() - graph.difference_left + 10);
+			varLeftBottom.setY(leftNode.getY() + graph.difference_left + 10);
+			varRightTop.setY(rightNode.getY() - graph.difference_right + 10);
+			varRightBottom.setY(rightNode.getY() + graph.difference_right + 10);
+			
+	      	var changeInY = Math.round((rightNode.getY() - 50)/min/1.5);
+      		var changeInY_Left = Math.round((leftNode.getY() - 50)/min/1.5);
+	      	
+	      	if(type == "no_variation"){
+	      		changeInY = Math.round(((rightNode.getY() - 50)/min)*6.5);
+      	 		changeInY_Left = Math.round(((leftNode.getY() - 50)/min)*6.5);
 	      	}
 	      	if(changeInY > max){
       	 		changeInY = max;
@@ -405,8 +437,8 @@ var inputGraph = (function () {
       	 	$(container).find('.startNumber').val(changeInY_Left);
 	      	
 	      	if(type == "variation"){
-	      		$(container).find('.varendNumber').val(difference_right);
-      	 		$(container).find('.varstartNumber').val(difference_left);
+	      		$(container).find('.varendNumber').val(graph.difference_right);
+      	 		$(container).find('.varstartNumber').val(graph.difference_left);
 	      	}
 	      	graph.startMeanVal = $(container).find('.startNumber').val();
 	        graph.endMeanVal = $(container).find('.endNumber').val();
@@ -426,6 +458,35 @@ var inputGraph = (function () {
         	 graph.startVarVal = $(container).find('.varstartNumber').val();
        		 graph.endVarVal = $(container).find('.varendNumber').val();
         }
+        
+        $(container).find('.startNumber').change(function(e){
+        	console.log(e.target.value);
+        	if(Math.abs(parseFloat(e.target.value)) > max) {return;}
+
+        	leftNode.setY((stage.getHeight() / 2) + parseFloat(e.target.value)*-2.26);
+        	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
+        	stage.draw();
+        })
+        
+        $(container).find('.endNumber').change(function(e){
+        	console.log(e.target.value);
+        	if(Math.abs(parseFloat(e.target.value)) > max) {return;}
+        	rightNode.setY((stage.getHeight() / 2) + parseFloat(e.target.value)*-2.26);
+        	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
+        	stage.draw();
+        })
+        
+          $(container).find('.varstartNumber').change(function(e){
+          	if(Math.abs(parseFloat(e.target.value)) > 20 || parseFloat(e.target.value) < 0) {return;}
+          	graph.difference_left = parseFloat(e.target.value);
+          	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
+          });
+          
+          $(container).find('.varendNumber').change(function(e){
+          	if(Math.abs(parseFloat(e.target.value)) > 20 || parseFloat(e.target.value) < 0) {return;}
+          	graph.difference_right = parseFloat(e.target.value);
+          	updateLine([leftNode.getX(), leftNode.getY(), rightNode.getX(), rightNode.getY()]);
+          });
       	
       	//Draw Graph Background
       function drawGraph(){
@@ -510,11 +571,35 @@ var inputGraph = (function () {
         
     }
     
-    
+   function populateInputs(data){
+   		console.log(data);
+   		for(var i=0;i<graphObject.length;i++){
+   			console.log(graphObject[i].name);
+   			if(graphObject[i].name == "WeatherModel_Precipitation" || graphObject[i].name == "Baseline_Precipitation"){
+   				$(graphObject[i].container).find('.startNumber').val(data.precip_mean_y1);
+   				
+   				console.log(graphObject[i].leftNode);
+   				graphObject[i].leftNode.setY((graphObject[i].stage.getHeight() / 2) + parseFloat(data.precip_mean_y1)*-6.8);
+   				$(graphObject[i].container).find('.endNumber').val(data.precip_mean_yn);
+        		graphObject[i].rightNode.setY((graphObject[i].stage.getHeight() / 2) + parseFloat(data.precip_mean_yn)*-6.8);
+   				$(graphObject[i].container).find('.varstartNumber').val(data.precip_var_y1);
+   				graphObject[i].difference_left = parseFloat(data.precip_var_y1);
+   				$(graphObject[i].container).find('.varendNumber').val(data.precip_var_yn);
+          		graphObject[i].difference_right = parseFloat(data.precip_var_yn);
+   			}
+   			if(graphObject[i].name == "WeatherModel_Temperature" || graphObject[i].name == "Baseline_Temperature"){
+   				$(graphObject[i].container).find('.startNumber').val(data.temp_mean_y1);
+   				graphObject[i].leftNode.setY((graphObject[i].stage.getHeight() / 2) + parseFloat(data.temp_mean_y1)*-2.26);
+   				$(graphObject[i].container).find('.endNumber').val(data.temp_mean_yn);
+        		graphObject[i].rightNode.setY((graphObject[i].stage.getHeight() / 2) + parseFloat(data.temp_mean_yn)*-2.26);
+        	}
+   		}
+   }
     
 
     return {
         initGraph: initGraph,
+        populateInputs:populateInputs,
         updateDate:updateDate,
     }
 })();

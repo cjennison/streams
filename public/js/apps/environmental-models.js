@@ -248,6 +248,12 @@ Streams.app_control.apps.environmental_models = {
   	enableButton("inputButton");
   	enableButton("outputButton");
   	enableButton("graphButton");
+  	
+  	var selectorList = $("#environment-models-app .runTypeSelect .selectRun");
+	var option = $("<option run-id=" + flow.run_alias + " basin_id=" + flow.basin_id + " scriptName=" + flow.scriptName + ">" + flow.run_alias + "</option>")
+					$(option).rundata = flow;
+					$(selectorList).append(option);
+					console.log(option);
   },
 
    getFlowInformation:function(){

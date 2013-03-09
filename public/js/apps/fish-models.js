@@ -326,5 +326,11 @@ Streams.app_control.apps.fish_models = {
   	enableButton("inputButton");
   	enableButton("outputButton");
   	enableButton("graphButton");
+  	
+  	var selectorList = $("#fish-models-app .runTypeSelect .selectRun");
+				var option = $("<option run-id=" + population.run_alias + ">" + population.run_alias + "</option>")
+					$(option).rundata = streamtemp;
+					$(selectorList).append(option);
+					console.log(option);
   },
 };

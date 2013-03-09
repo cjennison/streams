@@ -251,6 +251,12 @@ Streams.app_control.apps.stream_flow_models = {
   	enableButton("inputButton");
   	enableButton("outputButton");
   	enableButton("graphButton");
+  	
+  	var selectorList = $("#streamtemp-flow-app .runTypeSelect .selectRun");
+	var option = $("<option run-id=" + streamtemp.run_alias + " basin_id=" + streamtemp.basin_id + " scriptName=" + streamtemp.scriptName + ">" + streamtemp.run_alias + "</option>")
+					$(option).rundata = streamtemp;
+					$(selectorList).append(option);
+					console.log(option);
   },
 	
 	getStreamTempInformation:function(){

@@ -97,6 +97,8 @@ Streams.app_control.apps.land_use_models = {
 	  	}
 	  	
 	  	$(model).prop("disabled", true)
+	  	var runInputs = $('#land-use-models-app .runModel');
+		$(runInputs).css('display', 'none');
 	  },
 	  
 	  enableInputs:function(){
@@ -113,6 +115,8 @@ Streams.app_control.apps.land_use_models = {
 	  	}
 	  	
 	  	$(model).prop("disabled", false)
+	  	var runInputs = $('#land-use-models-app .runModel');
+		$(runInputs).css('display', 'block');
 	  },
 	
 	

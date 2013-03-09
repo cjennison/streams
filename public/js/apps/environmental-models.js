@@ -97,6 +97,9 @@ Streams.app_control.apps.environmental_models = {
 	  	}
 
 	  	$(model).prop("disabled", true)
+	  	
+	  	var runInputs = $('#environmental-models-app .runModel');
+		$(runInputs).css('display', 'none');
 	  },
 
 	  enableInputs:function(){
@@ -112,7 +115,9 @@ Streams.app_control.apps.environmental_models = {
 	  		$(inputs[q]).prop('disabled', false);
 	  	}
 
-	  	$(model).prop("disabled", false)
+	  	$(model).prop("disabled", false);
+	  	var runInputs = $('#environmental-models-app .runModel');
+		$(runInputs).css('display', 'block');
 	  },
 
   init : function () {

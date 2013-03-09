@@ -53,32 +53,36 @@ Streams.app_control.apps.fish_models = {
 	  	
 	  	
 	    var stockingslider1 = view.find('.stockingslider1');
-    var stockingNumber = view.find('.stockingNumber');
-    var countslider1 = view.find('.countslider1');
-    var countNumber = view.find('.countNumber');
-	  	countslider1.slider({
-      		max    : 100,
-	        min     : 0,
-	        range   : 'min',
-	        value   : 50,
-	        animate : 'fast',
-     		 disabled:true,
-     		 slide   : function (event, ui) {
-     		 	countNumber.text(ui.value);
-     		 }
-    });
+	    var stockingNumber = view.find('.stockingNumber');
+	    var countslider1 = view.find('.countslider1');
+	    var countNumber = view.find('.countNumber');
+		  	countslider1.slider({
+	      		max    : 100,
+		        min     : 0,
+		        range   : 'min',
+		        value   : 50,
+		        animate : 'fast',
+	     		 disabled:true,
+	     		 slide   : function (event, ui) {
+	     		 	countNumber.text(ui.value);
+	     		 }
+	    });
+	    
+	    stockingslider1.slider({
+	      		max    : 100,
+		        min     : 0,
+		        range   : 'min',
+		        value   : 50,
+		        animate : 'fast',
+	     		 disabled:true,
+	     		 slide   : function (event, ui) {
+	     		 	stockingNumber.text(ui.value);
+	     		 }
+	    });
     
-    stockingslider1.slider({
-      		max    : 100,
-	        min     : 0,
-	        range   : 'min',
-	        value   : 50,
-	        animate : 'fast',
-     		 disabled:true,
-     		 slide   : function (event, ui) {
-     		 	stockingNumber.text(ui.value);
-     		 }
-    });
+    	var runInputs = $('#fish-models-app .runModel');
+		$(runInputs).css('display', 'none');
+    
 	  },
 	  
 	  enableInputs:function(){
@@ -94,20 +98,20 @@ Streams.app_control.apps.fish_models = {
 	  		$(inputs[q]).prop('disabled', false);
 	  	}
 	  	 var stockingslider1 = view.find('.stockingslider1');
-    var stockingNumber = view.find('.stockingNumber');
-    var countslider1 = view.find('.countslider1');
-    var countNumber = view.find('.countNumber');
-	  	$(model).prop("disabled", false)
-	  	countslider1.slider({
-      		max    : 100,
-	        min     : 0,
-	        range   : 'min',
-	        value   : 50,
-	        animate : 'fast',
-     		 disabled:false,
-     		 slide   : function (event, ui) {
-     		 	countNumber.text(ui.value);
-     		 }
+	    var stockingNumber = view.find('.stockingNumber');
+	    var countslider1 = view.find('.countslider1');
+	    var countNumber = view.find('.countNumber');
+		  	$(model).prop("disabled", false)
+		  	countslider1.slider({
+	      		max    : 100,
+		        min     : 0,
+		        range   : 'min',
+		        value   : 50,
+		        animate : 'fast',
+	     		 disabled:false,
+	     		 slide   : function (event, ui) {
+	     		 	countNumber.text(ui.value);
+	     		 }
     });
     
     stockingslider1.slider({
@@ -121,7 +125,11 @@ Streams.app_control.apps.fish_models = {
      		 	stockingNumber.text(ui.value);
      		 }
     });
-	  },
+    
+    var runInputs = $('#fish-models-app .runModel');
+		$(runInputs).css('display', 'block');
+    
+  },
   
   
   init : function () {

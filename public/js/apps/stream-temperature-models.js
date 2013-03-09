@@ -96,7 +96,9 @@ Streams.app_control.apps.stream_flow_models = {
 	  		$(inputs[q]).prop('disabled', true);
 	  	}
 	  	
-	  	$(model).prop("disabled", true)
+	  	$(model).prop("disabled", true);
+	  	var runInputs = $('#streamtemp-flow-app .runModel');
+		$(runInputs).css('display', 'none');
 	  },
 	  
 	  enableInputs:function(){
@@ -113,6 +115,8 @@ Streams.app_control.apps.stream_flow_models = {
 	  	}
 	  	
 	  	$(model).prop("disabled", false)
+	  	var runInputs = $('#streamtemp-flow-app .runModel');
+		$(runInputs).css('display', 'block');
 	  },
 	
 	/**

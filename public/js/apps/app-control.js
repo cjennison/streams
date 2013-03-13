@@ -22,19 +22,26 @@ Streams.app_control = {
 			
 			Streams.app_control.accordionLimit = Math.floor(screenWidth / 440) - 1;
 			console.log("Accordion limit is now: " + Streams.app_control.accordionLimit);
+			console.log("Open Accordions: " + Streams.app_control.accordionsOpen)
 			
 			var accordionsToClose = Streams.app_control.accordionsOpen - Streams.app_control.accordionLimit;
 			
 			//TODO: Close All Accordions in Resize
-			if(accordionsToClose > 0){
-				var closeableAccordions = [];
-				for(var i=0; i<$('#accordion li').length; i++){
-					if($('#accordion li').parent().attr("state") == "open"){
-						
-					}
+			var accordions = $("#accordion li");
+			console.log(accordions);
+			if(accordionsToClose <= 0){ return; }
+			for(var i = 0;i < accordions.length; i++){
+				if($(accordions[i]).attr("state") == "open"){
+					accordionsToClose--;
+					$(accordions[i]).attr("state", "closed");
+					$(accordions[i]).css('width', "30px");
+					Streams.app_control.accordionsOpen--;
 				}
 				
-				console.log(closeableAccordions);
+				if(accordionsToClose <= 0){
+					//console.log("Done!")
+					return;
+				}
 			}
 		});
 		
@@ -303,13 +310,35 @@ Streams.app_control = {
    */
   bindOpen: function(target, amt){
 		$(target).bind('mousedown', function(event){
-			if($(target).parent().attr("state") == "closed" && Streams.app_control.accordionsOpen < Streams.app_control.accordionLimit){
+			
+			if($(target).parent().attr("state") == "closed" ){
 				$(target).parent().css('width', amt + "px");
 				var activate = setTimeout(function(){
 					$(target).parent().attr("state", "open");
 				}, 400);
 				Streams.app_control.accordionsOpen++;
 			}
+			if(Streams.app_control.accordionsOpen > Streams.app_control.accordionLimit){
+				console.log("Too Many Open")
+				
+				var accordions = $("#accordion li");
+				console.log(accordions);
+				//if(accordionsToClose <= 0){ return; }
+				for(var i = 0;i < accordions.length; i++){
+					if($(accordions[i]).attr("state") == "open"){
+						$(accordions[i]).attr("state", "closed");
+						$(accordions[i]).css('width', "30px");
+						Streams.app_control.accordionsOpen--;
+					}
+				if(Streams.app_control.accordionsOpen <= Streams.app_control.accordionLimit){ break; }
+
+				}
+				
+					
+					
+			}
+			
+			
 		});
   },
 
@@ -326,6 +355,7 @@ Streams.app_control = {
 				Streams.app_control.accordionsOpen--;
 			}
 		});
+		
   },
   
   bindCloseIcon: function(target){

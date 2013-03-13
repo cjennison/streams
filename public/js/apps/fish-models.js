@@ -52,8 +52,8 @@ Streams.app_control.apps.fish_models = {
 	  	$(model).prop("disabled", true)
 	  	
 	  	
-	    var stockingslider1 = view.find('.stockingslider1');
-	    var stockingNumber = view.find('.stockingNumber');
+	    //var stockingslider1 = view.find('.stockingslider1');
+	   // var stockingNumber = view.find('.stockingNumber');
 	    var countslider1 = view.find('.countslider1');
 	    var countNumber = view.find('.countNumber');
 		  	countslider1.slider({
@@ -68,6 +68,7 @@ Streams.app_control.apps.fish_models = {
 	     		 }
 	    });
 	    
+	    /*
 	    stockingslider1.slider({
 	      		max    : 100,
 		        min     : 0,
@@ -79,6 +80,7 @@ Streams.app_control.apps.fish_models = {
 	     		 	stockingNumber.text(ui.value);
 	     		 }
 	    });
+	    */
     
     	var runInputs = $('#fish-models-app .runModel');
 		$(runInputs).css('display', 'none');
@@ -97,8 +99,8 @@ Streams.app_control.apps.fish_models = {
 	  	for(var q = 0 ; q < inputs.length; q ++){
 	  		$(inputs[q]).prop('disabled', false);
 	  	}
-	  	 var stockingslider1 = view.find('.stockingslider1');
-	    var stockingNumber = view.find('.stockingNumber');
+	  	 //var stockingslider1 = view.find('.stockingslider1');
+	    //var stockingNumber = view.find('.stockingNumber');
 	    var countslider1 = view.find('.countslider1');
 	    var countNumber = view.find('.countNumber');
 		  	$(model).prop("disabled", false)
@@ -114,6 +116,7 @@ Streams.app_control.apps.fish_models = {
 	     		 }
     });
     
+    /*
     stockingslider1.slider({
       		max    : 100,
 	        min     : 0,
@@ -125,6 +128,7 @@ Streams.app_control.apps.fish_models = {
      		 	stockingNumber.text(ui.value);
      		 }
     });
+    */
     
     var runInputs = $('#fish-models-app .runModel');
 		$(runInputs).css('display', 'block');
@@ -176,6 +180,7 @@ Streams.app_control.apps.fish_models = {
      		 }
     });
     
+    /*
     stockingslider1.slider({
       		max    : 100,
 	        min     : 0,
@@ -188,7 +193,7 @@ Streams.app_control.apps.fish_models = {
      		 }
     });
     
-    
+    */
     
     model.change(function(){
 		console.log($(this).val())
@@ -228,7 +233,8 @@ Streams.app_control.apps.fish_models = {
     
   	//Passed Variables
   	var scriptName = $(model).val();
-	var stocking_stage = $("#" + scriptName + " .stockingNumber" ).html();
+	var stocking_stage = $("#" + scriptName + " select.selectRun" ).val();
+	console.log(stocking_stage)
 	var stocking_count = $("#" + scriptName + " .countNumber" ).html();	//Get Basin ID and ALIAS
   	var basin_id = Streams.app_control.apps.basin.basin.id;
   	var run_alias = $('div#fish-models-app.application .runModel .runInput').val();

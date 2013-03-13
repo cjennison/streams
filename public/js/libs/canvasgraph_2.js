@@ -316,14 +316,14 @@ var inputGraph = (function () {
         rightVarianceGroup.on('dragmove', function(ev){
 			if(lastRightY > ev.clientY){
 				console.log("LESSER")
-				if(graph.difference_right <= 20){
+				if(graph.difference_right < 30){
 					graph.difference_right++;
 				} else {
-					graph.difference_right = 20;
+					graph.difference_right = 30;
 				}
 			} else {
 				console.log("GREATER")
-				if(graph.difference_right >= 0){
+				if(graph.difference_right > 0){
 					graph.difference_right--;
 				} else {
 					graph.difference_right = 0;
@@ -339,14 +339,14 @@ var inputGraph = (function () {
         leftVarianceGroup.on('dragmove', function(ev){
 			if(lastLeftY > ev.clientY){
 				console.log("LESSER")
-				if(graph.difference_left <= 20){
+				if(graph.difference_left < 30){
 					graph.difference_left++;
 				} else {
-					graph.difference_left = 20;
+					graph.difference_left = 30;
 				}
 			} else {
 				console.log("GREATER")
-				if(graph.difference_left >= 0){
+				if(graph.difference_left > 0){
 					graph.difference_left--;
 				} else {
 					graph.difference_left = 0;
@@ -419,12 +419,12 @@ var inputGraph = (function () {
 			varRightTop.setY(rightNode.getY() - graph.difference_right + 10);
 			varRightBottom.setY(rightNode.getY() + graph.difference_right + 10);
 			
-	      	var changeInY = Math.round((rightNode.getY() - 50)/min/1.5);
-      		var changeInY_Left = Math.round((leftNode.getY() - 50)/min/1.5);
+	      	var changeInY = Math.round((rightNode.getY() - 50)/min * 30);
+      		var changeInY_Left = Math.round((leftNode.getY() - 50)/min * 30);
 	      	
 	      	if(type == "no_variation"){
-	      		changeInY = Math.round(((rightNode.getY() - 50)/min)*6.5);
-      	 		changeInY_Left = Math.round(((leftNode.getY() - 50)/min)*6.5);
+	      		changeInY = Math.round(((rightNode.getY() - 50)/min)*3);
+      	 		changeInY_Left = Math.round(((leftNode.getY() - 50)/min)*3);
 	      	}
 	      	if(changeInY > max){
       	 		changeInY = max;

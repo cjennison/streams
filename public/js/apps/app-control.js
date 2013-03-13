@@ -380,6 +380,7 @@ Streams.app_control = {
 	  	var thumb = $("<div class='svgDisplay' id='climateSvg'> </div>");
 	  	//console.log("http://" + document.location.host + '/' + dir[i].url + "/thumbnail.svg');
 	  	$(thumb).css("background", "url('http://" + document.location.host + '/' + dir[i].url + "/thumbnail.svg')");
+	  	$(thumb).css("background-size", "100% 100%");
 	  	$(list).append(thumb);
 	  	$(ullist).append(list);
   	}

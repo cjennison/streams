@@ -20,7 +20,7 @@ Streams.app_control = {
 			var screenWidth = document.width;
 			console.log("Detected Window Resize: " + screenWidth);
 			
-			Streams.app_control.accordionLimit = Math.floor(screenWidth / 440) - 1;
+			Streams.app_control.accordionLimit = Math.floor(screenWidth / 400) - 1;
 			console.log("Accordion limit is now: " + Streams.app_control.accordionLimit);
 			console.log("Open Accordions: " + Streams.app_control.accordionsOpen)
 			
@@ -296,8 +296,11 @@ Streams.app_control = {
 		
 		$('#basinSelection').css("display", "none");
 		
-		$('#acc1').css('width', "440px");
+		if(Streams.app_control.accordionLimit > 1){
+			$('#acc1').css('width', "440px");
 		$('#acc1').parent().attr("state", "open");
+		}
+		
 		$('#acc5').css('width', "300px");
 		$('#acc5').parent().attr("state", "open");
 		Streams.app_control.accordionsOpen = 2;

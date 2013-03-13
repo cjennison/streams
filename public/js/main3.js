@@ -23,6 +23,8 @@ console.log(Streams.user);
   Chart.init("#treeContainer", "../json/data2.json", 1100, 455, 55, 70, 147, 80, 25, "output");
   initNavigation();
   Status.init();
+  
+  screenSetup.optomize();
 });
 
 function initNavigation(){

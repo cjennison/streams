@@ -405,7 +405,7 @@ Streams.app_control = {
   	//$(ullist).append('<ul id="thumbLabels"><li>Basin</li><li>Climate</li><li>Land</li><li>Flow</li><li>Temperature</li><li>Population</li></ul>')
   	var basinThumb = $('<li><div class="svgDisplay" style="background:url(' + Streams.app_control.apps.basin.basin.thumbnail + '); background-size:100% 100%" id="basinSvg"></div></li>');
   	$(ullist).append(basinThumb);
-  	console.log(dir[0].url);
+  	console.log(dir);
   	for(var i = 0;i < dir.length; i++){
 	  	var list = $("<li>");
 	  	var listLine = $("#thumbnailList li");
@@ -417,6 +417,9 @@ Streams.app_control = {
 	  	$(list).append(thumb);
 	  	$(ullist).append(list);
   	}
+  	
+  	Output.currentDirectoryList = dir;
+  	storeGraphs(dir);
   },
   
   getStatus:function(){

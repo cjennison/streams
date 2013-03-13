@@ -39,12 +39,13 @@ nv.addGraph(function() {
 	});
 
          chart.yTickFormat(d3.format(',.1f'));
-
+        
+/*TODO: MAKE ME WORK!
   d3.select('#chart svg')
       .datum(testData())
     .transition().duration(500)
       .call(chart);
-
+*/
   nv.utils.windowResize(chart.update);
 
   return chart;

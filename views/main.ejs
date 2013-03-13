@@ -354,6 +354,7 @@
 	<div id="outputSelector">
 		<div id="graphContainer">
 			<span id="outputTitle">Output Graph Selection</span>
+			<!-- COMMENTED OUT FOR NOW
 			<ul>
 				<li>Basin</li>
 				<li>Climate</li>
@@ -362,9 +363,11 @@
 				<li>Stream Temperature</li>
 				<li>Fish Population</li>
 			</ul>
-			
-			
-			
+			-->
+			<div id="graphSelectionButtons">
+			<button id="view_climate">View Climate, Flow, and Temperature Graphs</button>
+			<button id="view_population">View Population Graphs</button>
+			</div>
 			<div id="inputDropBox">
 			</div>
 			
@@ -376,14 +379,15 @@
 </div>
 
 <div id="graphWrapper">
-
+	<!-- TODO: No Dynamic Graphs Yet!
 	<div id="chart">
 	    <svg height: 400px; width: 500px; background-color: white;></svg>
 	</div>
-
-	<div id="northeastImage"></div>
-	<div id="southwestImage"></div>
-	<div id="southeastImage"></div>
+	-->
+	<div id="northwestImage" class="outputgraph"></div>
+	<div id="northeastImage" class="outputgraph"></div>
+	<div id="southwestImage" class="outputgraph"></div>
+	<div id="southeastImage" class="outputgraph"></div>
 </div>
 
 

@@ -26,6 +26,10 @@ screenSetup = {
 		//document.body.style.zoom = (100 - (ratio * 10)) + "%";
 		if(width < 900){
 			document.body.style.zoom = "70%"
+			//TODO: Needs reevaluation for better method
+			$("#weather-models-app div #weather_generator #graphcontainer2").css("margin-top", "-27px")
+			$("#weather-models-app div #baseline_shift #baselineHistoric_graphcontainer2").css("margin-top", "-27px")
+
 		}
 		else{
 			document.body.style.zoom = "85%"

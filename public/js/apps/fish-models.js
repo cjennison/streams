@@ -343,7 +343,7 @@ Streams.app_control.apps.fish_models = {
   	
   	var selectorList = $("#fish-models-app .runTypeSelect .selectRun");
 				var option = $("<option run-id=" + population.run_alias + ">" + population.run_alias + "</option>")
-					$(option).rundata = streamtemp;
+					$(option).rundata = population;
 					$(selectorList).append(option);
 					console.log(option);
   },
